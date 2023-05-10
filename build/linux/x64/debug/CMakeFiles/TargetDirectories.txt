@@ -1,0 +1,14 @@
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/CMakeFiles/install/strip.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/CMakeFiles/install/local.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/CMakeFiles/install.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/CMakeFiles/list_install_components.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/CMakeFiles/rebuild_cache.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/CMakeFiles/edit_cache.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/CMakeFiles/ai_children_stories.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/flutter/CMakeFiles/install/strip.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/flutter/CMakeFiles/install/local.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/flutter/CMakeFiles/install.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/flutter/CMakeFiles/list_install_components.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/flutter/CMakeFiles/rebuild_cache.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/flutter/CMakeFiles/edit_cache.dir
+/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/build/linux/x64/debug/flutter/CMakeFiles/flutter_assemble.dir

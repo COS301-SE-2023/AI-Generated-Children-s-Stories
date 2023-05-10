@@ -1,0 +1,28 @@
+# ninja log v5
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/libflutter_linux_gtk.so	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_engine.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_value.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/fl_view.h	47cd8ad9c865eed6
+0	12449	0	/home/mekhailmuller/University/COS 301/AI-Generated-Children-s-Stories/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	47cd8ad9c865eed6
+0	12449	0	flutter/_phony_	47cd8ad9c865eed6
+12449	13428	1683711184398616421	CMakeFiles/ai_children_stories.dir/flutter/generated_plugin_registrant.cc.o	685bc90c1cd7872b
+12449	13478	1683711184450616229	CMakeFiles/ai_children_stories.dir/main.cc.o	1fafb0f1a7e2d06
+12449	13546	1683711184518615979	CMakeFiles/ai_children_stories.dir/my_application.cc.o	405bf43aca4739df
+13546	13918	1683711184890614608	intermediates_do_not_run/ai_children_stories	2b1f3b1e29dba9e2
+13918	14074	0	CMakeFiles/install.util	daa2e97cbe5b528a
