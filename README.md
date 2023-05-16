@@ -1,5 +1,10 @@
 # ai_children_stories
 
+Just get an idea of flutter
+Build the pages assigned to me
+Work on basic flutter of the app
+Show the implementation prgress
+
 A new Flutter project.
 
 ## Getting Started

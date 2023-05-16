@@ -1,0 +1,12 @@
+com.example.ai_children_stories.app-jetified-window-java-1.0.0-beta04-0 C:\Users\thoma\.gradle\caches\transforms-3\006d93cd422dbc43e89591147c2de572\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.ai_children_stories.app-core-1.6.0-1 C:\Users\thoma\.gradle\caches\transforms-3\4ca28c4a71705f8a687c69dda140a277\transformed\core-1.6.0\res
+com.example.ai_children_stories.app-jetified-annotation-experimental-1.1.0-2 C:\Users\thoma\.gradle\caches\transforms-3\8965c941cf4bee4d72541b965c7c9d39\transformed\jetified-annotation-experimental-1.1.0\res
+com.example.ai_children_stories.app-jetified-window-1.0.0-beta04-3 C:\Users\thoma\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\res
+com.example.ai_children_stories.app-debug-4 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\android\app\src\debug\res
+com.example.ai_children_stories.app-main-5 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\android\app\src\main\res
+com.example.ai_children_stories.app-pngs-6 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\build\app\generated\res\pngs\debug
+com.example.ai_children_stories.app-resValues-7 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\build\app\generated\res\resValues\debug
+com.example.ai_children_stories.app-rs-8 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\build\app\generated\res\rs\debug
+com.example.ai_children_stories.app-mergeDebugResources-9 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.ai_children_stories.app-mergeDebugResources-10 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.ai_children_stories.app-merged_res-11 C:\Users\thoma\Git Repos\AI-Generated-Children-s-Stories\build\app\intermediates\merged_res\debug
