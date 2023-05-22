@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-//import 'story_list.dart';
+import 'story_list.dart';
 import 'home.dart';
 
 //to do hot reload: 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
       routes: {
         '/login': (context) => LoginPage(),
-        //'/storyList': (context) => StoryList(),
+        '/storyList': (context) => StoryList(),
         '/home': (context) => Home(),
       }
     );
