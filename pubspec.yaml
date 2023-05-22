@@ -7,7 +7,7 @@ publish_to: 'none'
 version: 0.1.0+1
 
 environment:
-  sdk: '>=3.1.0-94.0.dev <4.0.0'
+  sdk: '>=3.0.0-94.0.dev <4.0.0'
 
 dependencies:
   flutter:
@@ -20,6 +20,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  carousel_slider: ^4.2.1
 
 flutter:
   uses-material-design: true
@@ -30,3 +31,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/storyPreviews/
