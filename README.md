@@ -26,7 +26,7 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 - [Demo 1](https://drive.google.com/drive/folders/1TppdV1y2zasnbSg2VPJK5W_CHI8vJmei?usp=share_link) {23 May 2023}
 
 # Documentation
-- [System Requiremnts Specification](https://drive.google.com/file/d/1ysLzdcyqisC-6aCzwVEqXcJaQHQHbzLh/view?usp=share_link)
+- [System Requiremnts Specification](https://drive.google.com/file/d/1DDvYY_DpKimKpEksD6fwcHR-kkfc3Uh8/view?usp=share_link)
 
 # Project Board
 - [Code Board](https://github.com/orgs/COS301-SE-2023/projects/22/views/1)
