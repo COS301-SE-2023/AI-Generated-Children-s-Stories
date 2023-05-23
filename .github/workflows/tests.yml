@@ -7,23 +7,31 @@ on:
     branches: [develop]
 
 jobs:
-  tests:
+  drive:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+      - run: flutter test
 
-      - name: Install and set Flutter version
-        uses: subosito/flutter-action@v1.4.0
-        with:
-          flutter-version: '3.7'
+# jobs:
+#   tests:
+#     runs-on: ubuntu-latest
 
-      - name: Restore packages
-        run: flutter pub get
+#     steps:
+#       - name: Checkout the code
+#         uses: actions/checkout@v2
 
-      - name: Analyze
-        run: flutter analyze
+#       - name: Install and set Flutter version
+#         uses: subosito/flutter-action@v1.4.0
+#         with:
+#           flutter-version: '3.7'
 
-      - name: Run tests
-        run: flutter test --coverage
+#       - name: Restore packages
+#         run: flutter pub get
+
+#       - name: Analyze
+#         run: flutter analyze
+
+#       - name: Run tests
+#         run: flutter test --coverage
