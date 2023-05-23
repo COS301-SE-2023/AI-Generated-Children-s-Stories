@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'story_list.dart';
 import 'home.dart';
+import 'myHeader.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 //to do hot reload: 
 //flutter run
 //enter 'r' in the terminal
 
 void main() {
+  // testWidgets(
+  //   "Find the Here\'s a new book! message on the home screen",
+  //   (WidgetTester tester) async {
+  //     await tester.pumpWidget(const MyHeader(message: 'Here\'s a new book!',));
+  //     final titleFinder = find.text('Here\'s a new book!');
+  //     expect(titleFinder, findsOneWidget);
+  //   },
+  // );
   runApp(MyApp());
 }
 

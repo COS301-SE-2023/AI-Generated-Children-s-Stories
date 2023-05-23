@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyHeader extends StatefulWidget {
-  const MyHeader({super.key});
+  const MyHeader({
+    super.key,
+    required this.message
+  });
+
+  final String message;
 
   @override
   State<MyHeader> createState() => _MyHeaderState();
@@ -40,10 +45,10 @@ class _MyHeaderState extends State<MyHeader> {
             child: SizedBox(
               width: MediaQuery.of(context).size.width*0.5,
               child: 
-                const Text(
-                'Here\'s a new book!',
+                Text(
+                '${widget.message}',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.w600

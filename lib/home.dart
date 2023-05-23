@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
         //back button
         child: Column(
           children: [
-            MyHeader(),
+            const MyHeader(message: 'Here\'s a new book!',),
             //padding 
             const SizedBox(height: 50),
             Row(
