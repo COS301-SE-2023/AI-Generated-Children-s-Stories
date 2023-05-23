@@ -28,9 +28,16 @@ class _StoryListState extends State<StoryList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 243, 233),
+      backgroundColor: const Color.fromARGB(255, 255, 243, 233),
       body: SafeArea(
-        child: ListView.builder(
+        child: Column(children: [
+
+          //the header
+          const MyHeader(message: 'Story List'),
+
+          //the story list 
+          Expanded(
+          child: ListView.builder(
             itemCount: _imageList.length,
             itemBuilder: (context, index) {
               return Column(
@@ -112,6 +119,9 @@ class _StoryListState extends State<StoryList> {
                 ],
               );
             }),
+      ),
+        ],)
+        
       ),
       bottomNavigationBar: NavbarWidget(),
     );
