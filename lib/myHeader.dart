@@ -56,14 +56,18 @@ class _MyHeaderState extends State<MyHeader> {
               ),
             ),
           ),
-          Positioned(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 5), 
-              child:  Image.asset(
-                'assets/images/Profile.png',
-                width:  MediaQuery.of(context).size.width*0.2,
+          Stack(
+            children: [
+              Positioned(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 5), 
+                  child:  Image.asset(
+                    'assets/images/Profile.png',
+                    width:  MediaQuery.of(context).size.width*0.2,
+                  ),
+                )
               ),
-            )
+            ]
           )
           
         ]

@@ -17,8 +17,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 243, 233),
       body: SafeArea(
-        //back button
-        child: Column(
+          child: Column(
           children: [
             Row(
               children: [
