@@ -1,5 +1,15 @@
 # Full-Stack Fox ~ AI Generated Children's Stories
 
+[![GitHub Repo Size in Bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2023/AI-Generated-Children-s-Stories)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
+[![GitHub Commit Activity](https://img.shields.io/github/commit-activity/w/COS301-SE-2023/AI-Generated-Children-s-Stories)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
+[![codecov](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories/branch/frontend-dev/graph/badge.svg?token=E5XAZ3LOGP)](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories)
+[![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023/Pronto/issues)
+[![Closed Issues](https://img.shields.io/github/issues-closed/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023/Pronto/issues?q=is%3Aissue+is%3Aclosed)
+[![Uptime Robot status](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595?style=flat-square)](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595)
+![example workflow](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/Workflow.yaml/badge.svg)
+
+
+
 # Table of Contents
 >
 > -  [Description](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#Full-Stack-Fox---AI-Generated-Children's-Stories---Project-Description)
