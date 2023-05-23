@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: subosito/flutter-action@v3
+      - uses: subosito/flutter-action@v2
       - run: flutter test
   
 # jobs:
