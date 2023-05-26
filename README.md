@@ -6,7 +6,7 @@
 [![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023/Pronto/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023/Pronto/issues?q=is%3Aissue+is%3Aclosed)
 [![Uptime Robot status](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595?style=flat-square)](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595)
-![example workflow](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/Workflow.yaml/badge.svg)
+[![Flutter_Tests](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/tests.yml/badge.svg)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/tests.yml)
 
 
 
