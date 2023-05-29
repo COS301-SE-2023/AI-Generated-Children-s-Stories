@@ -23,6 +23,7 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
   carousel_slider: ^4.2.1
+  provider: ^6.0.0
 
 flutter:
   uses-material-design: true

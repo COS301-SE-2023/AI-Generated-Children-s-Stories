@@ -3,6 +3,7 @@ import 'login_page.dart';
 import 'story_list.dart';
 import 'home.dart';
 import 'myHeader.dart';
+import 'inside_story.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 //to do hot reload: 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginPage(),
         '/storyList': (context) => StoryList(),
-        '/home': (context) => Home(),
+        '/home': (context) => InsideStory(),
       }
     );
   }
