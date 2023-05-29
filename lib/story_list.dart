@@ -25,6 +25,7 @@ class _StoryListState extends State<StoryList> {
     'Honey the Kitty'
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,6 +125,7 @@ class _StoryListState extends State<StoryList> {
         
       ),
       bottomNavigationBar: NavbarWidget(),
+      
     );
   }
 }

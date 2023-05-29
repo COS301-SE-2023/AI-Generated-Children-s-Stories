@@ -17,32 +17,35 @@ class _MyHeaderState extends State<MyHeader> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 6, color: Color.fromARGB(255, 255, 255, 255)),
-        ),
+        // border: Border(
+        //   bottom: BorderSide(width: 6, color: Color.fromARGB(255, 255, 255, 255)),
+        // ),
            
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            //rgb(255, 243, 233)
-            Color.fromARGB(255, 255, 243, 233),
-            Color.fromARGB(255, 255, 243, 233),
-            Color.fromARGB(255, 255, 214, 180),
-          ],
-        ), 
+        // gradient: LinearGradient(
+        //   begin: Alignment.topCenter,
+        //   end: Alignment.bottomCenter,
+        //   colors: [
+        //     //rgb(255, 243, 233)
+        //     Color.fromARGB(255, 255, 243, 233),
+        //     Color.fromARGB(255, 255, 243, 233),
+        //     Color.fromARGB(255, 255, 214, 180),
+        //   ],
+        // ), 
         
       ),
       child: Column(
         children: [
         Row(children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.width * 0.1,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/images/Wave.png'),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.width * 0.1,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/Wave.png'),
+                ),
               ),
             ),
           ),
