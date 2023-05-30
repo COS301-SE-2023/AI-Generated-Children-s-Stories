@@ -72,39 +72,10 @@ class _StoryListState extends State<StoryList> {
 
                   const SizedBox(height: 5),
 
-                  //progress bar with round corners
+                  //box with rounded corners
+                  
 
-                  const Stack(children: <Widget>[
-                    Center(
-                      child: SizedBox(
-                        width: 300,
-                        height: 30,
-                        //change width of cliprect
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          child: LinearProgressIndicator(
-                            value: 0.5,
-                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                Color.fromARGB(255, 254, 141, 41)),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    //center the
-                    Center(
-                      child: Text(
-                        "50%",
-                        style: TextStyle(
-                            //rgb(0, 197, 61)
-                            color: Color.fromARGB(255, 84, 34, 9),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 19,
-                            fontFamily: 'NotoSerif'),
-                      ),
-                    ),
-                  ]),
+                  
 
                   const SizedBox(height: 5),
                   GestureDetector(

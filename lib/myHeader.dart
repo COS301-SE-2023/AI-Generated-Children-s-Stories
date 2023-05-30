@@ -62,19 +62,16 @@ class _MyHeaderState extends State<MyHeader> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.06),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width*0.5,
-                child: 
-                  Text(
-                  '${widget.message}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w600
-                  ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*0.5,
+              child: 
+                Text(
+                '${widget.message}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w600
                 ),
               ),
             ),
