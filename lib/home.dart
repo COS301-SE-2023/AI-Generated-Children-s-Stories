@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'navbar.dart';
 import 'myHeader.dart';
+import 'progress_bar.dart';
 
 import 'image_button.dart';
 
@@ -17,12 +18,13 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final Size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 243, 233),
+      backgroundColor: const Color.fromARGB(255, 255, 243, 233),
       body: SafeArea(
         //back button
         child: Column(
           children: [
             const MyHeader(message: 'Here\'s a new book!',),
+            const ProgressBar(currentPages: 50, totalPages: 100),
             //padding 
             const SizedBox(height: 50),
             Row(

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:Magic_Pages/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -115,6 +116,13 @@ class _InsideStoryState extends State<InsideStory> {
                         
                       ]
                     ),
+                    Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, bottom: 5), 
+                        child: ProgressBar(totalPages: widget.storyText.length - 1, currentPages: storyIndex)
+                      )
+                      
+                    ],)
                   ])]
               ),
               Padding(
@@ -150,7 +158,23 @@ class _InsideStoryState extends State<InsideStory> {
                   child: Text('TextButton'),
                 )
                 
-              ],)
+              ],), 
+              Padding(
+                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05),
+                child: Row(children: [
+                  Image.asset(
+                    'assets/images/back.png'
+                  ), 
+                  Spacer(),
+                  Image.asset(
+                    'assets/images/pause.png'
+                  ),
+                  Spacer(), 
+                  Image.asset(
+                    'assets/images/forward.png'
+                  ),
+                ],),
+              )
             ]
           )
         )
