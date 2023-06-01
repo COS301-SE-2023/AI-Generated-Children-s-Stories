@@ -36,7 +36,7 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 - [**Oliver Welsh**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#oliver-welsh) ~ Project Manager
 - [**Latasha Friend**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Latasha-Friend) ~ Designer and Business Analyst
 - [**Ayaaz Street**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#ayaaz-street) ~ User Interface Engineer
-- [**Mekhail Muller**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Mekhail-Muller) ~ Databse, Servic, Integration Engineer and DevOps
+- [**Mekhail Muller**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Mekhail-Muller) ~ Databse, Service, Integration Engineer and DevOps
 - [**Thomas Isebeck**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Thomas-Isebeck) ~ Tester
 
 
