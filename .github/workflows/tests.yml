@@ -6,12 +6,15 @@ jobs:
   drive:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: subosito/flutter-action@v2
-      - run: flutter test
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Flutter Actions
+        uses: subosito/flutter-action@v2
+      - name: Run test
+        run: flutter test
       - name: Upload coverage reports to Codecov
           uses: codecov/codecov-action@v3
-          env: CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          
   
 # jobs:
 #   tests:
