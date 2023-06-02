@@ -11,7 +11,7 @@ jobs:
       - name: Flutter Actions
         uses: subosito/flutter-action@v2
       - name: Run test
-        run: flutter test
+        run: flutter test --coverage
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
