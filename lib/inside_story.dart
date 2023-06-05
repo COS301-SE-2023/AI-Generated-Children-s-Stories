@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:Magic_Pages/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'navbar.dart';
 
 import 'myHeader.dart';
 
@@ -40,149 +41,232 @@ class _InsideStoryState extends State<InsideStory> {
   int storyIndex = 0; 
 
   void next() {
-    setState(() {
-      messageIndex = Random().nextInt(widget.messages.length);
-      storyIndex = storyIndex + 1;
-    });
+    if (storyIndex < widget.storyText.length - 1) {
+      setState(() {
+        messageIndex = Random().nextInt(widget.messages.length);
+        storyIndex = storyIndex + 1;
+      });
+    }
+  }
+
+  void prev() {
+    if (storyIndex > 0) {
+      setState(() {
+        messageIndex = Random().nextInt(widget.messages.length);
+        storyIndex = storyIndex - 1;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => PageState(),
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 243, 233),
         body: SafeArea(
           //back button
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Column(
-                    children: [
-                    Row(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.width * 0.1,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/images/Wave.png'),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.05),
-                          child: Image.asset(
-                                'assets/images/heart-empty.png',
-                                width: MediaQuery.of(context).size.width*0.12,
-                              ),
-                          ),
-                        Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.06),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width*0.5,
-                            child: 
-                              Text(
-                              widget.messages[messageIndex],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 25,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontWeight: FontWeight.w600
-                              ),
-                            ),
-                          ),
-                        ),
-                        Stack(
-                          children: [
-                            Positioned(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 5), 
-                                child:  Image.asset(
-                                  'assets/images/MascotWinking.png',
-                                  width:  MediaQuery.of(context).size.width*0.2,
-                                ),
-                              )
-                            ),
-                          ]
-                        )
-                        
-                      ]
-                    ),
-                    Row(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15, bottom: 5), 
-                        child: ProgressBar(totalPages: widget.storyText.length - 1, currentPages: storyIndex)
-                      )
-                      
-                    ],)
-                  ])]
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Row(
-                  //image
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
                   children: [
-                      SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              widget.images[storyIndex],
+                    Column(
+                      children: [
+                      Row(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.width * 0.1,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage('assets/images/Wave.png'),
+                              ),
                             ),
+                          ),
+                        ),
+                      ],),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.05),
+                            child: Image.asset(
+                                  'assets/images/heart-empty.png',
+                                  width: MediaQuery.of(context).size.width*0.12,
+                                ),
+                            ),
+                          Padding(
+                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.06),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width*0.5,
+                              child: 
+                                Text(
+                                widget.messages[messageIndex],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 25,
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontWeight: FontWeight.w600
+                                ),
+                              ),
+                            ),
+                          ),
+                          Stack(
+                            children: [
+                              Positioned(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 5), 
+                                  child:  Image.asset(
+                                    'assets/images/MascotWinking.png',
+                                    width:  MediaQuery.of(context).size.width*0.2,
+                                  ),
+                                )
+                              ),
+                            ]
                           )
                           
-                        ],
+                        ]
                       ),
-                    ),
-                  ],                
+                      Row(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, bottom: 5), 
+                          child: ProgressBar(totalPages: widget.storyText.length - 1, currentPages: storyIndex)
+                        )
+                        
+                      ],)
+                    ])]
                 ),
-              ),
-              Row(children: [
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    //image
+                    children: [
+                        SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                widget.images[storyIndex],
+                              ),
+                            )
+                            
+                          ],
+                        ),
+                      ),
+                    ],                
                   ),
-                  onPressed: () { 
-                    next();
-                  },
-                  child: Text('TextButton'),
-                )
-                
-              ],), 
-              Padding(
-                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05),
-                child: Row(children: [
-                  Image.asset(
-                    'assets/images/back.png'
-                  ), 
-                  Spacer(),
-                  Image.asset(
-                    'assets/images/pause.png'
-                  ),
-                  Spacer(), 
-                  Image.asset(
-                    'assets/images/forward.png'
-                  ),
-                ],),
-              )
-            ]
+                ), 
+                SingleChildScrollView(
+                  child: Column(children: [
+                    Padding( //story text
+                      padding: const EdgeInsets.all(20.0),
+                      child:Text(
+                        widget.storyText[storyIndex], 
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 25
+                        )
+                      )                
+                    ), 
+                  ],) 
+                ),
+            
+                Column(
+              children: [
+                Padding(
+                      padding: EdgeInsets.only(bottom: 20, top: 15, left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05),
+                      child: Row(children: [
+                        GestureDetector(
+                          onTap: () => {
+                            prev()
+                          },
+                          child: Image.asset(
+                            'assets/images/back.png'
+                          ),
+                        ),
+                         
+                        Spacer(),
+                        Image.asset(
+                          'assets/images/pause.png'
+                        ),
+                        Spacer(), 
+          
+                        GestureDetector(
+                          onTap: () => {
+                            next()
+                          },
+                          child: Image.asset(
+                            'assets/images/forward.png'
+                          )
+                        )
+                        ,
+                      ],),
+                    ),
+              ],
+            )
+              ]
+            ),
+            
           )
-        )
-      )
+        ), 
+
+        bottomNavigationBar: NavbarWidget(),
+       
     );
+
+    
   }
 }
 
 class PageState extends ChangeNotifier {
 
 }
+
+/*
+
+bottomNavigationBar: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20, top: 15, left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05),
+                  child: Row(children: [
+                    GestureDetector(
+                      onTap: () => {
+                        prev()
+                      },
+                      child: Image.asset(
+                        'assets/images/back.png'
+                      ),
+                    ),
+                     
+                    Spacer(),
+                    Image.asset(
+                      'assets/images/pause.png'
+                    ),
+                    Spacer(), 
+          
+                    GestureDetector(
+                      onTap: () => {
+                        next()
+                      },
+                      child: Image.asset(
+                        'assets/images/forward.png'
+                      )
+                    )
+                    ,
+                  ],),
+                )
+              ],
+            ), 
+            Row(
+              children: [
+                NavbarWidget()
+              ],
+            )
+        ],
+      )
+
+*/
