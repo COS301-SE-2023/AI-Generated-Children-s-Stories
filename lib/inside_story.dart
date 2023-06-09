@@ -12,7 +12,7 @@ class InsideStory extends StatefulWidget {
   List<String> messages = ["Well done!", "Almost there!", "Way to go!"];
 
   List<String> storyText = [
-    "Once upon a time, there was a curious ant named Andy. He lived in a cozy anthill under a big oak tree. Andy loved exploring with his ant friends every day.",
+    "Once upon a time, there was a curious ant named Andy. He lived in a cozy anthill under a big oak tree. Andy loved exploring with his ant friends.",
     "One sunny morning, Andy found a shiny golden key. He didn't know where it came from or what it unloc, ked, but he was determined to find out.",
     "Carrying the key, Andy went on an exciting journey through tall grass, up branches, and across a tiny stream. Finally, he discovered a huge rock with door.",
     "Andy turned the key in the keyhole, and the door opened, revealing a hidden chamber. Inside, there was delicious food."
@@ -119,7 +119,7 @@ class _InsideStoryState extends State<InsideStory> {
                )
             ],
           ),
-          Expanded(
+          SizedBox(
             child: Padding(
               padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * 0.05,
@@ -145,16 +145,24 @@ class _InsideStoryState extends State<InsideStory> {
               ),
             ),
           ),
-          Padding(
-              padding: const EdgeInsets.only(
-                  top: 10, left: 15, right: 10, bottom: 10),
-              child: Text(
-                  textAlign: TextAlign.center,
-                  widget.storyText[storyIndex],
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 58, 23, 6),
-                  ))),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(
+                        top: 0, left: 20, right: 10, bottom: 0),
+                    child: Text(
+                        textAlign: TextAlign.center,
+                        widget.storyText[storyIndex],
+                        textScaleFactor: 1.1,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 58, 23, 6),
+                          fontSize: (1- MediaQuery.sizeOf(context).aspectRatio) * 30,
+                        ))),
+              ],
+            ),
+          ),
           Padding(
             padding: EdgeInsets.only(
                 bottom: 20,
