@@ -152,7 +152,7 @@ class _InsideStoryState extends State<InsideStory> {
                   textAlign: TextAlign.center,
                   widget.storyText[storyIndex],
                   style: const TextStyle(
-                    fontSize: 25,
+                    fontSize: 20,
                     color: Color.fromARGB(255, 58, 23, 6),
                   ))),
           Padding(
