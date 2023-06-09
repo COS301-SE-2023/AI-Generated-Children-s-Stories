@@ -16,7 +16,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
     @override
   Widget build(BuildContext context) {
-    final Size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 243, 233),
       body: SafeArea(
