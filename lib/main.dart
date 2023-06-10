@@ -35,6 +35,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/storyList': (context) => StoryList(),
         '/home': (context) => InsideStory(),
+        '/insideAStory': ChangeNotifierProvider(
+        )
       }
     );
   }
