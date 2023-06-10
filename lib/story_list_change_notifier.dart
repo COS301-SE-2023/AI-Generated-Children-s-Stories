@@ -24,5 +24,8 @@ class StoryListChangeNotifier extends ChangeNotifier {
     _stories = await _getStoriesService.fetchStories();  
     _isLoading = false;  
     notifyListeners();
+
+    print('got stories in change notifier');
+    print(_stories);
   }
 }
