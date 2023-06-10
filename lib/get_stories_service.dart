@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/services.dart';
 
@@ -11,6 +12,20 @@ class GetStoriesService {
         await Future.delayed(const Duration(seconds: 1));
         final String response = await rootBundle.loadString('assets/stories.json');
         final data = await json.decode(response);
-        return data.map<Story>((json) => Story.fromJson(json)).toList();
+
+        List<Story> stories = [];
+
+        for (var i = 0; i < data.length; i++) {
+            stories.add(
+                Story(
+                    title: data[i]['title'],
+                    coverUrl: data[i]['coverUrl'],
+                    textContent: data[i]['textContent'].cast<String>(),
+                    imageContent: data[i]['imageContent'].cast<String>(),
+                )
+            );
+        }
+
+        return stories;
     }
 }

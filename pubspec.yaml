@@ -10,20 +10,17 @@ environment:
   sdk: '>=3.0.0-94.0.dev <4.0.0'
 
 dependencies:
+  provider: ^6.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_test:
-    sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   flutter_lints: ^2.0.0
   carousel_slider: ^4.2.1
-  provider: ^6.0.0
+  test: ^1.24.3
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true
@@ -36,3 +33,4 @@ flutter:
     - assets/images/
     - assets/storyPreviews/
     - assets/images/stories/AndyTheAnt/
+    - assets/stories.json

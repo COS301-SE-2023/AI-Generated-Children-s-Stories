@@ -1,9 +1,9 @@
-import 'dart:io';
-
+import 'package:Magic_Pages/story.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'navbar.dart';
 import 'myHeader.dart';
+import 'story_list_change_notifier.dart';
+import 'get_stories_service.dart';
 
 class StoryList extends StatefulWidget {
   const StoryList({super.key});
@@ -13,18 +13,23 @@ class StoryList extends StatefulWidget {
 }
 
 class _StoryListState extends State<StoryList> {
-  final List<String> _imageList = [
-    'assets/storyPreviews/andy-the-ant.png',
-    'assets/storyPreviews/benny-the-bear.png',
-    'assets/storyPreviews/honey-the-kitty.png',
-  ];
 
-  final List<String> _captions = [
-    'Andy the Ant',
-    'Benny the Bear',
-    'Honey the Kitty'
-  ];
+  late List<Story> _stories;
 
+  //change notifier
+  final StoryListChangeNotifier _storyListChangeNotifier = StoryListChangeNotifier(GetStoriesService());
+
+  @override
+  void initState() {
+    super.initState();
+    getStories();
+    _stories = [];
+  }
+
+  void getStories() async {
+    await _storyListChangeNotifier.fetchStories();
+    _stories = _storyListChangeNotifier.stories;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,7 @@ class _StoryListState extends State<StoryList> {
           //the story list 
           Expanded(
           child: ListView.builder(
-            itemCount: _imageList.length,
+            itemCount: _stories.length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -51,7 +56,7 @@ class _StoryListState extends State<StoryList> {
                     child: Column(
                       children: [
                         Image.asset(
-                          _imageList[index],
+                          _stories[index].coverUrl,
                         ),
                       ],
                     ),
@@ -66,7 +71,7 @@ class _StoryListState extends State<StoryList> {
                           //rgb(84, 34, 9)
                           color: Color.fromARGB(255, 84, 34, 9),
                           fontFamily: 'NotoSerif'),
-                      child: Text(_captions[index]),
+                      child: Text(_stories[index].title),
                     ),
                   ),
 

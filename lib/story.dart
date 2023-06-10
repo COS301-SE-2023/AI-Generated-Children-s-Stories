@@ -10,16 +10,22 @@ class Story {
     required this.coverUrl,
     required this.textContent,
     required this.imageContent,
-  }) {}
+  });
 
-  //parse in a json object and return a Story object
-  factory Story.fromJson(Map<String, dynamic> json) {
-    return Story(
-      title: json['title'],
-      coverUrl: json['coverUrl'],
-      textContent: json['textContent'],
-      imageContent: json['imageContent'],
-    );
+  String getTitle() {
+    return title;
+  }
+
+  String getCoverUrl() {
+    return coverUrl;
+  }
+
+  List<String> getTextContent() {
+    return textContent;
+  }
+
+  List<String> getImageContent() {
+    return imageContent;
   }
 
   Object getNext() {
