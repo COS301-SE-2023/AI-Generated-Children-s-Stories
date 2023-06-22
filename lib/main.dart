@@ -31,8 +31,13 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
         create: (context) => StoryListChangeNotifier(GetStoriesService()),
-        child: StoryList(),
+        child: Home(),
       ),
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/storyList': (context) => StoryList(),
+        '/home': (context) => Home(),
+      }
     );
   }
 }
