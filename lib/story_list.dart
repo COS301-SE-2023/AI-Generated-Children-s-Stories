@@ -13,11 +13,11 @@ class StoryList extends StatefulWidget {
 }
 
 class _StoryListState extends State<StoryList> {
-
   late List<Story> _stories;
 
   //change notifier
-  final StoryListChangeNotifier _storyListChangeNotifier = StoryListChangeNotifier(GetStoriesService());
+  final StoryListChangeNotifier _storyListChangeNotifier =
+      StoryListChangeNotifier(GetStoriesService());
 
   @override
   void initState() {
@@ -28,7 +28,9 @@ class _StoryListState extends State<StoryList> {
 
   void getStories() async {
     await _storyListChangeNotifier.fetchStories();
-    _stories = _storyListChangeNotifier.stories;
+    setState(() {
+      _stories = _storyListChangeNotifier.stories;
+    });
   }
 
   @override
@@ -36,72 +38,64 @@ class _StoryListState extends State<StoryList> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 243, 233),
       body: SafeArea(
-        child: Column(children: [
-
+          child: Column(
+        children: [
           //the header
           const MyHeader(message: 'Story List'),
 
-          //the story list 
+          //the story list
           Expanded(
-          child: ListView.builder(
-            itemCount: _stories.length,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  //padding
-                  const SizedBox(height: 20),
+            child: ListView.builder(
+                itemCount: _stories.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      //padding
+                      const SizedBox(height: 20),
 
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 1.5,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          _stories[index].coverUrl,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 1.5,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              _stories[index].coverUrl,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
 
-                  const SizedBox(height: 5),
+                      const SizedBox(height: 5),
 
-                  Container(
-                    child: DefaultTextStyle(
-                      style: const TextStyle(
-                          fontSize: 35,
-                          //rgb(84, 34, 9)
-                          color: Color.fromARGB(255, 84, 34, 9),
-                          fontFamily: 'NotoSerif'),
-                      child: Text(_stories[index].title),
-                    ),
-                  ),
+                      Container(
+                        child: DefaultTextStyle(
+                          style: const TextStyle(
+                              fontSize: 35,
+                              //rgb(84, 34, 9)
+                              color: Color.fromARGB(255, 84, 34, 9),
+                              fontFamily: 'NotoSerif'),
+                          child: Text(_stories[index].title),
+                        ),
+                      ),
 
-                  const SizedBox(height: 5),
+                      const SizedBox(height: 5),
 
-                  //box with rounded corners
-                  
-
-                  
-
-                  const SizedBox(height: 5),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/home');
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      child: Image.asset('assets/images/viewButton.png'),
-                    ),
-                  ),
-                  //image button
-                ],
-              );
-            }),
-      ),
-        ],)
-        
-      ),
+                      const SizedBox(height: 5),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/home');
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.95,
+                          child: Image.asset('assets/images/viewButton.png'),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+        ],
+      )),
       bottomNavigationBar: NavbarWidget(),
-      
     );
   }
 }
