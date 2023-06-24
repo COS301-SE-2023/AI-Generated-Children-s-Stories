@@ -1,10 +1,7 @@
 import 'dart:math';
 import 'package:Magic_Pages/progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'navbar.dart';
-
-import 'myHeader.dart';
 
 class InsideStory extends StatefulWidget {
   InsideStory({super.key});
@@ -112,11 +109,11 @@ class _InsideStoryState extends State<InsideStory> {
           ]),
           Row(
             children: [
-               Center(
-                 child: ProgressBar(
-                        totalPages: widget.storyText.length - 1,
-                        currentPages: storyIndex),
-               )
+              Center(
+                child: ProgressBar(
+                    totalPages: widget.storyText.length - 1,
+                    currentPages: storyIndex),
+              )
             ],
           ),
           SizedBox(
@@ -158,7 +155,8 @@ class _InsideStoryState extends State<InsideStory> {
                         textScaleFactor: 1.1,
                         style: TextStyle(
                           color: Color.fromARGB(255, 58, 23, 6),
-                          fontSize: (1- MediaQuery.sizeOf(context).aspectRatio) * 30,
+                          fontSize:
+                              (1 - MediaQuery.sizeOf(context).aspectRatio) * 30,
                         ))),
               ],
             ),
