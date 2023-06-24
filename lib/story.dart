@@ -6,13 +6,12 @@ class Story {
   final int currentPage;
   int index = 0;
 
-  Story({
-    required this.title,
-    required this.coverUrl,
-    required this.textContent,
-    required this.imageContent,
-    required this.currentPage,
-  });
+  Story(
+      {required this.title,
+      required this.coverUrl,
+      required this.textContent,
+      required this.imageContent,
+      required this.currentPage});
 
   String getTitle() {
     return title;
