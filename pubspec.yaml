@@ -1,25 +1,26 @@
-name: ai_generated_children_s_stories
-description: A new Flutter project.
+name: Magic_Pages
+description: Magic Pages is an AI generated children's stories mobile application that leverages cutting-edge AI technologies to create engaging stories for foundation phase learners in South Africa. The app will use AI language models and generative image models, to provide age-appropriate reading and visual material centred around stories that interest the student. The proposed app seeks to address the challenge of low literacy rates among young learners in South Africa by giving them the ability to generate custom stories to their liking.
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 0.1.0+1
 
 environment:
   sdk: '>=3.0.1-94.0.dev <4.0.0'
 
 dependencies:
+  provider: ^6.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   flutter_lints: ^2.0.0
+  carousel_slider: ^4.2.1
+  test: ^1.24.3
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true
@@ -30,3 +31,6 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/storyPreviews/
+    - assets/images/stories/AndyTheAnt/
+    - assets/stories.json
