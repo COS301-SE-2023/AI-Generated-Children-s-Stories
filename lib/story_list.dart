@@ -41,178 +41,80 @@ class _StoryListState extends State<StoryList> {
           child: Column(
         children: [
           //the header
-          const MyHeader(message: 'Story List'),
+
+          _storyListChangeNotifier.isLoading
+              ? const Column(
+                  children: [
+                    MyHeader(
+                      message: 'Geting stories...',
+                    ),
+                    SizedBox(height: 50),
+                    CircularProgressIndicator(),
+                  ],
+                )
+              : const Column(
+                  children: [
+                    MyHeader(
+                      message: 'Stories',
+                    ),
+                    SizedBox(height: 50),
+                  ],
+                ),
 
           //the story list
-          Expanded(
-            child: ListView.builder(
-                itemCount: _stories.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      //padding
-                      const SizedBox(height: 20),
-
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 1.5,
-                        child: Column(
+          !_storyListChangeNotifier.isLoading
+              ? Expanded(
+                  child: ListView.builder(
+                      itemCount: _stories.length,
+                      itemBuilder: (context, index) {
+                        return Column(
                           children: [
-                            Image.asset(
-                              _stories[index].coverUrl,
+                            //padding
+                            const SizedBox(height: 20),
+
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 1.5,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    _stories[index].coverUrl,
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(height: 5),
+
+                            DefaultTextStyle(
+                              style: const TextStyle(
+                                  fontSize: 35,
+                                  //rgb(84, 34, 9)
+                                  color: Color.fromARGB(255, 84, 34, 9),
+                                  fontFamily: 'NotoSerif'),
+                              child: Text(_stories[index].title),
+                            ),
+
+                            const SizedBox(height: 5),
+
+                            const SizedBox(height: 5),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/home');
+                              },
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.95,
+                                child:
+                                    Image.asset('assets/images/viewButton.png'),
+                              ),
                             ),
                           ],
-                        ),
-                      ),
-
-                      const SizedBox(height: 5),
-
-                      DefaultTextStyle(
-                        style: const TextStyle(
-                            fontSize: 35,
-                            //rgb(84, 34, 9)
-                            color: Color.fromARGB(255, 84, 34, 9),
-                            fontFamily: 'NotoSerif'),
-                        child: Text(_stories[index].title),
-                      ),
-
-                      const SizedBox(height: 5),
-
-                      const SizedBox(height: 5),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/home');
-                        },
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.95,
-                          child: Image.asset('assets/images/viewButton.png'),
-                        ),
-                      ),
-                    ],
-                  );
-                }),
-          ),
+                        );
+                      }),
+                )
+              : const SizedBox(height: 0),
         ],
       )),
       bottomNavigationBar: const NavbarWidget(),
     );
   }
 }
-
-/*
-
-child: Column(children: [
-          MyHeader(),
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: Column(
-             _imageList.map((String imagePath) {
-              int index = _imageList.indexOf(imagePath);
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        //small image
-                        
-                        
-                       
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width*1.1,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 25.0),
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  imagePath, 
-                                  width: MediaQuery.of(context).size.width * 1.5, 
-                                ),
-                                Container(
-                                  transform: Matrix4.translationValues(90.0, -290, 0.0),
-                                  child: Image.asset(
-                                    'images/heart-filled.png',
-                                    width: 30
-                                  ),
-                                ),
-                                Container(
-                                  transform: Matrix4.translationValues(0, -320, 0.0),
-                                  child: const Text(
-                                    'Like this story?',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        Container(
-                          transform: Matrix4.translationValues(0.0, -130.0, 0.0),
-                          child:
-                           DefaultTextStyle(
-                          style: const TextStyle(
-                            fontSize: 35,
-                              //rgb(84, 34, 9)
-                              color: Color.fromARGB(255, 84, 34, 9),
-                              fontFamily: 'NotoSerif'
-                          ),
-                          child: Text(
-                            _captions[index]
-                          ),
-                        ),
-
-                        
-                        ),
-                        //title text 
-                       Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            //progress bar with round corners 
-                            SizedBox(
-                              width: 300,
-                              height: 30,
-                              child: Container(
-                                transform: Matrix4.translationValues(0.0, -120.0, 0.0),
-                                child: const ClipRRect(
-                                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                                  child: LinearProgressIndicator(
-                                    value: 0.5,
-                                    backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                                    valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255,254, 141, 41)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              transform: Matrix4.translationValues(0, -120, 0),
-                              child: const Text(
-                                "50%",
-                                style: TextStyle(
-                                  //rgb(0, 197, 61)
-                                  color: Color.fromARGB(255, 84, 34, 9),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 19,
-                                  fontFamily: 'NotoSerif'
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-          
-                  );
-                },
-              );
-            }).toList(),
-            ),
-          )
-        ])
-      ), 
-
-*/

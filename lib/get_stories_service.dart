@@ -7,7 +7,7 @@ class GetStoriesService {
   //continue with integration tests
 
   Future<List<Story>> fetchStories() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 5));
     final String response = await rootBundle.loadString('assets/stories.json');
     final data = await json.decode(response);
 
