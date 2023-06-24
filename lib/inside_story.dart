@@ -1,21 +1,21 @@
 import 'dart:math';
-import 'package:Magic_Pages/progress_bar.dart';
+import 'progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'navbar.dart';
 
 class InsideStory extends StatefulWidget {
   InsideStory({super.key});
 
-  List<String> messages = ["Well done!", "Almost there!", "Way to go!"];
+  final List<String> messages = ["Well done!", "Almost there!", "Way to go!"];
 
-  List<String> storyText = [
+  final List<String> storyText = [
     "Once upon a time, there was a curious ant named Andy. He lived in a cozy anthill under a big oak tree. Andy loved exploring with his ant friends.",
     "One sunny morning, Andy found a shiny golden key. He didn't know where it came from or what it unloc, ked, but he was determined to find out.",
     "Carrying the key, Andy went on an exciting journey through tall grass, up branches, and across a tiny stream. Finally, he discovered a huge rock with door.",
     "Andy turned the key in the keyhole, and the door opened, revealing a hidden chamber. Inside, there was delicious food."
   ];
 
-  List<String> images = [
+  final List<String> images = [
     "assets/images/stories/AndyTheAnt/img1.jpg",
     "assets/images/stories/AndyTheAnt/img2.jpg",
     "assets/images/stories/AndyTheAnt/img3.jpg",
@@ -154,7 +154,7 @@ class _InsideStoryState extends State<InsideStory> {
                         widget.storyText[storyIndex],
                         textScaleFactor: 1.1,
                         style: TextStyle(
-                          color: Color.fromARGB(255, 58, 23, 6),
+                          color: const Color.fromARGB(255, 58, 23, 6),
                           fontSize:
                               (1 - MediaQuery.sizeOf(context).aspectRatio) * 30,
                         ))),
@@ -184,7 +184,7 @@ class _InsideStoryState extends State<InsideStory> {
           )
         ],
       )),
-      bottomNavigationBar: NavbarWidget(),
+      bottomNavigationBar: const NavbarWidget(),
     );
   }
 }

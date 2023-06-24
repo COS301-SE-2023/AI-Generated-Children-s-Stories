@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'navbar.dart';
-import 'myHeader.dart';
+import 'my_header.dart';
 import 'progress_bar.dart';
 import 'image_button.dart';
 
@@ -8,7 +8,7 @@ class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      bottomNavigationBar: NavbarWidget(),
+      bottomNavigationBar: const NavbarWidget(),
     );
   }
 }

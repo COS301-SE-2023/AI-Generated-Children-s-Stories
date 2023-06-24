@@ -1,7 +1,7 @@
-import 'package:Magic_Pages/story.dart';
+import 'story.dart';
 import 'package:flutter/material.dart';
 import 'navbar.dart';
-import 'myHeader.dart';
+import 'my_header.dart';
 import 'story_list_change_notifier.dart';
 import 'get_stories_service.dart';
 
@@ -9,7 +9,7 @@ class StoryList extends StatefulWidget {
   const StoryList({super.key});
 
   @override
-  _StoryListState createState() => _StoryListState();
+  State<StoryList> createState() => _StoryListState();
 }
 
 class _StoryListState extends State<StoryList> {
@@ -66,15 +66,13 @@ class _StoryListState extends State<StoryList> {
 
                       const SizedBox(height: 5),
 
-                      Container(
-                        child: DefaultTextStyle(
-                          style: const TextStyle(
-                              fontSize: 35,
-                              //rgb(84, 34, 9)
-                              color: Color.fromARGB(255, 84, 34, 9),
-                              fontFamily: 'NotoSerif'),
-                          child: Text(_stories[index].title),
-                        ),
+                      DefaultTextStyle(
+                        style: const TextStyle(
+                            fontSize: 35,
+                            //rgb(84, 34, 9)
+                            color: Color.fromARGB(255, 84, 34, 9),
+                            fontFamily: 'NotoSerif'),
+                        child: Text(_stories[index].title),
                       ),
 
                       const SizedBox(height: 5),
@@ -84,7 +82,7 @@ class _StoryListState extends State<StoryList> {
                         onTap: () {
                           Navigator.pushNamed(context, '/home');
                         },
-                        child: Container(
+                        child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.95,
                           child: Image.asset('assets/images/viewButton.png'),
                         ),
@@ -95,7 +93,7 @@ class _StoryListState extends State<StoryList> {
           ),
         ],
       )),
-      bottomNavigationBar: NavbarWidget(),
+      bottomNavigationBar: const NavbarWidget(),
     );
   }
 }

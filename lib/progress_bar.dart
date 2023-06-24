@@ -1,13 +1,8 @@
-//wiget
-
 import 'package:flutter/material.dart';
 
 class ProgressBar extends StatefulWidget {
-  const ProgressBar({
-    super.key, 
-    required this.totalPages, 
-    required this.currentPages
-  });
+  const ProgressBar(
+      {super.key, required this.totalPages, required this.currentPages});
 
   final int currentPages;
   final int totalPages;
@@ -17,7 +12,6 @@ class ProgressBar extends StatefulWidget {
 }
 
 class _ProgressBarState extends State<ProgressBar> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,11 +22,12 @@ class _ProgressBarState extends State<ProgressBar> {
           height: 30,
           //change width of cliprect
           child: Padding(
-            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
+            padding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               child: LinearProgressIndicator(
-                value: widget.currentPages/ widget.totalPages,
+                value: widget.currentPages / widget.totalPages,
                 backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                 valueColor: const AlwaysStoppedAnimation<Color>(
                     Color.fromARGB(255, 254, 141, 41)),
@@ -40,7 +35,7 @@ class _ProgressBarState extends State<ProgressBar> {
             ),
           ),
         ),
-      
+
         //center the
         Positioned(
           left: MediaQuery.of(context).size.width * 0.44,
