@@ -13,7 +13,8 @@
             "assets/images/stories/AndyTheAnt/img2.jpg",
             "assets/images/stories/AndyTheAnt/img3.jpg",
             "assets/images/stories/AndyTheAnt/img4.jpg"
-        ]
+        ], 
+        "currentPage": 0
     },
     {
         "title": "Benny the Bear",
@@ -29,6 +30,7 @@
             "assets/images/stories/AndyTheAnt/img2.jpg",
             "assets/images/stories/AndyTheAnt/img3.jpg",
             "assets/images/stories/AndyTheAnt/img4.jpg"
-        ]
+        ], 
+        "currentPage": 0
     }
 ]

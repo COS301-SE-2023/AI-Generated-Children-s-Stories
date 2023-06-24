@@ -34,3 +34,4 @@ flutter:
     - assets/storyPreviews/
     - assets/images/stories/AndyTheAnt/
     - assets/stories.json
+    - assets/currentlyReading.json

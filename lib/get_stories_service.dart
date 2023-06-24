@@ -19,9 +19,25 @@ class GetStoriesService {
         coverUrl: data[i]['coverUrl'],
         textContent: data[i]['textContent'].cast<String>(),
         imageContent: data[i]['imageContent'].cast<String>(),
+        currentPage: data['currentPage'],
       ));
     }
 
     return stories;
+  }
+
+  Future<Story> fetchCurrrentlyReading() async {
+    await Future.delayed(const Duration(seconds: 1));
+    final String response =
+        await rootBundle.loadString('assets/currentlyReading.json');
+    final data = await json.decode(response);
+
+    return Story(
+      title: data['title'],
+      coverUrl: data['coverUrl'],
+      textContent: data['textContent'].cast<String>(),
+      imageContent: data['imageContent'].cast<String>(),
+      currentPage: data['currentPage'],
+    );
   }
 }
