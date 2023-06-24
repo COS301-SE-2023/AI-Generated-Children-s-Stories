@@ -28,7 +28,7 @@ migrate_working_dir/
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
-pubspec.lock 
+pubspec.lock
 .pub-cache/
 .pub/
 /build/
@@ -50,5 +50,4 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 windows/flutter/generated_plugin_registrant.cc
 windows/flutter/generated_plugin_registrant.h
 windows/flutter/generated_plugins.cmake
-pubspec.lock
-pubspec.lock
+
