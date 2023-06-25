@@ -1,11 +1,12 @@
-import 'get_stories_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test/test.dart';
+
+import 'get_stories_service.dart';
 import 'login_page.dart';
 import 'story_list.dart';
 import 'inside_story.dart';
 import 'home.dart';
-
 import 'story_list_change_notifier.dart';
 
 //to do hot reload:
@@ -13,6 +14,17 @@ import 'story_list_change_notifier.dart';
 //enter 'r' in the terminal
 
 void main() {
+  GetStoriesService getStoriesService;
+  StoryListChangeNotifier storyListChangeNotifier;
+
+  test("initial_values", () {
+    getStoriesService = GetStoriesService();
+    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
+
+    expect(storyListChangeNotifier.stories, []);
+    expect(storyListChangeNotifier.isLoading, false);
+  });
+
   runApp(const MyApp());
 }
 

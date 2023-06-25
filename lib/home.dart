@@ -81,24 +81,28 @@ class _HomeState extends State<Home> {
 
             //padding
             const SizedBox(height: 50),
-            Row(children: [
-              //image with rounded corners
-              Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(_currentlyReadingStory.coverUrl),
+
+            !_homeChangeNotifier.isLoading
+                ? Row(children: [
+                    //image with rounded corners
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.1),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.width * 0.8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(_currentlyReadingStory.coverUrl),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ]),
+                  ])
+                : const SizedBox(height: 0),
+
             Row(
               children: [
                 //image caption
@@ -120,15 +124,17 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            const Row(
-              children: [
-                //image button
-                ImageButton(
-                  imagePath: 'assets/images/viewButton.png',
-                  route: '/storyPage',
-                )
-              ],
-            ),
+            !_homeChangeNotifier.isLoading
+                ? const Row(
+                    children: [
+                      //image button
+                      ImageButton(
+                        imagePath: 'assets/images/viewButton.png',
+                        route: '/storyPage',
+                      )
+                    ],
+                  )
+                : const SizedBox(height: 0),
           ],
         ),
       ),
