@@ -22,8 +22,9 @@ class _ProgressBarState extends State<ProgressBar> {
           height: 30,
           //change width of cliprect
           child: Padding(
-            padding:
-                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.07,
+                right: MediaQuery.of(context).size.width * 0.07),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               child: LinearProgressIndicator(

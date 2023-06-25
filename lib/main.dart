@@ -21,7 +21,18 @@ void main() {
     getStoriesService = GetStoriesService();
     storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
 
-    expect(storyListChangeNotifier.stories, []);
+    expect(storyListChangeNotifier.isLoading, false);
+  });
+
+  test("fetch_stories", () async {
+    getStoriesService = GetStoriesService();
+    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
+
+    storyListChangeNotifier.fetchStories();
+    expect(storyListChangeNotifier.isLoading, true);
+    await storyListChangeNotifier.fetchStories();
+
+    expect(storyListChangeNotifier.stories.length, 2);
     expect(storyListChangeNotifier.isLoading, false);
   });
 

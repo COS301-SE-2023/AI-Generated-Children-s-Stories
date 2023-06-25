@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
                 : const SizedBox(height: 0),
 
             //padding
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
 
             !_homeChangeNotifier.isLoading
                 ? Row(children: [
