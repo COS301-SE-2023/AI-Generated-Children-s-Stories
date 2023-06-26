@@ -7,6 +7,9 @@ class InsideStory extends StatefulWidget {
   InsideStory({super.key});
 
   final List<String> messages = ["Well done!", "Almost there!", "Way to go!"];
+  final String halfWayMessage = "Halfway there!";
+
+  bool shownHalfway = false;
 
   final List<String> storyText = [
     "Once upon a time, there was a curious ant named Andy. He lived in a cozy anthill under a big oak tree. Andy loved exploring with his ant friends.",
@@ -23,31 +26,32 @@ class InsideStory extends StatefulWidget {
   ];
 
   @override
-  State<InsideStory> createState() => _InsideStoryState();
-}
+  State<InsideStory> createState() => InsideStoryState();
 
-class _InsideStoryState extends State<InsideStory> {
   int messageIndex = 0;
   int storyIndex = 0;
 
   void next() {
-    if (storyIndex < widget.storyText.length - 1) {
-      setState(() {
-        messageIndex = Random().nextInt(widget.messages.length);
-        storyIndex = storyIndex + 1;
-      });
+    if (storyIndex < storyText.length - 1) {
+      messageIndex = Random().nextInt(messages.length);
+      storyIndex = storyIndex + 1;
+    }
+    if (storyIndex == (storyText.length) / 2) {
+      shownHalfway = true;
+    } else {
+      shownHalfway = false;
     }
   }
 
   void prev() {
     if (storyIndex > 0) {
-      setState(() {
-        messageIndex = Random().nextInt(widget.messages.length);
-        storyIndex = storyIndex - 1;
-      });
+      messageIndex = Random().nextInt(messages.length);
+      storyIndex = storyIndex - 1;
     }
   }
+}
 
+class InsideStoryState extends State<InsideStory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +91,9 @@ class _InsideStoryState extends State<InsideStory> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(
-                  widget.messages[messageIndex],
+                  widget.shownHalfway
+                      ? "Halfway there!"
+                      : widget.messages[widget.messageIndex],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 25,
@@ -112,7 +118,7 @@ class _InsideStoryState extends State<InsideStory> {
               Center(
                 child: ProgressBar(
                     totalPages: widget.storyText.length - 1,
-                    currentPages: storyIndex),
+                    currentPages: widget.storyIndex),
               )
             ],
           ),
@@ -132,7 +138,7 @@ class _InsideStoryState extends State<InsideStory> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
-                            widget.images[storyIndex],
+                            widget.images[widget.storyIndex],
                           ),
                         )
                       ],
@@ -151,7 +157,7 @@ class _InsideStoryState extends State<InsideStory> {
                         top: 0, left: 20, right: 10, bottom: 0),
                     child: Text(
                         textAlign: TextAlign.center,
-                        widget.storyText[storyIndex],
+                        widget.storyText[widget.storyIndex],
                         textScaleFactor: 1.1,
                         style: TextStyle(
                           color: const Color.fromARGB(255, 58, 23, 6),
@@ -170,14 +176,14 @@ class _InsideStoryState extends State<InsideStory> {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => {prev()},
+                  onTap: () => {widget.prev()},
                   child: Image.asset('assets/images/back.png'),
                 ),
                 const Spacer(),
                 Image.asset('assets/images/pause.png'),
                 const Spacer(),
                 GestureDetector(
-                    onTap: () => {next()},
+                    onTap: () => {widget.next()},
                     child: Image.asset('assets/images/forward.png')),
               ],
             ),

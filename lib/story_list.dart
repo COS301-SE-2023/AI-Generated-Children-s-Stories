@@ -6,10 +6,15 @@ import 'story_list_change_notifier.dart';
 import 'get_stories_service.dart';
 
 class StoryList extends StatefulWidget {
-  const StoryList({super.key});
+  StoryList({super.key});
 
   @override
   State<StoryList> createState() => _StoryListState();
+
+  //for testing purposes
+  isLoading() {
+    return _StoryListState()._storyListChangeNotifier.isLoading;
+  }
 }
 
 class _StoryListState extends State<StoryList> {
@@ -99,7 +104,7 @@ class _StoryListState extends State<StoryList> {
                             const SizedBox(height: 5),
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/home');
+                                Navigator.pushNamed(context, '/insideAStory');
                               },
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.95,
