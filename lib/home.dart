@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                 //image button
                 ImageButton(
                   imagePath: 'assets/images/viewButton.png',
-                  route: '/storyPage',
+                  route: '/insideAStory',
                 )
               ],
             ),

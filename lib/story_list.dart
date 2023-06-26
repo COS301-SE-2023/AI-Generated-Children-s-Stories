@@ -99,7 +99,7 @@ class _StoryListState extends State<StoryList> {
                             const SizedBox(height: 5),
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/home');
+                                Navigator.pushNamed(context, '/insideAStory');
                               },
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.95,
