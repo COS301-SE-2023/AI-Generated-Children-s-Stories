@@ -120,11 +120,11 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/login': (context) => const LoginPage(),
-          '/storyList': (context) => StoryList(),
+          '/storyList': (context) => const StoryList(),
           '/home': (context) => const Home(),
           '/insideAStory': (context) => InsideStory(),
-          '/storyLiked': (context) => StoryLiked(),
-          '/profile': (context) => Profile(),
+          '/storyLiked': (context) => const StoryLiked(),
+          '/profile': (context) => const Profile(),
         });
   }
 }

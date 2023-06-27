@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'navbar.dart';
 import 'my_header.dart';
-import 'progress_bar.dart';
 import 'image_button.dart';
 import 'home_change_notifier.dart';
 import 'get_stories_service.dart';
