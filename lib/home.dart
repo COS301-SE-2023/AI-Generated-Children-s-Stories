@@ -72,12 +72,12 @@ class _HomeState extends State<Home> {
                         message: 'Continue reading...',
                       ),
 
-            //show the progress bar if loading
-            !_homeChangeNotifier.isLoading
-                ? ProgressBar(
-                    currentPages: _currentlyReadingStory.currentPage,
-                    totalPages: _currentlyReadingStory.textContent.length)
-                : const SizedBox(height: 0),
+            // show the progress bar if loading
+            // !_homeChangeNotifier.isLoading
+            //     ? ProgressBar(
+            //         currentPages: _currentlyReadingStory.currentPage,
+            //         totalPages: _currentlyReadingStory.textContent.length)
+            //     : const SizedBox(height: 0),
 
             //padding
             const SizedBox(height: 50),

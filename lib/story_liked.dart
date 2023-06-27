@@ -5,14 +5,14 @@ import 'my_header.dart';
 import 'story_list_change_notifier.dart';
 import 'get_stories_service.dart';
 
-class StoryList extends StatefulWidget {
-  const StoryList({super.key});
+class StoryLiked extends StatefulWidget {
+  const StoryLiked({super.key});
 
   @override
-  State<StoryList> createState() => _StoryListState();
+  State<StoryLiked> createState() => _StoryLikedState();
 }
 
-class _StoryListState extends State<StoryList> {
+class _StoryLikedState extends State<StoryLiked> {
   late List<Story> _stories;
 
   //change notifier
@@ -55,7 +55,7 @@ class _StoryListState extends State<StoryList> {
               : const Column(
                   children: [
                     MyHeader(
-                      message: 'Book Library',
+                      message: 'Liked Books',
                     ),
                     SizedBox(height: 50),
                   ],

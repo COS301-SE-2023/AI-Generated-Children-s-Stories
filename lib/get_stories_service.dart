@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'story.dart';
 
 class GetStoriesService {
-  //read the json file and reaturn the stories (simulates an api call)
+  //read the json file and return the stories (simulates an api call)
   //continue with integration tests
 
   Future<List<Story>> fetchStories() async {

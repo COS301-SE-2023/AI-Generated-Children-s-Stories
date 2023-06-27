@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'login_page.dart';
 import 'story_list.dart';
+import 'story_liked.dart';
 import 'inside_story.dart';
 import 'home.dart';
+import 'profile.dart';
 
 import 'story_list_change_notifier.dart';
 
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget {
           '/storyList': (context) => const StoryList(),
           '/home': (context) => const Home(),
           '/insideAStory': (context) => InsideStory(),
+          '/storyLiked': (context) => StoryLiked(),
+          '/profile': (context) => Profile(),
         });
   }
 }

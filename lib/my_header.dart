@@ -60,10 +60,14 @@ class _MyHeaderState extends State<MyHeader> {
           Positioned(
               child: Padding(
             padding: const EdgeInsets.only(right: 5),
-            child: Image.asset(
-              'assets/images/Profile.png',
-              width: MediaQuery.of(context).size.width * 0.2,
-            ),
+            child: IconButton(
+            icon: Image.asset('assets/images/Profile.png'),
+            iconSize: 50,
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+          ),
+            
           )),
         ])
       ]),

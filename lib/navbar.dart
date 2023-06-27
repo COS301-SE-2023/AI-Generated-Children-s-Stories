@@ -34,7 +34,9 @@ class NavbarWidget extends StatelessWidget {
           IconButton(
             icon: Image.asset('assets/images/Liked.png'),
             iconSize: 50,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/storyLiked');
+            },
           )
         ],
       ),
