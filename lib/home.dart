@@ -7,6 +7,15 @@ import 'home_change_notifier.dart';
 import 'get_stories_service.dart';
 import 'story.dart';
 
+/// This class represents the home page.
+/// It contains the UI for the home page.
+/// The UI contains a header, a progress bar, an image, an image caption, and an image button.
+/// The header tells the user if they are reading a new book or continuing to read the book they were reading.
+/// The progress bar shows the user how far they are through the book.
+/// The image shows the user the cover of the book they are reading.
+/// The image caption tells the user the title of the book they are reading.
+/// The image button takes the user to the inside a story page.
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -22,6 +31,7 @@ class _HomeState extends State<Home> {
   late Story _currentlyReadingStory;
 
   //set story to empty story
+  //fetch currently reading
   @override
   void initState() {
     super.initState();
@@ -35,6 +45,8 @@ class _HomeState extends State<Home> {
     );
   }
 
+  //fetch currently reading
+  //it uses the home change notifier to fetch the currently reading story
   void getCurrentlyReading() async {
     await _homeChangeNotifier.fetchCurrentlyReading();
     setState(() {
@@ -80,25 +92,57 @@ class _HomeState extends State<Home> {
             //     : const SizedBox(height: 0),
 
             //padding
-            const SizedBox(height: 50),
-            Row(children: [
-              //image with rounded corners
-              Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(_currentlyReadingStory.coverUrl),
-                    ),
-                  ),
-                ),
-              ),
-            ]),
+            const SizedBox(height: 30),
+
+            !_homeChangeNotifier.isLoading
+                ? Row(
+                    children: [
+                      //image with rounded corners
+                      LayoutBuilder(builder: (context, constraints) {
+                        if (constraints.maxWidth < 600) {
+                          //mobile
+                          return Padding(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.1,
+                                  right:
+                                      MediaQuery.of(context).size.width * 0.1),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                height: MediaQuery.of(context).size.width * 0.8,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        _currentlyReadingStory.coverUrl),
+                                  ),
+                                ),
+                              ));
+                        } else {
+                          //tablet
+                          return Padding(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.3,
+                                  right:
+                                      MediaQuery.of(context).size.width * 0.3),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: MediaQuery.of(context).size.width * 0.4,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        _currentlyReadingStory.coverUrl),
+                                  ),
+                                ),
+                              ));
+                        }
+                      })
+                    ],
+                  )
+                : const SizedBox(height: 0),
+
             Row(
               children: [
                 //image caption
@@ -120,15 +164,17 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            const Row(
-              children: [
-                //image button
-                ImageButton(
-                  imagePath: 'assets/images/viewButton.png',
-                  route: '/insideAStory',
-                )
-              ],
-            ),
+            !_homeChangeNotifier.isLoading
+                ? const Row(
+                    children: [
+                      //image button
+                      ImageButton(
+                        imagePath: 'assets/images/viewButton.png',
+                        route: '/insideAStory',
+                      )
+                    ],
+                  )
+                : const SizedBox(height: 0),
           ],
         ),
       ),

@@ -1,3 +1,10 @@
+/// Story class to hold story data
+/// It contains the title, cover url, text content, image content and current page.
+/// The title is used to display the title of the story to the user.
+/// The cover url is used to display the cover of the story to the user.
+/// The text content is used to display the story text to the user.
+/// The image content is used to display the image which corresponds to each piece of text to the user.
+
 class Story {
   final String title;
   final String coverUrl;
@@ -33,6 +40,9 @@ class Story {
     return currentPage;
   }
 
+  //get the next page
+  //if the current page is the last page, return the last page
+  //else return the next page
   Object getNext() {
     if (index < textContent.length - 1) {
       index = index + 1;
@@ -53,6 +63,9 @@ class Story {
     }
   }
 
+  //get the previous page
+  //if the current page is the first page, return the first page
+  //else return the previous page
   Object getPrev() {
     if (index > 0) {
       index = index - 1;

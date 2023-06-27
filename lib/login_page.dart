@@ -9,6 +9,13 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+/// This class represents the state of the login page.
+/// It contains the UI for the login page.
+/// The UI contains a back button, a text box, and two buttons to log in with apple and google.
+/// The text box contains a message telling the user to ask a grown up to help them log in.
+/// The buttons take the user to the home page.
+/// The buttons are images of the google and apple logos.
+
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 80),
               //row with image
               Row(
-                  //text box that takes up 80% of the screen widht
+                  //text box that takes up 80% of the screen width
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10, top: 20),

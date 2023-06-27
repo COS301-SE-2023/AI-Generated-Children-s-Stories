@@ -3,11 +3,25 @@ import 'progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'navbar.dart';
 
+/// This class represents the state of the inside story page.
+/// It keeps track of the current story index, the current message index, and whether the halfway message has been shown.
+/// It also contains the next and previous functions, which update the story index and message index.
+/// The next and previous functions are called when the user presses the next and previous buttons.
+/// The next and previous functions also update the halfway message.
+/// The halfway message is shown when the user is halfway through the story.
+/// The halfway message is randomly selected from a list of messages.
+
 class InsideStory extends StatefulWidget {
   InsideStory({super.key});
 
+  //messages displayed by the mascott
   final List<String> messages = ["Well done!", "Almost there!", "Way to go!"];
+  //halfway message when the user is halfway through the story
+  final String halfWayMessage = "Halfway there!";
 
+  bool shownHalfway = false;
+
+  //story text is the content of the story
   final List<String> storyText = [
     "Once upon a time, there was a curious ant named Andy. He lived in a cozy anthill under a big oak tree. Andy loved exploring with his ant friends.",
     "One sunny morning, Andy found a shiny golden key. He didn't know where it came from or what it unloc, ked, but he was determined to find out.",
@@ -15,6 +29,7 @@ class InsideStory extends StatefulWidget {
     "Andy turned the key in the keyhole, and the door opened, revealing a hidden chamber. Inside, there was delicious food."
   ];
 
+  //story images
   final List<String> images = [
     "assets/images/stories/AndyTheAnt/img1.jpg",
     "assets/images/stories/AndyTheAnt/img2.jpg",
@@ -23,31 +38,38 @@ class InsideStory extends StatefulWidget {
   ];
 
   @override
-  State<InsideStory> createState() => _InsideStoryState();
-}
+  State<InsideStory> createState() => InsideStoryState();
 
-class _InsideStoryState extends State<InsideStory> {
   int messageIndex = 0;
   int storyIndex = 0;
 
+  /// This function updates the story index and message index.
+  /// It also updates the halfway message.
+  /// It is called when the user presses the next button.
   void next() {
-    if (storyIndex < widget.storyText.length - 1) {
-      setState(() {
-        messageIndex = Random().nextInt(widget.messages.length);
-        storyIndex = storyIndex + 1;
-      });
+    if (storyIndex < storyText.length - 1) {
+      messageIndex = Random().nextInt(messages.length);
+      storyIndex = storyIndex + 1;
+    }
+    if (storyIndex == (storyText.length) / 2) {
+      shownHalfway = true;
+    } else {
+      shownHalfway = false;
     }
   }
 
+  /// This function updates the story index and message index.
+  /// It is called when the user presses the previous button.
+  /// It does not update the halfway message.
   void prev() {
     if (storyIndex > 0) {
-      setState(() {
-        messageIndex = Random().nextInt(widget.messages.length);
-        storyIndex = storyIndex - 1;
-      });
+      messageIndex = Random().nextInt(messages.length);
+      storyIndex = storyIndex - 1;
     }
   }
+}
 
+class InsideStoryState extends State<InsideStory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +77,7 @@ class _InsideStoryState extends State<InsideStory> {
       body: SafeArea(
           child: Column(
         children: [
+          //header image
           Row(
             children: [
               Padding(
@@ -72,6 +95,8 @@ class _InsideStoryState extends State<InsideStory> {
               ),
             ],
           ),
+
+          //heart and halfway message
           Row(children: [
             Padding(
               padding: EdgeInsets.only(
@@ -87,7 +112,9 @@ class _InsideStoryState extends State<InsideStory> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(
-                  widget.messages[messageIndex],
+                  widget.shownHalfway
+                      ? "Halfway there!"
+                      : widget.messages[widget.messageIndex],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 25,
@@ -112,10 +139,12 @@ class _InsideStoryState extends State<InsideStory> {
               Center(
                 child: ProgressBar(
                     totalPages: widget.storyText.length - 1,
-                    currentPages: storyIndex),
+                    currentPages: widget.storyIndex),
               )
             ],
           ),
+
+          //story image
           SizedBox(
             child: Padding(
               padding: EdgeInsets.only(
@@ -132,7 +161,7 @@ class _InsideStoryState extends State<InsideStory> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
-                            widget.images[storyIndex],
+                            widget.images[widget.storyIndex],
                           ),
                         )
                       ],
@@ -142,8 +171,11 @@ class _InsideStoryState extends State<InsideStory> {
               ),
             ),
           ),
+
+          //story text at the bottom of the image
           Expanded(
             child: Column(
+              //center align
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
@@ -151,7 +183,7 @@ class _InsideStoryState extends State<InsideStory> {
                         top: 0, left: 20, right: 10, bottom: 0),
                     child: Text(
                         textAlign: TextAlign.center,
-                        widget.storyText[storyIndex],
+                        widget.storyText[widget.storyIndex],
                         textScaleFactor: 1.1,
                         style: TextStyle(
                           color: const Color.fromARGB(255, 58, 23, 6),
@@ -161,6 +193,8 @@ class _InsideStoryState extends State<InsideStory> {
               ],
             ),
           ),
+
+          //control bar to navigate through the story
           Padding(
             padding: EdgeInsets.only(
                 bottom: 20,
@@ -170,14 +204,14 @@ class _InsideStoryState extends State<InsideStory> {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => {prev()},
+                  onTap: () => {widget.prev()},
                   child: Image.asset('assets/images/back.png'),
                 ),
                 const Spacer(),
                 Image.asset('assets/images/pause.png'),
                 const Spacer(),
                 GestureDetector(
-                    onTap: () => {next()},
+                    onTap: () => {widget.next()},
                     child: Image.asset('assets/images/forward.png')),
               ],
             ),
@@ -188,52 +222,3 @@ class _InsideStoryState extends State<InsideStory> {
     );
   }
 }
-
-class PageState extends ChangeNotifier {}
-
-/*
-
-bottomNavigationBar: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20, top: 15, left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05),
-                  child: Row(children: [
-                    GestureDetector(
-                      onTap: () => {
-                        prev()
-                      },
-                      child: Image.asset(
-                        'assets/images/back.png'
-                      ),
-                    ),
-                     
-                    Spacer(),
-                    Image.asset(
-                      'assets/images/pause.png'
-                    ),
-                    Spacer(), 
-          
-                    GestureDetector(
-                      onTap: () => {
-                        next()
-                      },
-                      child: Image.asset(
-                        'assets/images/forward.png'
-                      )
-                    )
-                    ,
-                  ],),
-                )
-              ],
-            ), 
-            Row(
-              children: [
-                NavbarWidget()
-              ],
-            )
-        ],
-      )
-
-*/
