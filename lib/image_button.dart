@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// This class represents an image button.
+/// It is used whenever a button and an image needs to be displayed
+/// It can route to any page
+
 class ImageButton extends StatefulWidget {
   final String imagePath;
   final String route;

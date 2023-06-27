@@ -9,6 +9,13 @@ class MyHeader extends StatefulWidget {
   State<MyHeader> createState() => _MyHeaderState();
 }
 
+/// This class represents the header of the home page.
+/// It contains the UI for the header of the home page.
+/// The UI contains a mascot, a message, and a profile picture.
+/// The mascot is a winking fox.
+/// The message tells the user if they are reading a new book or continuing to read the book they were reading.
+/// The profile picture is a picture of the user.
+
 class _MyHeaderState extends State<MyHeader> {
   @override
   Widget build(BuildContext context) {

@@ -9,16 +9,20 @@ import 'inside_story.dart';
 import 'home.dart';
 import 'story_list_change_notifier.dart';
 
-//to do hot reload:
-//flutter run
-//enter 'r' in the terminal
+/// This is the main file for the app.
+/// It contains the main function, which runs the app.
+/// It also contains the unit and integration tests.
+/// The unit tests test the inside a story class.
+/// The integration tests test the get stories service class.
 
 void main() {
+  //initialise the services and change notifiers
   GetStoriesService getStoriesService;
   StoryListChangeNotifier storyListChangeNotifier;
 
   //----------------------- UNIT TESTS -----------------------//
 
+  //test the inside a story class
   InsideStory insideStory = InsideStory();
 
   //test initial values
@@ -28,6 +32,8 @@ void main() {
     expect(insideStory.shownHalfway, false);
   });
 
+  //test next and previous buttons
+  //and the halfway message
   group('Inside a story test', () {
     test("next button works", () {
       insideStory.next();
@@ -50,6 +56,7 @@ void main() {
 
   //-------------------- INTEGRATION TEST --------------------//
 
+  //test the get stories service class
   test("get stories service initial values", () {
     getStoriesService = GetStoriesService();
     storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
@@ -100,7 +107,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Header Widget Example',
+        title: 'Magic Pages',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

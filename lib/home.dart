@@ -7,6 +7,15 @@ import 'home_change_notifier.dart';
 import 'get_stories_service.dart';
 import 'story.dart';
 
+/// This class represents the home page.
+/// It contains the UI for the home page.
+/// The UI contains a header, a progress bar, an image, an image caption, and an image button.
+/// The header tells the user if they are reading a new book or continuing to read the book they were reading.
+/// The progress bar shows the user how far they are through the book.
+/// The image shows the user the cover of the book they are reading.
+/// The image caption tells the user the title of the book they are reading.
+/// The image button takes the user to the inside a story page.
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -22,6 +31,7 @@ class _HomeState extends State<Home> {
   late Story _currentlyReadingStory;
 
   //set story to empty story
+  //fetch currently reading
   @override
   void initState() {
     super.initState();
@@ -35,6 +45,8 @@ class _HomeState extends State<Home> {
     );
   }
 
+  //fetch currently reading
+  //it uses the home change notifier to fetch the currently reading story
   void getCurrentlyReading() async {
     await _homeChangeNotifier.fetchCurrentlyReading();
     setState(() {

@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// This class represents the progress bar widget.
+/// It is used to show the user how far they are through the book.
+/// It is used on the home page and the inside a story page.
+/// It takes in the current page and the total pages.
+/// It displays the current page as a percentage.
+/// It displays the progress bar as a linear progress indicator.
+/// It displays the percentage in the middle of the progress bar.
+/// The progress bar is displayed at the top of the screen.
+
 class ProgressBar extends StatefulWidget {
   const ProgressBar(
       {super.key, required this.totalPages, required this.currentPages});

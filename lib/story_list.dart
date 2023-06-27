@@ -5,6 +5,10 @@ import 'my_header.dart';
 import 'story_list_change_notifier.dart';
 import 'get_stories_service.dart';
 
+/// This class represents the story list page.
+/// The UI contains a header and a list of stories.
+/// The list of stories shows the user the list of stories they can read.
+
 class StoryList extends StatefulWidget {
   StoryList({super.key});
 
@@ -24,6 +28,7 @@ class _StoryListState extends State<StoryList> {
   final StoryListChangeNotifier _storyListChangeNotifier =
       StoryListChangeNotifier(GetStoriesService());
 
+  //set stories to empty list
   @override
   void initState() {
     super.initState();
@@ -31,6 +36,8 @@ class _StoryListState extends State<StoryList> {
     _stories = [];
   }
 
+  //fetch stories
+  //it uses the story list change notifier to fetch the list of stories
   void getStories() async {
     await _storyListChangeNotifier.fetchStories();
     setState(() {
@@ -47,6 +54,9 @@ class _StoryListState extends State<StoryList> {
         children: [
           //the header
 
+          //if the story list is loading
+          //show loading message
+          //else show the header
           _storyListChangeNotifier.isLoading
               ? const Column(
                   children: [
