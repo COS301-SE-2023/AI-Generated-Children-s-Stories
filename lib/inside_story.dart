@@ -51,6 +51,14 @@ class InsideStory extends StatefulWidget {
   }
 }
 
+/* This class represents the state of the inside story page.
+ * It keeps track of the current story index, the current message index, and whether the halfway message has been shown.
+ * It also contains the next and previous functions, which update the story index and message index.
+ * The next and previous functions are called when the user presses the next and previous buttons.
+ * The next and previous functions also update the halfway message.
+ * The halfway message is shown when the user is halfway through the story.
+ * The halfway message is randomly selected from a list of messages.
+ */
 class InsideStoryState extends State<InsideStory> {
   @override
   Widget build(BuildContext context) {
@@ -59,6 +67,7 @@ class InsideStoryState extends State<InsideStory> {
       body: SafeArea(
           child: Column(
         children: [
+          //header image
           Row(
             children: [
               Padding(
@@ -76,6 +85,8 @@ class InsideStoryState extends State<InsideStory> {
               ),
             ],
           ),
+
+          //heart and halfway message
           Row(children: [
             Padding(
               padding: EdgeInsets.only(
@@ -122,6 +133,8 @@ class InsideStoryState extends State<InsideStory> {
               )
             ],
           ),
+
+          //story image
           SizedBox(
             child: Padding(
               padding: EdgeInsets.only(
@@ -148,8 +161,11 @@ class InsideStoryState extends State<InsideStory> {
               ),
             ),
           ),
+
+          //story text at the bottom of the image
           Expanded(
             child: Column(
+              //center align
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
@@ -167,6 +183,8 @@ class InsideStoryState extends State<InsideStory> {
               ],
             ),
           ),
+
+          //control bar to navigate through the story
           Padding(
             padding: EdgeInsets.only(
                 bottom: 20,
@@ -194,52 +212,3 @@ class InsideStoryState extends State<InsideStory> {
     );
   }
 }
-
-class PageState extends ChangeNotifier {}
-
-/*
-
-bottomNavigationBar: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20, top: 15, left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05),
-                  child: Row(children: [
-                    GestureDetector(
-                      onTap: () => {
-                        prev()
-                      },
-                      child: Image.asset(
-                        'assets/images/back.png'
-                      ),
-                    ),
-                     
-                    Spacer(),
-                    Image.asset(
-                      'assets/images/pause.png'
-                    ),
-                    Spacer(), 
-          
-                    GestureDetector(
-                      onTap: () => {
-                        next()
-                      },
-                      child: Image.asset(
-                        'assets/images/forward.png'
-                      )
-                    )
-                    ,
-                  ],),
-                )
-              ],
-            ), 
-            Row(
-              children: [
-                NavbarWidget()
-              ],
-            )
-        ],
-      )
-
-*/
