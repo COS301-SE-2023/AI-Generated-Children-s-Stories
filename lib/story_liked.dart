@@ -5,6 +5,11 @@ import 'my_header.dart';
 import 'story_list_change_notifier.dart';
 import 'get_stories_service.dart';
 
+/// This class represents the liked stories of the users
+/// The UI contains a header and a list of stories.
+/// The list of stories shows the user the list of stories they can read.
+/// Users are able to like and unlike stories in the story list page.
+
 class StoryLiked extends StatefulWidget {
   const StoryLiked({super.key});
 
@@ -26,6 +31,9 @@ class _StoryLikedState extends State<StoryLiked> {
     _stories = [];
   }
 
+  /// fetch stories
+  /// it uses the story list change notifier to fetch the list of stories
+  /// @return void
   void getStories() async {
     await _storyListChangeNotifier.fetchStories();
     setState(() {

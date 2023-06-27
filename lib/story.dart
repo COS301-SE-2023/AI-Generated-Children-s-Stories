@@ -20,29 +20,40 @@ class Story {
       required this.imageContent,
       required this.currentPage});
 
+  /// get the title of the story
+  /// @return the title of the story
   String getTitle() {
     return title;
   }
 
+  /// get the cover url of the story
+  /// @return the cover url of the story
   String getCoverUrl() {
     return coverUrl;
   }
 
+  /// get the text content of the story
+  /// @return the text content of the story
   List<String> getTextContent() {
     return textContent;
   }
 
+  /// get the image content of the story
+  /// @return the image content of the story
   List<String> getImageContent() {
     return imageContent;
   }
 
+  /// get the current page of the story
+  /// @return the current page of the story
   int getCurrentPage() {
     return currentPage;
   }
 
-  //get the next page
-  //if the current page is the last page, return the last page
-  //else return the next page
+  /// get the next page
+  /// if the current page is the last page, return the last page
+  /// else return the next page
+  /// @return the next page
   Object getNext() {
     if (index < textContent.length - 1) {
       index = index + 1;
@@ -63,9 +74,10 @@ class Story {
     }
   }
 
-  //get the previous page
-  //if the current page is the first page, return the first page
-  //else return the previous page
+  /// get the previous page
+  /// if the current page is the first page, return the first page
+  /// else return the previous page
+  /// @return the previous page
   Object getPrev() {
     if (index > 0) {
       index = index - 1;

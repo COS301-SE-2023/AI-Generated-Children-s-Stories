@@ -22,8 +22,9 @@ class StoryListChangeNotifier extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  //fetch the list of stories
-  //using the service
+  /// fetch the list of stories
+  /// this function is called when the user opens the story list page
+  /// @return the list of stories
   Future<void> fetchStories() async {
     _isLoading = true;
     notifyListeners();

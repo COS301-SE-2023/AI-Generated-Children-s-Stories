@@ -28,7 +28,8 @@ class _StoryListState extends State<StoryList> {
   final StoryListChangeNotifier _storyListChangeNotifier =
       StoryListChangeNotifier(GetStoriesService());
 
-  //set stories to empty list
+  /// set stories to empty list
+  /// @return void
   @override
   void initState() {
     super.initState();
@@ -36,8 +37,9 @@ class _StoryListState extends State<StoryList> {
     _stories = [];
   }
 
-  //fetch stories
-  //it uses the story list change notifier to fetch the list of stories
+  /// fetch stories
+  /// it uses the story list change notifier to fetch the list of stories
+  /// @return void
   void getStories() async {
     await _storyListChangeNotifier.fetchStories();
     setState(() {
