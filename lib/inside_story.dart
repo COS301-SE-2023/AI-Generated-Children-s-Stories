@@ -19,8 +19,6 @@ class InsideStory extends StatefulWidget {
   //halfway message when the user is halfway through the story
   final String halfWayMessage = "Halfway there!";
 
-  bool shownHalfway = false;
-
   //story text is the content of the story
   final List<String> storyText = [
     "Once upon a time, there was a curious ant named Andy. He lived in a cozy anthill under a big oak tree. Andy loved exploring with his ant friends.",
@@ -42,6 +40,7 @@ class InsideStory extends StatefulWidget {
 
   int messageIndex = 0;
   int storyIndex = 0;
+  bool shownHalfway = false;
 
   /// This function updates the story index and message index.
   /// It also updates the halfway message.
