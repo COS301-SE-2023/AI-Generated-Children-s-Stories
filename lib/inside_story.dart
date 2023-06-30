@@ -210,7 +210,16 @@ class InsideStoryState extends State<InsideStory> {
                 Image.asset('assets/images/pause.png'),
                 const Spacer(),
                 GestureDetector(
-                    onTap: () => {widget.next()},
+                    onTap: () => {
+                          if (widget.storyIndex == widget.storyText.length - 1)
+                            {
+                              //TODO: write a unit test to check this
+                              //go to the liked page if the story is finished
+                              Navigator.pushNamed(context, '/endBook')
+                            }
+                          else
+                            widget.next() //go to the next page
+                        },
                     child: Image.asset('assets/images/forward.png')),
               ],
             ),

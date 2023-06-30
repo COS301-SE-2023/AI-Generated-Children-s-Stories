@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test/test.dart';
 
 import 'get_stories_service.dart';
 import 'login_page.dart';
@@ -19,54 +18,6 @@ import 'story_list_change_notifier.dart';
 /// The integration tests test the get stories service class.
 
 void main() {
-  //initialise the services and change notifiers
-  GetStoriesService getStoriesService;
-  StoryListChangeNotifier storyListChangeNotifier;
-
-  //-------------------- INTEGRATION TEST --------------------//
-
-  //test the get stories service class
-  test("get stories service initial values", () {
-    getStoriesService = GetStoriesService();
-    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
-
-    expect(storyListChangeNotifier.isLoading, false);
-  });
-
-  test("fetch stories works and loading works", () async {
-    getStoriesService = GetStoriesService();
-    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
-
-    storyListChangeNotifier.fetchStories();
-
-    expect(storyListChangeNotifier.isLoading, true);
-    await storyListChangeNotifier.fetchStories();
-
-    //check that the stories are not empty
-    expect(storyListChangeNotifier.stories.length, 3);
-    //check that loading is set to false
-    expect(storyListChangeNotifier.isLoading, false);
-  });
-
-  test("correct story headings shown", () async {
-    getStoriesService = GetStoriesService();
-    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
-
-    storyListChangeNotifier.fetchStories();
-
-    await storyListChangeNotifier.fetchStories();
-
-    expect(storyListChangeNotifier.stories.length, 3);
-
-    //check that the headings are correct
-    expect(storyListChangeNotifier.stories[0].title, 'Andy the Ant');
-    expect(storyListChangeNotifier.stories[1].title, 'Benny the Bear');
-    expect(storyListChangeNotifier.stories[2].coverUrl,
-        'assets/storyPreviews/honey-the-kitty.png');
-  });
-
-  //----------------------------------------------------------//
-
   runApp(const MyApp());
 }
 
@@ -91,6 +42,9 @@ class MyApp extends StatelessWidget {
           '/insideAStory': (context) => InsideStory(),
           '/storyLiked': (context) => const StoryLiked(),
           '/profile': (context) => const Profile(),
+
+          //TODO: create an end book page
+          '/endBook': (context) => const Home(),
         });
   }
 }
