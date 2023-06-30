@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:math';
 import 'progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -86,162 +85,170 @@ class InsideStoryState extends State<InsideStory> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 243, 233),
-      body: SafeArea(
-          child: Column(
-        children: [
-          //header image
-          Row(
-            children: [
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 243, 233),
+        body: SafeArea(
+            child: Column(
+          children: [
+            //header image
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width * 0.1,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/images/Wave.png'),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            //heart and halfway message
+            Row(children: [
               Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width * 0.1,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage('assets/images/Wave.png'),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          //heart and halfway message
-          Row(children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.05),
-              child: Image.asset(
-                'assets/images/heart-empty.png',
-                width: MediaQuery.of(context).size.width * 0.12,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.06),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: Text(
-                  shownHalfway
-                      ? "Halfway there!"
-                      : widget.messages[messageIndex],
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 25,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-            Stack(children: [
-              Positioned(
-                  child: Padding(
-                padding: const EdgeInsets.only(right: 5),
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.05),
                 child: Image.asset(
-                  'assets/images/MascotWinking.png',
-                  width: MediaQuery.of(context).size.width * 0.2,
+                  'assets/images/heart-empty.png',
+                  width: MediaQuery.of(context).size.width * 0.12,
                 ),
-              )),
-            ])
-          ]),
-          Row(
-            children: [
-              Center(
-                child: ProgressBar(
-                    totalPages: widget.storyText.length - 1,
-                    currentPages: storyIndex),
-              )
-            ],
-          ),
-
-          //story image
-          SizedBox(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.05,
-                  right: MediaQuery.of(context).size.width * 0.05),
-              child: Row(
-                //image
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.width * 0.9,
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            widget.images[storyIndex],
-                          ),
-                        )
-                      ],
-                    ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.06),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(
+                    textDirection: TextDirection.ltr,
+                    shownHalfway
+                        ? "Halfway there!"
+                        : widget.messages[messageIndex],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 25,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w600),
                   ),
+                ),
+              ),
+              Stack(children: [
+                Positioned(
+                    child: Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: Image.asset(
+                    'assets/images/MascotWinking.png',
+                    width: MediaQuery.of(context).size.width * 0.2,
+                  ),
+                )),
+              ])
+            ]),
+            Row(
+              children: [
+                Center(
+                  child: ProgressBar(
+                      totalPages: widget.storyText.length - 1,
+                      currentPages: storyIndex),
+                )
+              ],
+            ),
+
+            //story image
+            SizedBox(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.05,
+                    right: MediaQuery.of(context).size.width * 0.05),
+                child: Row(
+                  //image
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.width * 0.9,
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              widget.images[storyIndex],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //story text at the bottom of the image
+            Expanded(
+              child: Column(
+                //center align
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.only(
+                          top: 0, left: 20, right: 10, bottom: 0),
+                      child: Text(
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.center,
+                          widget.storyText[storyIndex],
+                          textScaleFactor: 1.1,
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 58, 23, 6),
+                            fontSize:
+                                (1 - MediaQuery.sizeOf(context).aspectRatio) *
+                                    30,
+                          ))),
                 ],
               ),
             ),
-          ),
 
-          //story text at the bottom of the image
-          Expanded(
-            child: Column(
-              //center align
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 20, right: 10, bottom: 0),
-                    child: Text(
-                        textAlign: TextAlign.center,
-                        widget.storyText[storyIndex],
-                        textScaleFactor: 1.1,
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 58, 23, 6),
-                          fontSize:
-                              (1 - MediaQuery.sizeOf(context).aspectRatio) * 30,
-                        ))),
-              ],
-            ),
-          ),
-
-          //control bar to navigate through the story
-          Padding(
-            padding: EdgeInsets.only(
-                bottom: 20,
-                top: 15,
-                left: MediaQuery.of(context).size.width * 0.05,
-                right: MediaQuery.of(context).size.width * 0.05),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () => {prev()},
-                  child: Image.asset('assets/images/back.png'),
-                ),
-                const Spacer(),
-                Image.asset('assets/images/pause.png'),
-                const Spacer(),
-                GestureDetector(
-                    onTap: () => {
-                          // if (storyIndex == widget.storyText.length - 1)
-                          //   {
-                          //     //TODO: write a unit test to check this
-                          //     //go to the liked page if the story is finished
-                          //     Navigator.pushNamed(context, '/endBook')
-                          //   }
-                          // else
-                          next() //go to the next page
-                        },
-                    child: Image.asset('assets/images/forward.png')),
-              ],
-            ),
-          )
-        ],
-      )),
-      bottomNavigationBar: const NavbarWidget(),
+            //control bar to navigate through the story
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: 20,
+                  top: 15,
+                  left: MediaQuery.of(context).size.width * 0.05,
+                  right: MediaQuery.of(context).size.width * 0.05),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    key: const Key('previousButton'),
+                    onTap: () => {prev()},
+                    child: Image.asset('assets/images/back.png'),
+                  ),
+                  const Spacer(),
+                  Image.asset('assets/images/pause.png'),
+                  const Spacer(),
+                  GestureDetector(
+                      key: const Key('nextButton'),
+                      onTap: () => {
+                            // if (storyIndex == widget.storyText.length - 1)
+                            //   {
+                            //     //TODO: write a unit test to check this
+                            //     //go to the liked page if the story is finished
+                            //     Navigator.pushNamed(context, '/endBook')
+                            //   }
+                            // else
+                            next() //go to the next page
+                          },
+                      child: Image.asset('assets/images/forward.png')),
+                ],
+              ),
+            )
+          ],
+        )),
+        bottomNavigationBar: const NavbarWidget(),
+      ),
     );
   }
 }
