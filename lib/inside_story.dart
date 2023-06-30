@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 import 'progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,9 @@ class InsideStory extends StatefulWidget {
 
   @override
   State<InsideStory> createState() => InsideStoryState();
+}
 
+class InsideStoryState extends State<InsideStory> {
   int messageIndex = 0;
   int storyIndex = 0;
   bool shownHalfway = false;
@@ -46,14 +49,26 @@ class InsideStory extends StatefulWidget {
   /// It also updates the halfway message.
   /// It is called when the user presses the next button.
   void next() {
-    if (storyIndex < storyText.length - 1) {
-      messageIndex = Random().nextInt(messages.length);
-      storyIndex = storyIndex + 1;
-    }
-    if (storyIndex == (storyText.length) / 2) {
-      shownHalfway = true;
+    if (storyIndex < widget.storyText.length - 1) {
+      setState(() {
+        messageIndex = Random().nextInt(widget.messages.length);
+        storyIndex += 1;
+      });
     } else {
-      shownHalfway = false;
+      //route to the end of story page with the name in
+      //pass the name in the constructor of the story page
+      //when you press the next button on the last page
+      //TODO: write a unit test to check this
+    }
+
+    if (storyIndex == (widget.storyText.length) / 2) {
+      setState(() {
+        shownHalfway = true;
+      });
+    } else {
+      setState(() {
+        shownHalfway = false;
+      });
     }
   }
 
@@ -62,13 +77,13 @@ class InsideStory extends StatefulWidget {
   /// It does not update the halfway message.
   void prev() {
     if (storyIndex > 0) {
-      messageIndex = Random().nextInt(messages.length);
-      storyIndex = storyIndex - 1;
+      setState(() {
+        messageIndex = Random().nextInt(widget.messages.length);
+        storyIndex -= 1;
+      });
     }
   }
-}
 
-class InsideStoryState extends State<InsideStory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,9 +126,9 @@ class InsideStoryState extends State<InsideStory> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(
-                  widget.shownHalfway
+                  shownHalfway
                       ? "Halfway there!"
-                      : widget.messages[widget.messageIndex],
+                      : widget.messages[messageIndex],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 25,
@@ -138,7 +153,7 @@ class InsideStoryState extends State<InsideStory> {
               Center(
                 child: ProgressBar(
                     totalPages: widget.storyText.length - 1,
-                    currentPages: widget.storyIndex),
+                    currentPages: storyIndex),
               )
             ],
           ),
@@ -160,7 +175,7 @@ class InsideStoryState extends State<InsideStory> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
-                            widget.images[widget.storyIndex],
+                            widget.images[storyIndex],
                           ),
                         )
                       ],
@@ -182,7 +197,7 @@ class InsideStoryState extends State<InsideStory> {
                         top: 0, left: 20, right: 10, bottom: 0),
                     child: Text(
                         textAlign: TextAlign.center,
-                        widget.storyText[widget.storyIndex],
+                        widget.storyText[storyIndex],
                         textScaleFactor: 1.1,
                         style: TextStyle(
                           color: const Color.fromARGB(255, 58, 23, 6),
@@ -203,7 +218,7 @@ class InsideStoryState extends State<InsideStory> {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => {widget.prev()},
+                  onTap: () => {prev()},
                   child: Image.asset('assets/images/back.png'),
                 ),
                 const Spacer(),
@@ -211,14 +226,14 @@ class InsideStoryState extends State<InsideStory> {
                 const Spacer(),
                 GestureDetector(
                     onTap: () => {
-                          if (widget.storyIndex == widget.storyText.length - 1)
-                            {
-                              //TODO: write a unit test to check this
-                              //go to the liked page if the story is finished
-                              Navigator.pushNamed(context, '/endBook')
-                            }
-                          else
-                            widget.next() //go to the next page
+                          // if (storyIndex == widget.storyText.length - 1)
+                          //   {
+                          //     //TODO: write a unit test to check this
+                          //     //go to the liked page if the story is finished
+                          //     Navigator.pushNamed(context, '/endBook')
+                          //   }
+                          // else
+                          next() //go to the next page
                         },
                     child: Image.asset('assets/images/forward.png')),
               ],

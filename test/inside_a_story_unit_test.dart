@@ -8,29 +8,30 @@ import 'package:magic_pages/main.dart';
 void main() {
   group('Inside a story unit tests', () {
     //test the inside a story class
+    InsideStoryState insideStoryState = InsideStoryState();
     InsideStory insideStory = InsideStory();
 
     test("inisde a story initial values", () {
-      expect(insideStory.messageIndex, 0);
-      expect(insideStory.storyIndex, 0);
-      expect(insideStory.shownHalfway, false);
+      expect(insideStoryState.messageIndex, 0);
+      expect(insideStoryState.storyIndex, 0);
+      expect(insideStoryState.shownHalfway, false);
     });
 
     test("next button works", () {
-      insideStory.next();
-      expect(insideStory.storyIndex, 1);
+      insideStoryState.next();
+      expect(insideStoryState.storyIndex, 1);
     });
 
     test("prev button works", () {
-      insideStory.prev();
-      expect(insideStory.storyIndex, 0);
+      insideStoryState.prev();
+      expect(insideStoryState.storyIndex, 0);
     });
 
     test("halfway message works", () {
-      while (insideStory.storyIndex < insideStory.storyText.length / 2) {
-        insideStory.next();
+      while (insideStoryState.storyIndex < insideStory.storyText.length / 2) {
+        insideStoryState.next();
       }
-      expect(insideStory.shownHalfway, true);
+      expect(insideStoryState.shownHalfway, true);
     });
   });
 
