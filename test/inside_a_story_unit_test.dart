@@ -36,45 +36,47 @@ void main() {
   StoryListChangeNotifier storyListChangeNotifier;
   GetStoriesService getStoriesService;
 
+  group('Inside a story integration tests', () {
+    test("get stories service initial values", () {
+      getStoriesService = GetStoriesService();
+      storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
+
+      expect(storyListChangeNotifier.isLoading, false);
+    });
+
+    test("fetch stories works and loading works", () async {
+      getStoriesService = GetStoriesService();
+      storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
+
+      storyListChangeNotifier.fetchStories();
+
+      expect(storyListChangeNotifier.isLoading, true);
+      await storyListChangeNotifier.fetchStories();
+
+      //check that the stories are not empty
+      expect(storyListChangeNotifier.stories.length, 3);
+      //check that loading is set to false
+      expect(storyListChangeNotifier.isLoading, false);
+    });
+
+    test("correct story headings shown", () async {
+      getStoriesService = GetStoriesService();
+      storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
+
+      storyListChangeNotifier.fetchStories();
+
+      await storyListChangeNotifier.fetchStories();
+
+      expect(storyListChangeNotifier.stories.length, 3);
+
+      //check that the headings are correct
+      expect(storyListChangeNotifier.stories[0].title, 'Andy the Ant');
+      expect(storyListChangeNotifier.stories[1].title, 'Benny the Bear');
+      expect(storyListChangeNotifier.stories[2].coverUrl,
+          'assets/storyPreviews/honey-the-kitty.png');
+    });
+  });
   //test the get stories service class
-  test("get stories service initial values", () {
-    getStoriesService = GetStoriesService();
-    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
-
-    expect(storyListChangeNotifier.isLoading, false);
-  });
-
-  test("fetch stories works and loading works", () async {
-    getStoriesService = GetStoriesService();
-    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
-
-    storyListChangeNotifier.fetchStories();
-
-    expect(storyListChangeNotifier.isLoading, true);
-    await storyListChangeNotifier.fetchStories();
-
-    //check that the stories are not empty
-    expect(storyListChangeNotifier.stories.length, 3);
-    //check that loading is set to false
-    expect(storyListChangeNotifier.isLoading, false);
-  });
-
-  test("correct story headings shown", () async {
-    getStoriesService = GetStoriesService();
-    storyListChangeNotifier = StoryListChangeNotifier(getStoriesService);
-
-    storyListChangeNotifier.fetchStories();
-
-    await storyListChangeNotifier.fetchStories();
-
-    expect(storyListChangeNotifier.stories.length, 3);
-
-    //check that the headings are correct
-    expect(storyListChangeNotifier.stories[0].title, 'Andy the Ant');
-    expect(storyListChangeNotifier.stories[1].title, 'Benny the Bear');
-    expect(storyListChangeNotifier.stories[2].coverUrl,
-        'assets/storyPreviews/honey-the-kitty.png');
-  });
 
   runApp(const MyApp());
 }
