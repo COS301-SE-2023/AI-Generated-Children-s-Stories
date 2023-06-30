@@ -27,8 +27,9 @@ void main() {
     });
 
     test("halfway message works", () {
-      insideStory.next();
-      insideStory.next();
+      while (insideStory.storyIndex < insideStory.storyText.length / 2) {
+        insideStory.next();
+      }
       expect(insideStory.shownHalfway, true);
     });
   });
