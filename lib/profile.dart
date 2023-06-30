@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'navbar.dart';
 import 'my_header.dart';
 
+/// This class represents the profile page.
+/// The UI contains a header and a button to log out.
+/// The button is used to log out the user.
+/// The header is used to show the user which page they are on.
+/// The navbar is used to navigate to other pages.
+
 class Profile extends StatefulWidget {
   const Profile({super.key});
 

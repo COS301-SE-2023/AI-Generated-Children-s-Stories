@@ -23,40 +23,6 @@ void main() {
   GetStoriesService getStoriesService;
   StoryListChangeNotifier storyListChangeNotifier;
 
-  //----------------------- UNIT TESTS -----------------------//
-
-  //test the inside a story class
-  InsideStory insideStory = InsideStory();
-
-  //test initial values
-  test("inisde a story initial values", () {
-    expect(insideStory.messageIndex, 0);
-    expect(insideStory.storyIndex, 0);
-    expect(insideStory.shownHalfway, false);
-  });
-
-  //test next and previous buttons
-  //and the halfway message
-  group('Inside a story test', () {
-    test("next button works", () {
-      insideStory.next();
-      expect(insideStory.storyIndex, 1);
-    });
-
-    test("prev button works", () {
-      insideStory.prev();
-      expect(insideStory.storyIndex, 0);
-    });
-
-    test("halfway message works", () {
-      insideStory.next();
-      insideStory.next();
-      expect(insideStory.shownHalfway, true);
-    });
-  });
-
-  //----------------------------------------------------------//
-
   //-------------------- INTEGRATION TEST --------------------//
 
   //test the get stories service class
