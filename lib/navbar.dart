@@ -23,31 +23,38 @@ class NavbarWidget extends StatelessWidget {
       ),
 
       //row of three icons
+
       child: Row(
         //add a border
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          IconButton(
-            key: const Key("StoryListNav"),
-            icon: Image.asset('assets/images/Books.png'),
-            iconSize: 50,
-            onPressed: () {
-              Navigator.pushNamed(context, '/storyList');
-            },
+          Expanded(
+            child: IconButton(
+              key: const Key("StoryListNav"),
+              icon: Image.asset('assets/images/Books.png'),
+              iconSize: 50,
+              onPressed: () {
+                Navigator.pushNamed(context, '/storyList');
+              },
+            ),
           ),
-          IconButton(
-            icon: Image.asset('assets/images/Home.png'),
-            iconSize: 50,
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
-            },
+          Expanded(
+            child: IconButton(
+              icon: Image.asset('assets/images/Home.png'),
+              iconSize: 50,
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+            ),
           ),
-          IconButton(
-            icon: Image.asset('assets/images/Liked.png'),
-            iconSize: 50,
-            onPressed: () {
-              Navigator.pushNamed(context, '/storyLiked');
-            },
+          Expanded(
+            child: IconButton(
+              icon: Image.asset('assets/images/Liked.png'),
+              iconSize: 50,
+              onPressed: () {
+                Navigator.pushNamed(context, '/storyLiked');
+              },
+            ),
           )
         ],
       ),
