@@ -17,14 +17,18 @@ void main() {
       app.main();
 
       //---------------------   HOME PAGE ----------------//
+
+      //loading message
+      expect(find.text('Getting your story...'), findsOneWidget);
+
       //wait for the current story to load
       await tester.pump(const Duration(seconds: 7));
 
       //see the book has loaded
       expect(find.text('Continue reading...'), findsOneWidget);
 
-      //check that the currently reading story is there
-      expect(find.text('Andy The Ant'), findsOneWidget);
+      //check that the image is displayed
+      expect(find.byKey(const Key('HomeImage')), findsOneWidget);
 
       //navigate to the storyList page
       await tester.tap(find.byKey(const Key("StoryListNav")));

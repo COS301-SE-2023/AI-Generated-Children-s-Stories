@@ -124,6 +124,7 @@ class _HomeState extends State<Home> {
                           } else {
                             //tablet
                             return Padding(
+                                key: const Key("HomeImage"),
                                 padding: EdgeInsets.only(
                                     left:
                                         MediaQuery.of(context).size.width * 0.3,
