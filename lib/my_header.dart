@@ -38,19 +38,22 @@ class _MyHeaderState extends State<MyHeader> {
         ],
       ),
       Row(children: [
-        Padding(
-          padding:
-              EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05),
+        Expanded(
+          flex: 1,
           child: Transform.rotate(
             angle: -0.2,
-            child: Image.asset(
-              'assets/images/MascotWinking.png',
-              width: MediaQuery.of(context).size.width * 0.15,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.01),
+              child: Image.asset(
+                'assets/images/MascotWinking.png',
+                width: MediaQuery.of(context).size.width * 0.04,
+              ),
             ),
           ),
         ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.5,
+        Expanded(
+          flex: 3,
           child: Padding(
             padding: const EdgeInsets.only(left: 15),
             child: Text(
@@ -63,21 +66,19 @@ class _MyHeaderState extends State<MyHeader> {
             ),
           ),
         ),
-        Stack(children: [
-          Positioned(
-              child: Padding(
-            padding: const EdgeInsets.only(right: 5),
-            child: IconButton(
-            icon: Image.asset('assets/images/Profile.png'),
-            iconSize: 50,
-            onPressed: () {
-              Navigator.pushNamed(context, '/profile');
-            },
-          ),
-            
-          )),
-        ])
-      ]),
+        Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: IconButton(
+                icon: Image.asset('assets/images/Profile.png'),
+                iconSize: 50,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/profile');
+                },
+              ),
+            )),
+      ])
     ]);
   }
 }
