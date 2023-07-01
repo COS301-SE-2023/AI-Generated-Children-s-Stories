@@ -137,7 +137,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_test:
-    dependency: "direct main"
+    dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -437,7 +437,7 @@ packages:
     source: hosted
     version: "1.2.1"
   test:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: test
       sha256: "3dac9aecf2c3991d09b9cdde4f98ded7b30804a88a0d7e4e7e1678e78d6b97f4"
