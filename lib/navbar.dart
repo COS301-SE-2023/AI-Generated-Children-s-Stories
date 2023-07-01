@@ -28,6 +28,7 @@ class NavbarWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
+            key: const Key("StoryListNav"),
             icon: Image.asset('assets/images/Books.png'),
             iconSize: 50,
             onPressed: () {

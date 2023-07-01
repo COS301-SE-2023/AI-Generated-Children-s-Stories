@@ -18,11 +18,21 @@ void main() {
       binding.window.physicalSizeTestValue = Size(800, 1900);
 
       app.main();
+
+      //---------------------   HOME PAGE ----------------//
       //wait for the current story to load
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      //see the loading text is present
+      //see the book has loaded
       expect(find.text('Continue reading...'), findsOneWidget);
+
+      //check that the currently reading story is there
+      expect(find.text('Andy The Ant'), findsOneWidget);
+
+      //navigate to the storyList page
+      await tester.tap(find.byKey(const Key("StoryListNav")));
+
+      //------------------- STORY LIST PAGE ----------------//
     });
   });
 }
