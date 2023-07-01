@@ -33,7 +33,20 @@ void main() {
       //navigate to the storyList page
       await tester.tap(find.byKey(const Key("StoryListNav")));
 
+      //wait for the page to load
+      await tester.pumpAndSettle();
+
       //------------------- STORY LIST PAGE ----------------//
+
+      //loading message
+      expect(find.text('Getting books...'), findsOneWidget);
+
+      //wait for the current stories to load
+      await tester.pump(const Duration(seconds: 7));
+
+      expect(find.text('Andy the Ant'), findsOneWidget);
+      expect(find.text('Beny The Bear'), findsOneWidget);
+      expect(find.text('Honey The Kitty'), findsOneWidget);
     });
   });
 }
