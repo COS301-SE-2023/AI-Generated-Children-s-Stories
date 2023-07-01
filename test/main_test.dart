@@ -1,7 +1,6 @@
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
-import 'test_helpers.dart';
 
 import 'package:magic_pages/main.dart' as app;
 
@@ -12,16 +11,14 @@ void main() {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
     testWidgets('integration test', (tester) async {
-      //ignore overflow errors
-      FlutterError.onError = ignoreOverflowErrors;
-      //set window size
-      binding.window.physicalSizeTestValue = Size(800, 1900);
+      //set windows size to 800x600
+      binding.window.physicalSizeTestValue = const Size(800, 600);
 
       app.main();
 
       //---------------------   HOME PAGE ----------------//
       //wait for the current story to load
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await tester.pump(const Duration(seconds: 7));
 
       //see the book has loaded
       expect(find.text('Continue reading...'), findsOneWidget);
