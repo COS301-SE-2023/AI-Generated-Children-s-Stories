@@ -56,7 +56,6 @@ class _StoryLikedState extends State<StoryLiked> {
                     MyHeader(
                       message: 'Getting books...',
                     ),
-                    SizedBox(height: 50),
                     CircularProgressIndicator(),
                   ],
                 )
@@ -65,7 +64,6 @@ class _StoryLikedState extends State<StoryLiked> {
                     MyHeader(
                       message: 'Liked Books',
                     ),
-                    SizedBox(height: 50),
                   ],
                 ),
 

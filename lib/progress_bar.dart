@@ -49,7 +49,7 @@ class _ProgressBarState extends State<ProgressBar> {
         //center the
         Positioned(
           left: MediaQuery.of(context).size.width * 0.44,
-          top: 4,
+          top: 1,
           child: Text(
             "${(widget.currentPages / widget.totalPages * 100).round()}%",
             style: const TextStyle(

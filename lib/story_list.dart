@@ -4,6 +4,7 @@ import 'navbar.dart';
 import 'my_header.dart';
 import 'story_list_change_notifier.dart';
 import 'get_stories_service.dart';
+import 'progress_bar.dart';
 
 /// This class represents the story list page.
 /// The UI contains a header and a list of stories.
@@ -65,7 +66,6 @@ class _StoryListState extends State<StoryList> {
                     MyHeader(
                       message: 'Getting books...',
                     ),
-                    SizedBox(height: 50),
                     CircularProgressIndicator(),
                   ],
                 )
@@ -74,7 +74,6 @@ class _StoryListState extends State<StoryList> {
                     MyHeader(
                       message: 'Book Library',
                     ),
-                    SizedBox(height: 50),
                   ],
                 ),
 
@@ -88,46 +87,53 @@ class _StoryListState extends State<StoryList> {
                       itemBuilder: (context, index) {
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              //story cover in sized box
-                              child: SizedBox(
-                                child: Column(
-                                  children: [
-                                    //story cover
-                                    Row(children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Image.asset(
-                                            _stories[index].coverUrl,
-                                            fit: BoxFit.contain,
-                                          ),
+                            child: SizedBox(
+                              child: Column(
+                                children: [
+                                  //story cover
+                                  Row(children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Image.asset(
+                                          _stories[index].coverUrl,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
-                                    ]),
-                                    //story title
-                                    Row(children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            _stories[index].title,
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
+                                    ),
+                                  ]),
+                                  //story title
+                                  Row(children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          _stories[index].title,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                              fontSize: 27,
+                                              //rgb(84, 34, 9)
+                                              color: Color.fromARGB(
+                                                  255, 84, 34, 9),
+                                              fontFamily: 'NotoSerif'),
                                         ),
                                       ),
-                                    ]),
-                                  ],
-                                ),
+                                    ),
+                                  ]),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          child: ProgressBar(
+                                        currentPages:
+                                            _stories[index].currentPage,
+                                        totalPages:
+                                            _stories[index].textContent.length,
+                                      ))
+                                    ],
+                                  )
+                                ],
                               ),
                             ));
                       }))

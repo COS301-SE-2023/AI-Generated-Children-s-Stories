@@ -84,70 +84,30 @@ class _HomeState extends State<Home> {
                           message: 'Continue reading...',
                         ),
 
-              // show the progress bar if loading
-              // !_homeChangeNotifier.isLoading
-              //     ? ProgressBar(
-              //         currentPages: _currentlyReadingStory.currentPage,
-              //         totalPages: _currentlyReadingStory.textContent.length)
-              //     : const SizedBox(height: 0),
-
               //padding
               const SizedBox(height: 30),
 
               !_homeChangeNotifier.isLoading
-                  ? Row(
-                      children: [
-                        //image with rounded corners
-                        LayoutBuilder(builder: (context, constraints) {
-                          if (constraints.maxWidth < 600) {
-                            //mobile
-                            return Padding(
-                                padding: EdgeInsets.only(
-                                    left:
-                                        MediaQuery.of(context).size.width * 0.1,
-                                    right: MediaQuery.of(context).size.width *
-                                        0.1),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          _currentlyReadingStory.coverUrl),
-                                    ),
-                                  ),
-                                ));
-                          } else {
-                            //tablet
-                            return Padding(
-                                key: const Key("HomeImage"),
-                                padding: EdgeInsets.only(
-                                    left:
-                                        MediaQuery.of(context).size.width * 0.3,
-                                    right: MediaQuery.of(context).size.width *
-                                        0.3),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          _currentlyReadingStory.coverUrl),
-                                    ),
-                                  ),
-                                ));
-                          }
-                        })
-                      ],
-                    )
+                  ? Row(children: [
+                      //image with rounded corners
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.1,
+                              right: MediaQuery.of(context).size.width * 0.1),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: MediaQuery.of(context).size.width * 0.8,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image:
+                                    AssetImage(_currentlyReadingStory.coverUrl),
+                              ),
+                            ),
+                          ))
+                      //tablet
+                    ])
                   : const SizedBox(height: 0),
 
               Row(
