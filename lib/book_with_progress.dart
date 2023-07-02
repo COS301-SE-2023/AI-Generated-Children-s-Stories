@@ -27,7 +27,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: SizedBox(
           child: Column(
             children: [
@@ -37,7 +37,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
                   flex: 1,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 15.0, right: 15.0, top: 25.0),
+                        left: 20.0, right: 20.0, top: 25.0),
                     child: Image.asset(
                       widget.imagePath,
                       fit: BoxFit.contain,
