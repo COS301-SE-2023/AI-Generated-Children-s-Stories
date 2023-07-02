@@ -54,50 +54,43 @@ class _StoryListState extends State<StoryList> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 243, 233),
       body: SafeArea(
-          child: Column(
-        children: [
-          //the header
-
-          //if the story list is loading
-          //show loading message
-          //else show the header
-          _storyListChangeNotifier.isLoading
-              ? const Column(
-                  children: [
-                    MyHeader(
-                      message: 'Getting books...',
-                    ),
-                    CircularProgressIndicator(),
-                  ],
-                )
-              : const Column(
-                  children: [
-                    MyHeader(
-                      message: 'Book Library',
-                    ),
-                  ],
-                ),
-
-          //the story list
-          !_storyListChangeNotifier.isLoading
-              ?
-              //list of stories
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: _stories.length,
-                      itemBuilder: (context, index) {
-                        //list of book with progress
-                        return BookWithProgress(
-                          title: _stories[index].getTitle(),
-                          imagePath: _stories[index].getCoverUrl(),
-                          id: _stories[index].getId(),
-                          currentPage: _stories[index].getCurrentPage(),
-                          totalPages: _stories[index].getTextContent().length,
-                        );
-                      }))
-              : const SizedBox(height: 0),
-        ],
-      )),
+        child: SingleChildScrollView(
+            child: _storyListChangeNotifier.isLoading
+                ? const Column(
+                    children: [
+                      MyHeader(
+                        message: 'Getting books...',
+                      ),
+                      CircularProgressIndicator(),
+                    ],
+                  )
+                : //scrollable list of stories
+                Column(
+                    children: [
+                      MyHeader(
+                        message: 'Books',
+                      ),
+                      SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            for (var story in _stories)
+                              //book with progress bar
+                              BookWithProgress(
+                                title: story.getTitle(),
+                                imagePath: story.getCoverUrl(),
+                                id: story.getId(),
+                                currentPage: story.getCurrentPage(),
+                                totalPages: story.getTextContent().length,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
+      ),
       bottomNavigationBar: const NavbarWidget(),
     );
   }
