@@ -80,54 +80,57 @@ class _StoryListState extends State<StoryList> {
 
           //the story list
           !_storyListChangeNotifier.isLoading
-              ? Expanded(
+              ?
+              //list of stories
+              Expanded(
                   child: ListView.builder(
                       itemCount: _stories.length,
                       itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            //padding
-                            const SizedBox(height: 20),
-
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 1.5,
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    _stories[index].coverUrl,
-                                  ),
-                                ],
+                        return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
                               ),
-                            ),
-
-                            const SizedBox(height: 5),
-
-                            DefaultTextStyle(
-                              style: const TextStyle(
-                                  fontSize: 35,
-                                  //rgb(84, 34, 9)
-                                  color: Color.fromARGB(255, 84, 34, 9),
-                                  fontFamily: 'NotoSerif'),
-                              child: Text(_stories[index].title),
-                            ),
-
-                            const SizedBox(height: 5),
-
-                            const SizedBox(height: 5),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/insideAStory');
-                              },
+                              //story cover in sized box
                               child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.95,
-                                child:
-                                    Image.asset('assets/images/viewButton.png'),
+                                child: Column(
+                                  children: [
+                                    //story cover
+                                    Row(children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(
+                                            _stories[index].coverUrl,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                    //story title
+                                    Row(children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            _stories[index].title,
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        );
-                      }),
-                )
+                            ));
+                      }))
               : const SizedBox(height: 0),
         ],
       )),
