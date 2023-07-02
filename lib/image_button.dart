@@ -22,9 +22,8 @@ class _ImageButtonState extends State<ImageButton> {
         child: Row(
       children: [
         Padding(
-          padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.1,
-              top: MediaQuery.of(context).size.height * 0.05),
+          padding:
+              EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: IconButton(

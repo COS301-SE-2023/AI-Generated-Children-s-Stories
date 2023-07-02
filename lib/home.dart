@@ -5,6 +5,7 @@ import 'image_button.dart';
 import 'home_change_notifier.dart';
 import 'get_stories_service.dart';
 import 'story.dart';
+import 'book_with_progress.dart';
 
 /// This class represents the home page.
 /// It contains the UI for the home page.
@@ -36,12 +37,12 @@ class _HomeState extends State<Home> {
     super.initState();
     getCurrentlyReading();
     _currentlyReadingStory = Story(
-      title: '',
-      coverUrl: '',
-      textContent: [],
-      imageContent: [],
-      currentPage: 0,
-    );
+        title: '',
+        coverUrl: '',
+        textContent: [],
+        imageContent: [],
+        currentPage: 0,
+        id: 0);
   }
 
   //fetch currently reading
@@ -88,60 +89,14 @@ class _HomeState extends State<Home> {
               const SizedBox(height: 30),
 
               !_homeChangeNotifier.isLoading
-                  ? Row(children: [
-                      //image with rounded corners
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.1,
-                              right: MediaQuery.of(context).size.width * 0.1),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.width * 0.8,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image:
-                                    AssetImage(_currentlyReadingStory.coverUrl),
-                              ),
-                            ),
-                          ))
-                      //tablet
-                    ])
-                  : const SizedBox(height: 0),
-
-              Row(
-                children: [
-                  //image caption
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.1, top: 10),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: Text(
-                        _currentlyReadingStory.title,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontSize: 30,
-                            //hex color
-                            color: Color.fromARGB(255, 84, 34, 9),
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              !_homeChangeNotifier.isLoading
-                  ? const Row(
-                      children: [
-                        //image button
-                        ImageButton(
-                          imagePath: 'assets/images/viewButton.png',
-                          route: '/insideAStory',
-                        )
-                      ],
+                  ? BookWithProgress(
+                      title: _currentlyReadingStory.title,
+                      imagePath: _currentlyReadingStory.coverUrl,
+                      id: _currentlyReadingStory.id,
+                      currentPage: _currentlyReadingStory.currentPage,
+                      totalPages: _currentlyReadingStory.textContent.length,
                     )
-                  : const SizedBox(height: 0),
+                  : const SizedBox(height: 30),
             ],
           ),
         ),

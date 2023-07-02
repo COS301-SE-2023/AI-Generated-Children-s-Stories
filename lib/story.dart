@@ -12,13 +12,21 @@ class Story {
   final List<String> imageContent;
   final int currentPage;
   int index = 0;
+  final int id;
 
   Story(
       {required this.title,
       required this.coverUrl,
       required this.textContent,
       required this.imageContent,
-      required this.currentPage});
+      required this.currentPage,
+      required this.id});
+
+  /// get the id of the story
+  /// @return the id of the story
+  int getId() {
+    return id;
+  }
 
   /// get the title of the story
   /// @return the title of the story

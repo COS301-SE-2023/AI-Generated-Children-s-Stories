@@ -13,12 +13,12 @@ class HomeChangeNotifier extends ChangeNotifier {
 
   //initilise the currently reading story
   Story _story = Story(
-    title: '',
-    coverUrl: '',
-    textContent: [],
-    imageContent: [],
-    currentPage: 0,
-  );
+      title: '',
+      coverUrl: '',
+      textContent: [],
+      imageContent: [],
+      currentPage: 0,
+      id: 0);
 
   Story get currentlyReadingStory => _story;
 

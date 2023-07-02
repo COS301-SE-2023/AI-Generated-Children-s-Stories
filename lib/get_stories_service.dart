@@ -27,7 +27,8 @@ class GetStoriesService {
           coverUrl: data[i]['coverUrl'],
           textContent: data[i]['textContent'].cast<String>(),
           imageContent: data[i]['imageContent'].cast<String>(),
-          currentPage: data[i]['currentPage']));
+          currentPage: data[i]['currentPage'],
+          id: data[i]['id']));
     }
 
     return stories;
@@ -40,6 +41,9 @@ class GetStoriesService {
         await rootBundle.loadString('assets/currentlyReading.json');
     final data = await json.decode(response);
 
+    //log data
+    print(data);
+
     //return a story
     return Story(
       title: data['title'],
@@ -47,6 +51,7 @@ class GetStoriesService {
       textContent: data['textContent'].cast<String>(),
       imageContent: data['imageContent'].cast<String>(),
       currentPage: data['currentPage'],
+      id: data['id'],
     );
   }
 }
