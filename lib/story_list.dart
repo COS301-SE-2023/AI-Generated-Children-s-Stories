@@ -86,7 +86,6 @@ class _StoryListState extends State<StoryList> {
                   child: ListView.builder(
                       itemCount: _stories.length,
                       itemBuilder: (context, index) {
-                        print(_stories[index].getId());
                         //list of book with progress
                         return BookWithProgress(
                           title: _stories[index].getTitle(),

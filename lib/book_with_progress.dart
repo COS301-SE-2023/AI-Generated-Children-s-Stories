@@ -77,7 +77,8 @@ class _BookWithProgressState extends State<BookWithProgress> {
                   //image button
                   ImageButton(
                     imagePath: 'assets/images/viewButton.png',
-                    route: '/insideAStory/${widget.id}',
+                    route: '/insideAStory',
+                    id: widget.id,
                   )
                 ],
               )

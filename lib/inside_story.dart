@@ -12,7 +12,12 @@ import 'navbar.dart';
 /// The halfway message is randomly selected from a list of messages.
 
 class InsideStory extends StatefulWidget {
-  InsideStory({super.key});
+  //for routing to the book with progress page
+  //instantiate the inside story page with the id of the story
+  //this allows it to call the api to get the story
+  final int? id;
+
+  InsideStory({super.key, required this.id});
 
   //messages displayed by the mascott
   final List<String> messages = ["Well done!", "Almost there!", "Way to go!"];
