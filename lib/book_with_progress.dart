@@ -72,15 +72,19 @@ class _BookWithProgressState extends State<BookWithProgress> {
                   ))
                 ],
               ),
-              Row(
-                children: [
-                  //image button
-                  ImageButton(
-                    imagePath: 'assets/images/viewButton.png',
-                    route: '/insideAStory',
-                    id: widget.id,
-                  )
-                ],
+              //prevent overflow
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    //image button
+                    ImageButton(
+                      imagePath: 'assets/images/viewButton.png',
+                      route: '/insideAStory',
+                      id: widget.id,
+                    )
+                  ],
+                ),
               )
             ],
           ),
