@@ -41,9 +41,6 @@ class GetStoriesService {
         await rootBundle.loadString('assets/currentlyReading.json');
     final data = await json.decode(response);
 
-    //log data
-    print(data);
-
     //return a story
     return Story(
       title: data['title'],

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
         home: ChangeNotifierProvider(
           create: (context) => StoryListChangeNotifier(GetStoriesService()),
-          child: const Home(),
+          child: const LoginPage(),
         ),
         routes: {
           '/login': (context) => const LoginPage(),
