@@ -70,7 +70,7 @@ class _StoryListState extends State<StoryList> {
                       const MyHeader(
                         message: 'Books',
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Column(

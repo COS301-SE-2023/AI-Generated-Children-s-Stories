@@ -14,6 +14,7 @@ void main() {
         TestWidgetsFlutterBinding.ensureInitialized();
     testWidgets('integration test', (tester) async {
       //set windows size to 800x600
+      // ignore: deprecated_member_use
       binding.window.physicalSizeTestValue = const Size(300, 600);
 
       app.main();

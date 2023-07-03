@@ -5,7 +5,6 @@ import 'get_stories_service.dart';
 import 'login_page.dart';
 import 'story_list.dart';
 import 'story_liked.dart';
-import 'inside_story.dart';
 import 'home.dart';
 import 'profile.dart';
 
