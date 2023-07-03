@@ -23,17 +23,26 @@ class ProgressBar extends StatefulWidget {
 class _ProgressBarState extends State<ProgressBar> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10, bottom: 10),
-      child: Stack(children: <Widget>[
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: 30,
-          //change width of cliprect
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.07,
-                right: MediaQuery.of(context).size.width * 0.07),
+    return Stack(children: <Widget>[
+      SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 30,
+        //change width of cliprect
+        child: Padding(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.07,
+              right: MediaQuery.of(context).size.width * 0.07),
+
+          //give it a border of grey
+
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromARGB(211, 211, 211, 255),
+                width: 2.5,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               child: LinearProgressIndicator(
@@ -45,22 +54,22 @@ class _ProgressBarState extends State<ProgressBar> {
             ),
           ),
         ),
+      ),
 
-        //center the
-        Positioned(
-          left: MediaQuery.of(context).size.width * 0.44,
-          top: 1,
-          child: Text(
-            "${(widget.currentPages / widget.totalPages * 100).round()}%",
-            style: const TextStyle(
-                //rgb(0, 197, 61)
-                color: Color.fromARGB(255, 84, 34, 9),
-                fontWeight: FontWeight.bold,
-                fontSize: 19,
-                fontFamily: 'NotoSerif'),
-          ),
+      //center the
+      Positioned(
+        left: MediaQuery.of(context).size.width * 0.44,
+        top: 1,
+        child: Text(
+          "${(widget.currentPages / widget.totalPages * 100).round()}%",
+          style: const TextStyle(
+              //rgb(0, 197, 61)
+              color: Color.fromARGB(255, 84, 34, 9),
+              fontWeight: FontWeight.bold,
+              fontSize: 19,
+              fontFamily: 'NotoSerif'),
         ),
-      ]),
-    );
+      ),
+    ]);
   }
 }
