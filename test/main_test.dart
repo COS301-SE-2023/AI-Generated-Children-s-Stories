@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:magic_pages/main.dart' as app;
+import 'package:magic_pages/book_with_progress.dart';
 
 //to run: flutter test integration_test
 //choose windows
@@ -34,20 +36,22 @@ void main() {
       await tester.tap(find.byKey(const Key("StoryListNav")));
 
       //wait for the page to load
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
       //------------------- STORY LIST PAGE ----------------//
 
-      //loading message
-      //
+      expect(find.text('Books'), findsOneWidget);
 
-      //wait for the current stories to load
-      await tester.pump(const Duration(seconds: 3));
-      expect(find.text('Book Library'), findsOneWidget);
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      // expect(find.text('Andy the Ant'), findsOneWidget);
-      // expect(find.text('Beny The Bear'), findsOneWidget);
-      // expect(find.text('Honey The Kitty'), findsOneWidget);
+      //check that the list of stories is displayed
+
+      //multiple widgets of this type are displayed
+      expect(find.byType(BookWithProgress), findsWidgets);
+
+      //other stories that should be displayed
+      expect(find.text('Honey the Kitty'), findsOneWidget);
+      expect(find.text('Benny the Bear'), findsOneWidget);
     });
   });
 }

@@ -67,7 +67,7 @@ class _StoryListState extends State<StoryList> {
                 : //scrollable list of stories
                 Column(
                     children: [
-                      MyHeader(
+                      const MyHeader(
                         message: 'Books',
                       ),
                       SizedBox(height: 20),

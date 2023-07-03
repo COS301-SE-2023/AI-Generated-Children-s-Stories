@@ -62,6 +62,7 @@ class _HomeState extends State<Home> {
         //back button
         child: SingleChildScrollView(
           child: Column(
+            key: Key('TestKey'),
             children: [
               //if loading, show loading message
               _homeChangeNotifier.isLoading

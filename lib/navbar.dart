@@ -13,6 +13,7 @@ class NavbarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const Key('navbar'),
       //round the corners
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -30,13 +31,12 @@ class NavbarWidget extends StatelessWidget {
         children: [
           Expanded(
             child: IconButton(
-              key: const Key("StoryListNav"),
-              icon: Image.asset('assets/images/Books.png'),
-              iconSize: 50,
-              onPressed: () {
-                Navigator.pushNamed(context, '/storyList');
-              },
-            ),
+                key: const Key('StoryListNav'),
+                icon: Image.asset('assets/images/Books.png'),
+                iconSize: 50,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/storyList');
+                }),
           ),
           Expanded(
             child: IconButton(
