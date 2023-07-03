@@ -237,14 +237,14 @@ class InsideStoryState extends State<InsideStory> {
                   GestureDetector(
                       key: const Key('nextButton'),
                       onTap: () => {
-                            // if (storyIndex == widget.storyText.length - 1)
-                            //   {
-                            //     //TODO: write a unit test to check this
-                            //     //go to the liked page if the story is finished
-                            //     Navigator.pushNamed(context, '/endBook')
-                            //   }
-                            // else
-                            next() //go to the next page
+                            if (storyIndex == widget.storyText.length - 1)
+                              {
+                                //TODO: write a unit test to check this
+                                //go to the liked page if the story is finished
+                                Navigator.pushNamed(context, '/endBook')
+                              }
+                            else
+                              next() //go to the next page
                           },
                       child: Image.asset('assets/images/forward.png')),
                 ],
