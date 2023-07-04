@@ -9,17 +9,20 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.1.0-94.0.dev <4.0.0'
 
-dependencies:
+dependencies: 
+  provider: ^6.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
 
+
 dev_dependencies:
+  flutter_lints: ^2.0.0
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
@@ -30,3 +33,7 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/storyPreviews/
+    - assets/images/stories/AndyTheAnt/
+    - assets/stories.json
+    - assets/currentlyReading.json

@@ -1,20 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'src/app.dart';
-import 'src/settings/settings_controller.dart';
-import 'src/settings/settings_service.dart';
+import 'get_stories_service.dart';
+import 'login_page.dart';
+import 'story_list.dart';
+import 'story_liked.dart';
+import 'home.dart';
+import 'profile.dart';
 
-void main() async {
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
-  final settingsController = SettingsController(SettingsService());
+import 'story_list_change_notifier.dart';
 
-  // Load the user's preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
+/// This is the main file for the app.
+/// It contains the main function, which runs the app.
+/// It also contains the unit and integration tests.
+/// The unit tests test the inside a story class.
+/// The integration tests test the get stories service class.
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Magic Pages',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: ChangeNotifierProvider(
+          create: (context) => StoryListChangeNotifier(GetStoriesService()),
+          child: const LoginPage(),
+        ),
+        routes: {
+          '/login': (context) => const LoginPage(),
+          '/storyList': (context) => const StoryList(),
+          '/home': (context) => const Home(),
+          '/storyLiked': (context) => const StoryLiked(),
+          '/profile': (context) => const Profile(),
+
+          //TODO: create an end book page
+          '/endBook': (context) => const Home(),
+        });
+  }
 }
