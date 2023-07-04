@@ -11,5 +11,7 @@ class EndOfStoryChangeNotifier extends ChangeNotifier {
   //and a way to update the like status in the backend
   //as well as the image URL
 
-  
+  Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {
+    return await _getStoriesService.updateLikeStatus(newLike, storyID, userID);
+  }
 }

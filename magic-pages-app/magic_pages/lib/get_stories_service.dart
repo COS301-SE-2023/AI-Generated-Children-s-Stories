@@ -59,4 +59,22 @@ class GetStoriesService {
 
     return false;
   }
+
+  Future<Story> getStoryByID(int? storyID) async {
+    //get the story by ID
+    await Future.delayed(const Duration(seconds: 5));
+    final String response =
+        await rootBundle.loadString('assets/currentlyReading.json');
+    final data = await json.decode(response);
+
+    //return a story
+    return Story(
+      title: data['title'],
+      coverUrl: data['coverUrl'],
+      textContent: data['textContent'].cast<String>(),
+      imageContent: data['imageContent'].cast<String>(),
+      currentPage: data['currentPage'],
+      id: data['id'],
+    );
+  }
 }
