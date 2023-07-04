@@ -51,4 +51,12 @@ class GetStoriesService {
       id: data['id'],
     );
   }
+
+  Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {
+    //set the like status to the new one where the story ID and userID match
+
+    //TODO: make a service call to do this!
+
+    return false;
+  }
 }
