@@ -60,6 +60,12 @@ class GetStoriesService {
     return false;
   }
 
+  Future<void> markAsRead(int storyID, int userID) async {
+    //set the read status to true where the story ID and userID match
+
+    //TODO: make a service call to do this!
+  }
+
   Future<Story> getStoryByID(int? storyID) async {
     //get the story by ID
     await Future.delayed(const Duration(seconds: 5));

@@ -14,4 +14,8 @@ class EndOfStoryChangeNotifier extends ChangeNotifier {
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {
     return await _getStoriesService.updateLikeStatus(newLike, storyID, userID);
   }
+
+  Future<void> markAsRead(int storyID, int userID) async {
+    await _getStoriesService.markAsRead(storyID, userID);
+  }
 }
