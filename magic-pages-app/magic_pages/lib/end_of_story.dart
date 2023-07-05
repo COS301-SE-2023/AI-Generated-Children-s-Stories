@@ -19,9 +19,17 @@ class _EndOfStoryState extends State<EndOfStory> {
   final EndOfStoryChangeNotifier _endOfStoryChangeNotifier =
       EndOfStoryChangeNotifier(GetStoriesService());
 
+  //mark the story as read
+  void markStoryAsRead() async {
+    await _endOfStoryChangeNotifier.updateLikeStatus(
+        widget.story.getIsLiked(), widget.story.id, 1);
+  }
+
   @override
   void initState() {
     super.initState();
+    //send an api request to mark the story as read
+    markStoryAsRead();
   }
 
   void toggleStoryLiked() async {
