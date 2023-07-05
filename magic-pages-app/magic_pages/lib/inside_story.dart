@@ -171,11 +171,14 @@ class InsideStoryState extends State<InsideStory> {
             !isLoading
                 ? Row(
                     children: [
-                      Center(
-                        child: ProgressBar(
-                            totalPages:
-                                widget._myStory.getTextContent().length - 1,
-                            currentPages: storyIndex),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        child: Center(
+                          child: ProgressBar(
+                              totalPages:
+                                  widget._myStory.getTextContent().length - 1,
+                              currentPages: storyIndex),
+                        ),
                       )
                     ],
                   )
