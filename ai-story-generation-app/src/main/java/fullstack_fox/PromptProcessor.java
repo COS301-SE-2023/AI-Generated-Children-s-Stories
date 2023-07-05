@@ -22,6 +22,7 @@ public class PromptProcessor {
                 System.out.println(stringBuilder.toString() + "\n\n");
         return stringBuilder.toString();
     }
+    
     public String summarizePrompt(String inParagraph) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Summarise the paragraph below. The extracted concept must be short as it will be used as an image generation prompt.\\n");
