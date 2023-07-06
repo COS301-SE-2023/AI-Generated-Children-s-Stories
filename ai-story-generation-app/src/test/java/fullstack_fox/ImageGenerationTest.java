@@ -42,10 +42,16 @@ class ImageGenerationTest {
      */
     @Test
     void extractImageUrl() {
-        String testResponse = "[{\"content\": \"(Waiting to start)\"}]";
+        String testResponseNull = "[{\"content\": \"(Waiting to start)\"}]";
         //should return null...
         try {
             ImageGeneration imageGeneration = new ImageGeneration(new APICalls("configTest.json"));
+
+            //null case
+            String result = imageGeneration.extractImageUrl(testResponseNull);
+            Assertions.assertEquals(result, null);
+
+            result = imageGeneration.extractImageUrl()
         } catch (URISyntaxException e) {
             fail("Exception thrown: " + e.getMessage());
         }
