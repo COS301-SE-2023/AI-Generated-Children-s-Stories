@@ -22,7 +22,8 @@ public class GUI {
         panel.add(new JLabel("Age:"));
         panel.add(ageField);
 
-        int option = JOptionPane.showConfirmDialog(null, panel, "AI Story Generator", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int option = JOptionPane.showConfirmDialog(null, panel, "AI Story Generator", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
 
         if (option == JOptionPane.OK_OPTION) {
             String storyIdea = storyIdeaField.getText();

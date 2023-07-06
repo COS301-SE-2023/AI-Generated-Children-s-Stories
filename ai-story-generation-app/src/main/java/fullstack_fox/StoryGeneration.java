@@ -20,35 +20,53 @@ public class StoryGeneration {
         String storyPrompt = processPrompt.storyPrompt(inputList);
         String response = callApi.promptGPT(storyPrompt);
         String story = this.extractContent(response);
-        System.out.println(story);
-        // if (!story.isBlank()) {
-        //     ArrayList<String> paragraphs = this.splitParagraphs(story);
+        // System.out.println(story);
+        if (!story.isBlank()) {
+            ArrayList<String> paragraphs = this.splitParagraphs(story);
 
-        //     ArrayList<String> prompts = new ArrayList<String>();
+            ArrayList<String> prompts = new ArrayList<String>();
+            
+            String prompt = processPrompt.characterDescriptionPrompt(story);
 
-        //     for (int i = 0; i < paragraphs.size(); i++) {
-        //         String prompt = processPrompt.summarizePrompt(paragraphs.get(i));
-        //         response = callApi.promptGPT(prompt);
-        //         prompt = this.extractContent(response);
-        //         prompts.add(prompt);
-        //     }
+            System.out.println("--------");
+            System.out.println(prompt);
+            System.out.println("--------");
+            // response = callApi.promptGPT(prompt);
+            // System.out.println("--------");
+            // System.out.println("Character Propmpt");
+            // System.out.println(this.extractContent(response));
+            // System.out.println("--------");
 
-        //     ArrayList<String> imageUrls = new ArrayList<String>();
+            // prompt = processPrompt.genMidjourneyPromptsPrompy(story);
+            // response = callApi.promptGPT(prompt);
+            // System.out.println("--------");
+            // System.out.println("Midjourney Propmpts");
+            // System.out.println(this.extractContent(response));
+            // System.out.println("--------");
 
-        //     for (int i = 0; i < prompts.size(); i++) {
-        //         String url = imageGenerator.generateImage(prompts.get(i));
-        //         imageUrls.add(url);
-        //     }
-        //     System.out.println("Story:");
-        //     ArrayList<Page> pages = new ArrayList<Page>();
-        //     for (int i = 0; i < paragraphs.size(); i++) {
-        //         Page newPage = new Page(paragraphs.get(i), imageUrls.get(i));
-        //         pages.add(newPage);
-        //         System.out.println("Page " + i);
-        //         pages.get(i).print();
-        //     }
+            // for (int i = 0; i < paragraphs.size(); i++) {
+            // String prompt = processPrompt.summarizePrompt(paragraphs.get(i));
+            // response = callApi.promptGPT(prompt);
+            // prompt = this.extractContent(response);
+            // prompts.add(prompt);
+            // }
+
+            // ArrayList<String> imageUrls = new ArrayList<String>();
+
+            // for (int i = 0; i < prompts.size(); i++) {
+            //     String url = imageGenerator.generateImage(prompts.get(i));
+            //     imageUrls.add(url);
+            // }
+            // System.out.println("Story:");
+            // ArrayList<Page> pages = new ArrayList<Page>();
+            // for (int i = 0; i < paragraphs.size(); i++) {
+            //     Page newPage = new Page(paragraphs.get(i), imageUrls.get(i));
+            //     pages.add(newPage);
+            //     System.out.println("Page " + i);
+            //     pages.get(i).print();
+            // }
             // return the pages list
-        // }
+        }
     }
 
     public String extractContent(String inResponseBody) {
