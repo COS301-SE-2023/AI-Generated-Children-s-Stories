@@ -51,7 +51,6 @@ class ImageGenerationTest {
             String result = imageGeneration.extractImageUrl(testResponseNull);
             Assertions.assertEquals(result, null);
 
-            result = imageGeneration.extractImageUrl()
         } catch (URISyntaxException e) {
             fail("Exception thrown: " + e.getMessage());
         }
