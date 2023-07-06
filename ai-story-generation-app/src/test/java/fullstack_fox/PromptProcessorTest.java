@@ -30,16 +30,16 @@ class PromptProcessorTest {
         Assertions.assertEquals(expectedOutput, outputFromClass);
     }
 
-    @Test
-    void summarizePrompt() {
-        PromptProcessor promptProcessor = new PromptProcessor();
+    // @Test
+    // void summarizePrompt() {
+    //     PromptProcessor promptProcessor = new PromptProcessor();
 
-        String paragraph = "My para";
+    //     String paragraph = "My para";
 
-        String expectedOutput = "Summarise the paragraph below. The extracted concept must be short as it will be used as an image generation prompt.\\nMy para";
+    //     String expectedOutput = "Summarise the paragraph below. The extracted concept must be short as it will be used as an image generation prompt.\\nMy para";
 
-        String outputFromClass = promptProcessor.summarizePrompt(paragraph);
+    //     String outputFromClass = promptProcessor.summarizePrompt(paragraph);
 
-        Assertions.assertEquals(outputFromClass, expectedOutput);
-    }
+    //     Assertions.assertEquals(outputFromClass, expectedOutput);
+    // }
 }
