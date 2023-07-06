@@ -43,6 +43,7 @@ class ImageGenerationTest {
     @Test
     void extractImageUrl() {
         String testResponseNull = "[{\"content\": \"(Waiting to start)\"}]";
+
         //should return null...
         try {
             ImageGeneration imageGeneration = new ImageGeneration(new APICalls("configTest.json"));
