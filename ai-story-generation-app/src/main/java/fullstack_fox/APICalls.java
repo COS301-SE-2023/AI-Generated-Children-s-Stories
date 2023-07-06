@@ -15,9 +15,9 @@ public class APICalls {
     // 5: User Authorization
     ArrayList<String> configList;
 
-    public APICalls() throws URISyntaxException {
+    public APICalls(String fileName) throws URISyntaxException {
         JsonReader jReader = new JsonReader();
-        configList = jReader.readJson("config.json");
+        configList = jReader.readJson(fileName);
     }
 
     public String getMessage() {
@@ -42,19 +42,19 @@ public class APICalls {
         return null;
     }
 
-    public void postPrompt(String inPrompt) {
+    public String postPrompt(String inPrompt) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(
-                "{\r\n    \"type\": 2,\r\n    \"application_id\": \"" + configList.get(0)
-                        + "\",\r\n    \"guild_id\": \"" + configList.get(2)
-                        + "\",\r\n    \"channel_id\": \""
-                        + configList.get(1) + "\",\r\n    \"session_id\": \""
-                        + configList.get(3)
-                        + "\",\r\n    \"data\": {\r\n        \"id\": \"938956540159881230\",\r\n        \"version\": \"1118961510123847772\",\r\n        \"name\": \"imagine\",\r\n        \"type\": 1,\r\n        \"options\": [\r\n            {\r\n                \"type\": 3,\r\n                \"name\": \"prompt\",\r\n                \"value\": \""
-                        + inPrompt + "\"\r\n            }\r\n        ]\r\n    }\r\n}",
-                mediaType);
+        String requestBodyStr = "{\r\n    \"type\": 2,\r\n    \"application_id\": \"" + configList.get(0)
+                + "\",\r\n    \"guild_id\": \"" + configList.get(2)
+                + "\",\r\n    \"channel_id\": \""
+                + configList.get(1) + "\",\r\n    \"session_id\": \""
+                + configList.get(3)
+                + "\",\r\n    \"data\": {\r\n        \"id\": \"938956540159881230\",\r\n        \"version\": \"1118961510123847772\",\r\n        \"name\": \"imagine\",\r\n        \"type\": 1,\r\n        \"options\": [\r\n            {\r\n                \"type\": 3,\r\n                \"name\": \"prompt\",\r\n                \"value\": \""
+                + inPrompt + "\"\r\n            }\r\n        ]\r\n    }\r\n}";
+
+        RequestBody body = RequestBody.create(requestBodyStr, mediaType);
 
         Request request = new Request.Builder()
                 .url("https://discord.com/api/v9/interactions")
@@ -74,6 +74,8 @@ public class APICalls {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        return requestBodyStr;
     }
 
     public void postUpscale(String inImageURL, String inMessageID) {

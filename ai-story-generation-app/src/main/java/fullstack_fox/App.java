@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) throws URISyntaxException {
         // Set up
-        APICalls apiLibrary = new APICalls();
+        APICalls apiLibrary = new APICalls("config.json");
         StoryGeneration storyGenerator = new StoryGeneration(apiLibrary);
 
         // GUI Input

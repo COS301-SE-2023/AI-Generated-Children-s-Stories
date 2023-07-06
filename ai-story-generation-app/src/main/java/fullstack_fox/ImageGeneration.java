@@ -65,6 +65,7 @@ public class ImageGeneration {
         }
     }
 
+    //todo: test
     public String extractImageUrl(String inResponseBody) {
 
         JSONArray jsonArray = new JSONArray(inResponseBody);
@@ -86,6 +87,7 @@ public class ImageGeneration {
         return url;
     }
 
+    //
     private void urlUnitTest(String inUrl) {
         if (inUrl == "") {
             System.out.println("Message recived not an image");
@@ -105,6 +107,9 @@ public class ImageGeneration {
         return id;
     }
 
+    ///description: extracts the message id from the response body
+    ///@param: inResponseBody: the response body from the api call
+    ///@return: the message id
     public String extractMessageID(String inResponseBody) {
         JSONArray jsonArray = new JSONArray(inResponseBody);
         String id = "";
