@@ -76,6 +76,9 @@ public class StoryGeneration {
         return finishReason;
     }
 
+    /// Splits the story into paragraphs
+    /// @param inStory The story to split
+    /// @return An ArrayList of paragraphs
     public ArrayList<String> splitParagraphs(String inStory) {
         String[] paragraphs = inStory.split("\n");
         ArrayList<String> list = new ArrayList<>();
