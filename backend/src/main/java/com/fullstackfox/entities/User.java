@@ -1,10 +1,10 @@
 package com.fullstackfox.entities;
 
+import java.security.Provider;
 import java.util.Set;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,5 +32,17 @@ public class User {
     @Getter @Setter
     @Column(unique = false, nullable = true)
     private Integer age;
+
+    //Google authentation providor to store email
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
+ 
+    public Provider getProvider() {
+        return provider;
+    }
+ 
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
 
 }
