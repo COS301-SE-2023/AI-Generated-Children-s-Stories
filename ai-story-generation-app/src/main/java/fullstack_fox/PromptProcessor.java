@@ -7,7 +7,7 @@ public class PromptProcessor {
     public PromptProcessor() {
     }
 
-    public String toJSONstring (String inString){
+    public String toJSONstring(String inString) {
         inString = inString.replace("\n", "\\n");
         inString = inString.replace("\"", "\\\"");
         return inString;
@@ -37,22 +37,13 @@ public class PromptProcessor {
         return stringBuilder.toString();
     }
 
-    public String genMidjourneyPromptsPrompy(String inStory) {
+    public String genMidjourneyPromptsPrompt(String inStory, int inNumPages) {
         inStory = this.toJSONstring(inStory);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(
-                "Provide 7 prompts for Dall E for the following paragraphs in order to generate an image that captures the paragraphs content. Each prompt must be a vague, single line summery of the paragraph. \\n");
+                "Provide " + inNumPages
+                        + " prompts for Dall E for the following paragraphs in order to generate an image that captures the paragraphs content. Each prompt must be a vague, single line summery of the paragraph. Number each prompt.\\n");
         stringBuilder.append(inStory.replace("\n", "\\n"));
         return stringBuilder.toString();
     }
-
-    // public String summarizePrompt(String inParagraph) {
-    // StringBuilder stringBuilder = new StringBuilder();
-    // stringBuilder.append(
-    // "Summarise the paragraph below. The extracted concept must be short as it
-    // will be used as an image generation prompt.\\n");
-    // stringBuilder.append(inParagraph);
-
-    // return stringBuilder.toString();
-    // }
 }

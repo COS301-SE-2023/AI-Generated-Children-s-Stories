@@ -2,6 +2,7 @@ package fullstack_fox;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.*;
 
@@ -23,47 +24,48 @@ public class StoryGeneration {
         // System.out.println(story);
         if (!story.isBlank()) {
             ArrayList<String> paragraphs = this.splitParagraphs(story);
-
+            int numPages = paragraphs.size();
             ArrayList<String> prompts = new ArrayList<String>();
-            
+
             String prompt = processPrompt.characterDescriptionPrompt(story);
 
             System.out.println("--------");
             System.out.println(prompt);
             System.out.println("--------");
-            // response = callApi.promptGPT(prompt);
-            // System.out.println("--------");
-            // System.out.println("Character Propmpt");
-            // System.out.println(this.extractContent(response));
-            // System.out.println("--------");
+            response = callApi.promptGPT(prompt);
+            System.out.println("--------");
+            System.out.println("Character Propmpt");
+            System.out.println(this.extractContent(response));
+            System.out.println("--------");
 
-            // prompt = processPrompt.genMidjourneyPromptsPrompy(story);
+            String characterImageUrl = imageGenerator.generateImage(this.extractContent(response));
+            System.out.println(characterImageUrl);
+            // prompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
             // response = callApi.promptGPT(prompt);
             // System.out.println("--------");
             // System.out.println("Midjourney Propmpts");
-            // System.out.println(this.extractContent(response));
-            // System.out.println("--------");
-
-            // for (int i = 0; i < paragraphs.size(); i++) {
-            // String prompt = processPrompt.summarizePrompt(paragraphs.get(i));
-            // response = callApi.promptGPT(prompt);
-            // prompt = this.extractContent(response);
-            // prompts.add(prompt);
+            // String promptList = this.extractContent(response);
+            // System.out.println(promptList);
+            // List<String> result = splitNumberedList(promptList);
+            // System.out.println("-----------------------------");
+            // System.out.println("Final Prompts");
+            // for (String item : result) {
+            // System.out.println(item);
             // }
 
             // ArrayList<String> imageUrls = new ArrayList<String>();
 
             // for (int i = 0; i < prompts.size(); i++) {
-            //     String url = imageGenerator.generateImage(prompts.get(i));
-            //     imageUrls.add(url);
+            // String url = imageGenerator.generateImage(prompts.get(i));
+            // imageUrls.add(url);
             // }
             // System.out.println("Story:");
             // ArrayList<Page> pages = new ArrayList<Page>();
             // for (int i = 0; i < paragraphs.size(); i++) {
-            //     Page newPage = new Page(paragraphs.get(i), imageUrls.get(i));
-            //     pages.add(newPage);
-            //     System.out.println("Page " + i);
-            //     pages.get(i).print();
+            // Page newPage = new Page(paragraphs.get(i), imageUrls.get(i));
+            // pages.add(newPage);
+            // System.out.println("Page " + i);
+            // pages.get(i).print();
             // }
             // return the pages list
         }
@@ -108,5 +110,32 @@ public class StoryGeneration {
             }
         }
         return list;
+    }
+
+    public List<String> splitNumberedList(String inPromptList) {
+        inPromptList = this.trim(inPromptList);
+        List<String> resultList = new ArrayList<>();
+
+        String[] lines = inPromptList.split("\n");
+        for (String line : lines) {
+            int dotIndex = line.indexOf(".");
+            if (dotIndex != -1) {
+                String item = line.substring(dotIndex + 1).trim();
+                item = item.replaceAll("\"", "");
+                resultList.add(item);
+            }
+        }
+
+        return resultList;
+    }
+
+    public String trim(String inPrompts) {
+        int index = inPrompts.indexOf("1");
+        if (index != -1) {
+            return inPrompts.substring(index);
+        } else {
+            System.out.println("ChatGPT returned non numbered list");
+        }
+        return inPrompts;
     }
 }
