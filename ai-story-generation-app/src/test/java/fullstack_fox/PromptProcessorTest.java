@@ -30,16 +30,19 @@ class PromptProcessorTest {
         Assertions.assertEquals(expectedOutput, outputFromClass);
     }
 
-    // @Test
-    // void summarizePrompt() {
-    //     PromptProcessor promptProcessor = new PromptProcessor();
 
-    //     String paragraph = "My para";
+    @Test
+    void characterDescriptionPrompt() {
+        String inStory = "[{\"content\": \"I am a story.\"}]";
 
-    //     String expectedOutput = "Summarise the paragraph below. The extracted concept must be short as it will be used as an image generation prompt.\\nMy para";
+        PromptProcessor promptProcessor = new PromptProcessor();
+        String output = promptProcessor.characterDescriptionPrompt(inStory);
 
-    //     String outputFromClass = promptProcessor.summarizePrompt(paragraph);
+        //appends message at the beginning
+        // \n changes to \\n
+        String expectedOutput = "Write a single sentence description of the main characters appearance from the following story. \\n[{\\\"content\\\": \\\"I am a story.\\\"}]";
 
-    //     Assertions.assertEquals(outputFromClass, expectedOutput);
-    // }
+        Assertions.assertEquals(expectedOutput, output);
+
+    }
 }
