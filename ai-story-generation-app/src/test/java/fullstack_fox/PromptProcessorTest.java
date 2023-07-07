@@ -45,4 +45,18 @@ class PromptProcessorTest {
         Assertions.assertEquals(expectedOutput, output);
 
     }
+
+
+    @Test
+    void genMidjourneyPromptsPrompt() {
+        String inStory = "[{\"content\": \"I am a story.\"}]";
+
+        PromptProcessor promptProcessor = new PromptProcessor();
+        String output = promptProcessor.genMidjourneyPromptsPrompt(inStory, 3);
+
+        String expectedOutput = "Provide 3 prompts for Dall E for the following paragraphs in order to generate an image that captures the paragraphs content. Each prompt must be a vague, single line summery of the paragraph. Number each prompt.\\n[{\\\"content\\\": \\\"I am a story.\\\"}]";
+
+        Assertions.assertEquals(expectedOutput, output);
+
+    }
 }

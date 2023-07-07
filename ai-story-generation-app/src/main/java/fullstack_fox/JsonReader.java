@@ -9,8 +9,7 @@ import org.json.*;
 
 public class JsonReader {
 
-    public JsonReader() {
-    }
+    public JsonReader() {}
 
     public ArrayList<String> readJson(String inFName) throws URISyntaxException {
         System.out.println(inFName);
@@ -32,19 +31,10 @@ public class JsonReader {
             configList.add(jsonObject.optString("userAuthorization"));
             configList.add(jsonObject.optString("chatGPTKey"));
 
-            this.configUnitTest(configList);
             return configList;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    private void configUnitTest(ArrayList<String> inConfigList) {
-        if (inConfigList == null || inConfigList.size() != 7) {
-            System.out.println("Config file incorrect");
-        } else {
-            System.out.println("Config file correct");
-        }
     }
 }
