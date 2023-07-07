@@ -21,3 +21,4 @@ migrate_working_dir/
 # is commented out by default.
 .vscode/
 config.json
+backend/src/main/resources/application.properties
