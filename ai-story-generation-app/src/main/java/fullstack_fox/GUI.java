@@ -19,7 +19,7 @@ public class GUI {
         JPanel panel = new JPanel(new GridLayout(3, 2));
         panel.add(new JLabel("Story Idea:"));
         panel.add(storyIdeaField);
-        panel.add(new JLabel("Age:"));
+        panel.add(new JLabel("Target Age:"));
         panel.add(ageField);
 
         int option = JOptionPane.showConfirmDialog(null, panel, "AI Story Generator", JOptionPane.OK_CANCEL_OPTION,

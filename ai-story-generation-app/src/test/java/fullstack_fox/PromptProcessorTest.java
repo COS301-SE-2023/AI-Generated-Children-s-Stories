@@ -24,7 +24,7 @@ class PromptProcessorTest {
         String expectedOutput = "Write a children's story based using the following information:\\n1. Story Idea: Mystery\\n2. The maximum number of paragraphs is 4.\\n3. The story must be written for a child of age 5.\\nIt must be easy enough for the child to read and must only contain age appropriate content.";
 
         //create an instance of the class
-        PromptProcessor promptProcessor = new PromptProcessor();
+        PromptProcessor promptProcessor = new PromptProcessor("123");
 
         String outputFromClass = promptProcessor.storyPrompt(inputList);
         Assertions.assertEquals(expectedOutput, outputFromClass);
@@ -35,7 +35,7 @@ class PromptProcessorTest {
     void characterDescriptionPrompt() {
         String inStory = "[{\"content\": \"I am a story.\"}]";
 
-        PromptProcessor promptProcessor = new PromptProcessor();
+        PromptProcessor promptProcessor = new PromptProcessor("123");
         String output = promptProcessor.characterDescriptionPrompt(inStory);
 
         //appends message at the beginning
@@ -51,7 +51,7 @@ class PromptProcessorTest {
     void genMidjourneyPromptsPrompt() {
         String inStory = "[{\"content\": \"I am a story.\"}]";
 
-        PromptProcessor promptProcessor = new PromptProcessor();
+        PromptProcessor promptProcessor = new PromptProcessor("123");
         String output = promptProcessor.genMidjourneyPromptsPrompt(inStory, 3);
 
         String expectedOutput = "Provide 3 prompts for Dall E for the following paragraphs in order to generate an image that captures the paragraphs content. Each prompt must be a vague, single line summery of the paragraph. Number each prompt.\\n[{\\\"content\\\": \\\"I am a story.\\\"}]";

@@ -14,44 +14,56 @@ public class StoryGeneration {
     public StoryGeneration(APICalls inApiLibrary) throws URISyntaxException {
         imageGenerator = new ImageGeneration(inApiLibrary);
         callApi = inApiLibrary;
-        processPrompt = new PromptProcessor();
+        processPrompt = new PromptProcessor("123");
     }
 
     public void generateStory(ArrayList<String> inputList) throws URISyntaxException {
         String storyPrompt = processPrompt.storyPrompt(inputList);
         String response = callApi.promptGPT(storyPrompt);
         String story = this.extractContent(response);
-        // System.out.println(story);
+
+        System.out.println("--------");
+        System.out.println("Story");
+        System.out.println(story);
+        System.out.println("--------\n");
+
         if (!story.isBlank()) {
             ArrayList<String> paragraphs = this.splitParagraphs(story);
             int numPages = paragraphs.size();
-            ArrayList<String> prompts = new ArrayList<String>();
 
             String prompt = processPrompt.characterDescriptionPrompt(story);
-
-            System.out.println("--------");
-            System.out.println(prompt);
-            System.out.println("--------");
             response = callApi.promptGPT(prompt);
+
             System.out.println("--------");
             System.out.println("Character Propmpt");
             System.out.println(this.extractContent(response));
-            System.out.println("--------");
+            System.out.println("--------\n");
 
-            String characterImageUrl = imageGenerator.generateImage(this.extractContent(response));
+            String characterPrompt = processPrompt.characterImagePrompt(this.extractContent(response));
+
+            String characterImageUrl = imageGenerator.generateImage(characterPrompt);
             System.out.println(characterImageUrl);
-            // prompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
-            // response = callApi.promptGPT(prompt);
-            // System.out.println("--------");
-            // System.out.println("Midjourney Propmpts");
-            // String promptList = this.extractContent(response);
-            // System.out.println(promptList);
-            // List<String> result = splitNumberedList(promptList);
-            // System.out.println("-----------------------------");
-            // System.out.println("Final Prompts");
-            // for (String item : result) {
-            // System.out.println(item);
-            // }
+
+            prompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
+            response = callApi.promptGPT(prompt);
+
+            System.out.println("--------");
+            System.out.println("Midjourney Propmpts");
+            String promptList = this.extractContent(response);
+            System.out.println(promptList);
+            System.out.println("--------\n");
+
+            List<String> prompts = splitNumberedList(promptList);
+            System.out.println("-----------------------------");
+
+            for (int i = 0; i < prompts.size(); i++) {
+                prompts.set(i, processPrompt.imagePrompt(characterImageUrl, prompts.get(i)));
+            }
+
+            System.out.println("Final Prompts");
+            for (String item : prompts) {
+                System.out.println(item);
+            }
 
             // ArrayList<String> imageUrls = new ArrayList<String>();
 
@@ -67,7 +79,6 @@ public class StoryGeneration {
             // System.out.println("Page " + i);
             // pages.get(i).print();
             // }
-            // return the pages list
         }
     }
 
