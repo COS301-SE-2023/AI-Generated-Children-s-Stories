@@ -65,19 +65,21 @@ public class StoryGeneration {
                 System.out.println(item);
             }
 
+            // System.out.println("--------\n");
+
             // ArrayList<String> imageUrls = new ArrayList<String>();
 
             // for (int i = 0; i < prompts.size(); i++) {
-            // String url = imageGenerator.generateImage(prompts.get(i));
-            // imageUrls.add(url);
+            //     String url = imageGenerator.generateImage(prompts.get(i));
+            //     imageUrls.add(url);
             // }
             // System.out.println("Story:");
             // ArrayList<Page> pages = new ArrayList<Page>();
             // for (int i = 0; i < paragraphs.size(); i++) {
-            // Page newPage = new Page(paragraphs.get(i), imageUrls.get(i));
-            // pages.add(newPage);
-            // System.out.println("Page " + i);
-            // pages.get(i).print();
+            //     Page newPage = new Page(paragraphs.get(i), imageUrls.get(i));
+            //     pages.add(newPage);
+            //     System.out.println("Page " + i);
+            //     pages.get(i).print();
             // }
         }
     }
