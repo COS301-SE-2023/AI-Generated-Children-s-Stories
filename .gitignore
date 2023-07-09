@@ -24,5 +24,3 @@ config.json
 configTest.json
 
 linux/
-ai-story-generation-app/target/test-classes/fullstack_fox/resources/configTest.json
-ai-story-generation-app/target/test-classes/fullstack_fox/resources/configTest.json
