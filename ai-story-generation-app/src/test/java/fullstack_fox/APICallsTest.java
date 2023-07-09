@@ -15,7 +15,7 @@ class APICallsTest {
         //fails becuase there is no json file to read
         APICalls apiCalls = null;
         try {
-            apiCalls = new APICalls("TestConfig.json");
+            apiCalls = new APICalls("configTest.json");
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail("Failed with exception: " + e.getMessage());
