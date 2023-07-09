@@ -10,12 +10,9 @@ public class PromptProcessor {
         seed = inSeed;
     }
 
-    public String toJSONstring(String inString) {
-        inString = inString.replace("\n", "\\n");
-        inString = inString.replace("\"", "\\\"");
-        return inString;
-    }
+    // ChatGPT ---
 
+    // Creates the prompt for chatgpt to generate story
     public String storyPrompt(ArrayList<String> inputList) {
         String storyIdea = inputList.get(0);
         storyIdea = this.toJSONstring(storyIdea);
@@ -30,6 +27,7 @@ public class PromptProcessor {
         return stringBuilder.toString();
     }
 
+    // Creates the prompt for chatgpt to generate character description
     public String characterDescriptionPrompt(String inStory) {
         inStory = this.toJSONstring(inStory);
         StringBuilder stringBuilder = new StringBuilder();
@@ -39,11 +37,12 @@ public class PromptProcessor {
         return stringBuilder.toString();
     }
 
-    public String characterImagePrompt(String inPrompt) {
-        inPrompt = this.toJSONstring(inPrompt);
-        return inPrompt + " --seed " + seed;
+    // Creates the prompt for chatgpt to generate story trailer description
+    public String storyTrailerPrompts(String inStory) {
+        return "";
     }
 
+    // Creates the prompt for chatgpt to generate midjourney prompts
     public String genMidjourneyPromptsPrompt(String inStory, int inNumPages) {
         inStory = this.toJSONstring(inStory);
         StringBuilder stringBuilder = new StringBuilder();
@@ -54,12 +53,29 @@ public class PromptProcessor {
         return stringBuilder.toString();
     }
 
-    public String imagePrompt(String inUrl, String inPrompt) {
+    // Midjourney ---
+
+    // Creates the prompt for midjourney to generate character image
+    public String characterImagePrompt(String inPrompt) {
+        inPrompt = this.toJSONstring(inPrompt);
+        return inPrompt + " --seed " + seed;
+    }
+
+    // Creates the prompt for midjourney to generate all other images
+    public String storyImagePrompt(String inUrl, String inPrompt) {
         inPrompt = this.toJSONstring(inPrompt);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(inUrl + " ");
         stringBuilder.append(inPrompt);
         stringBuilder.append(" --seed " + seed);
         return stringBuilder.toString();
+    }
+
+    // Helper Functions
+
+    public String toJSONstring(String inString) {
+        inString = inString.replace("\n", "\\n");
+        inString = inString.replace("\"", "\\\"");
+        return inString;
     }
 }
