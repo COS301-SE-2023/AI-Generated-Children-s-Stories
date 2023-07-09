@@ -10,6 +10,8 @@ jobs:
       - uses: subosito/flutter-action@v1
         with: 
           channel: "stable"
+      - name: Install and test
+      - working-directory: ./magic-pages-app/magic_pages
       - run: flutter pub get
       - run: flutter test
       
