@@ -37,9 +37,16 @@ public class PromptProcessor {
         return stringBuilder.toString();
     }
 
+    // Creates the prompt for chatgpt to generate story title
+    public String storyTitlePrompt(String inStory){
+        // TOTO : Add code to gen story title gpt prompts
+        return "";
+    }
+
     // Creates the prompt for chatgpt to generate story trailer description
     public String storyTrailerPrompts(String inStory) {
-        return "";
+        inStory = this.toJSONstring(inStory);
+        return "Extract the most important key moment from the following story and summarise it into a single line. \\n" + inStory;
     }
 
     // Creates the prompt for chatgpt to generate midjourney prompts
