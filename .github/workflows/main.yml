@@ -16,7 +16,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./magic-pages-app/magic_pages
-        run: flutter pub get
+        run: flutter upgrade && flutter pub get
 
       - name: Run unit tests
         working-directory: ./magic-pages-app/magic_pages
