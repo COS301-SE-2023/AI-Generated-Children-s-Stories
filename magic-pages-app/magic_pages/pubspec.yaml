@@ -2,33 +2,35 @@ name: magic_pages
 description: A new Flutter project.
 
 # Prevent accidental publishing to pub.dev.
-publish_to: 'none'
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.0.5 <4.0.0'
 
-dependencies: 
-  provider: ^6.0.0
+dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-
+  provider: ^6.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
-  integration_test:
+  integration_test: 
     sdk: flutter
-  flutter_test:
+  flutter_test: 
     sdk: flutter
 
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
 flutter:
-  uses-material-design: true
 
-  # Enable generation of localized Strings from arb files.
-  generate: true
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
 
   assets:
     # Add assets from the images directory to the application.
