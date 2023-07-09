@@ -44,14 +44,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   //add a spacer
                   const SizedBox(height: 60),
+
+                  
                   //row with image
                   Row(
                       //text box that takes up 80% of the screen width
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 20),
+                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05, top: 20),
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
+                            width: MediaQuery.of(context).size.width * 0.45,
                             child:
                                 //text
                                 const Column(
@@ -69,8 +71,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, bottom: 0, right: 0, top: 10),
+                          padding: EdgeInsets.only(
+                              left:  MediaQuery.of(context).size.width * 0.05, bottom: 0, right: 0, top: 10),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.4,
                             child:
@@ -81,8 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                   // buttons to log in with apple and google
                   Row(children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10, bottom: 0, right: 0, top: 10),
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.05, bottom: 0, right: 0, top: 10),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.95,
                         child:
