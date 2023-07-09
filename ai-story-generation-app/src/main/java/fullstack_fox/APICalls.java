@@ -76,7 +76,6 @@ public class APICalls {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return requestBodyStr;
     }
 
