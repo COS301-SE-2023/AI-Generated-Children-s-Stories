@@ -8,6 +8,10 @@ import 'package:magic_pages/book_with_progress.dart';
 
 //to run: flutter test integration_test
 //choose windows
+
+
+//checking actions...
+
 void main() {
   group('end-to-end test', () {
     final TestWidgetsFlutterBinding binding =
