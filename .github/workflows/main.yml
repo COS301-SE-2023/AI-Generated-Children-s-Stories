@@ -15,8 +15,8 @@ jobs:
           channel: 'stable'
 
       - name: Install dependencies
-        run: cd ../../magic-pages-app/magic_pages && flutter pub get
+        run: cd magic-pages-app/magic_pages && flutter pub get
 
       - name: Run unit tests
-        run: cd ../../magic-pages-app/magic_pages && flutter test --coverage
+        run: cd magic-pages-app/magic_pages && flutter test --coverage
       
