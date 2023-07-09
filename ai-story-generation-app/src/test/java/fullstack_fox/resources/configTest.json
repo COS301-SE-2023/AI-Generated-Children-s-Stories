@@ -1,9 +1,0 @@
-{
-  "applicationID": "123",
-  "channelID": "456",
-  "guildID": "789",
-  "sessionID": "101112",
-  "botAuthorization": "131415",
-  "userAuthorization": "161718",
-  "chatGPTKey": "192021"
-}
