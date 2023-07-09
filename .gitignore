@@ -22,3 +22,5 @@ migrate_working_dir/
 .vscode/
 config.json
 configTest.json
+
+linux/

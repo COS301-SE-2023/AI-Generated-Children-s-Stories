@@ -8,30 +8,44 @@ import 'package:magic_pages/book_with_progress.dart';
 
 //to run: flutter test integration_test
 //choose windows
+
+//checking actions...
+
 void main() {
   group('end-to-end test', () {
     final TestWidgetsFlutterBinding binding =
         TestWidgetsFlutterBinding.ensureInitialized();
     testWidgets('integration test', (tester) async {
-      //set windows size to 800x600
-      // ignore: deprecated_member_use
-      binding.window.physicalSizeTestValue = const Size(300, 600);
-
       app.main();
 
-      //---------------------   HOME PAGE ----------------//
+      //--------------------- LOGIN PAGE ----------------//
 
-      //loading message
-      /* expect(find.text('Getting your story...'), findsOneWidget);
+      //check that the login page is displayed
+      expect(find.text('Ask a grown up to help you log in.'), findsOneWidget);
 
-      //wait for the current story to load
-      await tester.pump(const Duration(seconds: 7));
+      //ensure login button is present
+      expect(find.byKey(const Key('GoogleLogin')), findsOneWidget);
+
+      await tester.ensureVisible(find.byKey(const Key('GoogleLogin')));
+      await tester.pumpAndSettle();
+
+      GestureDetector googleButton = find
+          .byKey(const Key('GoogleLogin'))
+          .evaluate()
+          .first
+          .widget as GestureDetector;
+
+      googleButton.onTap!();
+
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      //--------------------- HOME PAGE ----------------//
 
       //see the book has loaded
       expect(find.text('Continue reading...'), findsOneWidget);
 
-      //check that the image is displayed
-      expect(find.byKey(const Key('HomeImage')), findsOneWidget);*/
+      //check that the book is displayed
+      expect(find.byKey(const Key('BookWithProgress')), findsOneWidget);
 
       //navigate to the storyList page
       await tester.tap(find.byKey(const Key("StoryListNav")));
