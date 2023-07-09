@@ -45,13 +45,14 @@ class _LoginPageState extends State<LoginPage> {
                   //add a spacer
                   const SizedBox(height: 60),
 
-                  
                   //row with image
                   Row(
                       //text box that takes up 80% of the screen width
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05, top: 20),
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.05,
+                              top: 20),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.45,
                             child:
@@ -72,7 +73,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left:  MediaQuery.of(context).size.width * 0.05, bottom: 0, right: 0, top: 10),
+                              left: MediaQuery.of(context).size.width * 0.05,
+                              bottom: 0,
+                              right: 0,
+                              top: 10),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.4,
                             child:
@@ -84,7 +88,10 @@ class _LoginPageState extends State<LoginPage> {
                   Row(children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.05, bottom: 0, right: 0, top: 10),
+                          left: MediaQuery.of(context).size.width * 0.05,
+                          bottom: 0,
+                          right: 0,
+                          top: 10),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.95,
                         child:
@@ -94,12 +101,11 @@ class _LoginPageState extends State<LoginPage> {
                             //text with background color
 
                             //add a spacer box
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1),
+                            const SizedBox(height: 20),
                             //responsive image
 
                             GestureDetector(
+                              key: const Key('GoogleLogin'),
                               onTap: () {
                                 Navigator.pushNamed(context, '/home');
                               },
@@ -110,7 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
 
-                            //fixed spacer box
                             const SizedBox(height: 5),
 
                             GestureDetector(
@@ -125,12 +130,10 @@ class _LoginPageState extends State<LoginPage> {
                             ),
 
                             //text
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height * 0.1,
-                                  left: 20,
-                                  right: 20),
-                              child: const Text(
+                            const Padding(
+                              padding:
+                                  EdgeInsets.only(top: 20, left: 20, right: 20),
+                              child: Text(
                                 'By logging in, you agree to our Terms of Service and Privacy Policy.',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 20),
