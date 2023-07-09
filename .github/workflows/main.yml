@@ -2,22 +2,14 @@ name: Flutter Workflow
 
 on: [push, workflow_dispatch]
 jobs:
-  build:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.0.5'
-          channel: 'stable'
-
-      - name: Install dependencies
-        working-directory: ./magic-pages-app/magic_pages
-        run: flutter pub upgrade && flutter clean && flutter pub get
-
-      - name: Run unit tests
-        working-directory: ./magic-pages-app/magic_pages
-        run: flutter test --coverage
+  flutter_test:
+    name: Run flutter test and analyze
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v1
+        with: 
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter test
+      
