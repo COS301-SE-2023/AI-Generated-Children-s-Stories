@@ -15,7 +15,7 @@ class APICallsTest {
         //fails becuase there is no json file to read
         APICalls apiCalls = null;
         try {
-            apiCalls = new APICalls("TestConfig.json");
+            apiCalls = new APICalls("configTest.json");
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail("Failed with exception: " + e.getMessage());
@@ -80,7 +80,26 @@ class APICallsTest {
 
             //check that the response was received correctly
             JSONObject testJsonObject = new JSONObject(response);
+
+            System.out.println(response);
+
+            //check that the response was recievec
             assertEquals(testJsonObject.get("object"), "chat.completion");
+
+            JSONObject choices = testJsonObject.getJSONObject("choices");
+            //check that the correct content was recieved
+            assertNotNull(choices.get("choices"));
+
+            JSONObject message = choices.getJSONObject("message");
+
+            //check that message is not null
+            assertNotNull(message);
+
+            String content = message.getString("content");
+
+            //check that the length of the story is not 0
+            
+
         } catch (Exception e) {
             Assertions.fail("promptGPT failed with an exception.");
             e.printStackTrace();
