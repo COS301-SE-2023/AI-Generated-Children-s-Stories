@@ -22,3 +22,10 @@ migrate_working_dir/
 .vscode/
 config.json
 configTest.json
+magic-pages-app/magic_pages/linux/flutter/generated_plugin_registrant.cc
+magic-pages-app/magic_pages/linux/flutter/generated_plugin_registrant.h
+magic-pages-app/magic_pages/linux/flutter/generated_plugins.cmake
+magic-pages-app/magic_pages/macos/Flutter/GeneratedPluginRegistrant.swift
+magic-pages-app/magic_pages/windows/flutter/generated_plugin_registrant.cc
+magic-pages-app/magic_pages/windows/flutter/generated_plugin_registrant.h
+magic-pages-app/magic_pages/windows/flutter/generated_plugins.cmake

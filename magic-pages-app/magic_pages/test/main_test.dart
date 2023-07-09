@@ -44,8 +44,8 @@ void main() {
       //see the book has loaded
       expect(find.text('Continue reading...'), findsOneWidget);
 
-      //check that the image is displayed
-      /* expect(find.byKey(const Key('HomeImage')), findsOneWidget);
+      //check that the book is displayed
+      expect(find.byKey(const Key('BookWithProgress')), findsOneWidget);
 
       //navigate to the storyList page
       await tester.tap(find.byKey(const Key("StoryListNav")));
@@ -66,7 +66,7 @@ void main() {
 
       //other stories that should be displayed
       expect(find.text('Honey the Kitty'), findsOneWidget);
-      expect(find.text('Benny the Bear'), findsOneWidget);*/
+      expect(find.text('Benny the Bear'), findsOneWidget);
     });
   });
 }

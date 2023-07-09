@@ -27,6 +27,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
   @override
   Widget build(BuildContext context) {
     return Padding(
+        key: const Key('BookWithProgress'),
         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: SizedBox(
           child: Column(
