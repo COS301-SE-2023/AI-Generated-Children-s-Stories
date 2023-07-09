@@ -12,10 +12,6 @@ public class JsonReader {
     public JsonReader() {}
 
     public ArrayList<String> readJson(String inFName) throws URISyntaxException {
-        System.out.println(inFName);
-        System.out.println(this.getClass().getResource("resources"));
-        System.out.println("--------");
-
         try (FileReader fileReader = new FileReader(
                 new File(this.getClass().getResource("resources/" + inFName).toURI()))) {
 
