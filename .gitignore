@@ -21,7 +21,6 @@ migrate_working_dir/
 # is commented out by default.
 .vscode/
 config.json
-configTest.json
 
 linux/
 ai-story-generation-app/target/
