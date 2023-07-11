@@ -59,7 +59,7 @@ class ImageGenerationTest {
 
         //should return null...
         try {
-            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
+            ImageGeneration imageGeneration = new ImageGeneration(new APICalls());
 
             //null case
             String result = imageGeneration.extractImageUrl(testResponseNull);
@@ -79,7 +79,7 @@ class ImageGenerationTest {
         String testResponseBody = "[{\"id\":\"12345\",\"content\":\"I am a message!\"}]";
 
         try {
-            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
+            ImageGeneration imageGeneration = new ImageGeneration(new APICalls());
             String actual = imageGeneration.extractMessageID(testResponseBody);
 
             Assertions.assertEquals("12345", actual);
