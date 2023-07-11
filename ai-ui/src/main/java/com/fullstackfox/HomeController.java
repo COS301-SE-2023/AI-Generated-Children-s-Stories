@@ -11,8 +11,8 @@ public class PrimaryController {
     }
 
     @FXML
-    private void switchToScreen() throws IOException {
-        App.setRoot("screen");
+    private void close() throws IOException {
+        Platform.exit();
     }
 
     @FXML
