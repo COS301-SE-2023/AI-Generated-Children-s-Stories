@@ -41,7 +41,7 @@ public class StoryGeneration {
 
             String characterPrompt = processPrompt.characterImagePrompt(this.extractContent(response));
 
-            String characterImageUrl = imageGenerator.generateImage(characterPrompt);
+            String characterImageUrl = imageGenerator.generateImage(characterPrompt,false);
             System.out.println(characterImageUrl);
 
             prompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);

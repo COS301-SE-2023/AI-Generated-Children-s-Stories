@@ -11,9 +11,9 @@ public class ImageGeneration {
         callApi = inApiLibrary;
     }
 
-    public String generateImage(String inPromt) throws URISyntaxException {
+    public String generateImage(String inPromt, Boolean test) throws URISyntaxException {
         String lastMessageID = this.latestMessageID();
-        callApi.postPrompt(inPromt);
+        callApi.postPrompt(inPromt, test);
         this.imageGenDelay(lastMessageID);
         String message = callApi.getMessage();
         String imageURL = this.extractImageUrl(message);
@@ -25,6 +25,7 @@ public class ImageGeneration {
         return imageURL;
     }
 
+    //todo: can test!
     public void imageGenDelay(String lastMessageID) {
         boolean idCheck = true;
         boolean check = true;

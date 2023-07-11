@@ -10,8 +10,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ImageGenerationTest {
 
+    /*
+    public String generateImage(String inPromt) throws URISyntaxException {
+        String lastMessageID = this.latestMessageID();
+        callApi.postPrompt(inPromt);
+        this.imageGenDelay(lastMessageID);
+        String message = callApi.getMessage();
+        String imageURL = this.extractImageUrl(message);
+        lastMessageID = this.latestMessageID();
+        callApi.postUpscale(imageURL, lastMessageID);
+        this.imageGenDelay(lastMessageID);
+        message = callApi.getMessage();
+        imageURL = this.extractImageUrl(message);
+        return imageURL;
+    }
+    */
     @Test
     void generateImage() {
+
     }
 
     @Test

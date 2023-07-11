@@ -22,6 +22,8 @@ public class APICalls {
         configList = jReader.readJson(fileName);
     }
 
+    //can be tested
+    //just calls standard api
     public String getMessage() {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -44,7 +46,7 @@ public class APICalls {
         return null;
     }
 
-    public String postPrompt(String inPrompt) {
+    public String postPrompt(String inPrompt, boolean test) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
@@ -68,18 +70,21 @@ public class APICalls {
                         "__dcfduid=cf25ec72f67f11ed8a888ae0f6e8a104; __sdcfduid=cf25ec72f67f11ed8a888ae0f6e8a1042802fad61c3954aaa0b380cf92aef35c55c1f038d1af006b63fe07261d5f75f0")
                 .build();
 
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) {
-                throw new Exception("Unexpected response code: " + response);
+
+        if (!test)
+            try (Response response = client.newCall(request).execute()) {
+                if (!response.isSuccessful()) {
+                    throw new Exception("Unexpected response code: " + response);
+                }
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
         return requestBodyStr;
     }
 
+    //can't test
     public void postUpscale(String inImageURL, String inMessageID) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -120,6 +125,7 @@ public class APICalls {
         }
     }
 
+    //uses money
     public String promptGPT(String inPrompt) {
         String API_URL = "https://api.openai.com/v1/chat/completions";
         OkHttpClient client = new OkHttpClient.Builder()
