@@ -17,10 +17,25 @@ public class PromptProcessor {
         String storyIdea = inputList.get(0);
         storyIdea = this.toJSONstring(storyIdea);
         String age = inputList.get(1);
+        int storyLength = Integer.parseInt(inputList.get(2));
+        storyLength /= 5;
+        if (storyLength < 1) {
+            storyLength = 1;
+        }
+        String lenDescription = "very long";
+        if (storyLength <= 5) {
+            lenDescription = "short";
+        } else if (storyLength <= 10) {
+            lenDescription = "medium length";
+        } else if (storyLength <= 15) {
+            lenDescription = "long";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Write a children's story based using the following information:\\n");
-        stringBuilder.append("1. Story Idea: ").append(storyIdea).append("\\n");
-        stringBuilder.append("2. The story must be written for a child of age ").append(age).append(".\\n");
+        stringBuilder.append("1. Story Idea: " + storyIdea + "\\n");
+        stringBuilder.append("2. The story must be written for a child of age " + age + ".\\n");
+        stringBuilder
+                .append("3. The story must be " + lenDescription + " and only " + storyLength + " paragraphs long.\\n");
         stringBuilder
                 .append("It must be easy enough for the child to read and must only contain age appropriate content.");
         return stringBuilder.toString();

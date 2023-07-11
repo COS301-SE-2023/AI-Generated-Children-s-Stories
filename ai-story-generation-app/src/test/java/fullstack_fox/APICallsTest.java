@@ -15,7 +15,7 @@ class APICallsTest {
         //fails becuase there is no json file to read
         APICalls apiCalls = null;
         try {
-            apiCalls = new APICalls("configTest.json");
+            apiCalls = new APICalls(new JsonProcessor(), "configTest.json");
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail("Failed with exception: " + e.getMessage());
@@ -37,7 +37,7 @@ class APICallsTest {
         // Create an instance of APICalls
         APICalls apiCalls;
         try {
-            apiCalls = new APICalls("configTest.json");
+            apiCalls = new APICalls(new JsonProcessor(), "configTest.json");
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail("Failed to initialize APICalls");
@@ -72,7 +72,7 @@ class APICallsTest {
     void promptGPT() {
         APICalls apiCalls;
         try {
-            apiCalls = new APICalls("configTest.json");
+            apiCalls = new APICalls(new JsonProcessor(),"configTest.json");
             String response = apiCalls.promptGPT("Write a kids story about a bear.");
 
             //check that response is not null

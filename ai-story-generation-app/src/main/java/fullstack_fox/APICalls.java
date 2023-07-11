@@ -17,9 +17,8 @@ public class APICalls {
     // 5: User Authorization
     ArrayList<String> configList;
 
-    public APICalls(String fileName) throws URISyntaxException {
-        JsonReader jReader = new JsonReader();
-        configList = jReader.readJson(fileName);
+    public APICalls(JsonProcessor jProcessor, String inFName) throws URISyntaxException {
+        configList = jProcessor.readJson(inFName);
     }
 
     public String getMessage() {

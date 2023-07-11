@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) throws URISyntaxException {
         // Set up
-        APICalls apiLibrary = new APICalls("config.json");
+        JsonProcessor jProcessor = new JsonProcessor();
+        APICalls apiLibrary = new APICalls(jProcessor, "config.json");
         StoryGeneration storyGenerator = new StoryGeneration(apiLibrary);
 
         // GUI Input
@@ -16,7 +17,7 @@ public class App {
 
         boolean check = true;
 
-        if (inputs.size() == 2) {
+        if (inputs.size() == 3) {
             for (String input : inputs) {
                 if (input.isBlank()) {
                     check = false;
@@ -28,6 +29,7 @@ public class App {
 
         if (check) {
             Story finalStory = storyGenerator.generateStory(inputs);
+            jProcessor.writeStoryToJson(finalStory, "output.json");
             finalStory.printStory();
         }
     }

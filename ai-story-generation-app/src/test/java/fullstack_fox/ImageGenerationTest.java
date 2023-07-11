@@ -19,36 +19,36 @@ class ImageGenerationTest {
     }
 
     /*
-    public String extractImageUrl(String inResponseBody) {
-
-        JSONArray jsonArray = new JSONArray(inResponseBody);
-        String content = "";
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject messageObject = jsonArray.getJSONObject(i);
-            content = messageObject.getString("content");
-        }
-        if (content.contains("(Waiting to start)")) {
-            return null;
-        }
-        String url = "";
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            url = jsonObject.getJSONArray("attachments")
-                    .getJSONObject(0)
-                    .getString("url");
-        }
-        return url;
-    }
+     * public String extractImageUrl(String inResponseBody) {
+     * 
+     * JSONArray jsonArray = new JSONArray(inResponseBody);
+     * String content = "";
+     * for (int i = 0; i < jsonArray.length(); i++) {
+     * JSONObject messageObject = jsonArray.getJSONObject(i);
+     * content = messageObject.getString("content");
+     * }
+     * if (content.contains("(Waiting to start)")) {
+     * return null;
+     * }
+     * String url = "";
+     * for (int i = 0; i < jsonArray.length(); i++) {
+     * JSONObject jsonObject = jsonArray.getJSONObject(i);
+     * url = jsonObject.getJSONArray("attachments")
+     * .getJSONObject(0)
+     * .getString("url");
+     * }
+     * return url;
+     * }
      */
     @Test
     void extractImageUrl() {
         String testResponseNull = "[{\"content\": \"(Waiting to start)\"}]";
 
-        //should return null...
+        // should return null...
         try {
-            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("configTest.json"));
+            ImageGeneration imageGeneration = new ImageGeneration(new APICalls(new JsonProcessor(), "configTest.json"));
 
-            //null case
+            // null case
             String result = imageGeneration.extractImageUrl(testResponseNull);
             Assertions.assertEquals(result, null);
 
@@ -66,7 +66,7 @@ class ImageGenerationTest {
         String testResponseBody = "[{\"id\":\"12345\",\"content\":\"I am a message!\"}]";
 
         try {
-            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("configTest.json"));
+            ImageGeneration imageGeneration = new ImageGeneration(new APICalls(new JsonProcessor(), "configTest.json"));
             String actual = imageGeneration.extractMessageID(testResponseBody);
 
             Assertions.assertEquals("12345", actual);

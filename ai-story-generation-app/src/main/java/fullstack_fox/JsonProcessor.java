@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import org.json.*;
 
-public class JsonReader {
+public class JsonProcessor {
 
-    public JsonReader() {}
+    public JsonProcessor() {
+    }
 
     public ArrayList<String> readJson(String inFName) throws URISyntaxException {
         try (FileReader fileReader = new FileReader(
@@ -32,5 +35,30 @@ public class JsonReader {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void writeStoryToJson(Story story, String inFName) {
+        JSONObject jsonStory = new JSONObject();
+        jsonStory.put("title", story.title);
+        jsonStory.put("size", story.numPages);
+        jsonStory.put("trailer", story.trailer);
+
+        JSONArray jsonPages = new JSONArray();
+        for (Page page : story.pages) {
+            JSONObject jsonPage = new JSONObject();
+            jsonPage.put("image", page.getImageUrl());
+            jsonPage.put("text", page.getContent());
+            jsonPage.put("pageNumber", jsonPages.length() + 1);
+            jsonPages.put(jsonPage);
+        }
+
+        jsonStory.put("pages", jsonPages);
+
+        try {
+            String jsonString = jsonStory.toString(4);
+            Files.write(Paths.get(inFName), jsonString.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

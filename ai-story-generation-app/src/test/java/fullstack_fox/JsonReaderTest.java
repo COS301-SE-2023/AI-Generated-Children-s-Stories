@@ -12,7 +12,7 @@ class JsonReaderTest {
 
     @Test
     void readJson() {
-        JsonReader reader = new JsonReader();
+        JsonProcessor reader = new JsonProcessor();
         ArrayList<String> expectedOutput = new ArrayList<>();
         expectedOutput.add("123");
         expectedOutput.add("456");

@@ -26,8 +26,6 @@ public class StoryGeneration {
             // Generate story title
             currentPrompt = processPrompt.storyTitlePrompt(story);
             String storyTitle = this.storyTitle(currentPrompt);
-            System.out.println("-----");
-            System.out.println(storyTitle);
 
             // Generate character image
             currentPrompt = processPrompt.characterDescriptionPrompt(story);
@@ -35,7 +33,6 @@ public class StoryGeneration {
 
             // Generate trailer image
             currentPrompt = processPrompt.storyTrailerPrompt(story);
-            System.out.println("Trailer prompt: " + currentPrompt);
             String storyTrailer = this.storyTrailer(currentPrompt, characterImageUrl);
 
             // Generate story images
