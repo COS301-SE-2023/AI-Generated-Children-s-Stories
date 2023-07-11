@@ -42,7 +42,6 @@ public class JsonProcessor {
         jsonStory.put("title", story.title);
         jsonStory.put("size", story.numPages);
         jsonStory.put("trailer", story.trailer);
-
         JSONArray jsonPages = new JSONArray();
         for (Page page : story.pages) {
             JSONObject jsonPage = new JSONObject();
@@ -51,9 +50,7 @@ public class JsonProcessor {
             jsonPage.put("pageNumber", jsonPages.length() + 1);
             jsonPages.put(jsonPage);
         }
-
         jsonStory.put("pages", jsonPages);
-
         try {
             String jsonString = jsonStory.toString(4);
             Files.write(Paths.get(inFName), jsonString.getBytes());

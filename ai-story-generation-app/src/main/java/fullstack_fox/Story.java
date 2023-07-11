@@ -12,11 +12,11 @@ public class Story {
         title = inTitle;
         trailer = inTrailer;
         pages = new ArrayList<Page>();
-        numPages = pages.size();
     }
 
     public void addPage(Page inPage) {
         pages.add(inPage);
+        numPages++;
     }
 
     public void printStory() {

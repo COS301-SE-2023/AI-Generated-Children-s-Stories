@@ -40,6 +40,7 @@ public class StoryGeneration {
             int numPages = paragraphs.size();
             currentPrompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
             currentPrompt = this.storyImagePrompts(currentPrompt);
+            System.out.println(currentPrompt);
             List<String> imagePrompts = splitNumberedList(currentPrompt);
             ArrayList<String> storyImages = this.storyImages(imagePrompts,
                     characterImageUrl);
