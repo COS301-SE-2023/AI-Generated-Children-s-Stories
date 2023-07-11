@@ -16,7 +16,7 @@ class StoryGenerationTest {
 
         //should return null
         try {
-            StoryGeneration gen = new StoryGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
+            StoryGeneration gen = new StoryGeneration(new APICalls());
 
             String content = gen.extractContent(inStoryNull);
             Assertions.assertNull(content);
@@ -34,7 +34,7 @@ class StoryGenerationTest {
         String inStory = "{\"choices\":[{\"finish_reason\": \"I am a finish reason\", \"content\": \"I am content\"}]}";
 
         try {
-            StoryGeneration gen = new StoryGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
+            StoryGeneration gen = new StoryGeneration(new APICalls());
 
             String finishReason = gen.finish_reason(inStory);
 
@@ -50,7 +50,7 @@ class StoryGenerationTest {
         String paras = "para1\npara2\npara3";
 
         try {
-            StoryGeneration gen = new StoryGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
+            StoryGeneration gen = new StoryGeneration(new APICalls());
 
             ArrayList<String> paragraphs = gen.splitParagraphs(paras);
 
@@ -69,7 +69,7 @@ class StoryGenerationTest {
         String list = "1. Hello there\n2. My Child\n3.Good to see you";
 
         try {
-            StoryGeneration gen = new StoryGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
+            StoryGeneration gen = new StoryGeneration(new APICalls());
 
             List<String> paragraphs = gen.splitNumberedList(list);
 
