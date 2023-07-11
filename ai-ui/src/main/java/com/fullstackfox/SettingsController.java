@@ -3,7 +3,7 @@ package com.fullstackfox;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class CreateAStoryController {
+public class SettingsController {
 
     @FXML
     private void switchToHome() throws IOException {
