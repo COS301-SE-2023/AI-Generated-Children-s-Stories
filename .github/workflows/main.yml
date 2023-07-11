@@ -34,5 +34,5 @@ jobs:
           distribution: 'adopt'
         
       - name: Run tests
-        run: mvn --batch-mode --update-snapshots package
+        run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package
         
