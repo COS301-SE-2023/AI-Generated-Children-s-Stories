@@ -27,7 +27,8 @@ public class App {
         }
 
         if (check) {
-            storyGenerator.generateStory(inputs);
+            Story finalStory = storyGenerator.generateStory(inputs);
+            finalStory.printStory();
         }
     }
 }

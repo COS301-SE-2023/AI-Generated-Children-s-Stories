@@ -17,21 +17,26 @@ public class StoryGeneration {
         processPrompt = new PromptProcessor("123");
     }
 
-    public void generateStory(ArrayList<String> inputList) throws URISyntaxException {
+    public Story generateStory(ArrayList<String> inputList) throws URISyntaxException {
         // Generate story text
         String currentPrompt = processPrompt.storyPrompt(inputList);
         String story = this.storyText(currentPrompt);
-
+        System.out.println(story);
         if (!story.isBlank()) {
             // Generate story title
-            // -------------------
+            currentPrompt = processPrompt.storyTitlePrompt(story);
+            String storyTitle = this.storyTitle(currentPrompt);
+            System.out.println("-----");
+            System.out.println(storyTitle);
 
             // Generate character image
             currentPrompt = processPrompt.characterDescriptionPrompt(story);
             String characterImageUrl = this.characterImage(currentPrompt);
 
             // Generate trailer image
-            // -------------------
+            currentPrompt = processPrompt.storyTrailerPrompt(story);
+            System.out.println("Trailer prompt: " + currentPrompt);
+            String storyTrailer = this.storyTrailer(currentPrompt, characterImageUrl);
 
             // Generate story images
             ArrayList<String> paragraphs = this.splitParagraphs(story);
@@ -39,40 +44,44 @@ public class StoryGeneration {
             currentPrompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
             currentPrompt = this.storyImagePrompts(currentPrompt);
             List<String> imagePrompts = splitNumberedList(currentPrompt);
-            ArrayList<String> storyImages = this.storyImages(imagePrompts, characterImageUrl);
+            ArrayList<String> storyImages = this.storyImages(imagePrompts,
+                    characterImageUrl);
 
             // Return final story
-
-            // return this.compileStory(paragraphs, storyImages);
+            return this.compileStory(storyTitle, storyTrailer, paragraphs, storyImages);
         }
+        return null;
     }
 
     public String storyText(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
         String story = this.extractContent(response);
-        System.out.println("--------");
-        System.out.println("Story");
-        System.out.println(story);
-        System.out.println("--------\n");
-
         return story;
+    }
+
+    public String storyTitle(String inPrompt) {
+        String response = callApi.promptGPT(inPrompt);
+        String storyTitle = this.extractContent(response);
+        return storyTitle;
     }
 
     public String characterImage(String inPrompt) throws URISyntaxException {
         String response = callApi.promptGPT(inPrompt);
         String characterPrompt = processPrompt.characterImagePrompt(this.extractContent(response));
         String characterImageUrl = imageGenerator.generateImage(characterPrompt);
-        System.out.println(characterImageUrl);
         return characterImageUrl;
+    }
+
+    public String storyTrailer(String inPrompt, String inCharacterImageUrl) throws URISyntaxException {
+        String response = callApi.promptGPT(inPrompt);
+        String trailerPrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, this.extractContent(response));
+        String trailerUrl = imageGenerator.generateImage(trailerPrompt);
+        return trailerUrl;
     }
 
     public String storyImagePrompts(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
-        System.out.println("--------");
-        System.out.println("Midjourney Propmpts");
         String promptList = this.extractContent(response);
-        System.out.println(promptList);
-        System.out.println("--------\n");
         return promptList;
     }
 
@@ -81,40 +90,26 @@ public class StoryGeneration {
             inPrompts.set(i, processPrompt.storyImagePrompt(inCharacterImageUrl,
                     inPrompts.get(i)));
         }
-
-        System.out.println("Final Prompts");
-        for (String item : inPrompts) {
-            System.out.println(item);
-        }
-
-        System.out.println("--------\n");
-
         ArrayList<String> imageUrls = new ArrayList<String>();
-
         for (int i = 0; i < inPrompts.size(); i++) {
             String url = imageGenerator.generateImage(inPrompts.get(i));
             imageUrls.add(url);
         }
-
         return imageUrls;
     }
 
-    public Story compileStory(ArrayList<String> inParagraphs, ArrayList<String> inStoryImages) {
-        Story finalStory = new Story();
-        System.out.println("Story:");
-        
+    public Story compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inParagraphs,
+            ArrayList<String> inStoryImages) {
+        Story finalStory = new Story(inStoryTitle, inStoryTrailer);
         for (int i = 0; i < inParagraphs.size(); i++) {
-            Page newPage = new Page(inParagraphs.get(i), inParagraphs.get(i));
+            Page newPage = new Page(inParagraphs.get(i), inStoryImages.get(i));
             finalStory.addPage(newPage);
-            System.out.println("Page " + i);
-            finalStory.printPage(i);
         }
         return finalStory;
     }
 
     public String extractContent(String inResponseBody) {
         String finishReason = this.finish_reason(inResponseBody);
-
         if (finishReason.compareTo("stop") == 0) {
             JSONObject responseJson = new JSONObject(inResponseBody);
             JSONArray choicesArray = responseJson.getJSONArray("choices");

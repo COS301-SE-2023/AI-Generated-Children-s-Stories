@@ -17,7 +17,6 @@ public class PromptProcessor {
         String storyIdea = inputList.get(0);
         storyIdea = this.toJSONstring(storyIdea);
         String age = inputList.get(1);
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Write a children's story based using the following information:\\n");
         stringBuilder.append("1. Story Idea: ").append(storyIdea).append("\\n");
@@ -27,37 +26,32 @@ public class PromptProcessor {
         return stringBuilder.toString();
     }
 
+    // Creates the prompt for chatgpt to generate story title
+    public String storyTitlePrompt(String inStory) {
+        inStory = this.toJSONstring(inStory);
+        return "Create a tile for the following story, do not label it:\\n" + inStory;
+    }
+
     // Creates the prompt for chatgpt to generate character description
     public String characterDescriptionPrompt(String inStory) {
         inStory = this.toJSONstring(inStory);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(
-                "Write a single sentence description of what the main character from the following story looks like. \\n");
-        stringBuilder.append(inStory);
-        return stringBuilder.toString();
-    }
-
-    // Creates the prompt for chatgpt to generate story title
-    public String storyTitlePrompt(String inStory){
-        // TOTO : Add code to gen story title gpt prompts
-        return "";
+        return "Write a single sentence description of what the main character from the following story looks like.\\n"
+                + inStory;
     }
 
     // Creates the prompt for chatgpt to generate story trailer description
-    public String storyTrailerPrompts(String inStory) {
+    public String storyTrailerPrompt(String inStory) {
         inStory = this.toJSONstring(inStory);
-        return "Extract the most important key moment from the following story and summarise it into a single line. \\n" + inStory;
+        return "Extract the most important key moment from the following story and summarise it into a single line.\\n"
+                + inStory;
     }
 
     // Creates the prompt for chatgpt to generate midjourney prompts
     public String genMidjourneyPromptsPrompt(String inStory, int inNumPages) {
         inStory = this.toJSONstring(inStory);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(
-                "Provide " + inNumPages
-                        + " prompts for Dall E for the following paragraphs in order to generate an image that captures the paragraphs content. Each prompt must be a vague, single line summery of the paragraph. Number each prompt.\\n");
-        stringBuilder.append(inStory.replace("\n", "\\n"));
-        return stringBuilder.toString();
+        return "Provide " + inNumPages
+                + " prompts for Dall E for the following paragraphs in order to generate an image that captures the paragraphs content. Each prompt must be a vague, single line summery of the paragraph. Number each prompt.\\n"
+                + inStory;
     }
 
     // Midjourney ---
@@ -71,14 +65,10 @@ public class PromptProcessor {
     // Creates the prompt for midjourney to generate all other images
     public String storyImagePrompt(String inUrl, String inPrompt) {
         inPrompt = this.toJSONstring(inPrompt);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(inUrl + " ");
-        stringBuilder.append(inPrompt);
-        stringBuilder.append(" --seed " + seed);
-        return stringBuilder.toString();
+        return inUrl + " " + inPrompt + " --seed " + seed;
     }
 
-    // Helper Functions
+    // Helper Functions ---
 
     public String toJSONstring(String inString) {
         inString = inString.replace("\n", "\\n");
