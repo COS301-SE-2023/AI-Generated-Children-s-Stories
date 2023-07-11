@@ -21,7 +21,7 @@ class PromptProcessorTest {
         };
 
         //set the expected output for the prompt
-        String expectedOutput = "Write a children's story based using the following information:\\n1. Story Idea: Mystery\\n2. The maximum number of paragraphs is 4.\\n3. The story must be written for a child of age 5.\\nIt must be easy enough for the child to read and must only contain age appropriate content.";
+        String expectedOutput = "Write a children's story based using the following information:\\n1. Story Idea: Mystery\\n2. The story must be written for a child of age 5.\\nIt must be easy enough for the child to read and must only contain age appropriate content.";
 
         //create an instance of the class
         PromptProcessor promptProcessor = new PromptProcessor("123");
@@ -40,7 +40,7 @@ class PromptProcessorTest {
 
         //appends message at the beginning
         // \n changes to \\n
-        String expectedOutput = "Write a single sentence description of the main characters appearance from the following story. \\n[{\\\"content\\\": \\\"I am a story.\\\"}]";
+        String expectedOutput = "Write a single sentence description of what the main character from the following story looks like. \\n[{\\\"content\\\": \\\"I am a story.\\\"}]";
 
         Assertions.assertEquals(expectedOutput, output);
 

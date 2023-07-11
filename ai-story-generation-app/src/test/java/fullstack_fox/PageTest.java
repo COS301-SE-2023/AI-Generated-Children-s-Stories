@@ -20,7 +20,7 @@ class PageTest {
     void getImageUrl() {
         Page page = new Page("content", "img_url");
 
-        String img_url = page.getImageUrl();
+        String img_url = page.getImageUrl(); //s
 
         Assertions.assertEquals(img_url, "img_url");
     }
