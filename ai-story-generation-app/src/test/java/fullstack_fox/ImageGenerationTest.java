@@ -1,12 +1,9 @@
 package fullstack_fox;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ImageGenerationTest {
 
@@ -62,14 +59,14 @@ class ImageGenerationTest {
 
         //should return null...
         try {
-            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("configTest.json"));
+            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
 
             //null case
             String result = imageGeneration.extractImageUrl(testResponseNull);
             Assertions.assertEquals(result, null);
 
         } catch (URISyntaxException e) {
-            fail("Exception thrown: " + e.getMessage());
+            Assertions.fail("Exception thrown: " + e.getMessage());
         }
     }
 
@@ -82,12 +79,12 @@ class ImageGenerationTest {
         String testResponseBody = "[{\"id\":\"12345\",\"content\":\"I am a message!\"}]";
 
         try {
-            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("configTest.json"));
+            ImageGeneration imageGeneration = new ImageGeneration(new APICalls("fullstack_fox/recources/configTest.json"));
             String actual = imageGeneration.extractMessageID(testResponseBody);
 
             Assertions.assertEquals("12345", actual);
         } catch (URISyntaxException e) {
-            fail("Exception thrown: " + e.getMessage());
+            Assertions.fail("Exception thrown: " + e.getMessage());
         }
 
     }

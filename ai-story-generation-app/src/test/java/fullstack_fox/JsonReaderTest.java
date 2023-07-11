@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class JsonReaderTest {
 
     @Test
@@ -23,7 +21,7 @@ class JsonReaderTest {
         expectedOutput.add("192021");
 
         try {
-            ArrayList<String> output = reader.readJson("configTest.json");
+            ArrayList<String> output = reader.readJson("fullstack_fox/recources/configTest.json");
 
             for (int i = 0; i < output.size(); i++) {
                 Assertions.assertEquals(expectedOutput.get(i), output.get(i));

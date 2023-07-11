@@ -3,9 +3,6 @@ package fullstack_fox;
 import okhttp3.MediaType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.json.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class APICallsTest {
 
@@ -15,7 +12,7 @@ class APICallsTest {
         //fails becuase there is no json file to read
         APICalls apiCalls = null;
         try {
-//            apiCalls = new APICalls("configTest.json");
+//            apiCalls = new APICalls();
 //            String message = apiCalls.getMessage();
 //            System.out.println();
 //
@@ -35,7 +32,7 @@ class APICallsTest {
         // Create an instance of APICalls
         APICalls apiCalls;
         try {
-            apiCalls = new APICalls("configTest.json");
+            apiCalls = new APICalls();
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail("Failed to initialize APICalls");
@@ -50,7 +47,7 @@ class APICallsTest {
                             + "\",\r\n    \"guild_id\": \"" + "789"
                             + "\",\r\n    \"channel_id\": \""
                             + "456" + "\",\r\n    \"session_id\": \""
-                            + "101112"
+                            + "789"
                             + "\",\r\n    \"data\": {\r\n        \"id\": \"938956540159881230\",\r\n        \"version\": \"1118961510123847772\",\r\n        \"name\": \"imagine\",\r\n        \"type\": 1,\r\n        \"options\": [\r\n            {\r\n                \"type\": 3,\r\n                \"name\": \"prompt\",\r\n                \"value\": \""
                             + "A boy sitting in a tree" + "\"\r\n            }\r\n        ]\r\n    }\r\n}";
 
@@ -73,12 +70,12 @@ class APICallsTest {
     void promptGPT() {
         APICalls apiCalls;
         try {
-            apiCalls = new APICalls("configTest.json");
+            apiCalls = new APICalls();
             //String response = apiCalls.promptGPT("Write a kids story about a bear.");
             String response = "i bear"; //make tests pass in the meantime
 
             //check that response is not null
-            assertNotNull(response);
+            Assertions.assertNotNull(response);
 
             //check that the response was received correctly
             //JSONObject testJsonObject = new JSONObject(response);
@@ -89,7 +86,7 @@ class APICallsTest {
             //assertEquals(testJsonObject.get("object"), "chat.completion");
 
             //check that the response contains the correct content
-            assertNotEquals(response.indexOf("bear"), -1);
+            Assertions.assertNotEquals(response.indexOf("bear"), -1);
 
         } catch (Exception e) {
             Assertions.fail("promptGPT failed with an exception.");

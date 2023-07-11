@@ -22,6 +22,16 @@ public class APICalls {
         configList = jReader.readJson(fileName);
     }
 
+    public APICalls() throws URISyntaxException {
+        configList  = new ArrayList<String>();
+        configList.add("123");
+        configList.add("456");
+        configList.add("789");
+        configList.add("789");
+        configList.add("789");
+        configList.add("789");
+    }
+
     //can be tested
     //just calls standard api
     public String getMessage() {
