@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+target/
 
 # IntelliJ related
 *.iml
@@ -24,3 +25,5 @@ config.json
 configTest.json
 
 linux/
+ai-story-generation-app/target/surefire-reports/fullstack_fox.APICallsTest.txt
+ai-story-generation-app/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
