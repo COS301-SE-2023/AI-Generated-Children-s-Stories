@@ -7,6 +7,7 @@ import 'story_list.dart';
 import 'story_liked.dart';
 import 'home.dart';
 import 'profile.dart';
+import 'splash.dart';
 
 import 'story_list_change_notifier.dart';
 
@@ -29,13 +30,15 @@ class MyApp extends StatelessWidget {
         title: 'Magic Pages',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: const Color(0xFFFFF3E9),
         ),
         home: ChangeNotifierProvider(
           create: (context) => StoryListChangeNotifier(GetStoriesService()),
-          child: const LoginPage(),
+          child: SplashPage(),
         ),
         routes: {
           '/login': (context) => const LoginPage(),
+          '/splash': (context) => SplashPage(),
           '/storyList': (context) => const StoryList(),
           '/home': (context) => const Home(),
           '/storyLiked': (context) => const StoryLiked(),
