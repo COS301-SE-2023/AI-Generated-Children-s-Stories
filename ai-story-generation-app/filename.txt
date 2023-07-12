@@ -1,1 +1,0 @@
-Write a children's story based using the following information:\n1. Story Idea: Mystery\n2. The story must be written for a child of age 3.\n3. The story must be short and only 1 paragraphs long.\nIt must be easy enough for the child to read and must only contain age appropriate content.

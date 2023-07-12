@@ -56,8 +56,10 @@ public class JsonProcessor {
         try {
             String jsonString = jsonStory.toString(4);
             Files.write(Paths.get(inFName), jsonString.getBytes());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
