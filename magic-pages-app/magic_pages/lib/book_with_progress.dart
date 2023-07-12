@@ -35,6 +35,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
               //story cover
               Row(children: [
                 Expanded(
+                  key: const Key("StoryCover"),
                   flex: 1,
                   child: Padding(
                     padding: const EdgeInsets.only(
