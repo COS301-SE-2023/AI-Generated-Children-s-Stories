@@ -47,6 +47,18 @@ class PromptProcessorTest {
 
     }
 
+    @Test
+    void storyTitlePrompt() {
+        String inStory = "[{\"content\": \"I am a story.\"}]";
+
+        PromptProcessor promptProcessor = new PromptProcessor("123");
+        String output = promptProcessor.storyTitlePrompt(inStory);
+
+        String expectedOutput = "Create a very short tile for the following story, do not label it:\\n" +
+                "[{\\\"content\\\": \\\"I am a story.\\\"}]";
+
+        Assertions.assertEquals(expectedOutput, output);
+    }
 
     @Test
     void characterDescriptionPrompt() {
@@ -75,5 +87,43 @@ class PromptProcessorTest {
 
         Assertions.assertEquals(expectedOutput, output);
 
+    }
+
+
+    @Test
+    void storyTrailerPrompt() {
+        String inStory = "[{\"content\": \"I am a story.\"}]";
+
+        PromptProcessor promptProcessor = new PromptProcessor("123");
+        String output = promptProcessor.storyTrailerPrompt(inStory);
+
+        String expectedOutput = "Extract the most important key moment from the following story and summarise it into a single line.\\n[{\\\"content\\\": \\\"I am a story.\\\"}]";
+
+        System.out.println(expectedOutput);
+        Assertions.assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    void characterImagePrompt() {
+        String inStory = "image";
+
+        PromptProcessor promptProcessor = new PromptProcessor("123");
+        String output = promptProcessor.characterImagePrompt(inStory);
+
+        String expectedOutput = "image --seed 123";
+
+        System.out.println(expectedOutput);
+        Assertions.assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    void storyImagePrompt() {
+        PromptProcessor promptProcessor = new PromptProcessor("123");
+        String output = promptProcessor.storyImagePrompt("url", "prompt");
+
+        String expectedOutput = "url prompt --seed 123";
+
+        System.out.println(expectedOutput);
+        Assertions.assertEquals(expectedOutput, output);
     }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -13,8 +12,6 @@ import 'package:magic_pages/book_with_progress.dart';
 
 void main() {
   group('end-to-end test', () {
-    final TestWidgetsFlutterBinding binding =
-        TestWidgetsFlutterBinding.ensureInitialized();
     testWidgets('integration test', (tester) async {
       app.main();
 
