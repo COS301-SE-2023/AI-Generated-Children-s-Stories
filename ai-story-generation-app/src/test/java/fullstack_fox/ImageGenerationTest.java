@@ -1,6 +1,5 @@
 package fullstack_fox;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,5 +39,20 @@ class ImageGenerationTest {
             fail("Exception thrown: " + e.getMessage());
         }
 
+    }
+
+    //Offline test (not automated, requires API key)
+    @Test
+    void generateImage() {
+       /* try {
+            JsonProcessor jsonProcessor = new JsonProcessor();
+            APICalls apiCalls = new APICalls(jsonProcessor, "configReal.json");
+            ImageGeneration imageGeneration = new ImageGeneration(apiCalls);
+
+            String url = imageGeneration.generateImage("A green spider");
+            System.out.println(url);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }*/
     }
 }

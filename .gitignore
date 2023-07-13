@@ -27,3 +27,4 @@ configTest.json
 linux/
 ai-story-generation-app/target/surefire-reports/fullstack_fox.APICallsTest.txt
 ai-story-generation-app/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+ai-story-generation-app/resources/configReal.json
