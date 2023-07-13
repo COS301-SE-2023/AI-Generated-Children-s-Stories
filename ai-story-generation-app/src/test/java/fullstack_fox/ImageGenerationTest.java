@@ -42,15 +42,22 @@ class ImageGenerationTest {
     }
 
     //Offline test (not automated, requires API key)
+    //uncomment in demo
     @Test
     void generateImage() {
-       /* try {
+
+        /*try {
             JsonProcessor jsonProcessor = new JsonProcessor();
             APICalls apiCalls = new APICalls(jsonProcessor, "configReal.json");
             ImageGeneration imageGeneration = new ImageGeneration(apiCalls);
 
             String url = imageGeneration.generateImage("A green spider");
             System.out.println(url);
+
+            boolean isAnImage = url.contains(".png");
+
+            assertEquals(isAnImage, true);
+
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }*/
