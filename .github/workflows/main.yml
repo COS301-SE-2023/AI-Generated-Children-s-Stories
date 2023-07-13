@@ -19,6 +19,11 @@ jobs:
 
       - name: Run unit tests
         run: cd magic-pages-app/magic_pages && flutter test --coverage
+      
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
         
   java_test:
     name: Run java tests
@@ -34,4 +39,9 @@ jobs:
           distribution: 'adopt'
         
       - name: Run tests
-        run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package
+        run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package --coverage
+      
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
