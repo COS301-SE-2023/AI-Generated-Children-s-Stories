@@ -1,6 +1,6 @@
 # Full-Stack Fox ~ AI Generated Children's Stories
 
-[![GitHub Repo Size in Bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2023/AI-Generated-Children-s-Stories/branch/develop)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
+[![GitHub Repo Size in Bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2023/AI-Generated-Children-s-Stories/develop)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
 [![GitHub Commit Activity](https://img.shields.io/github/commit-activity/w/COS301-SE-2023/AI-Generated-Children-s-Stories/develop)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
 [![codecov](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories/branch/develop/graph/badge.svg?token=7TANM1PRKY)](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories)
 [![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues)
