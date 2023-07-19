@@ -29,3 +29,7 @@ ai-story-generation-app/target/surefire-reports/fullstack_fox.APICallsTest.txt
 ai-story-generation-app/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
 ai-story-generation-app/resources/configReal.json
 ai-story-generation-app/src/test/java/fullstack_fox/resources/configReal.json
+*.properties
+firebase-config.json
+google-services.json
+firebase_options.dart
