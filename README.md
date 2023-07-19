@@ -30,6 +30,7 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 - [Architectural Requiremnts](https://drive.google.com/file/d/1WwKkKfpMYFT7H76yGEy9_0zl6rYBsbTU/view?usp=sharing)
 - [User Manual](https://drive.google.com/file/d/1vzgYklUWRFu1TAToZHZkYPnlqE_84Ap2/view?usp=sharing)
 - [Coding Standards](https://drive.google.com/file/d/1hVX1mXRAxJyoxxqk7SzZoVr2WexdqKnI/view?usp=sharing)
+- [Techincal Installation Manual](one)
 
 - [Unit Test](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/blob/feature/testing-fetch-stories-integration-test-mock-api/lib/main.dart)
     
