@@ -53,6 +53,8 @@ public class JsonProcessor {
             jsonPages.put(jsonPage);
         }
         jsonStory.put("pages", jsonPages);
+        // New Code ---
+        jsonStory.put("userStories", new JSONArray());
         try {
             String jsonString = jsonStory.toString(4);
             Files.write(Paths.get(inFName), jsonString.getBytes());
