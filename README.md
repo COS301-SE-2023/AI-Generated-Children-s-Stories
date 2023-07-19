@@ -1,8 +1,8 @@
 # Full-Stack Fox ~ AI Generated Children's Stories
 
-[![GitHub Repo Size in Bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2023/AI-Generated-Children-s-Stories)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
+[![GitHub Repo Size in Bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2023/AI-Generated-Children-s-Stories/develop)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/develop)
 [![GitHub Commit Activity](https://img.shields.io/github/commit-activity/w/COS301-SE-2023/AI-Generated-Children-s-Stories)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
-[![codecov](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories/branch/main/graph/badge.svg?token=7TANM1PRKY)](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories)
+[![codecov](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories/branch/develop/graph/badge.svg?token=7TANM1PRKY)](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories)
 [![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues?q=is%3Aissue+is%3Aclosed)
 [![Uptime Robot status](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595?style=flat-square)](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595)
