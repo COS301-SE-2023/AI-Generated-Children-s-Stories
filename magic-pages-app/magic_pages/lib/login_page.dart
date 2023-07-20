@@ -5,9 +5,9 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:magic_pages/home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,8 +24,7 @@ class LoginPage extends StatefulWidget {
 /// The buttons are images of the google and apple logos.
 
 class _LoginPageState extends State<LoginPage> {
-  Future<void> sendTokenToBackend(String? token) async {
-
+  Future<bool> sendTokenToBackend(String? token, BuildContext myContext) async {
     String tokenToSend = "";
 
     if (token != null) {
@@ -34,29 +33,46 @@ class _LoginPageState extends State<LoginPage> {
 
     final url = Uri.parse("http://192.168.68.116:8000/authenticate");
 
-   /* headers: {
-      'Content-Type': 'application/json',
-    'Authorization': 'Bearer $idToken', // Pass the token in the 'Authorization' header
-  },*/
-
-
     try {
-        final response = await http.post(url,
-            body: tokenToSend
-        );
+      final response = await http.post(url, body: tokenToSend);
       //check the response code
       if (response.statusCode == 200) {
-        print('Success: ${response.body}');
+        Map<String, dynamic> data = json.decode(response.body);
+
+        if (data["status"] == "success") {
+          //save the API token
+          const storage = FlutterSecureStorage();
+
+          await storage.write(key: "api_token", value: data["api_token"]);
+          await storage.write(key: "id", value: data["id"].toString());
+
+          String? checkToken = await storage.read(key: 'api_token');
+          String? checkId = await storage.read(key: 'id');
+
+          if (checkToken == null || checkId == null) {
+            return false;
+          }
+          return true;
+        }
       } else {
-        print('FaILeD yA dUuMMy');
-        print('Error message: ${response.body}');
+        String message =
+            'Error logging in, response code: ${response.statusCode}';
+        var mySnackbar = SnackBar(content: Text(message));
+
+        ScaffoldMessenger.of(myContext).showSnackBar(mySnackbar);
+        return false;
       }
     } catch (e) {
-      print('Error: $e');
+      String message = 'Error logging in, message: $e';
+      var mySnackbar = SnackBar(content: Text(message));
+
+      ScaffoldMessenger.of(myContext).showSnackBar(mySnackbar);
+      return false;
     }
+    return false;
   }
 
-  Future signIn(BuildContext myContext) async {
+  Future<bool> signIn(BuildContext myContext) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
@@ -80,11 +96,8 @@ class _LoginPageState extends State<LoginPage> {
 
         String? token = await userCredential.user?.getIdToken();
 
-        await sendTokenToBackend(token);
-
-        print("here is the token: ");
-        print(token);
-        
+        bool success = await sendTokenToBackend(token, myContext);
+        return success;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           const mySnakbar = SnackBar(
@@ -96,11 +109,14 @@ class _LoginPageState extends State<LoginPage> {
           const mySnakbar = SnackBar(content: Text('Invalid credentials'));
 
           ScaffoldMessenger.of(myContext).showSnackBar(mySnakbar);
+        } else {
+          var mySnakbar = SnackBar(content: Text('Error ' + e.toString()));
+          ScaffoldMessenger.of(myContext).showSnackBar(mySnakbar);
         }
       }
-
-      return user;
+      return false;
     }
+    return false;
   }
 
   @override
@@ -192,8 +208,18 @@ class _LoginPageState extends State<LoginPage> {
 
                             GestureDetector(
                               key: const Key('GoogleLogin'),
-                              onTap: () {
-                                signIn(context);
+                              onTap: () async {
+                                bool success = await signIn(context);
+
+                                if (success) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Home(), // Navigate to the Home Page
+                                    ),
+                                  );
+                                }
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.95,

@@ -1,8 +1,6 @@
 package fullstack_fox.Controllers;
 
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import fullstack_fox.services.UserService;
 import fullstack_fox.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.json.*;
 
 @RestController
 public class UserController {
@@ -34,9 +33,20 @@ public class UserController {
             //store the token an UID in the database...
             System.out.println(user);
 
-            return ResponseEntity.ok("User authenticated. Here is the uid: " + user.getId());
+            JSONObject response = new JSONObject();
+            response.put("status", "success");
+            response.put("id", user.getId());
+            response.put("api_token", user.getApiToken());
+
+            return ResponseEntity.ok(response.toString());
+
         } catch (FirebaseAuthException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
+
+            JSONObject response = new JSONObject();
+            response.put("status", "failed");
+            response.put("message", "authentication failed");
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response.toString());
         }
     }
 }

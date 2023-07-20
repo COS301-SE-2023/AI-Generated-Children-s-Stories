@@ -5,19 +5,10 @@ import javax.transaction.Transactional;
 
 import fullstack_fox.Entities.Story;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class StoryRepository {
+public interface StoryRepository extends CrudRepository<Story, Long> {
 
-    @Autowired private EntityManager entityManager;
-
-    @Transactional
-    public void save(Story story) {
-        entityManager.persist(story);
-    }
-
-    public Story findById(Long id) {
-        return entityManager.find(Story.class, id);
-    }
 }

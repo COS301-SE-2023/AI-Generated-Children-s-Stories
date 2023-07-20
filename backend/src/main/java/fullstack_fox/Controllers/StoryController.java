@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Entities.Story;
 
+import java.util.Optional;
+
 @RestController
 public class StoryController {
 
@@ -14,9 +16,10 @@ public class StoryController {
     StoryRepository storyRespository;
 
     @GetMapping("/story/{id}")
-    public Story show(@PathVariable String id){
+    public Optional<Story> show(@PathVariable String id){
         Long storyId = Long.parseLong(id);
-        return storyRespository.findById(storyId);
+        Optional<Story> byId = storyRespository.findById(storyId);
+        return byId;
     }
 
     @PostMapping( path = "/story",

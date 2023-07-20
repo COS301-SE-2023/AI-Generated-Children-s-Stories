@@ -27,13 +27,7 @@ public class Main implements CommandLineRunner{
     public void run(String... args) throws Exception {
        // createStoryAndPage();
         FirebaseConfig firebaseConfig = new FirebaseConfig();
-
-        /*try {
-            firebaseConfig.initialise();
-        } catch (IOException e) {
-            System.out.println("could not read file");
-            e.printStackTrace();
-        }*/
+        //createStoryAndPage();
     }
 
     private void createStoryAndPage() {

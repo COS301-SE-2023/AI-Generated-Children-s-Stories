@@ -44,6 +44,9 @@ dependencies:
   firebase_messaging: ^14.6.5
   http: ^1.1.0
 
+  # For storing API key
+  flutter_secure_storage: ^8.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

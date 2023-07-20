@@ -16,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 32)
+    @Column(length = 36)
     private String apiToken;
     @Column()
     private String firebaseUid;
@@ -37,11 +37,8 @@ public class User {
         this.apiToken = generateAPIToken();
     }
 
-    public String generateAPIToken() {
-        String lol = UUID.randomUUID().toString();
-        System.out.println(lol);
-        System.out.println("len: " + lol.length());
-        return  lol;
+    private String generateAPIToken() {
+        return  UUID.randomUUID().toString();
     }
 
     public Long getId() {

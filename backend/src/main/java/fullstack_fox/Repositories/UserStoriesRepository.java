@@ -1,6 +1,8 @@
 package fullstack_fox.Repositories;
 
 import fullstack_fox.Entities.UserStories;
+import org.springframework.data.repository.CrudRepository;
 
-public class UserStoriesRepository {
+public interface UserStoriesRepository extends CrudRepository<UserStories, Long> {
+
 }

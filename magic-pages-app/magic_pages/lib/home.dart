@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'navbar.dart';
 import 'my_header.dart';
 import 'home_change_notifier.dart';
@@ -29,12 +30,25 @@ class _HomeState extends State<Home> {
 
   late Story _currentlyReadingStory;
 
+  void readStorage() async {
+    const storage = FlutterSecureStorage();
+    String? id = await storage.read(key: 'id');
+    String? token = await storage.read(key: 'api_token');
+
+    print("id from storage: ");
+    print(id);
+
+    print("token from storage: ");
+    print(token);
+
+    //getCurrentlyReading();
+  }
+
   //set story to empty story
   //fetch currently reading
   @override
   void initState() {
     super.initState();
-    getCurrentlyReading();
     _currentlyReadingStory = Story(
         title: '',
         coverUrl: '',
@@ -42,6 +56,8 @@ class _HomeState extends State<Home> {
         imageContent: [],
         currentPage: 0,
         id: 0);
+
+    readStorage();
   }
 
   //fetch currently reading
