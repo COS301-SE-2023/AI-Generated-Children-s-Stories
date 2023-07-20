@@ -37,6 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
 
+  # For firebase authentication and sign in
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.1
+  google_sign_in: ^6.1.4
+  firebase_messaging: ^14.6.5
+  http: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

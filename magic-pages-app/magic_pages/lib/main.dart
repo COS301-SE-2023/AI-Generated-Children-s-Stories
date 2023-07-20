@@ -10,13 +10,21 @@ import 'profile.dart';
 
 import 'story_list_change_notifier.dart';
 
+//firebase
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 /// This is the main file for the app.
 /// It contains the main function, which runs the app.
 /// It also contains the unit and integration tests.
 /// The unit tests test the inside a story class.
 /// The integration tests test the get stories service class.
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 

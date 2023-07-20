@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'progress_bar.dart';
 import 'image_button.dart';
 
-/// This class represents...
+/// This class represents 
 
 class BookWithProgress extends StatefulWidget {
   final String imagePath;

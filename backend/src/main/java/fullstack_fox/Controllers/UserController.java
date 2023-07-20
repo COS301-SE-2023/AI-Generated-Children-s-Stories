@@ -25,12 +25,15 @@ public class UserController {
     public ResponseEntity<String> authenticateUser(@RequestBody String tokenBody) {
         //print the response:
 
-        System.out.println("Got token at backend: " + tokenBody);
-
-        tokenBody = tokenBody.substring(6);
+        System.out.println("Got token at backend: ");
+        System.out.println(tokenBody);
 
         try {
             User user = userService.authenticateFirebaseToken(tokenBody);
+
+            //store the token an UID in the database...
+            System.out.println(user);
+
             return ResponseEntity.ok("User authenticated. Here is the uid: " + user.getId());
         } catch (FirebaseAuthException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());

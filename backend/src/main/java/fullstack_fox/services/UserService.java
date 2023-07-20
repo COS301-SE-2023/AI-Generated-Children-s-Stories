@@ -29,12 +29,30 @@ public class UserService {
         //find the user in the repository, otherwise create a new user
         User user = userRepository.findByFirebaseUid(uid);
 
+        /*
+         public String getIssuer() {
+            return (String) claims.get("iss");
+          }
+
+        /*
+        public String getName() {
+            return (String) claims.get("name");
+        }
+
+        public String getPicture() {
+            return (String) claims.get("picture");
+        }
+
+        public String getEmail() {
+            return (String) claims.get("email");
+        }
+         */
+
+
         //check if user exists
         if (user == null) {
             //create a new user if not existing
-            user = new User();
-            user.setFirebaseUid(uid);
-            user.setFirebaseToken(token);
+            user = new User(uid);
 
             //write to the database
             userRepository.save(user);
