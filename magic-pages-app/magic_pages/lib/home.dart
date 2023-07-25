@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:magic_pages/global_variables.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
@@ -33,31 +34,27 @@ class _HomeState extends State<Home> {
 
   late List<Story> _currentlyReadingStory;
 
-  void readStorage() async {
-    const storage = FlutterSecureStorage();
-    String? id = await storage.read(key: 'id');
-    String? token = await storage.read(key: 'api_token');
-
-    print("id from storage: ");
-    print(id);
-
-    print("token from storage: ");
-    print(token);
-
-    //getCurrentlyReading();
-  }
+  late String id;
+  late String token;
 
   //set story to empty story
   //fetch currently reading
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
+    List<String> idToken = await GlobalVariables.getIdAndToken();
+
+    id = idToken[0];
+    token = idToken[1];
+
+    //TODO: pass in the user id and token to this fuction...
     getCurrentlyReading();
   }
 
   //fetch currently reading
   //it uses the home change notifier to fetch the currently reading story
   void getCurrentlyReading() async {
+
     await _homeChangeNotifier.fetchCurrentlyReading();
     setState(() {
       _currentlyReadingStory = _homeChangeNotifier.currentlyReadingStory;

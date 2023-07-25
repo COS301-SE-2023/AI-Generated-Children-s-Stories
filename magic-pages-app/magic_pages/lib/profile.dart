@@ -59,27 +59,37 @@ class _ProfileState extends State<Profile> {
                       const storage = FlutterSecureStorage();
                       String? checkId = await storage.read(key: 'id');
 
-                      final url = Uri.parse(
-                          "http://${GlobalVariables.ipAddress}/logout");
+                      if (checkId != null) {
+                        final url = Uri.parse(
+                            "http://${GlobalVariables.ipAddress}/logout/${checkId}");
 
-                      try {
-                        final response = await http.post(url, body: checkId);
-                        if (response.statusCode == 200) {
-                          if (context.mounted) {
-                            GlobalVariables.showSnackbarMessage(
-                                'Logged out', context);
-                            Navigator.pushNamed(context, '/login');
+                        print(url);
+
+                        try {
+                          final response = await http.post(url);
+                          if (response.statusCode == 200) {
+                            if (context.mounted) {
+                              GlobalVariables.showSnackbarMessage(
+                                  'Logged out', context);
+                              Navigator.pushNamed(context, '/login');
+                            }
+                          } else {
+                            String message =
+                                'Error logging out, status code: ${response.statusCode}';
+                            if (context.mounted) {
+                              GlobalVariables.showSnackbarMessage(
+                                  message, context);
+                            }
                           }
-                        } else {
-                          String message =
-                              'Error logging out, status code: ${response.statusCode}';
+                        } catch (e) {
+                          String message = 'Error logging out, message: $e';
                           if (context.mounted) {
                             GlobalVariables.showSnackbarMessage(
                                 message, context);
                           }
                         }
-                      } catch (e) {
-                        String message = 'Error logging out, message: $e';
+                      } else {
+                        String message = 'Failed to log out';
                         if (context.mounted) {
                           GlobalVariables.showSnackbarMessage(message, context);
                         }

@@ -6,9 +6,7 @@ import fullstack_fox.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.json.*;
 
 @RestController
@@ -18,6 +16,28 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/logout/{id}")
+    public ResponseEntity<String> logout(@PathVariable Long id) {
+
+        try {
+            //set the api token to null
+            userService.nullifyApiToken(id);
+
+            JSONObject response = new JSONObject();
+            response.put("status", "success");
+            return ResponseEntity.ok(response.toString());
+
+        } catch (Exception e) {
+
+            JSONObject response = new JSONObject();
+            response.put("status", "failed");
+            response.put("error", e.toString());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response.toString());
+
+        }
+
     }
 
     @PostMapping("/authenticate")

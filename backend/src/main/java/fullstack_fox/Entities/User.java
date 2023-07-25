@@ -37,7 +37,7 @@ public class User {
         this.apiToken = generateAPIToken();
     }
 
-    private String generateAPIToken() {
+    public String generateAPIToken() {
         return  UUID.randomUUID().toString();
     }
 
@@ -47,6 +47,10 @@ public class User {
 
     public String getApiToken() {
         return apiToken;
+    }
+
+    public void nullifyApiToken() {
+        this.apiToken = null;
     }
 
     public String getFirebaseUid() {
