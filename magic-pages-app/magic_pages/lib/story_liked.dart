@@ -120,7 +120,7 @@ class _StoryLikedState extends State<StoryLiked> {
               : const SizedBox(height: 0),
         ],
       )),
-      bottomNavigationBar: const NavbarWidget(),
+      bottomNavigationBar: const NavbarWidget(active: 2),
     );
   }
 }

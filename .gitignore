@@ -33,3 +33,8 @@ ai-story-generation-app/src/test/java/fullstack_fox/resources/configReal.json
 firebase-config.json
 google-services.json
 firebase_options.dart
+magic-pages-app/magic_pages/pubspec.lock
+magic-pages-app/magic_pages/pubspec.lock
+backend/src/main/resources/firebase-config.json
+magic-pages-app/magic_pages/android/app/google-services.json
+magic-pages-app/magic_pages/lib/firebase_options.dart

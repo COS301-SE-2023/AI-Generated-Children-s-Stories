@@ -34,22 +34,25 @@ class GetStoriesService {
     return stories;
   }
 
-  //read the json file and reaturn the currently reading story (simulates an api call)
-  Future<Story> fetchCurrrentlyReading() async {
-    await Future.delayed(const Duration(seconds: 5));
+  //read the json file and return the currently reading story (simulates an api call)
+  Future<List<Story>> fetchCurrentlyReading() async {
     final String response =
-        await rootBundle.loadString('assets/currentlyReading.json');
+        await rootBundle.loadString('assets/data/currentlyReading.json');
     final data = await json.decode(response);
 
-    //return a story
-    return Story(
-      title: data['title'],
-      coverUrl: data['coverUrl'],
-      textContent: data['textContent'].cast<String>(),
-      imageContent: data['imageContent'].cast<String>(),
-      currentPage: data['currentPage'],
-      id: data['id'],
-    );
+    List<Story> stories = [];
+
+    for (var i = 0; i < data.length; i++) {
+      stories.add(Story(
+        title: data[i]['title'],
+        coverUrl: data[i]['coverUrl'],
+        textContent: data[i]['textContent'].cast<String>(),
+        imageContent: data[i]['imageContent'].cast<String>(),
+        currentPage: data[i]['currentPage'],
+        id: data[i]['id'])
+      );
+    }
+    return stories;
   }
 
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {
