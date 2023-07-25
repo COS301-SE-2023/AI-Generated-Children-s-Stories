@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:magic_pages/home.dart';
+import 'package:magic_pages/global_variables.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       tokenToSend = token.toString();
     }
 
-    final url = Uri.parse("http://192.168.68.116:8000/authenticate");
+    final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
 
     try {
       final response = await http.post(url, body: tokenToSend);
@@ -57,23 +58,17 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         String message =
             'Error logging in, response code: ${response.statusCode}';
-        showSnackbarMessage(message);
+        if (context.mounted) {
+          GlobalVariables.showSnackbarMessage(message, context);
+        }
         return false;
       }
     } catch (e) {
       String message = 'Error logging in, message: $e';
-      showSnackbarMessage(message);
+      GlobalVariables.showSnackbarMessage(message, context);
       return false;
     }
     return false;
-  }
-
-  void showSnackbarMessage(String message) {
-    var mySnackbar = SnackBar(content: Text(message));
-
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(mySnackbar);
-    }
   }
 
   Future<bool> signIn() async {
@@ -103,12 +98,21 @@ class _LoginPageState extends State<LoginPage> {
         return success;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
-          showSnackbarMessage(
-              'The account already exists with a different credential');
+          if (context.mounted) {
+            GlobalVariables.showSnackbarMessage(
+                'The account already exists with a different credential',
+                context);
+          }
         } else if (e.code == 'invalid-credential') {
-          showSnackbarMessage('Invalid credentials');
+          if (context.mounted) {
+            GlobalVariables.showSnackbarMessage(
+                'Error occurred while accessing credentials. Try again.',
+                context);
+          }
         } else {
-          showSnackbarMessage('Error $e');
+          if (context.mounted) {
+            GlobalVariables.showSnackbarMessage('Error $e', context);
+          }
         }
       }
       return false;
