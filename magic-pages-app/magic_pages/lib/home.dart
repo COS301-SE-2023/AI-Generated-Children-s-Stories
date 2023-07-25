@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wave/config.dart';
+import 'package:wave/wave.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'navbar.dart';
 import 'my_header.dart';
 import 'home_change_notifier.dart';
@@ -27,7 +30,8 @@ class _HomeState extends State<Home> {
   final HomeChangeNotifier _homeChangeNotifier =
       HomeChangeNotifier(GetStoriesService());
 
-  late Story _currentlyReadingStory;
+  
+  late List<Story> _currentlyReadingStory;
 
   //set story to empty story
   //fetch currently reading
@@ -35,20 +39,13 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     getCurrentlyReading();
-    _currentlyReadingStory = Story(
-        title: '',
-        coverUrl: '',
-        textContent: [],
-        imageContent: [],
-        currentPage: 0,
-        id: 0);
   }
 
   //fetch currently reading
   //it uses the home change notifier to fetch the currently reading story
   void getCurrentlyReading() async {
     await _homeChangeNotifier.fetchCurrentlyReading();
-    setState(() {
+    setState( () {
       _currentlyReadingStory = _homeChangeNotifier.currentlyReadingStory;
     });
   }
@@ -56,52 +53,81 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 243, 233),
       body: SafeArea(
-        //back button
-        child: SingleChildScrollView(
-          child: Column(
-            key: const Key('TestKey'),
+        child: Center(
+          child: Stack(
             children: [
-              //if loading, show loading message
-              _homeChangeNotifier.isLoading
+              WaveWidget(
+                config: CustomConfig(
+                  colors: [
+                    const Color(0xFF84370F),
+                    const Color(0xFFFE8D29),
+                    const Color(0xFFFFF3E9),
+                  ],
+                  durations: [
+                    16000,
+                    18000,
+                    22000,
+                  ],
+                  heightPercentages: [
+                    -0.08,
+                    -0.07,
+                    -0.0525,
+                  ],
+                ),
+                size: const Size(double.infinity, double.infinity),
+                waveAmplitude: 0,
+              ),
+              Column(
+                children: [
+                  //if loading, show loading message
+                  _homeChangeNotifier.isLoading 
                   ? const Column(
-                      children: [
-                        MyHeader(
-                          message: 'Getting your story...',
-                        ),
-                        SizedBox(height: 50),
-                        CircularProgressIndicator(),
-                      ],
-                    )
-                  :
-
-                  //else show the correct header
-                  _homeChangeNotifier.isNewBook
-                      ? const MyHeader(
-                          message: 'Here\'s a new book!',
-                        )
-                      : const MyHeader(
-                          message: 'Continue reading...',
-                        ),
-
-              //padding
-              const SizedBox(height: 30),
-
-              !_homeChangeNotifier.isLoading
-                  ? BookWithProgress(
-                      title: _currentlyReadingStory.title,
-                      imagePath: _currentlyReadingStory.coverUrl,
-                      id: _currentlyReadingStory.id,
-                      currentPage: _currentlyReadingStory.currentPage,
-                      totalPages: _currentlyReadingStory.textContent.length,
-                    )
+                    children: [
+                      MyHeader(
+                        message: 'Getting your story...',
+                      ),
+                      CircularProgressIndicator(),
+                    ],
+                  )
+                  : _homeChangeNotifier.isNewBook
+                  ? const MyHeader(
+                    message: 'Here\'s a new book!',
+                  )
+                  : const MyHeader(
+                    message: 'Welcome back!\nKeep reading your books.',
+                  ),
+                  !_homeChangeNotifier.isLoading
+                  ? SizedBox(
+                    height: MediaQuery.of(context).size.height-(MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom+94+138),
+                    child: ScrollSnapList(
+                        itemBuilder: _currentlyReadingListItem,
+                        itemCount: _currentlyReadingStory.length,
+                        itemSize: 469,
+                        onItemFocus: (index) {},
+                        dynamicItemSize: true,
+                        scrollDirection: Axis.vertical,
+                      ),
+                  )
                   : const SizedBox(height: 30),
+                ]
+              ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(),
+      bottomNavigationBar: const NavbarWidget(active: 1),
+    );
+  }
+
+  Widget _currentlyReadingListItem(BuildContext context, int index) {
+    Story story = _currentlyReadingStory[index];
+    return BookWithProgress(
+      title: story.title,
+      imagePath: story.coverUrl,
+      id: story.id,
+      currentPage: story.currentPage,
+      totalPages: story.textContent.length,
     );
   }
 }

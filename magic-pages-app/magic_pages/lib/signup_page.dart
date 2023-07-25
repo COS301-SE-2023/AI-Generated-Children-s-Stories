@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
-class LoginPage extends StatelessWidget {
+class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height-(186+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom), 
+                            height: MediaQuery.of(context).size.height-(306+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
                                           ),
                                           SizedBox(width: 8),
                                           Text(
-                                            'LOGIN WITH GOOGLE',
+                                            'GET STARTED WITH GOOGLE',
                                             style: TextStyle(
                                               fontSize: 18,
                                               fontFamily: 'Poppins',
@@ -164,7 +164,7 @@ class LoginPage extends StatelessWidget {
                                           ),
                                           SizedBox(width: 8),
                                           Text(
-                                            'LOGIN WITH APPLE',
+                                            'GET STARTED WITH APPLE',
                                             style: TextStyle(
                                               fontSize: 18,
                                               fontFamily: 'Poppins',
@@ -178,6 +178,100 @@ class LoginPage extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 212,
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: 'By continuing, you agree to our ',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF000000),
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'Terms and Conditions ',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF000000),
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                    recognizer: new TapGestureRecognizer()
+                                      ..onTap = () => showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return const AlertDialog(
+                                            backgroundColor: Color(0xFFFFF3E9),
+                                            title: Text(
+                                              'Terms and Conditions', 
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            content: Text(
+                                              '...', 
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      ),
+                                  ),
+                                  const TextSpan(
+                                    text: 'and ',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF000000),
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'Privacy Policy',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xFF000000),
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                    recognizer: new TapGestureRecognizer()
+                                      ..onTap = () => showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return const AlertDialog(
+                                            backgroundColor: Color(0xFFFFF3E9),
+                                            title: Text(
+                                              'Privacy Policy', 
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            content: Text(
+                                              '...', 
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      ),
+                                  ),
+                                ],
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ]
