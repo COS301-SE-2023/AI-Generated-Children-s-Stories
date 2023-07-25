@@ -44,7 +44,7 @@ public class PromptProcessor {
     // Creates the prompt for chatgpt to generate story title
     public String storyTitlePrompt(String inStory) {
         inStory = this.toJSONstring(inStory);
-        return "Create a tile for the following story, do not label it:\\n" + inStory;
+        return "Create a very short tile for the following story, do not label it:\\n" + inStory;
     }
 
     // Creates the prompt for chatgpt to generate character description

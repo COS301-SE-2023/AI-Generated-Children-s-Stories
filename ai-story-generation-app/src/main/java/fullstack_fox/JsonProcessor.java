@@ -15,7 +15,9 @@ public class JsonProcessor {
     }
 
     public ArrayList<String> readJson(String inFName) throws URISyntaxException {
-        try (FileReader fileReader = new FileReader(
+
+        try (
+                FileReader fileReader = new FileReader(
                 new File(this.getClass().getResource("resources/" + inFName).toURI()))) {
 
             JSONTokener tokener = new JSONTokener(fileReader);
@@ -51,11 +53,15 @@ public class JsonProcessor {
             jsonPages.put(jsonPage);
         }
         jsonStory.put("pages", jsonPages);
+        // New Code ---
+        jsonStory.put("userStories", new JSONArray());
         try {
             String jsonString = jsonStory.toString(4);
             Files.write(Paths.get(inFName), jsonString.getBytes());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

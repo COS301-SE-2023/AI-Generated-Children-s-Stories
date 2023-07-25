@@ -17,12 +17,14 @@ public class Page {
         return imageUrl;
     }
 
-    public void print() {
-        System.out.println("----------");
-        System.out.println("Image URL:");
-        System.out.println(imageUrl + "\n");
-        System.out.println("Paragraph:");
-        System.out.println(content);
-        System.out.println("----------");
+    public String print() {
+        String toRet = "----------\n";
+        toRet += "Image URL:\n";
+        toRet += imageUrl + "\n\n";
+        toRet += "Paragraph:\n";
+        toRet += content;
+        toRet += "\n----------\n";
+        System.out.println(toRet);
+        return toRet;
     }
 }

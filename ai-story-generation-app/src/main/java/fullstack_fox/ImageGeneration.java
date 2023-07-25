@@ -87,7 +87,6 @@ public class ImageGeneration {
         return url;
     }
 
-    //
     private void urlUnitTest(String inUrl) {
         if (inUrl == "") {
             System.out.println("Message recived not an image");
