@@ -24,7 +24,7 @@ class LoginPage extends StatefulWidget {
 /// The buttons are images of the google and apple logos.
 
 class _LoginPageState extends State<LoginPage> {
-  Future<bool> sendTokenToBackend(String? token, BuildContext myContext) async {
+  Future<bool> sendTokenToBackend(String? token) async {
     String tokenToSend = "";
 
     if (token != null) {
@@ -57,24 +57,27 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         String message =
             'Error logging in, response code: ${response.statusCode}';
-        var mySnackbar = SnackBar(content: Text(message));
-
-        ScaffoldMessenger.of(myContext).showSnackBar(mySnackbar);
+        showSnackbarMessage(message);
         return false;
       }
     } catch (e) {
       String message = 'Error logging in, message: $e';
-      var mySnackbar = SnackBar(content: Text(message));
-
-      ScaffoldMessenger.of(myContext).showSnackBar(mySnackbar);
+      showSnackbarMessage(message);
       return false;
     }
     return false;
   }
 
-  Future<bool> signIn(BuildContext myContext) async {
+  void showSnackbarMessage(String message) {
+    var mySnackbar = SnackBar(content: Text(message));
+
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(mySnackbar);
+    }
+  }
+
+  Future<bool> signIn() async {
     FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
 
     //initilise a google sign in
     final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -96,22 +99,16 @@ class _LoginPageState extends State<LoginPage> {
 
         String? token = await userCredential.user?.getIdToken();
 
-        bool success = await sendTokenToBackend(token, myContext);
+        bool success = await sendTokenToBackend(token);
         return success;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
-          const mySnakbar = SnackBar(
-              content: Text(
-                  'The account already exists with a different credential'));
-
-          ScaffoldMessenger.of(myContext).showSnackBar(mySnakbar);
+          showSnackbarMessage(
+              'The account already exists with a different credential');
         } else if (e.code == 'invalid-credential') {
-          const mySnakbar = SnackBar(content: Text('Invalid credentials'));
-
-          ScaffoldMessenger.of(myContext).showSnackBar(mySnakbar);
+          showSnackbarMessage('Invalid credentials');
         } else {
-          var mySnakbar = SnackBar(content: Text('Error ' + e.toString()));
-          ScaffoldMessenger.of(myContext).showSnackBar(mySnakbar);
+          showSnackbarMessage('Error $e');
         }
       }
       return false;
@@ -209,16 +206,19 @@ class _LoginPageState extends State<LoginPage> {
                             GestureDetector(
                               key: const Key('GoogleLogin'),
                               onTap: () async {
-                                bool success = await signIn(context);
+                                bool success = await signIn();
 
                                 if (success) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          Home(), // Navigate to the Home Page
-                                    ),
-                                  );
+                                  if (context.mounted) {
+                                    //go to the home page
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Home(), // Navigate to the Home Page
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               child: Container(
