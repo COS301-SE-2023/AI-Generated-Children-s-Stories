@@ -22,7 +22,8 @@ class LoginPage extends StatelessWidget {
       tokenToSend = token.toString();
     }
 
-    final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
+    //final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
+    final url = Uri.parse("http://196.249.9.241:8000/authenticate");
 
     try {
       final response = await http.post(url, body: tokenToSend);
