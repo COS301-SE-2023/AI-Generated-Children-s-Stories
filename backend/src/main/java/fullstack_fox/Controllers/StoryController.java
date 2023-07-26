@@ -16,7 +16,7 @@ public class StoryController {
     StoryRepository storyRespository;
 
     @GetMapping("/story/{id}")
-    public Optional<Story> show(@PathVariable String id){
+    public Optional<Story> getStoryById(@PathVariable String id){
         Long storyId = Long.parseLong(id);
         Optional<Story> byId = storyRespository.findById(storyId);
         return byId;

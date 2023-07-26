@@ -25,4 +25,11 @@ public class UserStoriesService {
         return userStories.stream().map(UserStories::getStory).collect(Collectors.toList());
     }
 
+
+    public List<Story> getAllUnlikedStories(Long userId) {
+        List<UserStories> userStories = userStoriesRepository.getAllUnlikedStories(userId);
+        return userStories.stream().map(UserStories::getStory).collect(Collectors.toList());
+    }
+
+
 }

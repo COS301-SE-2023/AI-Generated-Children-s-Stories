@@ -25,7 +25,6 @@ public class Main implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-       // createStoryAndPage();
         FirebaseConfig firebaseConfig = new FirebaseConfig();
         //createStoryAndPage();
     }
