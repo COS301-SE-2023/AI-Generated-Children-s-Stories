@@ -16,5 +16,8 @@ public interface UserStoriesRepository extends CrudRepository<UserStories, Long>
 
     List<UserStories> findByUserId(Long userId);
 
+    @Query("SELECT us FROM UserStories us WHERE us.user.id = :userId AND us.pageNumber != 0")
+    List<UserStories> getCurrentlyReading(Long userId);
+
 }
 

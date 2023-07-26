@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:js';
 import 'package:flutter/services.dart';
 import 'global_variables.dart';
 import 'story.dart';
+import 'package:http/http.dart' as http;
 
 /// This class represents the service that gets the stories from the json file.
 /// It contains the fetchStories function, which reads the json file and returns the stories.
@@ -45,26 +47,25 @@ class GetStoriesService {
 
     //make an API call and pass in the id and token
     final url = Uri.parse(
-        "http://${GlobalVariables.ipAddress}/story/}");
+        "http://${GlobalVariables.ipAddress}/story/random/$id");
 
+    try {
+      final response = await http.get(url);
 
-    final String response =
-        await rootBundle.loadString('assets/data/currentlyReading.json');
-    final data = await json.decode(response);
-
-    List<Story> stories = [];
-
-    for (var i = 0; i < data.length; i++) {
-      stories.add(Story(
-        title: data[i]['title'],
-        coverUrl: data[i]['coverUrl'],
-        textContent: data[i]['textContent'].cast<String>(),
-        imageContent: data[i]['imageContent'].cast<String>(),
-        currentPage: data[i]['currentPage'],
-        id: data[i]['id'])
-      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        print("got random!!!!");
+        print(data);
+      } else {
+        GlobalVariables.showSnackbarMessage("Failed to get story", context);
+      }
+    } catch (e) {
+      print("Error: $e");
     }
-    return stories;
+
+    List<Story> list = [];
+    return list;
+
   }
 
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {

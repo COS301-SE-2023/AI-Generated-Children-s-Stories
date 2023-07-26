@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
   //set story to empty story
   //fetch currently reading
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
 
     //TODO: pass in the user id and token to this fuction...

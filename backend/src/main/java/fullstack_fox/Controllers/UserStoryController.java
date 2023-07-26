@@ -36,6 +36,17 @@ public class UserStoryController {
 
     @GetMapping("/story/random/{id}")
     public Story getRandomUnreadUnlikedStory(@PathVariable Long id) {
+
+        //first check if there are stories that are being read....
+        List<Story> currentlyReading = userStoriesService.getCurrentlyReading(id);
+
+        if (!currentlyReading.isEmpty()) {
+            int index = new Random().nextInt(currentlyReading.size());
+            return currentlyReading.get(index);
+        } else {
+            System.out.println("Currently reading null");
+        }
+
         //Fetch all unliked stories (in story table but not in liked table)
         List<Story> allUnlikedStories = userStoriesService.getAllUnlikedStories(id);
 
@@ -51,14 +62,14 @@ public class UserStoryController {
                 .collect(Collectors.toList());
 
         //Get a random story in the list
-        Story random = null;
         if (!unreadUnlikedStories.isEmpty()) {
             int index = new Random().nextInt(unreadUnlikedStories.size());
-            random = unreadUnlikedStories.get(index);
+            return unreadUnlikedStories.get(index);
+        }else {
+            System.out.println("Unread Unliked null");
         }
 
-        return random;
-
+        return null;
     }
 
 

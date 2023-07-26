@@ -23,7 +23,9 @@ class LoginPage extends StatelessWidget {
     }
 
     //final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
-    final url = Uri.parse("http://196.249.9.241:8000/authenticate");
+    final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
+
+    //todo: get started and log in should do different things
 
     try {
       final response = await http.post(url, body: tokenToSend);
@@ -90,7 +92,10 @@ class LoginPage extends StatelessWidget {
 
         String? token = await userCredential.user?.getIdToken();
 
+        print("Getting token...");
+
         bool success = await sendTokenToBackend(token, context);
+
         return success;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
@@ -202,6 +207,8 @@ class LoginPage extends StatelessWidget {
                                 bool success = await signInWithGoogle(context);
                                 if (success) {
                                   Navigator.pushNamed(context, "/home");
+                                } else {
+                                  print("Error when singing in...");
                                 }
                               },
                               child: Container(
