@@ -26,4 +26,8 @@ public class UserStories {
     private boolean liked;
     @Column()
     private int pageNumber;
+
+    public Story getStory() {
+        return story;
+    }
 }

@@ -34,18 +34,11 @@ class _HomeState extends State<Home> {
 
   late List<Story> _currentlyReadingStory;
 
-  late String id;
-  late String token;
-
   //set story to empty story
   //fetch currently reading
   @override
   Future<void> initState() async {
     super.initState();
-    List<String> idToken = await GlobalVariables.getIdAndToken();
-
-    id = idToken[0];
-    token = idToken[1];
 
     //TODO: pass in the user id and token to this fuction...
     getCurrentlyReading();

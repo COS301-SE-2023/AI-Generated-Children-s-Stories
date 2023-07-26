@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'global_variables.dart';
 import 'story.dart';
 
 /// This class represents the service that gets the stories from the json file.
@@ -36,6 +37,17 @@ class GetStoriesService {
 
   //read the json file and return the currently reading story (simulates an api call)
   Future<List<Story>> fetchCurrentlyReading() async {
+
+    List<String> idToken = await GlobalVariables.getIdAndToken();
+
+    String id = idToken[0];
+    String token = idToken[1];
+
+    //make an API call and pass in the id and token
+    final url = Uri.parse(
+        "http://${GlobalVariables.ipAddress}/story/}");
+
+
     final String response =
         await rootBundle.loadString('assets/data/currentlyReading.json');
     final data = await json.decode(response);

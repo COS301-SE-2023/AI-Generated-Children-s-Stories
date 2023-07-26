@@ -1,8 +1,14 @@
 package fullstack_fox.Repositories;
 
+import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.UserStories;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserStoriesRepository extends CrudRepository<UserStories, Long> {
+import java.util.List;
 
+public interface UserStoriesRepository extends CrudRepository<UserStories, Long> {
+     @Query("SELECT us FROM UserStories us WHERE us.user.id = :userId")
+    List<UserStories> findUserStoriesByUserId(Long userId);
 }
+
