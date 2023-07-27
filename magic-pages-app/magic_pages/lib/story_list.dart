@@ -4,7 +4,7 @@ import 'package:wave/wave.dart';
 import 'story.dart';
 import 'package:flutter/material.dart';
 import 'navbar.dart';
-import 'bookWidget.dart';
+import 'book_widget.dart';
 import 'story_list_change_notifier.dart';
 import 'get_stories_service.dart';
 
@@ -75,7 +75,7 @@ class _StoryListState extends State<StoryList> {
                     -0.0525,
                   ],
                 ),
-                size: const Size(double.infinity, double.infinity),
+                size: const Size(double.infinity, 1000),
                 waveAmplitude: 0,
               ),
               Column(
@@ -163,7 +163,7 @@ class _StoryListState extends State<StoryList> {
                       ),
                       !_storyListChangeNotifier.isLoading
                   ? SizedBox(
-                    height: MediaQuery.of(context).size.height-(MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom+94+194),
+                    height: MediaQuery.of(context).size.height-(MediaQuery.of(context).padding.top+288),
                     child: ListView.builder(
                       itemCount: _stories.length,
                       itemBuilder: _BookListItem,                        

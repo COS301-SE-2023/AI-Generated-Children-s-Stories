@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'heart_animation_widget.dart';
 
+// ignore: must_be_immutable
 class BookWidget extends StatefulWidget {
   final String imagePath;
   final int id;
@@ -48,7 +49,7 @@ class _BookWidget extends State<BookWidget> {
                     child: const Icon(
                       Icons.favorite, 
                       color: Color(0xFF542209), 
-                      size: 50,
+                      size: 90,
                     ),
                     onEnd: () {
                       setState(() {
@@ -80,7 +81,8 @@ class _BookWidget extends State<BookWidget> {
                   style: const TextStyle(
                     fontSize: 18,
                     color: Color(0xFF542209),
-                    fontFamily: 'NotoSerif'
+                    fontFamily: 'NotoSerif',
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -110,9 +112,12 @@ class _BookWidget extends State<BookWidget> {
         alwaysAnimate: true,
         isAnimating: widget.isLiked,
         child: IconButton(
-          icon: Icon(icon, color: color, size: 28),
+          icon: Icon(icon, color: color, size: 32),
           onPressed: () => setState(() {
             widget.isLiked = !widget.isLiked;
+            if (widget.isLiked == true) {
+              isHeartAnimating = true;
+            }
           }),
         ),
       );

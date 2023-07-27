@@ -29,7 +29,7 @@ class SignupPage extends StatelessWidget {
                     -0.0525,
                   ],
                 ),
-                size: const Size(double.infinity, double.infinity),
+                size: Size(MediaQuery.of(context).size.width, 1000),
                 waveAmplitude: 0,
               ),
               Column(
