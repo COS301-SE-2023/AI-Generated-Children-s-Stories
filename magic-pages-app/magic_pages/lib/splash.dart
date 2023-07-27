@@ -50,7 +50,7 @@ class SplashPage extends StatelessWidget {
                     child: Container(
                       height: 50,
                       width: double.infinity,
-                      margin: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+                      margin: const EdgeInsets.fromLTRB(16, 0, 16, 48),
                       decoration: BoxDecoration(
                         color: Color(0xFFFE8D29),
                         borderRadius: BorderRadius.circular (25),
@@ -72,53 +72,6 @@ class SplashPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: Color(0xFFFDFDFD),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      margin: const EdgeInsets.fromLTRB(16, 0, 16, 48),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFDFDFD),
-                        borderRadius: BorderRadius.circular (25),
-                        border: Border.all(
-                          color: Color(0xFFD3D3D3),
-                          width: 2,
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0xFFD3D3D3),
-                            spreadRadius: 0,
-                            blurRadius: 0,
-                            offset: Offset(0,6),
-                          )
-                        ]
-                      ),
-                      child: const Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image(
-                              image: AssetImage('assets/images/Mascot.png'),
-                              width: 32,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              'USED MAGIC PAGES BEFORE',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFFFE8D29),
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ),
