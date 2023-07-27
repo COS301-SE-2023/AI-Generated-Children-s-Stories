@@ -13,7 +13,7 @@ class Story {
   final int currentPage;
   int index = 0;
   final int id;
-  bool isliked = false;
+  bool isLiked = false;
 
   Story(
       {required this.title,
@@ -21,17 +21,18 @@ class Story {
       required this.textContent,
       required this.imageContent,
       required this.currentPage,
-      required this.id});
+      required this.id, 
+      required this.isLiked});
 
   /// get the liked status of the story
   /// @return the like status
   bool getIsLiked() {
-    return isliked;
+    return isLiked;
   }
 
   /// set the like status of the story
   void setIsLiked(bool likeStatus) {
-    isliked = likeStatus;
+    isLiked = likeStatus;
   }
 
   /// get the id of the story

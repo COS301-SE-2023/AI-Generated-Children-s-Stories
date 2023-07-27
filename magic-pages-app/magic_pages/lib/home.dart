@@ -131,3 +131,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
+// For image Image.network('url')

@@ -15,7 +15,7 @@ class GetStoriesService {
 
   Future<List<Story>> fetchStories() async {
     //await Future.delayed(const Duration(seconds: 5));
-    final String response = await rootBundle.loadString('assets/stories.json');
+    final String response = await rootBundle.loadString('assets/data/stories.json');
     final data = await json.decode(response);
 
     List<Story> stories = [];
@@ -28,6 +28,7 @@ class GetStoriesService {
           textContent: data[i]['textContent'].cast<String>(),
           imageContent: data[i]['imageContent'].cast<String>(),
           currentPage: data[i]['currentPage'],
+          isLiked: data[i]['isLiked'],
           id: data[i]['id']));
     }
 
@@ -49,6 +50,7 @@ class GetStoriesService {
         textContent: data[i]['textContent'].cast<String>(),
         imageContent: data[i]['imageContent'].cast<String>(),
         currentPage: data[i]['currentPage'],
+        isLiked: data[i]['isLiked'],
         id: data[i]['id'])
       );
     }
