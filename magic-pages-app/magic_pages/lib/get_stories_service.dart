@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:js';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'global_variables.dart';
 import 'story.dart';
@@ -38,16 +38,15 @@ class GetStoriesService {
   }
 
   //read the json file and return the currently reading story (simulates an api call)
-  Future<List<Story>> fetchCurrentlyReading() async {
-
+  Future<List<Story>> fetchCurrentlyReading(BuildContext context) async {
     List<String> idToken = await GlobalVariables.getIdAndToken();
 
     String id = idToken[0];
     String token = idToken[1];
 
     //make an API call and pass in the id and token
-    final url = Uri.parse(
-        "http://${GlobalVariables.ipAddress}/story/random/$id");
+    final url =
+        Uri.parse("http://${GlobalVariables.ipAddress}/story/random/$id");
 
     try {
       final response = await http.get(url);
@@ -57,7 +56,9 @@ class GetStoriesService {
         print("got random!!!!");
         print(data);
       } else {
-        GlobalVariables.showSnackbarMessage("Failed to get story", context);
+        if (context.mounted) {
+          GlobalVariables.showSnackbarMessage("Failed to get story", context);
+        }
       }
     } catch (e) {
       print("Error: $e");
@@ -65,7 +66,6 @@ class GetStoriesService {
 
     List<Story> list = [];
     return list;
-
   }
 
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {

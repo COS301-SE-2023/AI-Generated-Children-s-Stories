@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:magic_pages/global_variables.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
@@ -41,14 +39,14 @@ class _HomeState extends State<Home> {
     super.initState();
 
     //TODO: pass in the user id and token to this fuction...
-    getCurrentlyReading();
+    getCurrentlyReading(context);
   }
 
   //fetch currently reading
   //it uses the home change notifier to fetch the currently reading story
-  void getCurrentlyReading() async {
+  void getCurrentlyReading(BuildContext context) async {
+    await _homeChangeNotifier.fetchCurrentlyReading(context);
 
-    await _homeChangeNotifier.fetchCurrentlyReading();
     setState(() {
       _currentlyReadingStory = _homeChangeNotifier.currentlyReadingStory;
     });

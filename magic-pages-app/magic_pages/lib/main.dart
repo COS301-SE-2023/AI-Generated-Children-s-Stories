@@ -9,6 +9,7 @@ import 'story_liked.dart';
 import 'home.dart';
 import 'profile.dart';
 import 'splash.dart';
+import 'login_page.dart';
 
 import 'story_list_change_notifier.dart';
 
@@ -73,7 +74,7 @@ class MyApp extends StatelessWidget {
           '/home': (context) => const Home(),
           '/storyLiked': (context) => const StoryLiked(),
           '/profile': (context) => const Profile(),
-          '/insideAStory': (context) =>  InsideStory(id: null),
+          '/insideAStory': (context) => InsideStory(id: null),
 
           //TODO: create an end book page
           '/endBook': (context) => const Home(),

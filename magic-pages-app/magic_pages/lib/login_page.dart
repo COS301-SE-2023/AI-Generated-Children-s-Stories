@@ -1,8 +1,6 @@
 //for flutter
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wave/config.dart';
@@ -11,7 +9,6 @@ import 'package:wave/wave.dart';
 //for logging in
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:magic_pages/home.dart';
 import 'package:magic_pages/global_variables.dart';
 
 class LoginPage extends StatelessWidget {
@@ -201,7 +198,9 @@ class LoginPage extends StatelessWidget {
                               onTap: () async {
                                 bool success = await signInWithGoogle(context);
                                 if (success) {
-                                  Navigator.pushNamed(context, "/home");
+                                  if (context.mounted) {
+                                    Navigator.pushNamed(context, "/home");
+                                  }
                                 }
                               },
                               child: Container(
@@ -210,10 +209,10 @@ class LoginPage extends StatelessWidget {
                                 margin:
                                     const EdgeInsets.fromLTRB(16, 0, 16, 20),
                                 decoration: BoxDecoration(
-                                    color: Color(0xFFFDFDFD),
+                                    color: const Color(0xFFFDFDFD),
                                     borderRadius: BorderRadius.circular(25),
                                     border: Border.all(
-                                      color: Color(0xFFD3D3D3),
+                                      color: const Color(0xFFD3D3D3),
                                       width: 2,
                                     ),
                                     boxShadow: const [
@@ -257,10 +256,10 @@ class LoginPage extends StatelessWidget {
                                 width: double.infinity,
                                 margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                                 decoration: BoxDecoration(
-                                    color: Color(0xFFFDFDFD),
+                                    color: const Color(0xFFFDFDFD),
                                     borderRadius: BorderRadius.circular(25),
                                     border: Border.all(
-                                      color: Color(0xFFD3D3D3),
+                                      color: const Color(0xFFD3D3D3),
                                       width: 2,
                                     ),
                                     boxShadow: const [

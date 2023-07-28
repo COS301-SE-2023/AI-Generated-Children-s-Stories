@@ -23,10 +23,10 @@ class HomeChangeNotifier extends ChangeNotifier {
 
   //fetch the currently reading story
   //this will be displayed on the home screen
-  Future<void> fetchCurrentlyReading() async {
+  Future<void> fetchCurrentlyReading(BuildContext context) async {
     _isLoading = true;
     notifyListeners();
-    _stories = await _getStoriesService.fetchCurrentlyReading();
+    _stories = await _getStoriesService.fetchCurrentlyReading(context);
     _isLoading = false;
     notifyListeners();
   }
