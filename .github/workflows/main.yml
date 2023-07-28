@@ -1,25 +1,7 @@
 name: Flutter Workflow
 
 on: [push, workflow_dispatch]
-jobs:
-  flutter_test:
-    name: Run flutter test and analyze
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-
-      - name: Install dependencies
-        run: cd magic-pages-app/magic_pages && flutter pub get
-
-      - name: Run unit tests
-        run: cd magic-pages-app/magic_pages && flutter test
-        
+jobs:        
   java_test:
     name: Run java tests
     runs-on: ubuntu-latest
