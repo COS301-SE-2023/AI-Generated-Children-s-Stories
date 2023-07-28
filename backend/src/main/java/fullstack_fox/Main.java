@@ -18,7 +18,6 @@ public class Main implements CommandLineRunner{
     @Autowired private PageRepository pageRepo;
     @Autowired private StoryRepository storyRepo;
 
-
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
