@@ -18,7 +18,7 @@ jobs:
         run: cd magic-pages-app/magic_pages && flutter pub get
 
       - name: Run unit tests
-        run: cd magic-pages-app/magic_pages && flutter test --coverage
+        run: cd magic-pages-app/magic_pages && flutter test
       
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
@@ -39,7 +39,7 @@ jobs:
           distribution: 'adopt'
         
       - name: Run tests
-        run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package --coverage
+        run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package
       
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
