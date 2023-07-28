@@ -57,7 +57,7 @@ void main() {
       //--------------------- LOGIN PAGE ----------------//
 
       //check that the login page is displayed
-      expect(find.text('Ask a grown up to help you log in.'), findsOneWidget);
+      expect(find.text('Ask a grown up to help you'), findsOneWidget);
 
       //ensure login button is present
       expect(find.byKey(const Key('GoogleLogin')), findsOneWidget);

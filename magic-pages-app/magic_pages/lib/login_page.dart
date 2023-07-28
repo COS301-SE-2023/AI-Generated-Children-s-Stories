@@ -45,7 +45,6 @@ class LoginPage extends StatelessWidget {
           print(checkToken);
           print(checkId);
 
-
           if (checkToken == null || checkId == null) {
             return false;
           }
@@ -198,6 +197,7 @@ class LoginPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             GestureDetector(
+                              key: const Key('GoogleLogin'),
                               onTap: () async {
                                 bool success = await signInWithGoogle(context);
                                 if (success) {
@@ -225,30 +225,29 @@ class LoginPage extends StatelessWidget {
                                       )
                                     ]),
                                 child: const Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/google-logo.png'),
-                                          width: 25,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image(
+                                        image: AssetImage(
+                                            'assets/images/google-logo.png'),
+                                        width: 25,
+                                      ),
+                                      SizedBox(width: 8),
+                                      Text(
+                                        'LOGIN WITH GOOGLE',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xFFFE8D29),
                                         ),
-                                        SizedBox(width: 8),
-                                        Text(
-                                          'LOGIN WITH GOOGLE',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xFFFE8D29),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
+                            ),
                             GestureDetector(
                               onTap: () {
                                 print("sign in with apple...");
