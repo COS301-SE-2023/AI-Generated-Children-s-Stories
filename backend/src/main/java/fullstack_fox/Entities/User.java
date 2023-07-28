@@ -10,8 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name="User")
 public class User {
-
-
+    
     //user class must have uid and api token
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
