@@ -4,7 +4,6 @@ import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.UserStories;
 import fullstack_fox.Repositories.UserStoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,4 +24,15 @@ public class UserStoriesService {
         return userStories.stream().map(UserStories::getStory).collect(Collectors.toList());
     }
 
+
+    public List<Story> getAllUnlikedStories(Long userId) {
+        List<UserStories> userStories = userStoriesRepository.getAllUnlikedStories(userId);
+        return userStories.stream().map(UserStories::getStory).collect(Collectors.toList());
+    }
+
+
+    public List<Story> getCurrentlyReading(Long userId) {
+        List<UserStories> userStories = userStoriesRepository.getCurrentlyReading(userId);
+        return userStories.stream().map(UserStories::getStory).collect(Collectors.toList());
+    }
 }

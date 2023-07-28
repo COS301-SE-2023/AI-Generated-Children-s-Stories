@@ -29,28 +29,23 @@ class _NavbarWidgetState extends State<NavbarWidget> {
         children: [
           Container(
             padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/explore.png',
-                    width: 42,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/explore.png',
+                  width: 42,
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  'Books',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF000000),
                   ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Books',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
+                ),
+              ]
             ),
           ),
           Container(
@@ -62,7 +57,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               child: Column(
                 children: [
                   Image.asset(
-                    'images/homeOutline.png',
+                    'assets/images/homeOutline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -88,7 +83,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               child: Column(
                 children: [
                   Image.asset(
-                    'images/likedOutline.png',
+                    'assets/images/likedOutline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -122,7 +117,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               child: Column(
                 children: [
                   Image.asset(
-                    'images/exploreOutline.png',
+                    'assets/images/exploreOutline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -141,28 +136,23 @@ class _NavbarWidgetState extends State<NavbarWidget> {
           ),
           Container(
             padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/home.png',
-                    width: 42,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/home.png',
+                  width: 42,
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF000000),
                   ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
+                ),
+              ]
             ),
           ),
           Container(
@@ -174,7 +164,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               child: Column(
                 children: [
                   Image.asset(
-                    'images/likedOutline.png',
+                    'assets/images/likedOutline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -208,7 +198,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               child: Column(
                 children: [
                   Image.asset(
-                    'images/exploreOutline.png',
+                    'assets/images/exploreOutline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -234,7 +224,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               child: Column(
                 children: [
                   Image.asset(
-                    'images/homeOutline.png',
+                    'assets/images/homeOutline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -253,28 +243,23 @@ class _NavbarWidgetState extends State<NavbarWidget> {
           ),
           Container(
             padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'images/liked.png',
-                    width: 42,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/liked.png',
+                  width: 42,
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  'Liked',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF000000),
                   ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Liked',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
+                ),
+              ]
             ),
           ),
         ],

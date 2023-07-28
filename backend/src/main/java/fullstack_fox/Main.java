@@ -25,20 +25,19 @@ public class Main implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-       // createStoryAndPage();
         FirebaseConfig firebaseConfig = new FirebaseConfig();
         //createStoryAndPage();
     }
 
     private void createStoryAndPage() {
-        Story newStory = new Story("Andy the ant", "trailer");
+        Story newStory = new Story("Benny the bear", "trailer 2");
         storyRepo.save(newStory);
         
-        Page newPage = new Page("image", "text", newStory);
+        Page newPage = new Page("benny", "text", newStory);
         pageRepo.save(newPage);
-        newPage = new Page("image2", "text2", newStory);
+        newPage = new Page("benny", "text2", newStory);
         pageRepo.save(newPage);
-        newPage = new Page("image3", "text3", newStory);
+        newPage = new Page("benny", "text3", newStory);
         pageRepo.save(newPage);
     }
 
