@@ -1,6 +1,4 @@
-import 'package:wave/config.dart';
-import 'package:wave/wave.dart';
-
+import 'Wave_Widget.dart';
 import 'story.dart';
 import 'package:flutter/material.dart';
 import 'navbar.dart';
@@ -57,27 +55,7 @@ class _StoryListState extends State<StoryList> {
         child: Center(
           child: Stack(
             children: [
-              WaveWidget(
-                config: CustomConfig(
-                  colors: [
-                    const Color(0xFF84370F),
-                    const Color(0xFFFE8D29),
-                    const Color(0xFFFFF3E9),
-                  ],
-                  durations: [
-                    16000,
-                    18000,
-                    22000,
-                  ],
-                  heightPercentages: [
-                    -0.08,
-                    -0.07,
-                    -0.0525,
-                  ],
-                ),
-                size: const Size(double.infinity, 1000),
-                waveAmplitude: 0,
-              ),
+              const WaveHeaderWidget(),
               Column(
                 children: [
                   _storyListChangeNotifier.isLoading

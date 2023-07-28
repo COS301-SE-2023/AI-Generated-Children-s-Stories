@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:wave/config.dart';
-import 'package:wave/wave.dart';
+import 'icon_button_widget.dart';
+import 'wave_widget.dart';
+
 
 class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,27 +16,7 @@ class SignupPage extends StatelessWidget {
         child: Center(
           child: Stack(
             children: [
-              WaveWidget(
-                config: CustomConfig(
-                  colors: [
-                    const Color(0xFF84370F),
-                    const Color(0xFFFE8D29),
-                    const Color(0xFFFFF3E9),
-                  ],
-                  durations: [
-                    16000,
-                    18000,
-                    22000,
-                  ],
-                  heightPercentages: [
-                    -0.08,
-                    -0.07,
-                    -0.0525,
-                  ],
-                ),
-                size: Size(MediaQuery.of(context).size.width, 1000),
-                waveAmplitude: 0,
-              ),
+              const WaveHeaderWidget(),
               Column(
                 children: [
                   Stack(
@@ -88,95 +73,21 @@ class SignupPage extends StatelessWidget {
                                     Navigator.pushNamed(context, '/home');
                                   },
                                   child: Container(
-                                    height: 50,
-                                    width: double.infinity,
-                                    margin: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFFDFDFD),
-                                      borderRadius: BorderRadius.circular (25),
-                                      border: Border.all(
-                                        color: Color(0xFFD3D3D3),
-                                        width: 2,
-                                      ),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Color(0xFFD3D3D3),
-                                          spreadRadius: 0,
-                                          blurRadius: 0,
-                                          offset: Offset(0,6),
-                                        )
-                                      ]
-                                    ),
-                                    child: const Center(
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Image(
-                                            image: AssetImage('assets/images/google-logo.png'),
-                                            width: 25,
-                                          ),
-                                          SizedBox(width: 8),
-                                          Text(
-                                            'GET STARTED WITH GOOGLE',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xFFFE8D29),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                    margin: const EdgeInsets.only(bottom: 20),
+                                    child: const IconButtonWidget(
+                                      message: 'GET STARTED WITH GOOGLE',
+                                      destination: '/home',
+                                      image: 'assets/images/google-logo.png',
+                                      imageSize: 25,
                                     ),
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/home');
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    width: double.infinity,
-                                    margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFFDFDFD),
-                                      borderRadius: BorderRadius.circular (25),
-                                      border: Border.all(
-                                        color: Color(0xFFD3D3D3),
-                                        width: 2,
-                                      ),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Color(0xFFD3D3D3),
-                                          spreadRadius: 0,
-                                          blurRadius: 0,
-                                          offset: Offset(0,6),
-                                        )
-                                      ]
-                                    ),
-                                    child: const Center(
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Image(
-                                            image: AssetImage('assets/images/apple-logo.png'),
-                                            width: 25,
-                                          ),
-                                          SizedBox(width: 8),
-                                          Text(
-                                            'GET STARTED WITH APPLE',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xFFFE8D29),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                Platform.isIOS ? const IconButtonWidget(
+                                  message: 'GET STARTED WITH APPLE',
+                                  destination: '/home',
+                                  image: 'assets/images/apple-logo.png',
+                                  imageSize: 25,
+                                ) : const SizedBox(height: 0,),
                               ],
                             ),
                           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wave/config.dart';
-import 'package:wave/wave.dart';
+
 import 'package:scroll_snap_list/scroll_snap_list.dart';
+import 'wave_widget.dart';
 import 'navbar.dart';
 import 'my_header.dart';
 import 'home_change_notifier.dart';
@@ -57,27 +57,7 @@ class _HomeState extends State<Home> {
         child: Center(
           child: Stack(
             children: [
-              WaveWidget(
-                config: CustomConfig(
-                  colors: [
-                    const Color(0xFF84370F),
-                    const Color(0xFFFE8D29),
-                    const Color(0xFFFFF3E9),
-                  ],
-                  durations: [
-                    16000,
-                    18000,
-                    22000,
-                  ],
-                  heightPercentages: [
-                    -0.08,
-                    -0.07,
-                    -0.0525,
-                  ],
-                ),
-                size: const Size(double.infinity, double.infinity),
-                waveAmplitude: 0,
-              ),
+              const WaveHeaderWidget(),
               Column(
                 children: [
                   //if loading, show loading message

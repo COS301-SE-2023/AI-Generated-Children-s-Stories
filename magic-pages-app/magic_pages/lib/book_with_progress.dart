@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import 'button_widget.dart';
+
 /// This class represents...
 
 class BookWithProgress extends StatefulWidget {
@@ -81,85 +83,14 @@ class _BookWithProgressState extends State<BookWithProgress> {
             progressColor: Color(0xFFFE8D29),
           ),
         ),
-        // ProgressBar(
-        //   currentPages: widget.currentPage,
-        //   totalPages: widget.totalPages,
-        // ),
-        GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/insideAStory', arguments: widget.id);
-                    },
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFE8D29),
-                        borderRadius: BorderRadius.circular (25),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0xFF84370F),
-                            spreadRadius: 0,
-                            blurRadius: 0,
-                            offset: Offset(0,6),
-                          )
-                        ]
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'VIEW',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFDFDFD),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+        Container(
+          margin: const EdgeInsets.only(top: 16),
+          child: const ButtonWidget(
+            message: 'VIEW',
+            destination: '/insideAStory',
+          )
+        ),
       ]
     );
-      //               ),
-      //             ]),
-      //             //story title
-      //             Row(children: [
-      //               Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Text(
-      //                   widget.title,
-      //                   textAlign: TextAlign.center,
-      //                   style: const TextStyle(
-      //                       fontSize: 27,
-      //                       //rgb(84, 34, 9)
-      //                       color: Color.fromARGB(255, 84, 34, 9),
-      //                       fontFamily: 'NotoSerif'),
-      //                 ),
-      //               ),
-      //             ]),
-      //             Row(
-      //               children: [
-      //                 ProgressBar(
-      //                   currentPages: widget.currentPage,
-      //                   totalPages: widget.totalPages,
-      //                 )
-      //               ],
-      //             ),
-      //             //prevent overflow
-      //             Row(
-      //                 children: [
-      //                   //image button
-      //                   ImageButton(
-      //                     imagePath: 'assets/images/viewButton.png',
-      //                     route: '/insideAStory',
-      //                     id: widget.id,
-      //                   )
-      //                 ],
-      //               ),
-      //             )
-      //           ],
-      //         ),
-      //       )),
-      // ],
   }
 }

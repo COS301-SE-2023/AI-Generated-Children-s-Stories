@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'button_widget.dart';
 
 class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       body: SafeArea(
         child: Center(
           child: Column(
@@ -43,40 +46,13 @@ class SplashPage extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/signup');
-                    },
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      margin: const EdgeInsets.fromLTRB(16, 0, 16, 48),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFE8D29),
-                        borderRadius: BorderRadius.circular (25),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0xFF84370F),
-                            spreadRadius: 0,
-                            blurRadius: 0,
-                            offset: Offset(0,6),
-                          )
-                        ]
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'GET STARTED',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFDFDFD),
-                          ),
-                        ),
-                      ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 42),
+                    child: const ButtonWidget(
+                      message: 'GET STARTED',
+                      destination: '/signup',
                     ),
                   ),
-                  
                 ],
               ),
             ],
