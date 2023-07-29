@@ -11,6 +11,10 @@ public class UserStories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public User getUser() {
+        return user;
+    }
+
     @JsonBackReference //prevent infinite loop
     @ManyToOne
     @JoinColumn(name="userId")
@@ -22,10 +26,34 @@ public class UserStories {
     @JoinColumn(name="storyId")
     private Story story;
 
+    public boolean getLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
     @Column()
     private boolean liked;
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
     @Column()
     private int pageNumber;
+
+    public UserStories (User user, Story story, boolean liked, int pageNumber){
+        this.user = user;
+        this.story = story;
+        this.liked = liked;
+        this.pageNumber = pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
 
     public Story getStory() {
         return story;

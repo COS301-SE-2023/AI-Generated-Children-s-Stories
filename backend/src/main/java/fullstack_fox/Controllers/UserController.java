@@ -18,9 +18,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/logout/{id}")
-    public ResponseEntity<String> logout(@PathVariable Long id) {
-
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestBody Long id) {
         try {
             //set the api token to null
             userService.nullifyApiToken(id);
@@ -30,14 +29,11 @@ public class UserController {
             return ResponseEntity.ok(response.toString());
 
         } catch (Exception e) {
-
             JSONObject response = new JSONObject();
             response.put("status", "failed");
             response.put("error", e.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response.toString());
-
         }
-
     }
 
     @PostMapping("/authenticate")

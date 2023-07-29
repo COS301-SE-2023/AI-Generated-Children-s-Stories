@@ -26,7 +26,6 @@ public class StoryController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-
     public Story create(@RequestBody Story story){
         storyRespository.save(story);
         return story;
