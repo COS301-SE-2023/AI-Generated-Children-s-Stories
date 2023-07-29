@@ -1,8 +1,11 @@
 package fullstack_fox.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+
 
 @Entity
 @Table(name="Progress")
@@ -12,16 +15,34 @@ public class Progress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference //prevent infinite loop
+    Progress(){}
+
+    @JsonIgnoreProperties("progress")
     @ManyToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     private User user;
 
-    // Story table relationship
-    @JsonBackReference("progress") //prevent infinite loop
+
+    @JsonIgnoreProperties("progress")
     @ManyToOne
-    @JoinColumn(name="storyId")
+    @JoinColumn(name = "storyId")
     private Story story;
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Story getStory() {
+        return story;
+    }
 
     @Column()
     private int pageNumber;
@@ -31,10 +52,4 @@ public class Progress {
         this.story = story;
         this.pageNumber = pageNumber;
     }
-
-    public Story getStory() {
-        return story;
-    }
-
-
 }

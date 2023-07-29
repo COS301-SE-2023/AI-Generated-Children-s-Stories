@@ -21,12 +21,8 @@ public class User {
     private String firebaseUid;
 
     // User table relationship
-    @JsonManagedReference //prevent infinite loop
-    @OneToMany(
-            mappedBy="user",
-            cascade = CascadeType.ALL, //cascade operations
-            orphanRemoval = true //delete story = delete pages
-    )
+    @JsonManagedReference // Define the owner of the relationship
+    @OneToMany(mappedBy = "user")
     private List<Progress> progress = new ArrayList<>();
 
     public User() {}
@@ -56,4 +52,7 @@ public class User {
         return firebaseUid;
     }
 
+    public List<Progress> getProgress() {
+        return progress;
+    }
 }
