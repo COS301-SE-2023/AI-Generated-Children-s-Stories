@@ -15,7 +15,8 @@
             "assets/images/stories/AndyTheAnt/img4.jpg"
         ], 
         "currentPage": 1, 
-        "id": 1
+        "id": 1,
+        "isLiked" : false
     },
     {
         "title": "Benny the Bear",
@@ -33,7 +34,8 @@
             "assets/images/stories/AndyTheAnt/img4.jpg"
         ], 
         "currentPage": 2,
-        "id": 2
+        "id": 2,
+        "isLiked" : false
     }, 
     {
         "title": "Honey the Kitty",
@@ -51,6 +53,7 @@
             "assets/images/stories/AndyTheAnt/img4.jpg"
         ], 
         "currentPage": 3,
-        "id": 3
+        "id": 3,
+        "isLiked" : false
     }
 ]

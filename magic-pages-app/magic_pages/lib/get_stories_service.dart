@@ -18,7 +18,8 @@ class GetStoriesService {
 
   Future<List<Story>> fetchStories() async {
     //await Future.delayed(const Duration(seconds: 5));
-    final String response = await rootBundle.loadString('assets/stories.json');
+    final String response =
+        await rootBundle.loadString('assets/data/stories.json');
     final data = await json.decode(response);
 
     List<Story> stories = [];
@@ -31,6 +32,7 @@ class GetStoriesService {
           textContent: data[i]['textContent'].cast<String>(),
           imageContent: data[i]['imageContent'].cast<String>(),
           currentPage: data[i]['currentPage'],
+          isLiked: data[i]['isLiked'],
           id: data[i]['id']));
     }
 
@@ -66,6 +68,31 @@ class GetStoriesService {
 
     List<Story> list = [];
     return list;
+  }
+
+  Future<List<Story>> fetchLikedStories() async {
+    //await Future.delayed(const Duration(seconds: 5));
+    final String response =
+        await rootBundle.loadString('assets/data/stories.json');
+    final data = await json.decode(response);
+
+    List<Story> stories = [];
+
+    //add a new story object to the list of stories for each story in the json file
+    for (var i = 0; i < data.length; i++) {
+      if (data[i]['isLiked'] == true) {
+        stories.add(Story(
+            title: data[i]['title'],
+            coverUrl: data[i]['coverUrl'],
+            textContent: data[i]['textContent'].cast<String>(),
+            imageContent: data[i]['imageContent'].cast<String>(),
+            currentPage: data[i]['currentPage'],
+            isLiked: data[i]['isLiked'],
+            id: data[i]['id']));
+      }
+    }
+
+    return stories;
   }
 
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {

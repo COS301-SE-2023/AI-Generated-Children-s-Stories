@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
-import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'navbar.dart';
 import 'my_header.dart';
 import 'home_change_notifier.dart';
@@ -133,3 +134,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
+// For image Image.network('url')
