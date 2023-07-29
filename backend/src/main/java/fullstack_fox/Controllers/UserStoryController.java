@@ -26,9 +26,6 @@ public class UserStoryController {
     UserStoriesService userStoriesService;
 
     @Autowired
-    StoryService storyService;
-
-    @Autowired
     private UserStoriesRepository userStoriesRepository;
 
     @Autowired
@@ -47,12 +44,6 @@ public class UserStoryController {
         Long userId = Long.parseLong(id);
         List<Story> currentlyReading = userStoriesService.findStoriesByUserId(userId);
         return currentlyReading;
-    }
-
-    List<Story> getRandomCurrentlyReading(Long id) {
-        //first check if there are stories that are being read....
-        return userStoriesService.getCurrentlyReading(id);
-
     }
 
     //if there are stories in progress
@@ -87,7 +78,7 @@ public class UserStoryController {
         return toRet;
     }
 
-    @PostMapping( path = "/story/updateProgress",
+    @PostMapping(path = "/story/updateProgress",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateProgress(@RequestBody UserStories userStories) {
