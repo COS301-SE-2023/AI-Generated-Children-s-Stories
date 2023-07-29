@@ -129,7 +129,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: Column(children: [
                 Image.asset(
-                  'assets/images/Home.png',
+                  'assets/images/home.png',
                   width: 42,
                 ),
                 const SizedBox(height: 3),
