@@ -45,7 +45,6 @@ class SplashPage extends StatelessWidget {
                 ),
               ),
               Button(text: 'GET STARTED', route: '/signup'),
-              Button(text: 'LOGIN', route: '/login')
             ],
           ),
         ),
