@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class GlobalVariables {
-  static String ipAddress = "192.168.34.173:8000";
+  static String ipAddress = "192.168.68.108:8000";
 
   static void showSnackbarMessage(String message, context) {
     var mySnackbar = SnackBar(content: Text(message));
@@ -28,7 +28,7 @@ class GlobalVariables {
       return ["2", "12345678"];
     }
 
-    List<String> list = List.empty();
+    List<String> list = [];
     if (id != null) list.add(id);
     if (token != null) list.add(token);
 

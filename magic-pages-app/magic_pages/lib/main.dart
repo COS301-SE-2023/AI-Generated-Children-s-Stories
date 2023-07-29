@@ -9,7 +9,6 @@ import 'story_liked.dart';
 import 'home.dart';
 import 'profile.dart';
 import 'splash.dart';
-import 'login_page.dart';
 
 import 'story_list_change_notifier.dart';
 
@@ -67,7 +66,6 @@ class MyApp extends StatelessWidget {
           child: const SplashPage(),
         ),
         routes: {
-          '/login': (context) => LoginPage(),
           '/signup': (context) => SignupPage(),
           '/splash': (context) => SplashPage(),
           '/storyList': (context) => const StoryList(),

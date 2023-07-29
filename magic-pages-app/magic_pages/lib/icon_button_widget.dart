@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class IconButtonWidget extends StatefulWidget {
   final String message;
-  final String destination;
+  final String? destination;
   final String image;
   final double imageSize;
   
   const IconButtonWidget( {
     super.key, 
     required this.message,
-    required this.destination, 
+    this.destination,
     required this.image, 
     required this.imageSize
   });
@@ -24,19 +24,22 @@ class _IconButtonWidget extends State<IconButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapUp: (val){
+    return Listener(
+      onPointerUp: (val){
         setState(() {
           isPressed = false;
         });
-        Navigator.pushNamed(context, widget.destination);
+        if (widget.destination != null) {
+          String dest = widget.destination.toString();
+          Navigator.pushNamed(context, dest);
+        }
       },
-      onTapDown: (val){
+      onPointerDown: (val){
         setState(() {
           isPressed = true;
         });
       },
-      onTapCancel: (){
+      onPointerCancel: (val){
         setState(() {
           isPressed = false;
         });
