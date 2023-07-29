@@ -6,14 +6,14 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Center(
-          key: Key('SplashPage'),
+          key: const Key('SplashPage'),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
+              const Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,7 +44,13 @@ class SplashPage extends StatelessWidget {
                   ],
                 ),
               ),
-              ButtonWidget(message: 'GET STARTED', destination: '/signup'),
+              Container(
+                margin: const EdgeInsets.only(bottom: 42),
+                child: const ButtonWidget(
+                  message: 'GET STARTED',
+                  destination: '/signup',
+                ),
+              ),
             ],
           ),
         ),
