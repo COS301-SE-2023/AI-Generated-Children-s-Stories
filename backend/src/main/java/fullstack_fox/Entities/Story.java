@@ -27,13 +27,13 @@ public class Story {
     private List<Page> pages = new ArrayList<>();
 
     // UserStories table relationship
-    @JsonManagedReference("story-userStories") //prevent infinite loop
+    @JsonManagedReference("progress") //prevent infinite loop
     @OneToMany(
             mappedBy="story",
             cascade = CascadeType.ALL, //cascade operations
             orphanRemoval = true //delete story = delete pages
     )
-    private List<UserStories> userStories = new ArrayList<>();
+    private List<Progress> progress = new ArrayList<>();
 
     public Story() {
         this.title = "";
@@ -66,11 +66,11 @@ public class Story {
         this.pages.addAll(pages);
     }
 
-    public List<UserStories> getUserStories() {
-        return userStories;
+    public List<Progress> getProgress() {
+        return progress;
     }
 
-    public void setUserStories(List<UserStories> userStories) {
-        this.userStories = userStories;
+    public void setProgress(List<Progress> progress) {
+        this.progress = progress;
     }
 }

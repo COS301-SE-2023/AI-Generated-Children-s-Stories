@@ -27,7 +27,7 @@ public class User {
             cascade = CascadeType.ALL, //cascade operations
             orphanRemoval = true //delete story = delete pages
     )
-    private List<UserStories> userStories = new ArrayList<>();
+    private List<Progress> progress = new ArrayList<>();
 
     public User() {}
     public User(String firebaseUid) {
