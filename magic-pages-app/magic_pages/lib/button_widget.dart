@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'inside_story.dart';
 
 // ignore: must_be_immutable
 class ButtonWidget extends StatefulWidget {
   final String message;
   final String destination;
+  final int? id;
   
   const ButtonWidget( {
     super.key, 
     required this.message,
-    required this.destination
+    required this.destination,
+    this.id
   });
 
   @override
@@ -25,6 +28,14 @@ class _ButtonWidget extends State<ButtonWidget> {
         setState(() {
           isPressed = false;
         });
+        if (widget.id != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => InsideStory(id: widget.id!),
+            ),
+          );
+        }
         Navigator.pushNamed(context, widget.destination);
       },
       onTapDown: (val){
