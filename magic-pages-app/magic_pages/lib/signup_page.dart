@@ -1,13 +1,120 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'global_variables.dart';
 import 'icon_button_widget.dart';
 import 'wave_widget.dart';
+
+import 'package:http/http.dart' as http;
 
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
+
+  Future<bool> sendTokenToBackend(String? token, context) async {
+    String tokenToSend = "";
+
+    if (token != null) {
+      tokenToSend = token.toString();
+    }
+
+    final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
+
+    try {
+      final response = await http.post(url, body: tokenToSend);
+      //check the response code
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = json.decode(response.body);
+
+        if (data["status"] == "success") {
+          //save the API token
+          const storage = FlutterSecureStorage();
+
+          await storage.write(key: "api_token", value: data["api_token"]);
+          await storage.write(key: "id", value: data["id"].toString());
+
+          String? checkToken = await storage.read(key: 'api_token');
+          String? checkId = await storage.read(key: 'id');
+
+          print("token: ");
+          print(checkToken);
+          print(checkId);
+
+          if (checkToken == null || checkId == null) {
+            return false;
+          }
+          return true;
+        }
+      } else {
+        String message =
+            'Error logging in, response code: ${response.statusCode}';
+        if (context.mounted) {
+          GlobalVariables.showSnackbarMessage(message, context);
+        }
+        return false;
+      }
+    } catch (e) {
+      String message = 'Error logging in, message: $e';
+      GlobalVariables.showSnackbarMessage(message, context);
+      return false;
+    }
+    return false;
+  }
+
+  Future<bool> signInWithGoogle(context) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    //initilise a google sign in
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+
+    final GoogleSignInAccount? googleSignInAccount =
+    await googleSignIn.signIn();
+
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken);
+
+      try {
+        final UserCredential userCredential =
+        await auth.signInWithCredential(credential);
+
+        String? token = await userCredential.user?.getIdToken();
+
+        bool success = await sendTokenToBackend(token, context);
+        return success;
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'account-exists-with-different-credential') {
+          if (context.mounted) {
+            GlobalVariables.showSnackbarMessage(
+                'The account already exists with a different credential',
+                context);
+          }
+        } else if (e.code == 'invalid-credential') {
+          if (context.mounted) {
+            GlobalVariables.showSnackbarMessage(
+                'Error occurred while accessing credentials. Try again.',
+                context);
+          }
+        } else {
+          if (context.mounted) {
+            GlobalVariables.showSnackbarMessage('Error $e', context);
+          }
+        }
+      }
+      return false;
+    }
+    return false;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,20 +175,32 @@ class SignupPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/home');
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.only(bottom: 20),
-                                    child: const IconButtonWidget(
-                                      message: 'GET STARTED WITH GOOGLE',
-                                      destination: '/home',
-                                      image: 'assets/images/google-logo.png',
-                                      imageSize: 25,
+
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 20),
+                                  child: GestureDetector(
+                                      behavior: HitTestBehavior.opaque, // Allow outer GestureDetector to receive the tap event
+                                      onTap: () async {
+                                        print("tap outer");
+                                        bool success = await signInWithGoogle(
+                                            context);
+                                        if (success) {
+                                          print("Success!!!!");
+                                          if (context.mounted) {
+                                            Navigator.pushNamed(context, "/home");
+                                          }
+                                        }
+                                      },
+                                      child: const IconButtonWidget(
+                                        message: 'GET STARTED WITH GOOGLE',
+                                        destination: 'invalid',
+                                        image: 'assets/images/google-logo.png',
+                                        imageSize: 25
+                                      ),
                                     ),
                                   ),
-                                ),
+
+
                                 Platform.isIOS ? const IconButtonWidget(
                                   message: 'GET STARTED WITH APPLE',
                                   destination: '/home',

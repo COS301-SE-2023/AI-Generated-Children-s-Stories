@@ -51,12 +51,14 @@ class GetStoriesService {
         Uri.parse("http://${GlobalVariables.ipAddress}/story/random/$id");
 
     try {
+      print("trying get request");
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        print("got random!!!!");
-        print(data);
+        print (response.body);
+        // final data = json.decode(response.body);
+        // print("got random!!!!");
+        // print(data);
       } else {
         if (context.mounted) {
           GlobalVariables.showSnackbarMessage("Failed to get story", context);

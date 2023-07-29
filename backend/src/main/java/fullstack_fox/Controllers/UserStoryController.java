@@ -6,8 +6,11 @@ import fullstack_fox.Entities.UserStories;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Repositories.UserRepository;
 import fullstack_fox.Repositories.UserStoriesRepository;
+import fullstack_fox.services.StoryService;
 import fullstack_fox.services.UserStoriesService;
-import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,13 +19,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 @RestController
 public class UserStoryController {
     @Autowired
     UserStoriesService userStoriesService;
+
+    @Autowired
+    StoryService storyService;
 
     @Autowired
     private UserStoriesRepository userStoriesRepository;
@@ -45,43 +49,42 @@ public class UserStoryController {
         return currentlyReading;
     }
 
+    List<Story> getRandomCurrentlyReading(Long id) {
+        //first check if there are stories that are being read....
+        return userStoriesService.getCurrentlyReading(id);
+
+    }
+
+    //if there are stories in progress
+    //display all stories in progress
+
+    //if there are no stories in progress
+    //pick a random story and show it
 
     @GetMapping("/story/random/{id}")
-    public Story getRandomUnreadUnlikedStory(@PathVariable Long id) {
-
-        //first check if there are stories that are being read....
+    public List<Story> getRandomUnreadUnlikedStory(@PathVariable Long id) {
+        //get currently reading
         List<Story> currentlyReading = userStoriesService.getCurrentlyReading(id);
 
-        if (!currentlyReading.isEmpty()) {
-            int index = new Random().nextInt(currentlyReading.size());
-            return currentlyReading.get(index);
-        } else {
-            System.out.println("Currently reading null");
+        //currently reading has content
+        if (!currentlyReading.isEmpty())
+            return currentlyReading;
+
+        //get a random story and show it
+        List<Story> allStories = (List<Story>) storyRepository.findAll();
+
+        if (allStories.size() == 0) {
+            System.out.println("There are no stories in the database!");
+            return null;
         }
 
-        //Fetch all unliked stories (in story table but not in liked table)
-        List<Story> allUnlikedStories = userStoriesService.getAllUnlikedStories(id);
-
-        //get all the stories in the table
-        List<UserStories> userStories = userStoriesRepository.findByUserId(id);
-
-        //get the stories that aren't overlapping
-        //present in all unlikedStories
-        //not present in userStories
-        List<Story> unreadUnlikedStories = allUnlikedStories.stream()
-                .filter(story -> userStories.stream()
-                        .noneMatch(userStory -> userStory.getStory().getId().equals(story.getId())))
-                .collect(Collectors.toList());
-
-        //Get a random story in the list
-        if (!unreadUnlikedStories.isEmpty()) {
-            int index = new Random().nextInt(unreadUnlikedStories.size());
-            return unreadUnlikedStories.get(index);
-        }else {
-            System.out.println("Unread Unliked null");
-        }
-
-        return null;
+        Random random = new Random();
+        int randomIndex = random.nextInt(allStories.size());
+        //get a random index and return it
+        Story story = allStories.get(randomIndex);
+        List<Story> toRet = new ArrayList<>();
+        toRet.add(story);
+        return toRet;
     }
 
     @PostMapping( path = "/story/updateProgress",

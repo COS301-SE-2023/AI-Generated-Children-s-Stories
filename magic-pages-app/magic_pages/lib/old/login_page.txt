@@ -11,6 +11,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:magic_pages/global_variables.dart';
 
+
+//REMOVE THIS PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 class LoginPage extends StatelessWidget {
   Future<bool> sendTokenToBackend(String? token, context) async {
     String tokenToSend = "";
@@ -198,7 +201,7 @@ class LoginPage extends StatelessWidget {
                                 bool success = await signInWithGoogle(context);
                                 if (success) {
                                   if (context.mounted) {
-                                    Navigator.pushNamed(context, "/home");
+                                    //Navigator.pushNamed(context, "/home");
                                   }
                                 }
                               },
