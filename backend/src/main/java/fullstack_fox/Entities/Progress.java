@@ -15,7 +15,7 @@ public class Progress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    Progress(){}
+    public Progress(){}
 
     @JsonIgnoreProperties("progress")
     @ManyToOne
@@ -50,6 +50,10 @@ public class Progress {
     public Progress(User user, Story story, int pageNumber) {
         this.user = user;
         this.story = story;
+        this.pageNumber = pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
 }
