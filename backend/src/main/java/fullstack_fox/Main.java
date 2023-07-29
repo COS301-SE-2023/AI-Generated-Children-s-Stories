@@ -18,7 +18,6 @@ public class Main implements CommandLineRunner{
     @Autowired private PageRepository pageRepo;
     @Autowired private StoryRepository storyRepo;
 
-
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
@@ -26,7 +25,7 @@ public class Main implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
         FirebaseConfig firebaseConfig = new FirebaseConfig();
-        //createStoryAndPage();
+        createStoryAndPage();
     }
 
     private void createStoryAndPage() {

@@ -11,7 +11,6 @@ import java.util.UUID;
 @Table(name="User")
 public class User {
 
-
     //user class must have uid and api token
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

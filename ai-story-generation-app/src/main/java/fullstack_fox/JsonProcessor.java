@@ -15,7 +15,6 @@ public class JsonProcessor {
     }
 
     public ArrayList<String> readJson(String inFName) throws URISyntaxException {
-
         try (
                 FileReader fileReader = new FileReader(
                 new File(this.getClass().getResource("resources/" + inFName).toURI()))) {
@@ -42,14 +41,14 @@ public class JsonProcessor {
     public void writeStoryToJson(Story story, String inFName) {
         JSONObject jsonStory = new JSONObject();
         jsonStory.put("title", story.title);
-        jsonStory.put("size", story.numPages);
+        // jsonStory.put("size", story.numPages);
         jsonStory.put("trailer", story.trailer);
         JSONArray jsonPages = new JSONArray();
         for (Page page : story.pages) {
             JSONObject jsonPage = new JSONObject();
             jsonPage.put("image", page.getImageUrl());
             jsonPage.put("text", page.getContent());
-            jsonPage.put("pageNumber", jsonPages.length() + 1);
+            // jsonPage.put("pageNumber", jsonPages.length() + 1);
             jsonPages.put(jsonPage);
         }
         jsonStory.put("pages", jsonPages);
