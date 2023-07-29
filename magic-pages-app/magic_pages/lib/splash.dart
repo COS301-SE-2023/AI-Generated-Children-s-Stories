@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_pages/button.dart';
+import 'package:magic_pages/button_widget.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -44,7 +44,7 @@ class SplashPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Button(text: 'GET STARTED', route: '/signup'),
+              ButtonWidget(message: 'GET STARTED', destination: '/signup'),
             ],
           ),
         ),
