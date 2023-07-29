@@ -23,11 +23,14 @@ class GlobalVariables {
     print("token from storage: ");
     print(token);
 
+    if (id == null || token == null) {
+      //store mock for testing
+      return ["2", "12345678"];
+    }
+
     List<String> list = List.empty();
-    if (id != null)
-      list.add(id);
-    if (token != null)
-      list.add(token);
+    if (id != null) list.add(id);
+    if (token != null) list.add(token);
 
     return list;
   }

@@ -194,7 +194,6 @@ class LoginPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              key: const Key('GoogleLogin'),
                               onTap: () async {
                                 bool success = await signInWithGoogle(context);
                                 if (success) {
@@ -294,6 +293,20 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            GestureDetector(
+                              //test login, go to home page
+                              onTap: () async {
+                                if (context.mounted) {
+                                  Navigator.pushNamed(context, "/home");
+                                }
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.only(top: 20.0),
+                                child: Text(
+                                  "Login with test account",
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),

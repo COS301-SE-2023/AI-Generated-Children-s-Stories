@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:magic_pages/progress_bar.dart';
 
 /// This class represents
 
@@ -33,6 +33,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
             width: 300,
             height: 300,
             child: Image.asset(
+              key: const Key('StoryCover'),
               widget.imagePath,
               fit: BoxFit.contain,
             ),
@@ -49,39 +50,8 @@ class _BookWithProgressState extends State<BookWithProgress> {
                   fontFamily: 'NotoSerif'),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(64, 0, 64, 0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color(0xFFD3D3D3),
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: LinearPercentIndicator(
-              padding: const EdgeInsets.all(0),
-              barRadius: const Radius.circular(20),
-              backgroundColor: const Color(0xFFFFFFFF),
-              animation: true,
-              lineHeight: 35.0,
-              animationDuration: 1000,
-              percent: widget.currentPage / widget.totalPages,
-              center: Text(
-                '${(widget.currentPage / widget.totalPages * 100).round()}%',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    color: Color(0xFF542209),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    fontFamily: 'Poppins'),
-              ),
-              progressColor: Color(0xFFFE8D29),
-            ),
-          ),
-          // ProgressBar(
-          //   currentPages: widget.currentPage,
-          //   totalPages: widget.totalPages,
-          // ),
+          ProgressBar(
+              totalPages: widget.totalPages, currentPages: widget.currentPage),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, '/insideAStory',
@@ -92,7 +62,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
               width: double.infinity,
               margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               decoration: BoxDecoration(
-                  color: Color(0xFFFE8D29),
+                  color: const Color(0xFFFE8D29),
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: const [
                     BoxShadow(

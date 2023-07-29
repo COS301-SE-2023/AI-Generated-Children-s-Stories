@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/button.dart';
 
 class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Center(
+          key: Key('SplashPage'),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,44 +44,8 @@ class SplashPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/signup');
-                    },
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      margin: const EdgeInsets.fromLTRB(16, 0, 16, 48),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFE8D29),
-                        borderRadius: BorderRadius.circular (25),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0xFF84370F),
-                            spreadRadius: 0,
-                            blurRadius: 0,
-                            offset: Offset(0,6),
-                          )
-                        ]
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'GET STARTED',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFDFDFD),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              Button(text: 'GET STARTED', route: '/signup'),
+              Button(text: 'LOGIN', route: '/login')
             ],
           ),
         ),

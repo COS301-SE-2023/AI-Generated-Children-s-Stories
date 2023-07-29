@@ -37,8 +37,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
-    //TODO: pass in the user id and token to this fuction...
     getCurrentlyReading(context);
   }
 
