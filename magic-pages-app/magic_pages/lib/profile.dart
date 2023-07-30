@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/wave_widget.dart';
 import 'navbar.dart';
 import 'my_header.dart';
+import 'button_widget.dart';
 
 /// This class represents the profile page.
 /// The UI contains a header and a button to log out.
@@ -26,42 +28,38 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 243, 233),
+    return const Scaffold(
       body: SafeArea(
-        //back button
-        child: Column(
-          children: [
-            const Column(
-              children: [
-                MyHeader(
-                  message: 'Profile',
-                ),
-                SizedBox(height: 50),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Center(
+          child: Stack(
+            children: [
+              WaveHeaderWidget(),
+              Column(
                 children: [
-                  FilledButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color(0xFFFE8D29)),
+                  Column(
+                    children: [
+                      MyHeader(
+                        message: 'Profile',
+                      ),
+                      SizedBox(height: 50),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ButtonWidget(destination: '/signup', message: 'LOGOUT',)
+                      ],
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    child: const Text('Log Out'),
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(),
+      bottomNavigationBar: NavbarWidget(),
     );
   }
 }

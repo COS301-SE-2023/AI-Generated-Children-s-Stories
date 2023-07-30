@@ -64,7 +64,6 @@ class _BookWidget extends State<BookWidget> {
               setState(() {
                 isHeartAnimating = true;
                 widget.isLiked = true;
-                //widget.story.setIsLiked(!widget.story.getIsLiked());
               });
             },
           ),

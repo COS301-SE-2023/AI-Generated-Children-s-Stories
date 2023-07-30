@@ -71,16 +71,16 @@ class _BookWithProgressState extends State<BookWithProgress> {
             animationDuration: 1000,
             percent: widget.currentPage / widget.totalPages,
             center: Text(
-        '${(widget.currentPage / widget.totalPages * 100).round()}%',
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          color: Color(0xFF542209),
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-          fontFamily: 'Poppins'
-        ),
-      ),
-            progressColor: Color(0xFFFE8D29),
+              '${(widget.currentPage / widget.totalPages * 100).round()}%',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Color(0xFF542209),
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                fontFamily: 'Poppins'
+              ),
+            ),
+            progressColor: const Color(0xFFFE8D29),
           ),
         ),
         Container(
