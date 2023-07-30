@@ -53,7 +53,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/homeOutline.png',
+                    'assets/images/home-outline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -77,7 +77,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/likedOutline.png',
+                    'assets/images/liked-outline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -109,7 +109,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/exploreOutline.png',
+                    'assets/images/explore-outline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -152,7 +152,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/likedOutline.png',
+                    'assets/images/liked-outline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -184,7 +184,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/exploreOutline.png',
+                    'assets/images/explore-outline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -208,7 +208,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/homeOutline.png',
+                    'assets/images/home-outline.png',
                     width: 42,
                   ),
                   const SizedBox(height: 3),

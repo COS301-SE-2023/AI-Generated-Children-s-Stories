@@ -163,7 +163,7 @@ class SignupPage extends StatelessWidget {
                                   ),
                                 ),
                                 const Image(
-                                  image: AssetImage('assets/images/MascotWinking.png'),
+                                  image: AssetImage('assets/images/mascot-winking.png'),
                                   width: 144,
                                 )
                               ],

@@ -108,7 +108,7 @@ class InsideStoryState extends State<InsideStory> {
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: AssetImage('assets/images/Wave.png'),
+                        image: AssetImage('assets/images/wave.png'),
                       ),
                     ),
                   ),
@@ -149,7 +149,7 @@ class InsideStoryState extends State<InsideStory> {
                     child: Padding(
                   padding: const EdgeInsets.only(right: 5),
                   child: Image.asset(
-                    'assets/images/MascotWinking.png',
+                    'assets/images/mascot-winking.png',
                     width: MediaQuery.of(context).size.width * 0.2,
                   ),
                 )),

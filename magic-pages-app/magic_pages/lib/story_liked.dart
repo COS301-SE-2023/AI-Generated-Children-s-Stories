@@ -87,7 +87,7 @@ class _StoryLikedState extends State<StoryLiked> {
                                             child:  Transform.rotate(
                                               angle: 0.125,
                                               child: const Image(
-                                                image: AssetImage('assets/images/Mascot.png'),
+                                                image: AssetImage('assets/images/mascot.png'),
                                                 width: 150,
                                               ),
                                             ),
@@ -128,7 +128,7 @@ class _StoryLikedState extends State<StoryLiked> {
                                             child:  Transform.rotate(
                                               angle: 0.125,
                                               child: const Image(
-                                                image: AssetImage('assets/images/Mascot.png'),
+                                                image: AssetImage('assets/images/mascot.png'),
                                                 width: 150,
                                               ),
                                             ),

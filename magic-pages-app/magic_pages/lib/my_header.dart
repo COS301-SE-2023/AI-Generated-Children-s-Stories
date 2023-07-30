@@ -32,7 +32,7 @@ class _MyHeaderState extends State<MyHeader> {
                       child: Transform.rotate(
                         angle: -0.2,
                         child: const Image(
-                          image: AssetImage('assets/images/MascotWinking.png'),
+                          image: AssetImage('assets/images/mascot-winking.png'),
                           width: 48,
                         ),
                       ),
@@ -59,7 +59,7 @@ class _MyHeaderState extends State<MyHeader> {
                         child: const Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Image(
-                            image: AssetImage('assets/images/Profile.png'),
+                            image: AssetImage('assets/images/profile.png'),
                             width: 40,
                           ),
                         ),
@@ -91,7 +91,7 @@ class _MyHeaderState extends State<MyHeader> {
     //           decoration: const BoxDecoration(
     //             image: DecorationImage(
     //               fit: BoxFit.fill,
-    //               image: AssetImage('assets/images/Wave.png'),
+    //               image: AssetImage('assets/images/wave.png'),
     //             ),
     //           ),
     //         ),
@@ -107,7 +107,7 @@ class _MyHeaderState extends State<MyHeader> {
     //           padding: EdgeInsets.only(
     //               left: MediaQuery.of(context).size.width * 0.01),
     //           child: Image.asset(
-    //             'assets/images/MascotWinking.png',
+    //             'assets/images/mascot-winking.png',
     //             width: MediaQuery.of(context).size.width * 0.04,
     //           ),
     //         ),
@@ -132,7 +132,7 @@ class _MyHeaderState extends State<MyHeader> {
     //         child: Padding(
     //           padding: const EdgeInsets.only(right: 5),
     //           child: IconButton(
-    //             icon: Image.asset('assets/images/Profile.png'),
+    //             icon: Image.asset('assets/images/profile.png'),
     //             iconSize: 50,
     //             onPressed: () {
     //               Navigator.pushNamed(context, '/profile');
