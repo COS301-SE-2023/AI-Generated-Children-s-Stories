@@ -28,7 +28,7 @@ class GetStoriesService {
     for (var i = 0; i < data.length; i++) {
       stories.add(Story(
           title: data[i]['title'],
-          coverUrl: data[i]['coverUrl'],
+          trailer: data[i]['coverUrl'],
           textContent: data[i]['textContent'].cast<String>(),
           imageContent: data[i]['imageContent'].cast<String>(),
           currentPage: data[i]['currentPage'],
@@ -48,7 +48,7 @@ class GetStoriesService {
 
     //make an API call and pass in the id and token
     final url =
-        Uri.parse("http://${GlobalVariables.ipAddress}/story/random/$id");
+        Uri.parse("http://${GlobalVariables.ipAddress}/progress/$id");
 
     try {
       print("trying get request");
@@ -56,12 +56,46 @@ class GetStoriesService {
 
       if (response.statusCode == 200) {
         print (response.body);
-        // final data = json.decode(response.body);
-        // print("got random!!!!");
-        // print(data);
+
+        final data = jsonDecode(response.body);
+
+        /*
+       {
+        "pageNumber": 0,
+        "story": {
+            "title": "Benny the bear",
+            "trailer": "trailer 2",
+            "pages": [
+                {
+                    "id": 1,
+                    "image": "benny",
+                    "text": "text"
+                },
+                {
+                    "id": 2,
+                    "image": "benny",
+                    "text": "text2"
+                },
+                {
+                    "id": 3,
+                    "image": "benny",
+                    "text": "text3"
+                }
+            ],
+            "id": null
+        },
+        "user": 1
+    }
+         */
+
+        for (var progressEntity in data) {
+            //create a book
+
+        }
+
       } else {
         if (context.mounted) {
-          GlobalVariables.showSnackbarMessage("Failed to get story", context);
+          GlobalVariables.showSnackbarMessage("Failed to get story: ${response.statusCode}", context);
         }
       }
     } catch (e) {
@@ -85,7 +119,7 @@ class GetStoriesService {
       if (data[i]['isLiked'] == true) {
         stories.add(Story(
             title: data[i]['title'],
-            coverUrl: data[i]['coverUrl'],
+            trailer: data[i]['coverUrl'],
             textContent: data[i]['textContent'].cast<String>(),
             imageContent: data[i]['imageContent'].cast<String>(),
             currentPage: data[i]['currentPage'],

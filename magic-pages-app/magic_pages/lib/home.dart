@@ -127,7 +127,7 @@ class _HomeState extends State<Home> {
     Story story = _currentlyReadingStory[index];
     return BookWithProgress(
       title: story.title,
-      imagePath: story.coverUrl,
+      imagePath: story.trailer,
       id: story.id,
       currentPage: story.currentPage,
       totalPages: story.textContent.length,

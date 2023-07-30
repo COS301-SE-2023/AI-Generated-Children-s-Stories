@@ -19,16 +19,19 @@ public class ProgressDTO {
     private int pageNumber;
 
     public void setStory(Story story) {
-        this.story = story;
+        this.story = new StoryDTO();
+        this.story.setPages(story.getPages());
+        this.story.setTitle(story.getTitle());
+        this.story.setTrailer(story.getTrailer());
     }
 
-    private Story story;
+    private StoryDTO story;
 
     public Long getUser() {
         return user;
     }
 
-    public Story getStory() {
+    public StoryDTO getStory() {
         return story;
     }
 

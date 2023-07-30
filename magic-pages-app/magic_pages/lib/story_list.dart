@@ -34,15 +34,17 @@ class _StoryListState extends State<StoryList> {
   @override
   void initState() {
     super.initState();
-    getStories();
+    Future.delayed(Duration.zero,() {
+      getStories(context);
+    });
     _stories = [];
   }
 
   /// fetch stories
   /// it uses the story list change notifier to fetch the list of stories
   /// @return void
-  void getStories() async {
-    await _storyListChangeNotifier.fetchStories();
+  void getStories(BuildContext context) async {
+    await _storyListChangeNotifier.fetchStories(context);
     setState(() {
       _stories = _storyListChangeNotifier.stories;
     });

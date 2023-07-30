@@ -25,10 +25,10 @@ class StoryListChangeNotifier extends ChangeNotifier {
   /// fetch the list of stories
   /// this function is called when the user opens the story list page
   /// @return the list of stories
-  Future<void> fetchStories() async {
+  Future<void> fetchStories(BuildContext context) async {
     _isLoading = true;
     notifyListeners();
-    _stories = await _getStoriesService.fetchStories();
+    _stories = await _getStoriesService.fetchCurrentlyReading(context);
     _isLoading = false;
     notifyListeners();
   }

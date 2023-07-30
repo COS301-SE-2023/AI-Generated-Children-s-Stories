@@ -7,7 +7,7 @@
 
 class Story {
   final String title;
-  final String coverUrl;
+  final String trailer;
   final List<String> textContent;
   final List<String> imageContent;
   final int currentPage;
@@ -17,7 +17,7 @@ class Story {
 
   Story(
       {required this.title,
-      required this.coverUrl,
+      required this.trailer,
       required this.textContent,
       required this.imageContent,
       required this.currentPage,
@@ -50,7 +50,7 @@ class Story {
   /// get the cover url of the story
   /// @return the cover url of the story
   String getCoverUrl() {
-    return coverUrl;
+    return trailer;
   }
 
   /// get the text content of the story

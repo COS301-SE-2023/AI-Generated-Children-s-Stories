@@ -77,8 +77,11 @@ public class ProgressController {
         }
 
         for (Story story : allBooks) {
-            Progress progress = new Progress(myUser, story, 0);
-            progressDTOList.add(convertToProgressDTO(progress));
+            Optional<Progress> progress = progressRepository.findByUserAndStory(myUser, story);
+            if (progress.isPresent()) {
+                Progress p = progress.get();
+                progressDTOList.add(convertToProgressDTO(p));
+            }
         }
 
         if (progressDTOList.size() == 0)
