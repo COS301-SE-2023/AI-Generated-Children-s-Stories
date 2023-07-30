@@ -111,6 +111,7 @@ public class ProgressController {
         progressDTO.setUser(progress.getUser().getId());
         progressDTO.setPageNumber(progressDTO.getPageNumber());
 
+
         return progressDTO;
     }
 

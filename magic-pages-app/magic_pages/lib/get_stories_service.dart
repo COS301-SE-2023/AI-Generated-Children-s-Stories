@@ -41,6 +41,9 @@ class GetStoriesService {
 
   //read the json file and return the currently reading story (simulates an api call)
   Future<List<Story>> fetchCurrentlyReading(BuildContext context) async {
+
+    List<Story> stories = [];
+
     List<String> idToken = await GlobalVariables.getIdAndToken();
 
     String id = idToken[0];
@@ -55,43 +58,43 @@ class GetStoriesService {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        print (response.body);
+        //print (response.body);
 
         final data = jsonDecode(response.body);
 
-        /*
-       {
-        "pageNumber": 0,
-        "story": {
-            "title": "Benny the bear",
-            "trailer": "trailer 2",
-            "pages": [
-                {
-                    "id": 1,
-                    "image": "benny",
-                    "text": "text"
-                },
-                {
-                    "id": 2,
-                    "image": "benny",
-                    "text": "text2"
-                },
-                {
-                    "id": 3,
-                    "image": "benny",
-                    "text": "text3"
-                }
-            ],
-            "id": null
-        },
-        "user": 1
-    }
-         */
-
         for (var progressEntity in data) {
-            //create a book
+
+          print(progressEntity);
+
+          //create a book
+          var s = progressEntity['story'];
+
+          var pages = s['pages'];
+          List<String>textContent = [];
+          List<String>imageContent = [];
+
+          for (var page in pages) {
+            textContent.add(page["text"]);
+            imageContent.add(page["image"]);
+          }
+
+          Story story = Story(
+              title: s['title'],
+              trailer: s['trailer'],
+              textContent: textContent,
+              imageContent: imageContent,
+              currentPage: progressEntity['pageNumber'],
+              id: s['id'],
+
+              //todo: get like status
+              isLiked: false
+          );
+
+          stories.add(story);
 
         }
+
+        return stories;
 
       } else {
         if (context.mounted) {
@@ -102,8 +105,7 @@ class GetStoriesService {
       print("Error: $e");
     }
 
-    List<Story> list = [];
-    return list;
+    return stories;
   }
 
   Future<List<Story>> fetchLikedStories() async {

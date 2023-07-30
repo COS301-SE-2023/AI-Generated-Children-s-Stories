@@ -23,6 +23,7 @@ public class ProgressDTO {
         this.story.setPages(story.getPages());
         this.story.setTitle(story.getTitle());
         this.story.setTrailer(story.getTrailer());
+        this.story.setId(story.getId());
     }
 
     private StoryDTO story;
