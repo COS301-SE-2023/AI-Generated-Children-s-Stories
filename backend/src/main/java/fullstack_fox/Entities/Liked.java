@@ -37,12 +37,12 @@ public class Liked {
         this.story = story;
     }
 
-    @JsonBackReference //prevent infinite loop
+    @JsonBackReference("user-liked") //prevent infinite loop
     @ManyToOne
     @JoinColumn(name="userId")
     private User user;
 
-    @JsonBackReference //prevent infinite loop
+    @JsonBackReference("story-liked") //prevent infinite loop
     @ManyToOne
     @JoinColumn(name="storyId")
     private Story story;

@@ -21,9 +21,13 @@ public class User {
     private String firebaseUid;
 
     // User table relationship
-    @JsonManagedReference // Define the owner of the relationship
+    @JsonManagedReference("user-progress") // Define the owner of the relationship
     @OneToMany(mappedBy = "user")
     private List<Progress> progress = new ArrayList<>();
+
+    @JsonManagedReference("user-liked")
+    @OneToMany(mappedBy = "user")
+    private List<Liked> liked = new ArrayList<>();
 
     public User() {}
     public User(String firebaseUid) {
@@ -54,5 +58,13 @@ public class User {
 
     public List<Progress> getProgress() {
         return progress;
+    }
+
+    public List<Liked> getLiked() {
+        return liked;
+    }
+
+    public void setLiked(List<Liked> liked) {
+        this.liked = liked;
     }
 }

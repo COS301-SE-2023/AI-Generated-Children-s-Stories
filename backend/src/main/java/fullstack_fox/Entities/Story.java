@@ -3,6 +3,8 @@ package fullstack_fox.Entities;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -18,7 +20,7 @@ public class Story {
     private final String trailer;
 
     // Pages table relationship
-    @JsonManagedReference("story-pages") //prevent infinite loop
+    @JsonManagedReference("story-pages")
     @OneToMany(
         mappedBy="story",
         cascade = CascadeType.ALL, //cascade operations
@@ -27,7 +29,7 @@ public class Story {
     private List<Page> pages = new ArrayList<>();
 
     // UserStories table relationship
-    @JsonManagedReference("progress") //prevent infinite loop
+    @JsonManagedReference("story-progress")
     @OneToMany(
             mappedBy="story",
             cascade = CascadeType.ALL, //cascade operations

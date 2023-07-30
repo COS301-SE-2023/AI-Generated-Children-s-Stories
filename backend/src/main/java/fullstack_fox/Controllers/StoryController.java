@@ -22,10 +22,7 @@ public class StoryController {
         return byId;
     }
 
-    @PostMapping( path = "/story",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PostMapping("/story")
     public Story create(@RequestBody Story story){
         storyRespository.save(story);
         return story;

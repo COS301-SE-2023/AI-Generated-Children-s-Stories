@@ -3,6 +3,7 @@ package fullstack_fox.Entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -17,15 +18,14 @@ public class Progress {
 
     public Progress(){}
 
-    @JsonIgnoreProperties("progress")
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonBackReference("user-progress")
     private User user;
 
-
-    @JsonIgnoreProperties("progress")
     @ManyToOne
     @JoinColumn(name = "storyId")
+    @JsonBackReference("story-progress")
     private Story story;
 
     public Long getId() {
