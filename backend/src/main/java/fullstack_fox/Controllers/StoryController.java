@@ -30,4 +30,6 @@ public class StoryController {
         storyRespository.save(story);
         return story;
     }
+
+
 }

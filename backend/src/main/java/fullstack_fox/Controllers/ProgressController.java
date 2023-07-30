@@ -12,9 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.awt.print.Book;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -36,7 +35,7 @@ public class ProgressController {
         Optional<User> optionalUser = userRepository.findById(progressDTO.getUser());
         User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User not found"));
 
-        Optional<Story> optionalStory = storyRepository.findById(progressDTO.getStory());
+        Optional<Story> optionalStory = storyRepository.findById(progressDTO.getStory().getId());
         Story story = optionalStory.orElseThrow(() -> new NoSuchElementException("Story not found"));
 
         // Check if a progress entry already exists for the given user and story
@@ -54,23 +53,62 @@ public class ProgressController {
         }
     }
 
-    @GetMapping("/progress/all")
-    public List<ProgressDTO> getAllProgress() {
-        Iterable<Progress> progresses = progressRepository.findAll();
-        List<ProgressDTO> progressDTOList = StreamSupport.stream(progresses.spliterator(), false)
-                .map(this::convertToDTO)
+    public List<ProgressDTO> getAllBooksInProgress(Long userId) {
+        Optional<List<Progress>> optionalProgress = progressRepository.findProgressByUserId(userId);
+
+        List<ProgressDTO> progressDTOs = optionalProgress.stream()
+                .flatMap(List::stream)
+                .map(this::convertToProgressDTO)
                 .collect(Collectors.toList());
-        return progressDTOList;
+
+        return progressDTOs;
     }
 
-    private ProgressDTO convertToDTO(Progress progress) {
-        ProgressDTO dto = new ProgressDTO();
-        dto.setId(progress.getId());
-        dto.setPageNumber(progress.getPageNumber());
-        dto.setUser(progress.getUser().getId());
-        dto.setStory(progress.getStory().getId());
-        // You can exclude other fields that you don't want to include in the DTO
-        return dto;
+    public ProgressDTO getRandomBook(Long userId) {
+        Iterable<Story> allBooks = storyRepository.findAll();
+        List<ProgressDTO> progressDTOList = new ArrayList<>();
+
+        Optional<User> currentUser = userRepository.findById(userId);
+        User myUser = null;
+        if (currentUser.isPresent()){
+            myUser = currentUser.get();
+        } else {
+            throw new NoSuchElementException("No user found");
+        }
+
+        for (Story story : allBooks) {
+            Progress progress = new Progress(myUser, story, 0);
+            progressDTOList.add(convertToProgressDTO(progress));
+        }
+
+        if (progressDTOList.size() == 0)
+            throw new NoSuchElementException("Progress list is empty");
+
+        Random random = new Random();
+        return progressDTOList.get(random.nextInt(progressDTOList.size()));
+    }
+
+    @GetMapping("/progress/{userId}")
+    public List<ProgressDTO> getProgressForUser(@PathVariable Long userId) {
+        List<ProgressDTO> currentlyReadingList = getAllBooksInProgress(userId);
+
+        if (!currentlyReadingList.isEmpty())
+            return currentlyReadingList;
+
+        //currently reading is empty, return a random book
+        currentlyReadingList.add(getRandomBook(userId));
+
+        return currentlyReadingList;
+    }
+
+    //converts a progress object to a DTO
+    public ProgressDTO convertToProgressDTO(Progress progress) {
+        ProgressDTO progressDTO = new ProgressDTO();
+        progressDTO.setStory(progress.getStory());
+        progressDTO.setUser(progress.getUser().getId());
+        progressDTO.setPageNumber(progressDTO.getPageNumber());
+
+        return progressDTO;
     }
 
     @DeleteMapping(path = "/deleteProgress/{storyId}/{userId}")

@@ -1,13 +1,8 @@
 package fullstack_fox.DTOs;
 
-public class ProgressDTO {
-    public Long getId() {
-        return id;
-    }
+import fullstack_fox.Entities.Story;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+public class ProgressDTO {
 
     public int getPageNumber() {
         return pageNumber;
@@ -21,20 +16,19 @@ public class ProgressDTO {
         this.user = user;
     }
 
-    private Long id;
     private int pageNumber;
 
-    public void setStory(Long story) {
+    public void setStory(Story story) {
         this.story = story;
     }
 
-    private Long story;
+    private Story story;
 
     public Long getUser() {
         return user;
     }
 
-    public Long getStory() {
+    public Story getStory() {
         return story;
     }
 
