@@ -84,11 +84,20 @@ public class ProgressController {
             }
         }
 
-        if (progressDTOList.size() == 0)
-            throw new NoSuchElementException("Progress list is empty");
+        if (progressDTOList.size() != 0) {
+            Random random = new Random();
+            return progressDTOList.get(random.nextInt(progressDTOList.size()));
+        }
 
+        // If no available books, return a random book from allBooks
+        List<Story> allBooksList = StreamSupport.stream(allBooks.spliterator(), false)
+                .collect(Collectors.toList());
         Random random = new Random();
-        return progressDTOList.get(random.nextInt(progressDTOList.size()));
+        Story randomStory = allBooksList.get(random.nextInt(allBooksList.size()));
+
+        //convert to progress DTO
+        Progress progress = new Progress(myUser, randomStory, 0);
+        return convertToProgressDTO(progress);
     }
 
     @GetMapping("/progress/{userId}")
