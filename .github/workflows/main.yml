@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -15,10 +15,19 @@ jobs:
           channel: 'stable'
 
       - name: Install dependencies
-        run: cd magic-pages-app/magic_pages && flutter pub get
+        run: cd magic-pages-app/magic_pages && flutter pub get --coverage
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Run unit tests
-        run: cd magic-pages-app/magic_pages && flutter test
+        run: cd magic-pages-app/magic_pages && flutter test --coverage
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+        
         
   java_test:
     name: Run java tests
@@ -34,4 +43,8 @@ jobs:
           distribution: 'adopt'
         
       - name: Run tests
-        run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package
+        run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package --coverage
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
