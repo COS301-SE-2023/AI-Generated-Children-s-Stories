@@ -1,6 +1,6 @@
 package fullstack_fox.Controllers;
 
-import fullstack_fox.DTOs.ProgressDTO;
+import fullstack_fox.DTOs.ProgressLikedDTO;
 import fullstack_fox.Entities.Progress;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.User;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -30,12 +29,12 @@ public class ProgressController {
     StoryRepository storyRepository;
 
     @PostMapping(path = "/progress")
-    public Progress create(@RequestBody ProgressDTO progressDTO) {
+    public Progress create(@RequestBody ProgressLikedDTO progressLikedDTO) {
         // Get the user and story from the provided IDs in the DTO
-        Optional<User> optionalUser = userRepository.findById(progressDTO.getUser());
+        Optional<User> optionalUser = userRepository.findById(progressLikedDTO.getUser());
         User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User not found"));
 
-        Optional<Story> optionalStory = storyRepository.findById(progressDTO.getStory().getId());
+        Optional<Story> optionalStory = storyRepository.findById(progressLikedDTO.getStory().getId());
         Story story = optionalStory.orElseThrow(() -> new NoSuchElementException("Story not found"));
 
         // Check if a progress entry already exists for the given user and story
@@ -44,29 +43,30 @@ public class ProgressController {
         if (optionalProgress.isPresent()) {
             // If a progress entry already exists, update the pageNumber and return the existing progress
             Progress existingProgress = optionalProgress.get();
-            existingProgress.setPageNumber(progressDTO.getPageNumber());
+            existingProgress.setPageNumber(progressLikedDTO.getPageNumber());
             return progressRepository.save(existingProgress);
         } else {
             // If a progress entry does not exist, create a new one and save it
-            Progress newProgress = new Progress(user, story, progressDTO.getPageNumber());
+            Progress newProgress = new Progress(user, story, progressLikedDTO.getPageNumber());
             return progressRepository.save(newProgress);
         }
     }
 
-    public List<ProgressDTO> getAllBooksInProgress(Long userId) {
+    public List<ProgressLikedDTO> getAllBooksInProgress(Long userId) {
         Optional<List<Progress>> optionalProgress = progressRepository.findProgressByUserId(userId);
 
-        List<ProgressDTO> progressDTOs = optionalProgress.stream()
+
+        List<ProgressLikedDTO> progressLikedDTOS = optionalProgress.stream()
                 .flatMap(List::stream)
-                .map(this::convertToProgressDTO)
+                .map(this::convertToProgressLikedDTO)
                 .collect(Collectors.toList());
 
-        return progressDTOs;
+        return progressLikedDTOS;
     }
 
-    public ProgressDTO getRandomBook(Long userId) {
+    public ProgressLikedDTO getRandomBook(Long userId) {
         Iterable<Story> allBooks = storyRepository.findAll();
-        List<ProgressDTO> progressDTOList = new ArrayList<>();
+        List<ProgressLikedDTO> progressLikedDTOList = new ArrayList<>();
 
         Optional<User> currentUser = userRepository.findById(userId);
         User myUser = null;
@@ -80,13 +80,13 @@ public class ProgressController {
             Optional<Progress> progress = progressRepository.findByUserAndStory(myUser, story);
             if (progress.isPresent()) {
                 Progress p = progress.get();
-                progressDTOList.add(convertToProgressDTO(p));
+                progressLikedDTOList.add(convertToProgressLikedDTO(p));
             }
         }
 
-        if (progressDTOList.size() != 0) {
+        if (progressLikedDTOList.size() != 0) {
             Random random = new Random();
-            return progressDTOList.get(random.nextInt(progressDTOList.size()));
+            return progressLikedDTOList.get(random.nextInt(progressLikedDTOList.size()));
         }
 
         // If no available books, return a random book from allBooks
@@ -97,12 +97,12 @@ public class ProgressController {
 
         //convert to progress DTO
         Progress progress = new Progress(myUser, randomStory, 0);
-        return convertToProgressDTO(progress);
+        return convertToProgressLikedDTO(progress);
     }
 
     @GetMapping("/progress/{userId}")
-    public List<ProgressDTO> getProgressForUser(@PathVariable Long userId) {
-        List<ProgressDTO> currentlyReadingList = getAllBooksInProgress(userId);
+    public List<ProgressLikedDTO> getProgressForUser(@PathVariable Long userId) {
+        List<ProgressLikedDTO> currentlyReadingList = getAllBooksInProgress(userId);
 
         if (!currentlyReadingList.isEmpty())
             return currentlyReadingList;
@@ -114,14 +114,13 @@ public class ProgressController {
     }
 
     //converts a progress object to a DTO
-    public ProgressDTO convertToProgressDTO(Progress progress) {
-        ProgressDTO progressDTO = new ProgressDTO();
-        progressDTO.setStory(progress.getStory());
-        progressDTO.setUser(progress.getUser().getId());
-        progressDTO.setPageNumber(progressDTO.getPageNumber());
+    public ProgressLikedDTO convertToProgressLikedDTO(Progress progress) {
+        ProgressLikedDTO progressLikedDTO = new ProgressLikedDTO();
+        progressLikedDTO.setStory(progress.getStory());
+        progressLikedDTO.setUser(progress.getUser().getId());
+        progressLikedDTO.setPageNumber(progress.getPageNumber());
 
-
-        return progressDTO;
+        return progressLikedDTO;
     }
 
     @DeleteMapping(path = "/deleteProgress/{storyId}/{userId}")

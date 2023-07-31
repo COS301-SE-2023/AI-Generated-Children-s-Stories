@@ -1,6 +1,7 @@
 package fullstack_fox.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -10,6 +11,16 @@ public class Liked {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="userId")
+    @JsonBackReference("user-liked")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name="storyId")
+    @JsonBackReference("story-liked")
+    private Story story;
 
     public Liked() {};
 
@@ -36,14 +47,4 @@ public class Liked {
     public void setStory(Story story) {
         this.story = story;
     }
-
-    @JsonBackReference("user-liked") //prevent infinite loop
-    @ManyToOne
-    @JoinColumn(name="userId")
-    private User user;
-
-    @JsonBackReference("story-liked") //prevent infinite loop
-    @ManyToOne
-    @JoinColumn(name="storyId")
-    private Story story;
 }

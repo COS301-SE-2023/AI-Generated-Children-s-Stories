@@ -2,7 +2,11 @@ package fullstack_fox.DTOs;
 
 import fullstack_fox.Entities.Story;
 
-public class ProgressDTO {
+//Rules
+//Not in progress: page = 0
+//Not liked: like = false
+
+public class ProgressLikedDTO {
 
     public int getPageNumber() {
         return pageNumber;
@@ -17,6 +21,16 @@ public class ProgressDTO {
     }
 
     private int pageNumber;
+
+    public boolean getLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
+
+    private boolean isLiked;
 
     public void setStory(Story story) {
         this.story = new StoryDTO();
@@ -38,6 +52,6 @@ public class ProgressDTO {
 
     private Long user;
 
-    public ProgressDTO() {
+    public ProgressLikedDTO() {
     }
 }

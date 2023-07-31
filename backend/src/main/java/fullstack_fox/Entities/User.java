@@ -26,7 +26,7 @@ public class User {
     private List<Progress> progress = new ArrayList<>();
 
     @JsonManagedReference("user-liked")
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Liked> liked = new ArrayList<>();
 
     public User() {}

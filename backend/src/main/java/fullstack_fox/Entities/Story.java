@@ -18,14 +18,10 @@ public class Story {
     private final String title;
     @Column(length = 2048)
     private final String trailer;
-
+    
     // Pages table relationship
     @JsonManagedReference("story-pages")
-    @OneToMany(
-        mappedBy="story",
-        cascade = CascadeType.ALL, //cascade operations
-        orphanRemoval = true //delete story = delete pages
-    )
+    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Page> pages = new ArrayList<>();
 
     // UserStories table relationship
@@ -36,6 +32,10 @@ public class Story {
             orphanRemoval = true //delete story = delete pages
     )
     private List<Progress> progress = new ArrayList<>();
+
+    @JsonManagedReference("story-liked")
+    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Liked> likedList = new ArrayList<>();
 
     public Story() {
         this.title = "";

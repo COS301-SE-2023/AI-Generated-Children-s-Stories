@@ -1,5 +1,6 @@
 package fullstack_fox.Controllers;
 
+import fullstack_fox.DTOs.StoryDTO;
 import fullstack_fox.Entities.Liked;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.User;
@@ -8,10 +9,9 @@ import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class LikedController {
@@ -48,6 +48,12 @@ public class LikedController {
         likedRepository.save(liked);
 
         return ResponseEntity.ok("Story added to the liked page.");
+    }
+
+    @GetMapping("/liked/stories/{userId}")
+    public ResponseEntity<List<Liked>> getLiked(@PathVariable Long userId) {
+        List<Liked> likedStories = likedRepository.findByUser_Id(userId);
+        return ResponseEntity.ok(likedStories);
     }
 
     //Unlike a story

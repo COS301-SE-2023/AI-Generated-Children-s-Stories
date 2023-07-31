@@ -7,6 +7,7 @@ import fullstack_fox.Repositories.PageRepository;
 import fullstack_fox.Repositories.StoryRepository;
 
 import fullstack_fox.Repositories.UserRepository;
+import fullstack_fox.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +32,8 @@ public class Main implements CommandLineRunner{
         FirebaseConfig firebaseConfig = new FirebaseConfig();
         //createStoryAndPage();
         //createUser();
+
+
     }
 
     private void createStoryAndPage() {

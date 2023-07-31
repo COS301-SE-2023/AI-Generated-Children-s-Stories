@@ -18,9 +18,9 @@ public class Progress {
 
     public Progress(){}
 
+    @JsonBackReference("user-progress")
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonBackReference("user-progress")
     private User user;
 
     @ManyToOne

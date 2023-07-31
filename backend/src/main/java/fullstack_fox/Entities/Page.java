@@ -3,6 +3,8 @@ package fullstack_fox.Entities;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="Page")
@@ -17,8 +19,9 @@ public class Page {
     private String text;
 
     @JsonBackReference("story-pages") //prevent infinite loop
-    @ManyToOne 
+    @ManyToOne
     @JoinColumn(name="storyId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Story story;
 
     public Page() {
