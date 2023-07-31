@@ -32,20 +32,20 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 - [Architectural Requiremnts](https://drive.google.com/file/d/1WwKkKfpMYFT7H76yGEy9_0zl6rYBsbTU/view?usp=sharing)
 - [User Manual](https://drive.google.com/file/d/1vzgYklUWRFu1TAToZHZkYPnlqE_84Ap2/view?usp=sharing)
 - [Coding Standards](https://drive.google.com/file/d/1hVX1mXRAxJyoxxqk7SzZoVr2WexdqKnI/view?usp=sharing)
-- [Techincal Installation Manual](one)
+- [Techincal Installation Manual](none)
 
-- [Unit Test](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/blob/feature/testing-fetch-stories-integration-test-mock-api/lib/main.dart)
+- [Unit Test](need a link :))
     
 # Project Board
 - [Code Board](https://github.com/orgs/COS301-SE-2023/projects/22/views/1)
 - [Administration and Documentation Board](https://github.com/orgs/COS301-SE-2023/projects/23)
 
 # Team 
-- [**Oliver Welsh**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#oliver-welsh) ~ Project Manager
-- [**Latasha Friend**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Latasha-Friend) ~ Designer and Business Analyst
-- [**Ayaaz Street**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#ayaaz-street) ~ User Interface Engineer
-- [**Mekhail Muller**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Mekhail-Muller) ~ Databse, Service, Integration Engineer and DevOps
-- [**Thomas Isebeck**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Thomas-Isebeck) ~ Tester
+- [**Oliver Welsh**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#oliver-welsh) ~ Project Manager and AI Services
+- [**Latasha Friend**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Latasha-Friend) ~ Designer, Administrator and Business Analyst
+- [**Ayaaz Street**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#ayaaz-street) ~ User Interface Engineer and DevOps
+- [**Mekhail Muller**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Mekhail-Muller) ~ Databse Engineer and Services
+- [**Thomas Isebeck**](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#Thomas-Isebeck) ~ Tester and Integration Engineer
 
 
 # Full Read Me
