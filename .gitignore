@@ -37,3 +37,4 @@ pubspec.lock
 backend/src/main/resources/firebase-config.json
 magic-pages-app/magic_pages/android/app/google-services.json
 magic-pages-app/magic_pages/lib/firebase_options.dart
+backend/out/artifacts/backend_jar/backend.jar
