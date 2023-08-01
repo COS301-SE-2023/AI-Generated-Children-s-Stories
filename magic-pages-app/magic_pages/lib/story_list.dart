@@ -158,50 +158,9 @@ class _StoryListState extends State<StoryList> {
       ),
       bottomNavigationBar: const NavbarWidget(active: 0),
     );
-    
-    // Scaffold(
-    //   backgroundColor: const Color.fromARGB(255, 255, 243, 233),
-    //   body: SafeArea(
-    //     child: SingleChildScrollView(
-    //         child: _storyListChangeNotifier.isLoading
-    //             ? const Column(
-    //                 children: [
-    //                   MyHeader(
-    //                     message: 'Getting books...',
-    //                   ),
-    //                   CircularProgressIndicator(),
-    //                 ],
-    //               )
-    //             : //scrollable list of stories
-    //             Column(
-    //                 children: [
-    //                   const MyHeader(
-    //                     message: 'Books',
-    //                   ),
-    //                   const SizedBox(height: 20),
-    //                   Padding(
-    //                     padding: const EdgeInsets.all(4.0),
-    //                     child: Column(
-    //                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //                       children: [
-    //                         for (var story in _stories)
-    //                           //book with progress bar
-    //                           BookWithProgress(
-    //                             title: story.getTitle(),
-    //                             imagePath: story.getCoverUrl(),
-    //                             id: story.getId(),
-    //                             currentPage: story.getCurrentPage(),
-    //                             totalPages: story.getTextContent().length,
-    //                           ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                 ],
-    //               )),
-    //   ),
-    //   bottomNavigationBar: const NavbarWidget(active: 0),
-    // );
+
   }
+
   Widget _BookListItem(BuildContext context, int index) {
     if (index.isOdd) {
       return const SizedBox(height: 0);

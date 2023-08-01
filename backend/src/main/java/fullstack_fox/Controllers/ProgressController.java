@@ -1,5 +1,6 @@
 package fullstack_fox.Controllers;
 
+import fullstack_fox.DTOs.PostProgressDTO;
 import fullstack_fox.DTOs.ProgressLikedDTO;
 import fullstack_fox.Entities.Progress;
 import fullstack_fox.Entities.Story;
@@ -125,7 +126,7 @@ public class ProgressController {
 
     @DeleteMapping(path = "/deleteProgress/{storyId}/{userId}")
     public ResponseEntity<String> delete(@PathVariable Long storyId, @PathVariable Long userId) {
-        Progress progressToDelete = progressRepository.findByUserIdAndStoryId(userId, storyId);
+        Progress progressToDelete = progressRepository.findByUser_IdAndStory_Id(userId, storyId);
 
         if (progressToDelete != null) {
             progressRepository.delete(progressToDelete);
@@ -134,4 +135,40 @@ public class ProgressController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Progress entry not found.");
         }
     }
+
+    //insert: page number is set to 1
+    //insert with page number set
+
+    @PostMapping(path = "/createProgress")
+    public ResponseEntity<String> post(@RequestBody PostProgressDTO progress) {
+        if (progress.getUserId() == null || progress.getStoryId() == null) {
+            return ResponseEntity.badRequest().body("User ID or Story ID cannot be null.");
+        }
+
+        Progress progressToUpdate = progressRepository.findByUser_IdAndStory_Id(progress.getUserId(), progress.getStoryId());
+
+        if (progressToUpdate != null) { //update
+            progressToUpdate.setPageNumber(progress.getPageNumber());
+            progressRepository.save(progressToUpdate);
+            return ResponseEntity.ok("Progress updated.");
+        } else { //update
+            Optional<User> userToPostOptional = userRepository.findById(progress.getUserId());
+            Optional<Story> storyToPostOptional = storyRepository.findById(progress.getStoryId());
+            User userToPost = null;
+            Story storyToPost = null;
+            if (userToPostOptional.isPresent() && storyToPostOptional.isPresent()) {
+                userToPost = userToPostOptional.get();
+                storyToPost = storyToPostOptional.get();
+
+                Progress newProgress = new Progress(userToPost, storyToPost, progress.getPageNumber());
+                progressRepository.save(newProgress);
+                return ResponseEntity.ok("Progress created.");
+            }
+
+            return ResponseEntity.badRequest().body("User or story is not present: " + userToPostOptional.isPresent() + ", " + storyToPostOptional.isPresent());
+        }
+
+    }
+
+    //delete progress
 }

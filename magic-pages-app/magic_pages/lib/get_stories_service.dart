@@ -21,6 +21,8 @@ class GetStoriesService {
     String id = idToken[0];
     String token = idToken[1];
 
+    print(id);
+
     List<Story> stories = [];
 
     final url =

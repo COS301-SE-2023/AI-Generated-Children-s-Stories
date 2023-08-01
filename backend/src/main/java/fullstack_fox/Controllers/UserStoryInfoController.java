@@ -29,4 +29,9 @@ public class UserStoryInfoController {
     public List<UserStoryInfoDTO> getLikedEntriesByUserId(@PathVariable Long userId) {
         return userStoryInfoService.findLikedByUserId(userId);
     }
+
+    @GetMapping("/userStoryInfo/progress/{userId}")
+    public List<UserStoryInfoDTO> getProgressEntriesByUserId(@PathVariable Long userId) {
+        return userStoryInfoService.findProgressByUserId(userId);
+    }
 }

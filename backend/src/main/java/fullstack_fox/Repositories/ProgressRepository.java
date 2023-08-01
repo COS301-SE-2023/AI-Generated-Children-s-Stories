@@ -12,7 +12,8 @@ import java.util.Optional;
 @Repository
 public interface ProgressRepository extends CrudRepository<Progress, Long> {
 
-    Progress findByUserIdAndStoryId(Long userId, Long storyId);
+
+    Progress findByUser_IdAndStory_Id(Long userId, Long storyId);
 
     Optional<Progress> findByUserAndStory(User user, Story story);
 

@@ -23,4 +23,8 @@ public class UserStoryInfoService {
     public List<UserStoryInfoDTO> findLikedByUserId(Long userId) {
         return userStoryInfoRepository.findLikedByUserId(userId);
     }
+    public List<UserStoryInfoDTO> findProgressByUserId(Long userId) {
+        return userStoryInfoRepository.findProgressByUserId(userId);
+    }
+
 }
