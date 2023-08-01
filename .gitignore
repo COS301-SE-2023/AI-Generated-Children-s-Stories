@@ -38,4 +38,3 @@ magic-pages-app/magic_pages/pubspec.lock
 backend/src/main/resources/firebase-config.json
 magic-pages-app/magic_pages/android/app/google-services.json
 magic-pages-app/magic_pages/lib/firebase_options.dart
-ai-story-generation-app/ai-story-generation-app.jar
