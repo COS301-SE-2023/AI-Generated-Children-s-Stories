@@ -39,7 +39,6 @@ dependencies:
   wave: ^0.2.2
   percent_indicator: ^4.0.1
   scroll_snap_list: ^0.9.1
-  firebase_core: ^2.15.0
   auto_size_text: ^3.0.0
 
   # For firebase authentication and sign in

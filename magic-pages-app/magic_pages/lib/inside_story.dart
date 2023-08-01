@@ -22,9 +22,9 @@ class InsideStory extends StatefulWidget {
   final int pageId;
 
   InsideStory({
-    super.key, 
+    super.key,
     required this.storyId,
-    required this.pageId  
+    required this.pageId
   });
 
   //messages displayed by the mascott
@@ -32,7 +32,7 @@ class InsideStory extends StatefulWidget {
   final String firstMessage = "Let's read together!";
   final String halfwayMessage = "Half way there!";
   final String lastMessage = "The last page!";
-  
+
 
   //story text is the content of the story
   final List<String> storyText = [
@@ -100,12 +100,12 @@ class InsideStoryState extends State<InsideStory> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               //heart and halfway message
-              Row( 
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 16),
-                    child: HeartToggle()
+                      margin: const EdgeInsets.only(left: 16),
+                      child: HeartToggle()
                   ),
                   Row(
                     children: [
@@ -113,13 +113,13 @@ class InsideStoryState extends State<InsideStory> {
                         width: MediaQuery.of(context).size.width-(16+24+110+108),
                         margin: const EdgeInsets.only(top: 20),
                         child: Text(
-                          storyIndex == 0 
-                          ? widget.firstMessage
-                          : storyIndex == widget.storyText.length - 1
-                          ? widget.lastMessage
-                          : storyIndex == (widget.storyText.length) / 2
-                          ? widget.halfwayMessage
-                          : widget.messages[randomMessageIndex], 
+                          storyIndex == 0
+                              ? widget.firstMessage
+                              : storyIndex == widget.storyText.length - 1
+                              ? widget.lastMessage
+                              : storyIndex == (widget.storyText.length) / 2
+                              ? widget.halfwayMessage
+                              : widget.messages[randomMessageIndex],
                           textAlign: TextAlign.end,
                           style: const TextStyle(
                             overflow: TextOverflow.clip,
@@ -166,10 +166,10 @@ class InsideStoryState extends State<InsideStory> {
                     '${(storyIndex / (widget.storyText.length) * 100).round()}%',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Color(0xFF542209),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      fontFamily: 'Poppins'
+                        color: Color(0xFF542209),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontFamily: 'Poppins'
                     ),
                   ),
                   progressColor: const Color(0xFFFE8D29),
@@ -209,12 +209,12 @@ class InsideStoryState extends State<InsideStory> {
                       flex: 2,
                       child: Opacity(
                         opacity: storyIndex == 0 ? 0.5 : 1,
-                        child: storyIndex == 0 
-                        ? Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width/2-(16+8),
-                            margin: const EdgeInsets.fromLTRB(16, 0, 8, 6),
-                            decoration: BoxDecoration(
+                        child: storyIndex == 0
+                            ? Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width/2-(16+8),
+                          margin: const EdgeInsets.fromLTRB(16, 0, 8, 6),
+                          decoration: BoxDecoration(
                               color: const Color(0xFFFDFDFD),
                               borderRadius: BorderRadius.circular (25),
                               border: Border.all(
@@ -222,22 +222,22 @@ class InsideStoryState extends State<InsideStory> {
                                 width: 2,
                               ),
                               boxShadow: const [
-                                 BoxShadow(
+                                BoxShadow(
                                   color: Color(0xFFD3D3D3),
                                   spreadRadius: 0,
                                   blurRadius: 0,
                                   offset: Offset(0,6),
                                 )
                               ]
-                            ),
-                            child: Center(
-                              child: Transform.rotate(
+                          ),
+                          child: Center(
+                            child: Transform.rotate(
                                 angle: 3.13,
                                 child: const Image(image: AssetImage('assets/images/arrow-orange.png'), width: 35)
-                              ),
                             ),
-                          )
-                        : GestureDetector(
+                          ),
+                        )
+                            : GestureDetector(
                           onTapUp: (val){
                             setState(() {
                               isBackPressed = false;
@@ -258,26 +258,26 @@ class InsideStoryState extends State<InsideStory> {
                             height: 50,
                             margin: isBackPressed ? const EdgeInsets.fromLTRB(16, 6, 8, 0) : const EdgeInsets.fromLTRB(16, 0, 8, 6),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFDFDFD),
-                              borderRadius: BorderRadius.circular (25),
-                              border: Border.all(
-                                color: const Color(0xFFD3D3D3),
-                                width: 2,
-                              ),
-                              boxShadow: isBackPressed ? null : [
-                                const BoxShadow(
-                                  color: Color(0xFFD3D3D3),
-                                  spreadRadius: 0,
-                                  blurRadius: 0,
-                                  offset: Offset(0,6),
-                                )
-                              ]
+                                color: const Color(0xFFFDFDFD),
+                                borderRadius: BorderRadius.circular (25),
+                                border: Border.all(
+                                  color: const Color(0xFFD3D3D3),
+                                  width: 2,
+                                ),
+                                boxShadow: isBackPressed ? null : [
+                                  const BoxShadow(
+                                    color: Color(0xFFD3D3D3),
+                                    spreadRadius: 0,
+                                    blurRadius: 0,
+                                    offset: Offset(0,6),
+                                  )
+                                ]
                             ),
                             duration: const Duration(milliseconds: 75),
                             child: Center(
                               child: Transform.rotate(
-                                angle: 3.13,
-                                child: const Image(image: AssetImage('assets/images/arrow-orange.png'), width: 35)
+                                  angle: 3.13,
+                                  child: const Image(image: AssetImage('assets/images/arrow-orange.png'), width: 35)
                               ),
                             ),
                           ),
@@ -299,27 +299,27 @@ class InsideStoryState extends State<InsideStory> {
                         },
                         onTapCancel: (){
                           setState(() {
-                          isHomePressed = false;
+                            isHomePressed = false;
                           });
                         },
                         child: AnimatedContainer(
                           height: 50,
                           margin: isHomePressed ? const EdgeInsets.fromLTRB(0, 6, 0, 0) : const EdgeInsets.fromLTRB(0, 0, 0, 6),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFDFDFD),
-                            borderRadius: BorderRadius.circular (25),
-                            border: Border.all(
-                              color: const Color(0xFFD3D3D3),
-                              width: 2,
-                            ),
-                            boxShadow: isHomePressed ? null : [
-                              const BoxShadow(
-                                color: Color(0xFFD3D3D3),
-                                spreadRadius: 0,
-                                blurRadius: 0,
-                                offset: Offset(0,6),
-                              )
-                            ]
+                              color: const Color(0xFFFDFDFD),
+                              borderRadius: BorderRadius.circular (25),
+                              border: Border.all(
+                                color: const Color(0xFFD3D3D3),
+                                width: 2,
+                              ),
+                              boxShadow: isHomePressed ? null : [
+                                const BoxShadow(
+                                  color: Color(0xFFD3D3D3),
+                                  spreadRadius: 0,
+                                  blurRadius: 0,
+                                  offset: Offset(0,6),
+                                )
+                              ]
                           ),
                           duration: const Duration(milliseconds: 75),
                           child: const Center(
@@ -351,16 +351,16 @@ class InsideStoryState extends State<InsideStory> {
                           height: 50,
                           margin: isNextPressed ? const EdgeInsets.fromLTRB(8, 6, 16, 0) : const EdgeInsets.fromLTRB(8, 0, 16, 6),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFE8D29),
-                            borderRadius: BorderRadius.circular (25),
-                            boxShadow: isNextPressed ? null : [
-                              const BoxShadow(
-                                color: Color(0xFF84370F),
-                                spreadRadius: 0,
-                                blurRadius: 0,
-                                offset: Offset(0,6),
-                              )
-                            ]
+                              color: const Color(0xFFFE8D29),
+                              borderRadius: BorderRadius.circular (25),
+                              boxShadow: isNextPressed ? null : [
+                                const BoxShadow(
+                                  color: Color(0xFF84370F),
+                                  spreadRadius: 0,
+                                  blurRadius: 0,
+                                  offset: Offset(0,6),
+                                )
+                              ]
                           ),
                           duration: const Duration(milliseconds: 75),
                           child: const Center(
@@ -372,104 +372,104 @@ class InsideStoryState extends State<InsideStory> {
                   ],
                 ),
               ),
-      
-          // Row(
-          //   children: [
-          //     Center(
-          //       child: ProgressBar(
-          //           totalPages: widget.storyText.length - 1,
-          //           currentPages: storyIndex),
-          //     )
-          //   ],
-          // ),
-        
-          // //story image
-          // SizedBox(
-          //   child: Padding(
-          //     padding: EdgeInsets.only(
-          //         left: MediaQuery.of(context).size.width * 0.05,
-          //         right: MediaQuery.of(context).size.width * 0.05),
-          //     child: Row(
-          //       //image
-          //       children: [
-          //         SizedBox(
-          //           width: MediaQuery.of(context).size.width * 0.9,
-          //           height: MediaQuery.of(context).size.width * 0.9,
-          //           child: Column(
-          //             children: [
-          //               ClipRRect(
-          //                 borderRadius: BorderRadius.circular(20),
-          //                 child: Image.asset(
-          //                   widget.images[storyIndex],
-          //                 ),
-          //               )
-          //             ],
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-        
-          // //story text at the bottom of the image
-          // Expanded(
-          //   child: Column(
-          //     //center align
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Padding(
-          //           padding: const EdgeInsets.only(
-          //               top: 0, left: 20, right: 10, bottom: 0),
-          //           child: Text(
-          //               textDirection: TextDirection.ltr,
-          //               textAlign: TextAlign.center,
-          //               widget.storyText[storyIndex],
-          //               textScaleFactor: 1.1,
-          //               style: TextStyle(
-          //                 color: const Color.fromARGB(255, 58, 23, 6),
-          //                 fontSize:
-          //                     (1 - MediaQuery.sizeOf(context).aspectRatio) *
-          //                         30,
-          //               ))),
-          //     ],
-          //   ),
-          // ),
-        
-          // //control bar to navigate through the story
-          // Padding(
-          //   padding: EdgeInsets.only(
-          //       bottom: 20,
-          //       top: 15,
-          //       left: MediaQuery.of(context).size.width * 0.05,
-          //       right: MediaQuery.of(context).size.width * 0.05),
-          //   child: Row(
-          //     children: [
-          //       GestureDetector(
-          //         key: const Key('previousButton'),
-          //         onTap: () => {prev()},
-          //         child: Image.asset('assets/images/back.png'),
-          //       ),
-          //       const Spacer(),
-          //       Image.asset('assets/images/pause.png'),
-          //       const Spacer(),
-          //       GestureDetector(
-          //           key: const Key('nextButton'),
-          //           onTap: () => {
-          //                 if (storyIndex == widget.storyText.length - 1)
-          //                   {
-          //                     //TODO: write a unit test to check this
-          //                     //go to the liked page if the story is finished
-          //                     Navigator.pushNamed(context, '/endBook')
-          //                   }
-          //                 else
-          //                   next() //go to the next page
-          //               },
-          //           child: Image.asset('assets/images/forward.png')),
-          //     ],
-          //   ),
-          // )
-                ],
-              ),
+
+              // Row(
+              //   children: [
+              //     Center(
+              //       child: ProgressBar(
+              //           totalPages: widget.storyText.length - 1,
+              //           currentPages: storyIndex),
+              //     )
+              //   ],
+              // ),
+
+              // //story image
+              // SizedBox(
+              //   child: Padding(
+              //     padding: EdgeInsets.only(
+              //         left: MediaQuery.of(context).size.width * 0.05,
+              //         right: MediaQuery.of(context).size.width * 0.05),
+              //     child: Row(
+              //       //image
+              //       children: [
+              //         SizedBox(
+              //           width: MediaQuery.of(context).size.width * 0.9,
+              //           height: MediaQuery.of(context).size.width * 0.9,
+              //           child: Column(
+              //             children: [
+              //               ClipRRect(
+              //                 borderRadius: BorderRadius.circular(20),
+              //                 child: Image.asset(
+              //                   widget.images[storyIndex],
+              //                 ),
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+              // //story text at the bottom of the image
+              // Expanded(
+              //   child: Column(
+              //     //center align
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Padding(
+              //           padding: const EdgeInsets.only(
+              //               top: 0, left: 20, right: 10, bottom: 0),
+              //           child: Text(
+              //               textDirection: TextDirection.ltr,
+              //               textAlign: TextAlign.center,
+              //               widget.storyText[storyIndex],
+              //               textScaleFactor: 1.1,
+              //               style: TextStyle(
+              //                 color: const Color.fromARGB(255, 58, 23, 6),
+              //                 fontSize:
+              //                     (1 - MediaQuery.sizeOf(context).aspectRatio) *
+              //                         30,
+              //               ))),
+              //     ],
+              //   ),
+              // ),
+
+              // //control bar to navigate through the story
+              // Padding(
+              //   padding: EdgeInsets.only(
+              //       bottom: 20,
+              //       top: 15,
+              //       left: MediaQuery.of(context).size.width * 0.05,
+              //       right: MediaQuery.of(context).size.width * 0.05),
+              //   child: Row(
+              //     children: [
+              //       GestureDetector(
+              //         key: const Key('previousButton'),
+              //         onTap: () => {prev()},
+              //         child: Image.asset('assets/images/back.png'),
+              //       ),
+              //       const Spacer(),
+              //       Image.asset('assets/images/pause.png'),
+              //       const Spacer(),
+              //       GestureDetector(
+              //           key: const Key('nextButton'),
+              //           onTap: () => {
+              //                 if (storyIndex == widget.storyText.length - 1)
+              //                   {
+              //                     //TODO: write a unit test to check this
+              //                     //go to the liked page if the story is finished
+              //                     Navigator.pushNamed(context, '/endBook')
+              //                   }
+              //                 else
+              //                   next() //go to the next page
+              //               },
+              //           child: Image.asset('assets/images/forward.png')),
+              //     ],
+              //   ),
+              // )
+            ],
+          ),
         ),
       ),
     );
