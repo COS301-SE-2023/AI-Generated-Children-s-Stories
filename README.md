@@ -28,13 +28,12 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 - [Demo 2](https://drive.google.com/file/d/1JeRRbCC1XCDNSr-4QH8g7GUTyxF_8rj8/view?usp=sharing) {27 June 2023}
 
 # Documentation
-- [System Requirements Specification](https://drive.google.com/file/d/1c_5RvzvqFOYeM1JSo_yrxUX3Nz40Frbn/view?usp=sharing)
-- [Architectural Requiremnts](https://drive.google.com/file/d/1WwKkKfpMYFT7H76yGEy9_0zl6rYBsbTU/view?usp=sharing)
-- [User Manual](https://drive.google.com/file/d/1vzgYklUWRFu1TAToZHZkYPnlqE_84Ap2/view?usp=sharing)
-- [Coding Standards](https://drive.google.com/file/d/1hVX1mXRAxJyoxxqk7SzZoVr2WexdqKnI/view?usp=sharing)
+- [System Requirements Specification](https://drive.google.com/file/d/13ZDMpqCqpA8BNBYwKSXAVICtzp5n0BA5/view?usp=drive_link)
+- [Architectural Requirements](https://drive.google.com/drive/folders/1muABwE2izR6myVkNcs5cSbxIx_CBAQv-?usp=drive_link)
+- [User Manual]()
+- [Coding Standards](https://drive.google.com/file/d/1Fssa0K5I86Uj4cUt1jLymrqeKrXRq5DR/view?usp=sharing)
 - [Techincal Installation Manual](none)
 
-- [Unit Test](need a link :))
     
 # Project Board
 - [Code Board](https://github.com/orgs/COS301-SE-2023/projects/22/views/1)
