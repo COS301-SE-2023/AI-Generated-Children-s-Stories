@@ -28,15 +28,16 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Center(
           child: Stack(
             children: [
-              WaveHeaderWidget(),
+              const WaveHeaderWidget(),
               Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  const Column(
                     children: [
                       MyHeader(
                         message: 'Profile',
@@ -44,14 +45,9 @@ class _ProfileState extends State<Profile> {
                       SizedBox(height: 50),
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ButtonWidget(destination: '/signup', message: 'LOGOUT',)
-                      ],
-                    ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: const ButtonWidget(destination: '/signup', message: 'LOGOUT',),
                   ),
                 ],
               ),
@@ -59,7 +55,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      bottomNavigationBar: NavbarWidget(active: 3),
+      bottomNavigationBar: const NavbarWidget(active: 3),
     );
   }
 }

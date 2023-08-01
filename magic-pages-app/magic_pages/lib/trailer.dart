@@ -57,39 +57,13 @@ class _TrailerPageState extends State<TrailerPage> {
                             Navigator.of(context).pop();
                           },
                           child: Container(
-                            margin: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                            margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                             padding: const EdgeInsets.all(16),
                             child: const Image(
                               image: AssetImage('assets/images/back-button.png'),
-                              width: 24,
+                              width: 32,
                             ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width-(16+24+110+108),
-                              margin: const EdgeInsets.only(top: 20),
-                              child: const Text(
-                                'Great Choice!',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  overflow: TextOverflow.clip,
-                                  fontSize: 18,
-                                  color: Color(0xFF542209),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(24, 0, 32, 0),
-                              child:  const Image(
-                                image: AssetImage('assets/images/MascotWinking.png'),
-                                width: 110,
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     ),
@@ -97,39 +71,54 @@ class _TrailerPageState extends State<TrailerPage> {
                   Expanded(
                     child: Column(
                       children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(64, 32, 64, 16),
-                          child: Stack(
-                            children: [
-                              Row(
-                                children: [
-                                  const Image(
-                                    image: AssetImage('assets/images/MascotWinking.png'),
-                                    width: 110,
-                                  ),
-                                  const Text(
-                                    'Like this book?',
-                                    textAlign: TextAlign.end,
-                                    style: TextStyle(
-                                      overflow: TextOverflow.clip,
-                                      fontSize: 18,
-                                      color: Color(0xFF542209),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
+                        Stack(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: const EdgeInsets.fromLTRB(64, 0, 64, 0),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Image(
+                                          image: AssetImage('assets/images/MascotWinking.png'),
+                                          width: 50,
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.only(bottom: 12),
+                                          child: const Text(
+                                            'Like this book?',
+                                            textAlign: TextAlign.end,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.clip,
+                                              fontSize: 18,
+                                              color: Color(0xFF542209),
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  HeartToggle(),
-                                ],
-                              ),
-                              AspectRatio(
+                                    Container(
+                                      child: HeartToggle()
+                                    ),
+                                  ],
+                                ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(64, 32, 64, 16),
+                              child: AspectRatio(
                                 aspectRatio: 1,
                                 child: Image.asset(
                                   widget.imagePath,
                                   fit: BoxFit.contain,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                         Expanded(
                           child: Container(
@@ -275,16 +264,16 @@ class _TrailerPageState extends State<TrailerPage> {
   Widget HeartToggle() {
     Image image;
     if (widget.isLiked == true) {
-      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 32);
+      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 30);
     } else {
-      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 32);
+      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 30);
     }
 
     return HeartAnimationWidget(
       alwaysAnimate: true,
       isAnimating: widget.isLiked,
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
         child: GestureDetector(
           onTap: () {
             setState(() {

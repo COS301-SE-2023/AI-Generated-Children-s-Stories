@@ -26,11 +26,11 @@ class SignupPage extends StatelessWidget {
                           Navigator.pushNamed(context, '/splash');
                         },
                         child: Container(
-                          margin: const EdgeInsets.fromLTRB(2, 52, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(8, 52, 0, 0),
                           padding: const EdgeInsets.all(16),
                           child: const Image(
                               image: AssetImage('assets/images/back-button.png'),
-                              width: 24,
+                              width: 32,
                             ),
                         ),
                       ),
