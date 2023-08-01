@@ -10,7 +10,6 @@
 [![Flutter_Tests](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml/badge.svg)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml)
 
 
-
 # Table of Contents
 >
 > -  [Description](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#full-stack-fox---ai-generated-childrens-stories---project-description)
@@ -32,7 +31,7 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 - [Architectural Requirements](https://drive.google.com/drive/folders/1muABwE2izR6myVkNcs5cSbxIx_CBAQv-?usp=drive_link)
 - [User Manual](https://drive.google.com/file/d/1PyBRy9Z7BcM91Nsl6QeyKJfBJdJadEqh/view?usp=sharing)
 - [Coding Standards](https://drive.google.com/file/d/1Fssa0K5I86Uj4cUt1jLymrqeKrXRq5DR/view?usp=sharing)
-- [Techincal Installation Manual]()
+- [Techincal Installation Manual](https://drive.google.com/file/d/1PwGeMTb6eXAsFvIsry6ufujjwtFjhliA/view?usp=drive_link)
 
     
 # Project Board
