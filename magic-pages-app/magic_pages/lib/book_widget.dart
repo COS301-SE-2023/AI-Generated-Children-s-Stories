@@ -94,7 +94,7 @@ class _BookWidget extends State<BookWidget> {
               Expanded(
                 flex: 2,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.fromLTRB(10,2,10,2),
                   child: Text(
                     widget.title,
                     textAlign: TextAlign.center,
@@ -105,12 +105,6 @@ class _BookWidget extends State<BookWidget> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: HeartToggle(),
                 ),
               ),
             ]
