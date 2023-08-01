@@ -59,7 +59,7 @@ class _BookWidget extends State<BookWidget> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Image.asset(
+                  Image.network(
                     widget.imagePath,
                     fit: BoxFit.contain,
                   ),

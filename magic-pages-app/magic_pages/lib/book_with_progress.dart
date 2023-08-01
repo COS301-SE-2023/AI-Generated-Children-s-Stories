@@ -35,7 +35,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
           SizedBox(
             width: 300,
             height: 300,
-            child: Image.asset(
+            child: Image.network(
               widget.imagePath,
               fit: BoxFit.contain,
             ),
