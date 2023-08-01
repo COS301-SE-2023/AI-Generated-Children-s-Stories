@@ -1,6 +1,43 @@
+backend/backend/.idea/
 
-backend/backend/.idea/workspace.xml
-backend/backend/.idea/misc.xml
-backend/backend/.idea/jarRepositories.xml
-backend/backend/.idea/encodings.xml
-backend/backend/.idea/compiler.xml
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+target/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+.vscode/
+config.json
+configTest.json
+
+linux/
+ai-story-generation-app/target/surefire-reports/fullstack_fox.APICallsTest.txt
+ai-story-generation-app/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+ai-story-generation-app/resources/configReal.json
+ai-story-generation-app/src/test/java/fullstack_fox/resources/configReal.json
+*.properties
+firebase-config.json
+google-services.json
+firebase_options.dart
+pubspec.lock
+backend/src/main/resources/firebase-config.json
+magic-pages-app/magic_pages/android/app/google-services.json
+magic-pages-app/magic_pages/lib/firebase_options.dart
+backend/out/artifacts/backend_jar/backend.jar
+
