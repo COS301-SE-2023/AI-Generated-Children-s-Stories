@@ -13,11 +13,11 @@
 
 # Table of Contents
 >
-> -  Description
-> -  Recordings
-> -  Documentation
-> -  Project Board
-> -  Team
+> -  [Description](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#full-stack-fox---ai-generated-childrens-stories---project-description)
+> -  [Recordings](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#recordings)
+> -  [Documentation](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#documentation)
+> -  [Project Board](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#project-board)
+> -  [Team](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#team)
 
 # Full-Stack Fox - AI Generated Children's Stories - Project Description
 
