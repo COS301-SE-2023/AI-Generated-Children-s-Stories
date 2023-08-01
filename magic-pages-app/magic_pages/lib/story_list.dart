@@ -173,6 +173,7 @@ class _StoryListState extends State<StoryList> {
     return _stories.length.isEven
       ? Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: MediaQuery.of(context).size.width/2-32,
@@ -203,6 +204,7 @@ class _StoryListState extends State<StoryList> {
     : index < _stories.length-1 
     ? Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: MediaQuery.of(context).size.width/2-32,
@@ -232,6 +234,7 @@ class _StoryListState extends State<StoryList> {
     )
     : Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: MediaQuery.of(context).size.width/2-32,

@@ -103,7 +103,7 @@ class _ProfileState extends State<Profile> {
           ],
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(),
+      bottomNavigationBar: NavbarWidget(active: 3),
     );
   }
 }
