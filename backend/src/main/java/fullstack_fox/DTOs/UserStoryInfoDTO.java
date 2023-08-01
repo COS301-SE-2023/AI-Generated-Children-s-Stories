@@ -7,16 +7,17 @@ import javax.persistence.*;
 public class UserStoryInfoDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long auto_id;
+    private Long id;
     private Long userId;
     private Long storyId;
     private String title;
     private String trailer;
     private boolean liked;
     private int pageNo;
+    private int totalPages;
 
-    public Long getAuto_id() {
-        return auto_id;
+    public Long getId() {
+        return id;
     }
 
     public Long getUserId() {
@@ -41,5 +42,9 @@ public class UserStoryInfoDTO {
 
     public int getPageNo() {
         return pageNo;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
     }
 }
