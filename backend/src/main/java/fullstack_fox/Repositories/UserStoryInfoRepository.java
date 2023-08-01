@@ -13,5 +13,6 @@ public interface UserStoryInfoRepository extends JpaRepository<UserStoryInfoDTO,
     @Query("SELECT u FROM UserStoryInfoDTO u WHERE u.userId = :userId")
     List<UserStoryInfoDTO> findByUserId(Long userId);
 
-    // Add other custom query methods as needed
+    @Query("SELECT u FROM UserStoryInfoDTO u WHERE u.userId = :userId AND u.liked = true")
+    List<UserStoryInfoDTO> findLikedByUserId(Long userId);
 }

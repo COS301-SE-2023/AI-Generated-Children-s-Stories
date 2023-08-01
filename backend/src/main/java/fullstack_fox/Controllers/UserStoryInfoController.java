@@ -20,8 +20,13 @@ public class UserStoryInfoController {
     }
 
     // Define the endpoint to get all entries by user ID
-    @GetMapping("/userstoryinfo/{userId}")
+    @GetMapping("/userStoryInfo/all/{userId}")
     public List<UserStoryInfoDTO> getEntriesByUserId(@PathVariable Long userId) {
         return userStoryInfoService.findByUserId(userId);
+    }
+
+    @GetMapping("/userStoryInfo/liked/{userId}")
+    public List<UserStoryInfoDTO> getLikedEntriesByUserId(@PathVariable Long userId) {
+        return userStoryInfoService.findLikedByUserId(userId);
     }
 }

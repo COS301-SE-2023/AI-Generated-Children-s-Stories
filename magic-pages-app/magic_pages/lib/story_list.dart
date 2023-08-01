@@ -44,7 +44,7 @@ class _StoryListState extends State<StoryList> {
   /// it uses the story list change notifier to fetch the list of stories
   /// @return void
   void getStories(BuildContext context) async {
-    await _storyListChangeNotifier.fetchStories(context);
+    await _storyListChangeNotifier.fetchAllStories(context);
     setState(() {
       _stories = _storyListChangeNotifier.stories;
     });
