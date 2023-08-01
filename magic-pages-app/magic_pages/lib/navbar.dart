@@ -265,6 +265,92 @@ class _NavbarWidgetState extends State<NavbarWidget> {
         ],
       );
         break;
+      case 3:
+        navigation = Row(
+        //add a border
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/storyList');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/exploreOutline.png',
+                    width: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Books',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/home');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/homeOutline.png',
+                    width: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/storyLiked');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/likedOutline.png',
+                    width: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Liked',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+        ],
+      );
+        break;
       default:
         throw UnimplementedError('no widget for $widget.active');
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/end_of_story.dart';
 import 'package:provider/provider.dart';
 
 import 'get_stories_service.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Magic Pages',
         theme: ThemeData(
-          primarySwatch: createMaterialColor(const Color(0xFF43932A)),
+          primarySwatch: createMaterialColor(const Color(0xFFFE8D29)),
           scaffoldBackgroundColor: const Color(0xFFFFF3E9),
         ),
         home: ChangeNotifierProvider(
@@ -59,17 +60,12 @@ class MyApp extends StatelessWidget {
           child: SplashPage(),
         ),
         routes: {
-          '/login': (context) => LoginPage(),
           '/signup': (context) => SignupPage(),
           '/splash': (context) => SplashPage(),
           '/storyList': (context) => const StoryList(),
           '/home': (context) => const Home(),
           '/storyLiked': (context) => const StoryLiked(),
           '/profile': (context) => const Profile(),
-          '/insideAStory': (context) =>  InsideStory(id: null),
-
-          //TODO: create an end book page
-          '/endBook': (context) => const Home(),
         });
   }
 }

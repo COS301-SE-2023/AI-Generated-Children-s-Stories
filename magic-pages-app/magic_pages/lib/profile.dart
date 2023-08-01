@@ -59,7 +59,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      bottomNavigationBar: NavbarWidget(),
+      bottomNavigationBar: NavbarWidget(active: 3),
     );
   }
 }

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/inside_story.dart';
 
 // ignore: must_be_immutable
 class ButtonWidget extends StatefulWidget {
   final String message;
   final String destination;
+  final int? storyId;
+  final int? pageId;
   
   const ButtonWidget( {
     super.key, 
     required this.message,
-    required this.destination
+    required this.destination, 
+    this.storyId, 
+    this.pageId
   });
 
   @override
@@ -25,7 +30,14 @@ class _ButtonWidget extends State<ButtonWidget> {
         setState(() {
           isPressed = false;
         });
-        Navigator.pushNamed(context, widget.destination);
+        widget.storyId == null
+        ? Navigator.pushNamed(context, widget.destination)
+        : Navigator.push(context, MaterialPageRoute(
+          builder: (context) => InsideStory(
+            storyId: widget.storyId!,
+            pageId: widget.pageId!,
+          ),
+        ));
       },
       onTapDown: (val){
         setState(() {

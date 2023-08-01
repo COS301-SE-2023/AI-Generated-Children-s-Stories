@@ -85,9 +85,11 @@ class _BookWithProgressState extends State<BookWithProgress> {
         ),
         Container(
           margin: const EdgeInsets.only(top: 16),
-          child: const ButtonWidget(
+          child: ButtonWidget(
             message: 'VIEW',
-            destination: '/insideAStory',
+            destination: '/insideStory',
+            storyId: widget.id,
+            pageId: widget.currentPage,
           )
         ),
       ]

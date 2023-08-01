@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'heart_animation_widget.dart';
+import 'inside_story.dart';
+import 'trailer.dart';
 
 // ignore: must_be_immutable
 class BookWidget extends StatefulWidget {
@@ -29,96 +31,143 @@ class _BookWidget extends State<BookWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AspectRatio(
-          aspectRatio: 1,
-          child: GestureDetector(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Image.asset(
-                  widget.imagePath,
-                  fit: BoxFit.contain,
-                ),
-                Opacity(
-                  opacity: isHeartAnimating ? 1 : 0,
-                  child: HeartAnimationWidget(
-                    isAnimating: isHeartAnimating,
-                    duration: const Duration(milliseconds: 700),
-                    child: const Icon(
-                      Icons.favorite, 
-                      color: Color(0xFF542209), 
-                      size: 90,
-                    ),
-                    onEnd: () {
-                      setState(() {
-                        isHeartAnimating = false;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            onDoubleTap: () {
-              setState(() {
-                isHeartAnimating = true;
-                widget.isLiked = true;
-              });
-            },
+    return GestureDetector(
+      onTap: (){
+        // Navigator.push(context, MaterialPageRoute(
+        //   builder: (context) => InsideStory(
+        //     storyId: widget.id,
+        //     pageId: widget.currentPage,
+        //   ),
+        // ));
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => TrailerPage(
+            title: widget.title,
+            imagePath: widget.imagePath,
+            id: widget.id,
+            currentPage: widget.currentPage,
+            totalPages: widget.totalPages,
+            isLiked: widget.isLiked,
           ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  widget.title,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: Color(0xFF542209),
-                    fontFamily: 'NotoSerif',
-                    fontWeight: FontWeight.w700,
+        ));
+
+      },
+      child: Column(
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: GestureDetector(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    widget.imagePath,
+                    fit: BoxFit.contain,
+                  ),
+                  Opacity(
+                    opacity: isHeartAnimating ? 1 : 0,
+                    child: HeartAnimationWidget(
+                      isAnimating: isHeartAnimating,
+                      duration: const Duration(milliseconds: 700),
+                      child: const Image(
+                        image: AssetImage('assets/images/heart.png'), 
+                        width: 80
+                      ),
+                      onEnd: () {
+                        setState(() {
+                          isHeartAnimating = false;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              onDoubleTap: () {
+                setState(() {
+                  isHeartAnimating = true;
+                  widget.isLiked = true;
+                });
+              },
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    widget.title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF542209),
+                      fontFamily: 'NotoSerif',
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: HeartToggle(),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: HeartToggle(),
+                ),
               ),
-            ),
-          ]
-        )
-      ],
+            ]
+          )
+        ],
+      ),
     );
   }
 
   Widget HeartToggle() {
-      IconData icon;
-      Color color = const Color(0xFF542209);
-      if (widget.isLiked == true) {
-        icon = Icons.favorite;
-      } else {
-        icon = Icons.favorite_outline;
-      }
-
-      return HeartAnimationWidget(
-        alwaysAnimate: true,
-        isAnimating: widget.isLiked,
-        child: IconButton(
-          icon: Icon(icon, color: color, size: 32),
-          onPressed: () => setState(() {
-            widget.isLiked = !widget.isLiked;
-            if (widget.isLiked == true) {
-              isHeartAnimating = true;
-            }
-          }),
-        ),
-      );
+    Image image;
+    if (widget.isLiked == true) {
+      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 32);
+    } else {
+      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 32);
     }
+
+    return HeartAnimationWidget(
+      alwaysAnimate: true,
+      isAnimating: widget.isLiked,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              widget.isLiked = !widget.isLiked;
+              if (widget.isLiked == true) {
+                isHeartAnimating = true;
+              }
+            });
+          },
+          child: image,
+        ),
+      ),
+    );
+  }
+  // Widget HeartToggle() {
+  //     IconData icon;
+  //     Color color = const Color(0xFF542209);
+  //     if (widget.isLiked == true) {
+  //       icon = Icons.favorite;
+  //     } else {
+  //       icon = Icons.favorite_outline;
+  //     }
+
+  //     return HeartAnimationWidget(
+  //       alwaysAnimate: true,
+  //       isAnimating: widget.isLiked,
+  //       child: IconButton(
+  //         icon: Icon(icon, color: color, size: 32),
+  //         onPressed: () => setState(() {
+  //           widget.isLiked = !widget.isLiked;
+  //           if (widget.isLiked == true) {
+  //             isHeartAnimating = true;
+  //           }
+  //         }),
+  //       ),
+  //     );
+  //   }
 }
