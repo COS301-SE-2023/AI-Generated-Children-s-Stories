@@ -9,4 +9,9 @@ public class CreateAStoryController {
     private void switchToHome() throws IOException {
         App.setRoot("home");
     }
+
+    @FXML
+    private void switchToCharacter() throws IOException {
+        App.setRoot("character");
+    }
 }

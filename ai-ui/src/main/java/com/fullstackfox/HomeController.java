@@ -1,9 +1,11 @@
 package com.fullstackfox;
 
 import java.io.IOException;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-public class PrimaryController {
+public class HomeController {
 
     @FXML
     private void switchToSettings() throws IOException {
@@ -20,3 +22,4 @@ public class PrimaryController {
         App.setRoot("create-a-story");
     }
 }
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.PagePreviewController">
+    <children>
+      <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="305.0" layoutY="16.0" text="Story Preview - Page #" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Label>
+            <Button fx:id="discardButton" alignment="CENTER" contentDisplay="CENTER" layoutX="896.0" layoutY="14.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Discard Story" textAlignment="JUSTIFY" wrapText="true">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane maxWidth="425.0" prefHeight="500.0" style="-fx-background-color: #e6e7e8; -fx-border-color: #1e1e1e; -fx-background-radius: 20; -fx-border-radius: 20;">
+         <children>
+            <Button fx:id="secondaryButton1" layoutX="38.0" layoutY="433.0" onAction="#switchToName" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Previous Page" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="secondaryButton11" layoutX="218.0" layoutY="433.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Next Page" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Pane layoutX="53.0" layoutY="4.0" prefHeight="320.0" prefWidth="320.0" style="-fx-background-color: #007FBA; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <TextArea layoutX="38.0" layoutY="331.0" prefHeight="100.0" prefWidth="350.0" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </Pane>
+    </children>
+</VBox>
