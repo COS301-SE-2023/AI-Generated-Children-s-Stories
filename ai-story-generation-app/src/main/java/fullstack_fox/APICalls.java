@@ -66,7 +66,6 @@ public class APICalls {
                 + inPrompt + "\"\r\n            }\r\n        ]\r\n    }\r\n}";
 
         RequestBody body = RequestBody.create(requestBodyStr, mediaType);
-
         Request request = new Request.Builder()
                 .url("https://discord.com/api/v9/interactions")
                 .method("POST", body)

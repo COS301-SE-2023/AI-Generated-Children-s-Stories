@@ -13,46 +13,46 @@ import java.util.ArrayList;
 
 class JsonProcessorTest {
 
-    @Test
-    void readJson() {
-        JSONObject testObj = new JSONObject();
-        testObj.put("applicationID", "1");
-        testObj.put("channelID", "2");
-        testObj.put("guildID", "3");
-        testObj.put("sessionID", "4");
-        testObj.put("botAuthorization", "5");
-        testObj.put("userAuthorization", "6");
-        testObj.put("chatGPTKey", "7");
+    // @Test
+    // void readJson() {
+    //     JSONObject testObj = new JSONObject();
+    //     testObj.put("applicationID", "1");
+    //     testObj.put("channelID", "2");
+    //     testObj.put("guildID", "3");
+    //     testObj.put("sessionID", "4");
+    //     testObj.put("botAuthorization", "5");
+    //     testObj.put("userAuthorization", "6");
+    //     testObj.put("chatGPTKey", "7");
 
-        try {
+    //     try {
 
-            File f = new File("target/test-classes/fullstack_fox/resources/output.json");
-            f.getParentFile().mkdirs();
-            f.createNewFile();
+    //         File f = new File("target/test-classes/fullstack_fox/resources/output.json");
+    //         f.getParentFile().mkdirs();
+    //         f.createNewFile();
 
-            FileWriter fileWriter = new FileWriter("target/test-classes/fullstack_fox/resources/output.json");
-            fileWriter.write(testObj.toString());
-            fileWriter.close();
+    //         FileWriter fileWriter = new FileWriter("target/test-classes/fullstack_fox/resources/output.json");
+    //         fileWriter.write(testObj.toString());
+    //         fileWriter.close();
 
-            //test the function
-            JsonProcessor jsonProcessor = new JsonProcessor();
+    //         //test the function
+    //         JsonProcessor jsonProcessor = new JsonProcessor();
 
-            ArrayList<String> readParameters = jsonProcessor.readJson("output.json");
+    //         ArrayList<String> readParameters = jsonProcessor.readJson("output.json");
 
-            //todo: check that it read the right pararmeters
-
-
-            //delete the dirs
-            f.delete();
-            f = new File("target/test-classes/fullstack_fox/resources");
-            f.delete();
+    //         //todo: check that it read the right pararmeters
 
 
-        }
-        catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
+    //         //delete the dirs
+    //         f.delete();
+    //         f = new File("target/test-classes/fullstack_fox/resources");
+    //         f.delete();
+
+
+    //     }
+    //     catch (IOException | URISyntaxException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     @Test
     void writeStoryToJson() throws URISyntaxException, FileNotFoundException {

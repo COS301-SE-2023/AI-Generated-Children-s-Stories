@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 /// This class represents the progress bar widget.
 /// It is used to show the user how far they are through the book.
@@ -23,53 +24,25 @@ class ProgressBar extends StatefulWidget {
 class _ProgressBarState extends State<ProgressBar> {
   @override
   Widget build(BuildContext context) {
-    return Stack(children: <Widget>[
-      SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 30,
-        //change width of cliprect
-        child: Padding(
-          padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.07,
-              right: MediaQuery.of(context).size.width * 0.07),
-
-          //give it a border of grey
-
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromARGB(211, 211, 211, 255),
-                width: 2.5,
-              ),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              child: LinearProgressIndicator(
-                value: widget.currentPages / widget.totalPages,
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                valueColor: const AlwaysStoppedAnimation<Color>(
-                    Color.fromARGB(255, 254, 141, 41)),
-              ),
-            ),
-          ),
-        ),
+    return LinearPercentIndicator(
+      key: const Key('ProgressBar'),
+      padding: const EdgeInsets.all(0),
+      barRadius: const Radius.circular(20),
+      backgroundColor: const Color(0xFFFFFFFF),
+      animation: true,
+      lineHeight: 35.0,
+      animationDuration: 1000,
+      percent: widget.currentPages / widget.totalPages,
+      center: Text(
+        '${(widget.currentPages / widget.totalPages * 100).round()}%',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+            color: Color(0xFF542209),
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+            fontFamily: 'Poppins'),
       ),
-
-      //center the
-      Positioned(
-        left: MediaQuery.of(context).size.width * 0.44,
-        top: 1,
-        child: Text(
-          "${(widget.currentPages / widget.totalPages * 100).round()}%",
-          style: const TextStyle(
-              //rgb(0, 197, 61)
-              color: Color.fromARGB(255, 84, 34, 9),
-              fontWeight: FontWeight.bold,
-              fontSize: 19,
-              fontFamily: 'NotoSerif'),
-        ),
-      ),
-    ]);
+      progressColor: const Color(0xFFFE8D29),
+    );
   }
 }

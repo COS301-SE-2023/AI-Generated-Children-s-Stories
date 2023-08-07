@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'global_variables.dart';
 import 'story.dart';
+import 'package:http/http.dart' as http;
 
 /// This class represents the service that gets the stories from the json file.
 /// It contains the fetchStories function, which reads the json file and returns the stories.
@@ -13,43 +16,131 @@ class GetStoriesService {
   //read the json file and return the stories (simulates an api call)
   //continue with integration tests
 
-  Future<List<Story>> fetchStories() async {
+  Future<List<Story>> fetchAllStories(BuildContext context) async {
+    List<String> idToken = await GlobalVariables.getIdAndToken();
+    String id = idToken[0];
+    String token = idToken[1];
+
+    print(id);
+
+    List<Story> stories = [];
+
+    final url =
+        Uri.parse("http://${GlobalVariables.ipAddress}/userStoryInfo/all/$id");
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
+        for (var story in data) {
+          Story newStory = Story(
+              title: story['title'],
+              trailer: story['trailer'],
+              textContent:[],
+              imageContent:[],
+              currentPage: story['pageNo'],
+              id: story['id'],
+              isLiked: story['liked']
+          );
+          stories.add(newStory);
+        }
+
+      } else {
+        if (context.mounted) {
+          GlobalVariables.showSnackbarMessage(
+              "Failed to get story: ${response.statusCode}", context);
+        }
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+
+    return stories;
+  }
+
+  //read the json file and return the currently reading story (simulates an api call)
+  Future<List<Story>> fetchCurrentlyReading(BuildContext context) async {
+    List<String> idToken = await GlobalVariables.getIdAndToken();
+    String id = idToken[0];
+    String token = idToken[1];
+
+    List<Story> stories = [];
+
+    //make an API call and pass in the id and token
+    final url = Uri.parse("http://${GlobalVariables.ipAddress}/progress/$id");
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
+        for (var progressEntity in data) {
+          //create a book
+          var s = progressEntity['story'];
+
+          var pages = s['pages'];
+          List<String> textContent = [];
+          List<String> imageContent = [];
+
+          for (var page in pages) {
+            textContent.add(page["text"]);
+            imageContent.add(page["image"]);
+          }
+
+          Story story = Story(
+              title: s['title'],
+              trailer: s['trailer'],
+              textContent: textContent,
+              imageContent: imageContent,
+              currentPage: progressEntity['pageNumber'],
+              id: s['id'],
+
+              //todo: get like status
+              isLiked: false);
+
+          stories.add(story);
+        }
+
+        return stories;
+      } else {
+        if (context.mounted) {
+          GlobalVariables.showSnackbarMessage(
+              "Failed to get story: ${response.statusCode}", context);
+        }
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+
+    return stories;
+  }
+
+  Future<List<Story>> fetchLikedStories() async {
     //await Future.delayed(const Duration(seconds: 5));
-    final String response = await rootBundle.loadString('assets/stories.json');
+    final String response =
+        await rootBundle.loadString('assets/data/stories.json');
     final data = await json.decode(response);
 
     List<Story> stories = [];
 
     //add a new story object to the list of stories for each story in the json file
     for (var i = 0; i < data.length; i++) {
-      stories.add(Story(
-          title: data[i]['title'],
-          coverUrl: data[i]['coverUrl'],
-          textContent: data[i]['textContent'].cast<String>(),
-          imageContent: data[i]['imageContent'].cast<String>(),
-          currentPage: data[i]['currentPage'],
-          id: data[i]['id']));
+      if (data[i]['isLiked'] == true) {
+        stories.add(Story(
+            title: data[i]['title'],
+            trailer: data[i]['coverUrl'],
+            textContent: data[i]['textContent'].cast<String>(),
+            imageContent: data[i]['imageContent'].cast<String>(),
+            currentPage: data[i]['currentPage'],
+            isLiked: data[i]['isLiked'],
+            id: data[i]['id']));
+      }
     }
 
     return stories;
-  }
-
-  //read the json file and reaturn the currently reading story (simulates an api call)
-  Future<Story> fetchCurrrentlyReading() async {
-    await Future.delayed(const Duration(seconds: 5));
-    final String response =
-        await rootBundle.loadString('assets/currentlyReading.json');
-    final data = await json.decode(response);
-
-    //return a story
-    return Story(
-      title: data['title'],
-      coverUrl: data['coverUrl'],
-      textContent: data['textContent'].cast<String>(),
-      imageContent: data['imageContent'].cast<String>(),
-      currentPage: data['currentPage'],
-      id: data['id'],
-    );
   }
 
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {

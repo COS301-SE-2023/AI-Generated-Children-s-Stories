@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'global_variables.dart';
 import 'navbar.dart';
 import 'my_header.dart';
+import 'package:http/http.dart' as http;
 
 /// This class represents the profile page.
 /// The UI contains a header and a button to log out.
@@ -50,8 +53,47 @@ class _ProfileState extends State<Profile> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           const Color(0xFFFE8D29)),
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
+                    onPressed: () async {
+                      //make an api call to reset the token
+
+                      const storage = FlutterSecureStorage();
+                      String? checkId = await storage.read(key: 'id');
+
+                      if (checkId != null) {
+                        final url = Uri.parse(
+                            "http://${GlobalVariables.ipAddress}/logout/${checkId}");
+
+                        print(url);
+
+                        try {
+                          final response = await http.post(url);
+                          if (response.statusCode == 200) {
+                            if (context.mounted) {
+                              GlobalVariables.showSnackbarMessage(
+                                  'Logged out', context);
+                              Navigator.pushNamed(context, '/login');
+                            }
+                          } else {
+                            String message =
+                                'Error logging out, status code: ${response.statusCode}';
+                            if (context.mounted) {
+                              GlobalVariables.showSnackbarMessage(
+                                  message, context);
+                            }
+                          }
+                        } catch (e) {
+                          String message = 'Error logging out, message: $e';
+                          if (context.mounted) {
+                            GlobalVariables.showSnackbarMessage(
+                                message, context);
+                          }
+                        }
+                      } else {
+                        String message = 'Failed to log out';
+                        if (context.mounted) {
+                          GlobalVariables.showSnackbarMessage(message, context);
+                        }
+                      }
                     },
                     child: const Text('Log Out'),
                   ),
@@ -61,7 +103,7 @@ class _ProfileState extends State<Profile> {
           ],
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(),
+      bottomNavigationBar: NavbarWidget(active: 3),
     );
   }
 }
