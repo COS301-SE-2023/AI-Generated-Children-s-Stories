@@ -56,16 +56,16 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font></Label>
-                  <TextArea prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #1e1e1e; -fx-border-width: 1;" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="5" />
+                  <TextArea fx:id="storyPrompt" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #1e1e1e; -fx-border-width: 1;" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="5" />
                   <Label text="Target Age:" GridPane.rowIndex="6" />
-                  <TextField style="-fx-border-color: #1e1e1e;" GridPane.rowIndex="7" />
+                  <TextField fx:id="age" style="-fx-border-color: #1e1e1e;" GridPane.rowIndex="7" />
                   <Label text="Target Story Length:" GridPane.rowIndex="8" />
-                  <Slider showTickLabels="true" showTickMarks="true" value="20.0" GridPane.rowIndex="9" />
+                  <Slider fx:id="lenSlider" showTickLabels="true" showTickMarks="true" value="20.0" GridPane.rowIndex="9" />
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="507.0" text="Final Story" textAlignment="CENTER" GridPane.columnIndex="1">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font></Label>
-                  <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #1e1e1e;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="9" />
+                  <TextArea fx:id="storyOut" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #1e1e1e;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="9" />
                </children>
             </GridPane>
          </children>
@@ -78,7 +78,7 @@
       </Pane>
       <Pane prefHeight="100.0" prefWidth="200.0">
          <children>
-              <Button fx:id="secondaryButton" layoutX="204.0" layoutY="22.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Start Generation" textAlignment="CENTER" wrapText="true">
+              <Button fx:id="generationButton" layoutX="204.0" layoutY="22.0" onAction="#getPrompt" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Start Generation" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="15.0" />
                </font></Button>

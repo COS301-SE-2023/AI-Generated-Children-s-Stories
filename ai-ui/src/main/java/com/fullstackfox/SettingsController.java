@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 public class SettingsController {
 
@@ -16,4 +17,13 @@ public class SettingsController {
     private void close() throws IOException {
         Platform.exit();
     }
+
+     @FXML
+    private void setAppID() throws IOException {
+        
+    }
+
+
+
+
 }
