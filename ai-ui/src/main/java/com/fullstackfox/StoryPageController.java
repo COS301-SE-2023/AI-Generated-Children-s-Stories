@@ -1,11 +1,9 @@
 package com.fullstackfox;
 
 import java.io.IOException;
-
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-public class SettingsController {
+public class StoryPageController {
 
     @FXML
     private void switchToHome() throws IOException {
@@ -13,7 +11,7 @@ public class SettingsController {
     }
 
     @FXML
-    private void close() throws IOException {
-        Platform.exit();
+    private void switchToName() throws IOException {
+        App.setRoot("page-preview");
     }
 }
