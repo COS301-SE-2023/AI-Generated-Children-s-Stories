@@ -3,8 +3,6 @@ package fullstack_fox.Repositories;
 import fullstack_fox.Entities.Liked;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.User;
-import jdk.dynalink.linker.LinkerServices;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

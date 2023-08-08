@@ -1,9 +1,15 @@
 package fullstack_fox.DTOs;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.Subselect;
+
 
 @Entity
-@Table(name = "user_story_info")
+//prevent the table for automatically being created
+@Subselect("select * from user_story_info")
 public class UserStoryInfoDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

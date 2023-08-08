@@ -1,9 +1,7 @@
 package fullstack_fox.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="Liked")

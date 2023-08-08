@@ -1,13 +1,13 @@
 package fullstack_fox.Controllers;
 
 import com.google.firebase.auth.FirebaseAuthException;
-import fullstack_fox.services.UserService;
 import fullstack_fox.Entities.User;
+import fullstack_fox.services.UserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.json.*;
 
 @RestController
 public class UserController {

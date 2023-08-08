@@ -1,7 +1,6 @@
 package fullstack_fox.Entities;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
