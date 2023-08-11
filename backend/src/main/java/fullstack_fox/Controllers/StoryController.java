@@ -39,6 +39,4 @@ public class StoryController {
         storyService.deleteStoryById(id);
         return ResponseEntity.ok("Story with id " + id + " and its pages have been deleted.");
     }
-
-
 }

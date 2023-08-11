@@ -15,6 +15,4 @@ public interface LikedRepository extends CrudRepository<Liked, Long> {
     Liked findByUserAndStory(User user, Story story);
 
     List<Liked> findByUser_Id(Long id);
-
-
 }

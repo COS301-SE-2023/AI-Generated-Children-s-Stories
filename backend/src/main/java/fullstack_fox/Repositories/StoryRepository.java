@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface StoryRepository extends CrudRepository<Story, Long> {
-
-
     Optional<Story> findById(Long id);
 }

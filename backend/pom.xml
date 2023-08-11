@@ -17,7 +17,6 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-
 		<!-- for spring boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -37,14 +36,12 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<version>8.0.33</version>
 		</dependency>
-
 		<!-- for handling json objects -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20230227</version>
 		</dependency>
-
 		<!-- for authentication-->
 		<dependency>
 			<groupId>com.google.firebase</groupId>
@@ -59,13 +56,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- to dockerise the app -->
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.13</version>
-			</plugin>
 		</plugins>
 	</build>
-
 </project>

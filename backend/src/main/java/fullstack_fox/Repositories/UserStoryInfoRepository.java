@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface UserStoryInfoRepository extends JpaRepository<UserStoryInfoDTO, Long> {
-
-    // Define custom queries on the view
     @Query("SELECT u FROM UserStoryInfoDTO u WHERE u.userId = :userId")
     List<UserStoryInfoDTO> findByUserId(Long userId);
 

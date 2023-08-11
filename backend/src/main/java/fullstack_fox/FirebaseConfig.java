@@ -20,7 +20,6 @@ public class FirebaseConfig {
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
-
         return FirebaseApp.initializeApp(options);
     }
 }

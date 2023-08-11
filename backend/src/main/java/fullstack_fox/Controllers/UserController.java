@@ -41,7 +41,6 @@ public class UserController {
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticateUser(@RequestBody String tokenBody) {
         //print the response:
-
         System.out.println("Got token at backend: ");
         System.out.println(tokenBody);
 

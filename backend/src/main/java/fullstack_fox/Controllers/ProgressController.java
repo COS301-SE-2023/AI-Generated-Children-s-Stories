@@ -55,13 +55,10 @@ public class ProgressController {
 
     public List<ProgressLikedDTO> getAllBooksInProgress(Long userId) {
         Optional<List<Progress>> optionalProgress = progressRepository.findProgressByUserId(userId);
-
-
         List<ProgressLikedDTO> progressLikedDTOS = optionalProgress.stream()
                 .flatMap(List::stream)
                 .map(this::convertToProgressLikedDTO)
                 .collect(Collectors.toList());
-
         return progressLikedDTOS;
     }
 
@@ -164,11 +161,9 @@ public class ProgressController {
                 progressRepository.save(newProgress);
                 return ResponseEntity.ok("Progress created.");
             }
-
             return ResponseEntity.badRequest().body("User or story is not present: " + userToPostOptional.isPresent() + ", " + storyToPostOptional.isPresent());
         }
 
     }
-
     //delete progress
 }

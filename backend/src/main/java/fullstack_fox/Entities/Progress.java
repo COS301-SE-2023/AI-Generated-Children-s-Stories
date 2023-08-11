@@ -52,6 +52,4 @@ public class Progress {
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
-
-
 }
