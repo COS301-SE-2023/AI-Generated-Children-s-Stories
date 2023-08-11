@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Magic Pages',
         theme: ThemeData(
           primarySwatch: createMaterialColor(const Color(0xFFFE8D29)),
