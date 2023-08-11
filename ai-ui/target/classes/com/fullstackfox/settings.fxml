@@ -61,7 +61,7 @@
                         <Font name="Arial" size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="exitButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="0.2" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button fx:id="setAppID" alignment="CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="0.2" onAction="#setAppID" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -72,7 +72,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="1">
+                  <TextField fx:id="appID" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
@@ -107,42 +107,42 @@
                         <Font name="Arial" size="13.0" />
                      </font>
                   </Label>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="4">
+                  <TextField fx:id="channelID" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="4">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="7">
+                  <TextField fx:id="GuildID" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="7">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="10">
+                  <TextField fx:id="sessionID" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="10">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <TextField fx:id="botAuth" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <TextField fx:id="userAuth" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                  <TextField fx:id="chatKey" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="7">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                  <TextField fx:id="midSeed" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.columnIndex="3" GridPane.rowIndex="10">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="exitButton1" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Button fx:id="setChannelID" alignment="CENTER" contentDisplay="RIGHT" onAction="#setChannelID" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -153,7 +153,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="exitButton2" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <Button fx:id="setGuildID" alignment="CENTER" contentDisplay="RIGHT" onAction="#setGuildID" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -164,7 +164,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="exitButton3" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                  <Button fx:id="setSessionID" alignment="CENTER" contentDisplay="RIGHT" onAction="#setSessionID" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -175,7 +175,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="exitButton4" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <Button fx:id="setBotAuth" alignment="CENTER" contentDisplay="RIGHT" onAction="#setBotAuth" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -186,7 +186,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="exitButton41" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="10">
+                  <Button fx:id="setMidSeed" alignment="CENTER" contentDisplay="RIGHT" onAction="#setMidSeed" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="10">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -197,7 +197,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="exitButton42" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="7">
+                  <Button fx:id="SetChatKey" alignment="CENTER" contentDisplay="RIGHT" onAction="#setChatKey" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="7">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -208,7 +208,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="exitButton5" alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                  <Button fx:id="setUserAuth" alignment="CENTER" contentDisplay="RIGHT" onAction="#setUserAuth" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: #007FBA; -fx-border-color: #FFC72C; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Update" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
