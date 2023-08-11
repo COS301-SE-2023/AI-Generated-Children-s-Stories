@@ -1,13 +1,11 @@
 package fullstack_fox.Controllers;
 
+import fullstack_fox.Entities.Story;
+import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import fullstack_fox.Repositories.StoryRepository;
-import fullstack_fox.Entities.Story;
 
 import java.util.Optional;
 

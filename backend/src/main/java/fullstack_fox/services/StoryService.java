@@ -2,10 +2,10 @@ package fullstack_fox.services;
 
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Repositories.StoryRepository;
+import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.*;
 import java.util.List;
 import java.util.Optional;
 
