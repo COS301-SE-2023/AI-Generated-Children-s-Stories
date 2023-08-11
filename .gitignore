@@ -41,3 +41,6 @@ magic-pages-app/magic_pages/android/app/google-services.json
 magic-pages-app/magic_pages/lib/firebase_options.dart
 backend/out/artifacts/backend_jar/backend.jar
 backend/src/main/resources.zip
+backend/docker-app/backend-0.0.1-SNAPSHOT.jar
+backend/.env
+backend/docker-app/backend-0.0.1-SNAPSHOT.jar
