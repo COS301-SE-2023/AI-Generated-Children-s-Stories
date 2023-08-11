@@ -44,13 +44,15 @@ public class SettingsController {
     @FXML
     private void setAppID() throws IOException {
         if(appID.getText() != null && !appID.getText().isEmpty()){
-  
+           updateJson( "applicationID", appID.getText()); 
+        }
     }
-}
+
      @FXML
     private void setChannelID() throws IOException {
-        
+     
     }
+
      @FXML
     private void setGuildID() throws IOException {
         
@@ -75,41 +77,36 @@ public class SettingsController {
     private void setMidSeed() throws IOException {
         
     }
+// helper function
+     public void updateJson( String keyToUpdate, String newValue) {
+        ClassLoader classLoader = SettingsController.class.getClassLoader();
 
+        // Path to the config.json file relative to the resources directory
+        //String configFilePath = "com/fullstackfox/resources/config.json";
 
+         try (InputStream inputStream = classLoader.getResourceAsStream("resources/config.json")) {
+             if (inputStream != null) {
+                try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                    JSONTokener tokener = new JSONTokener(reader);
+                    JSONObject jsonObject = new JSONObject(tokener);
 
-    // helper function
+                    // Update the specific key with the new value
+                    jsonObject.put(keyToUpdate, newValue);
 
-    // public void updateJson(String inFName, String keyToUpdate, String newValue) {
-    //     try (InputStream inputStream = this.getClass().getResourceAsStream("resources/" + inFName)) {
-    //         if (inputStream != null) {
-    //             // Read the resource using BufferedReader or any other appropriate method
-    //             try (BufferedReader reader = new BufferedReader(
-    //                     new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-    //                 JSONTokener tokener = new JSONTokener(reader);
-    //                 JSONObject jsonObject = new JSONObject(tokener);
-
-    //                 // Update the specific key with the new value
-    //                 jsonObject.put(keyToUpdate, newValue);
-
-    //                 // Write the updated JSON back to the file
-    //                 try (OutputStream outputStream = new FileOutputStream("resources/" + inFName)) {
-    //                     outputStream.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
-    //                 }
-    //             }
-    //         } else {
-    //             // The resource could not be found
-    //             System.out.println("Resource not found: " + inFName);
-    //         }
-    //     } catch (IOException e) {
-    //         // Handle any potential IO exceptions
-    //         e.printStackTrace();
-    //     }
-    // }
-
-
-
-
-
+                    // Write the updated JSON back to the file
+                    try (OutputStream outputStream = new FileOutputStream("resources/config.json")) {
+                        outputStream.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
+                    }
+                }
+            } else {
+                // The resource could not be found
+                System.out.println("Resource not found: config.json");
+            }
+        } catch (IOException e) {
+            // Handle any potential IO exceptions
+            e.printStackTrace();
+        }
+    }
 
 }
