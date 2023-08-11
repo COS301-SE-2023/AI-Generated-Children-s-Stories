@@ -73,31 +73,37 @@ public class SettingsController {
         
     }
 // helper function
-     public void updateJson( String keyToUpdate, String newValue) {
-        ClassLoader classLoader = SettingsController.class.getClassLoader();
+public void updateJson(String keyToUpdate, String newValue) {
+    String resourcesPath = "/com/fullstackfox/resources/config.json";
 
-         String resourcesPath = "/com/fullstackfox/resources/config.json";
+    try (InputStream inputStream = SettingsController.class.getResourceAsStream(resourcesPath)) {
+        if (inputStream != null) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                JSONTokener tokener = new JSONTokener(reader);
+                JSONObject jsonObject = new JSONObject(tokener);
 
-         try (InputStream inputStream = SettingsController.class.getResourceAsStream(resourcesPath)) {
-             if (inputStream != null) {
-                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-                     JSONTokener tokener = new JSONTokener(reader);
-                     JSONObject jsonObject = new JSONObject(tokener);
-                     // Update the specific key with the new value
-                     jsonObject.put(keyToUpdate, newValue);
+                // Update the specific key with the new value
+                jsonObject.put(keyToUpdate, newValue);
 
-                     // Write the updated JSON back to the file
-                     try (OutputStream outputStream = new FileOutputStream("resources/config.json")) {
-                         outputStream.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
-                     }
-                 }
-             } else {
-                 // The resource could not be found
-                 System.out.println("Resource not found: config.json");
-             }
-         } catch (IOException e) {
-             // Handle any potential IO exceptions
-             e.printStackTrace();
-         }
+                // Get the absolute path to the resource
+                String resourceAbsolutePath = SettingsController.class.getResource(resourcesPath).getPath();
+
+                // Write the updated JSON back to the file
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(resourceAbsolutePath))) {
+                    writer.write(jsonObject.toString());
+                }catch (IOException e) {
+                    // Handle any potential IO exceptions
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            // The resource could not be found
+            System.out.println("Resource not found: config.json");
+        }
+    } catch (IOException e) {
+        // Handle any potential IO exceptions
+        e.printStackTrace();
     }
+}
+
 }
