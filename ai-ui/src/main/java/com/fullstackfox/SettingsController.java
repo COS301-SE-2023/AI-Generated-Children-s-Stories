@@ -1,11 +1,6 @@
 package com.fullstackfox;
 
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import org.json.*;
 
@@ -81,32 +76,28 @@ public class SettingsController {
      public void updateJson( String keyToUpdate, String newValue) {
         ClassLoader classLoader = SettingsController.class.getClassLoader();
 
-        // Path to the config.json file relative to the resources directory
-        //String configFilePath = "com/fullstackfox/resources/config.json";
+         String resourcesPath = "/com/fullstackfox/resources/config.json";
 
-         try (InputStream inputStream = classLoader.getResourceAsStream("resources/config.json")) {
+         try (InputStream inputStream = SettingsController.class.getResourceAsStream(resourcesPath)) {
              if (inputStream != null) {
-                try (BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-                    JSONTokener tokener = new JSONTokener(reader);
-                    JSONObject jsonObject = new JSONObject(tokener);
+                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                     JSONTokener tokener = new JSONTokener(reader);
+                     JSONObject jsonObject = new JSONObject(tokener);
+                     // Update the specific key with the new value
+                     jsonObject.put(keyToUpdate, newValue);
 
-                    // Update the specific key with the new value
-                    jsonObject.put(keyToUpdate, newValue);
-
-                    // Write the updated JSON back to the file
-                    try (OutputStream outputStream = new FileOutputStream("resources/config.json")) {
-                        outputStream.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
-                    }
-                }
-            } else {
-                // The resource could not be found
-                System.out.println("Resource not found: config.json");
-            }
-        } catch (IOException e) {
-            // Handle any potential IO exceptions
-            e.printStackTrace();
-        }
+                     // Write the updated JSON back to the file
+                     try (OutputStream outputStream = new FileOutputStream("resources/config.json")) {
+                         outputStream.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
+                     }
+                 }
+             } else {
+                 // The resource could not be found
+                 System.out.println("Resource not found: config.json");
+             }
+         } catch (IOException e) {
+             // Handle any potential IO exceptions
+             e.printStackTrace();
+         }
     }
-
 }
