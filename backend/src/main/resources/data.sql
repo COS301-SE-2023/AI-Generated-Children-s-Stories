@@ -11,7 +11,7 @@ SELECT
     (CASE WHEN l.story_id IS NOT NULL THEN true ELSE false END) AS liked,
     (CASE WHEN pr.page_number IS NOT NULL THEN pr.page_number ELSE 0 END) AS page_no
 FROM
-    Story s
-        CROSS JOIN User u
-        LEFT JOIN Liked l ON s.id = l.story_id AND u.id = l.user_id
-        LEFT JOIN Progress pr ON s.id = pr.story_id AND u.id = pr.user_id;
+    story s
+        CROSS JOIN user u
+        LEFT JOIN liked l ON s.id = l.story_id AND u.id = l.user_id
+        LEFT JOIN progress pr ON s.id = pr.story_id AND u.id = pr.user_id;
