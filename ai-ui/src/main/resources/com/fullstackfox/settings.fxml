@@ -112,7 +112,7 @@
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="GuildID" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="7">
+                  <TextField fx:id="guildID" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" style="-fx-background-radius: 15; -fx-background-color: #e6e7e8; -fx-border-color: black; -fx-border-radius: 15;" GridPane.rowIndex="7">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
