@@ -47,6 +47,7 @@ public class Progress {
         this.user = user;
         this.story = story;
         this.pageNumber = pageNumber;
+
     }
 
     public void setPageNumber(int pageNumber) {

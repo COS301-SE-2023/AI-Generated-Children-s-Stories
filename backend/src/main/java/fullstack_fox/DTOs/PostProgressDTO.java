@@ -1,6 +1,16 @@
 package fullstack_fox.DTOs;
 
+import fullstack_fox.Entities.Progress;
+
 public class PostProgressDTO {
+    public PostProgressDTO(Progress progress) {
+        this.userId = progress.getUser().getId();
+        this.pageNumber = progress.getPageNumber();
+        this.storyId = progress.getStory().getId();
+    }
+
+    public PostProgressDTO(){}
+
     public int getPageNumber() {
         return pageNumber;
     }
@@ -28,4 +38,5 @@ public class PostProgressDTO {
     int pageNumber;
     Long storyId;
     Long userId;
+
 }

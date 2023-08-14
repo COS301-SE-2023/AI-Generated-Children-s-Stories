@@ -11,14 +11,16 @@ import java.util.Optional;
 @RestController
 public class AuthenticateApiCalls {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    static UserRepository userRepository;
+    public AuthenticateApiCalls(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    public static boolean authenticateApiKey(Long userId, String apiToken) {
+    public boolean authenticateApiKey(Long userId, String apiToken) {
+        Optional<User> u = userRepository.findById(userId);
 
-        return true;
-
-        /*Optional<User> u = userRepository.findById(userId);
         if (u.isPresent()) {
             User user = u.get();
             if (user.getApiToken().equals(apiToken)) {
@@ -26,7 +28,7 @@ public class AuthenticateApiCalls {
             }
             return false;
         }
-        throw new NoSuchElementException("No user found with id " + userId);*/
+        throw new NoSuchElementException("No user found with id " + userId);
     }
 
 }
