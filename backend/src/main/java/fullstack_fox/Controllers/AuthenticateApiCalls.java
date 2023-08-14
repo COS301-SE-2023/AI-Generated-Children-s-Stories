@@ -30,5 +30,4 @@ public class AuthenticateApiCalls {
         }
         throw new NoSuchElementException("No user found with id " + userId);
     }
-
 }
