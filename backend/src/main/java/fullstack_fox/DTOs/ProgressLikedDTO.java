@@ -22,6 +22,16 @@ public class ProgressLikedDTO {
 
     private int pageNumber;
 
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    private String apiKey;
+
     public boolean getLiked() {
         return isLiked;
     }
@@ -29,6 +39,7 @@ public class ProgressLikedDTO {
     public void setLiked(boolean liked) {
         isLiked = liked;
     }
+
 
     private boolean isLiked;
 

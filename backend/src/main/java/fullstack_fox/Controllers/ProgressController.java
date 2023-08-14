@@ -30,7 +30,11 @@ public class ProgressController {
     StoryRepository storyRepository;
 
     @PostMapping(path = "/progress")
-    public Progress create(@RequestBody ProgressLikedDTO progressLikedDTO) {
+    public ResponseEntity<Progress> createProgress(@RequestBody ProgressLikedDTO progressLikedDTO) {
+
+        if (!AuthenticateApiCalls.authenticateApiKey(progressLikedDTO.getUser(), progressLikedDTO.getApiKey()))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+
         // Get the user and story from the provided IDs in the DTO
         Optional<User> optionalUser = userRepository.findById(progressLikedDTO.getUser());
         User user = optionalUser.orElseThrow(() -> new NoSuchElementException("User not found"));
@@ -45,11 +49,13 @@ public class ProgressController {
             // If a progress entry already exists, update the pageNumber and return the existing progress
             Progress existingProgress = optionalProgress.get();
             existingProgress.setPageNumber(progressLikedDTO.getPageNumber());
-            return progressRepository.save(existingProgress);
+            Progress saved = progressRepository.save(existingProgress);
+            return ResponseEntity.ok().body(saved);
         } else {
             // If a progress entry does not exist, create a new one and save it
             Progress newProgress = new Progress(user, story, progressLikedDTO.getPageNumber());
-            return progressRepository.save(newProgress);
+            Progress saved = progressRepository.save(newProgress);
+            return ResponseEntity.ok().body(saved);
         }
     }
 
@@ -121,8 +127,14 @@ public class ProgressController {
         return progressLikedDTO;
     }
 
-    @DeleteMapping(path = "/deleteProgress/{storyId}/{userId}")
-    public ResponseEntity<String> delete(@PathVariable Long storyId, @PathVariable Long userId) {
+    //todo change to body
+    @DeleteMapping(path = "/deleteProgress")
+    public ResponseEntity<String> deleteProgress(@RequestParam Long storyId, @RequestParam Long userId,
+                                                 @RequestParam String apiKey) {
+
+        //authenticate api key...
+
+
         Progress progressToDelete = progressRepository.findByUser_IdAndStory_Id(userId, storyId);
 
         if (progressToDelete != null) {
@@ -137,7 +149,7 @@ public class ProgressController {
     //insert with page number set
 
     @PostMapping(path = "/createProgress")
-    public ResponseEntity<String> post(@RequestBody PostProgressDTO progress) {
+    public ResponseEntity<String> postProgress(@RequestBody PostProgressDTO progress) {
         if (progress.getUserId() == null || progress.getStoryId() == null) {
             return ResponseEntity.badRequest().body("User ID or Story ID cannot be null.");
         }

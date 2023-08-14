@@ -21,6 +21,7 @@ public class UserStoryInfoService {
         return userStoryInfoRepository.findByUserId(userId);
     }
 
+
     public List<UserStoryInfoDTO> findLikedByUserId(Long userId) {
         return userStoryInfoRepository.findLikedByUserId(userId);
     }
