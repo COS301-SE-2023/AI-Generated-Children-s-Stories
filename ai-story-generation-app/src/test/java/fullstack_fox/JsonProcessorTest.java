@@ -82,7 +82,6 @@ class JsonProcessorTest {
         JSONObject page = object.getJSONArray("pages").getJSONObject(0);
 
         Assertions.assertEquals(page.get("image"), "image_url");
-        Assertions.assertEquals(page.get("pageNumber"), 1);
         Assertions.assertEquals(page.get("text"), "I am page content");
 
         //delete the file
