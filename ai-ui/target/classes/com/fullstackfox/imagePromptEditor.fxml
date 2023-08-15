@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.CreateAStoryController">
+    <children>
+      <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
+         <children>
+            <Button fx:id="updateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="16.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Home" textAlignment="JUSTIFY" wrapText="true">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="47.0" prefWidth="1040.0" text="Prompt Editor" textAlignment="CENTER" textFill="#0f4876" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="-57.0" prefHeight="450.0" prefWidth="1000.0" style="-fx-background-color: white;">
+         <children>
+            <GridPane alignment="TOP_CENTER" hgap="10.0" prefHeight="410.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 50;" vgap="5.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="28.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="1003.0" text="Please ensure all prompts are formatted in a numbered list." GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></Label>
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="" prefHeight="51.0" prefWidth="1007.0" text="For example: &quot;1. This is an example prompt.   " textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="storyOut" editable="false" prefHeight="400.0" prefWidth="960.0" style="-fx-border-color: #1e1e1e;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="7" />
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" ellipsisString="" prefHeight="46.0" prefWidth="973.0" text="                       2. This is the second prompt.&quot; " textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Pane>
+      <Pane layoutX="-100.0" maxHeight="40.0" prefHeight="80.0" prefWidth="1040.0">
+         <children>
+            <Button fx:id="secondaryButton1" layoutX="381.0" layoutY="-30.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Edit" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font></Button>
+            <Button fx:id="secondaryButton11" layoutX="525.0" layoutY="-30.0" onAction="#switchToCharacter" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+    </children>
+</VBox>
