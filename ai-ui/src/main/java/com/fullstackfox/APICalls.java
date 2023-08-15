@@ -5,8 +5,6 @@ import okhttp3.*;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.JOptionPane;
-
 public class APICalls {
     // Config List Content
     // 0: Application ID
@@ -95,7 +93,7 @@ public class APICalls {
         int lastDotIndex = inImageURL.lastIndexOf(".");
 
         String imageID = inImageURL.substring(lastUnderscoreIndex + 1, lastDotIndex);
-        int upscaleNum = Integer.parseInt(JOptionPane.showInputDialog("Which image do you want to upscale 1-4"));
+        int upscaleNum = 1;
         RequestBody body = RequestBody.create(
                 "{\r\n    \"type\": 3,\r\n    \"application_id\": \"" + configList.get(0)
                         + "\",\r\n    \"guild_id\": \"" + configList.get(2)
