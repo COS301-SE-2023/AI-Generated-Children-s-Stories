@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("home"), 1040, 585);
+        
+        stage.setResizable(false);
+        stage.setTitle("Artificial Intellignece Story Generator");
+        Image iconImage = new Image(getClass().getResourceAsStream("/com/fullstackfox/resources/Icon.png"));
+        stage.getIcons().add(iconImage);
         stage.setScene(scene);
         stage.show();
     }
