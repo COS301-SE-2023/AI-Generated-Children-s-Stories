@@ -75,22 +75,22 @@ class Story {
   /// if the current page is the last page, return the last page
   /// else return the next page
   /// @return the next page
-  Object getNext() {
+  Map<String, dynamic> getNext() {
     if (index < textContent.length - 1) {
       index = index + 1;
     }
 
     if (index == textContent.length - 1) {
       return {
-        textContent[index],
-        imageContent[index],
-        true //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': true //is last item
       };
     } else {
       return {
-        textContent[index],
-        imageContent[index],
-        false //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': false //is last item
       };
     }
   }
@@ -99,22 +99,22 @@ class Story {
   /// if the current page is the first page, return the first page
   /// else return the previous page
   /// @return the previous page
-  Object getPrev() {
+  Map<String, dynamic> getPrev() {
     if (index > 0) {
       index = index - 1;
     }
 
     if (index == textContent.length - 1) {
       return {
-        textContent[index],
-        imageContent[index],
-        true //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': true
       };
     } else {
       return {
-        textContent[index],
-        imageContent[index],
-        false //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': false //is last item
       };
     }
   }

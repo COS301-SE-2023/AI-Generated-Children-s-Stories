@@ -25,7 +25,7 @@ class GlobalVariables {
 
     if (id == null || token == null) {
       //store mock for testing
-      return ["2", "12345678"];
+      return ["1", "12345678"];
     }
 
     List<String> list = [];

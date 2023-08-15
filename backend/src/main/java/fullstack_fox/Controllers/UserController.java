@@ -44,6 +44,7 @@ public class UserController {
         System.out.println("Got token at backend: ");
         System.out.println(tokenBody);
 
+
         try {
             User user = userService.authenticateFirebaseToken(tokenBody);
 

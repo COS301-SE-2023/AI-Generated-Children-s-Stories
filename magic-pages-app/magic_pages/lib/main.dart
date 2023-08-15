@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magic_pages/end_of_story.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 import 'get_stories_service.dart';
-import 'inside_story.dart';
 import 'signup_page.dart';
 import 'story_list.dart';
 import 'story_liked.dart';
@@ -15,7 +14,7 @@ import 'story_list_change_notifier.dart';
 
 //firebase
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+
 
 /// This is the main file for the app.
 /// It contains the main function, which runs the app.
@@ -25,10 +24,18 @@ import 'firebase_options.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const MyApp());
+  bool isTest = false;
+
+  // Conditionally initialize Firebase
+  if (DefaultFirebaseOptions.currentPlatform.apiKey != "test") {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  }
+  else {
+    isTest = true;
+  }
+
+  runApp(MyApp(isTest: isTest));
 }
 
 MaterialColor createMaterialColor(Color color) {
@@ -52,7 +59,13 @@ MaterialColor createMaterialColor(Color color) {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+  final bool isTest;
+
+  MyApp({
+    super.key,
+    required this.isTest
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +77,7 @@ class MyApp extends StatelessWidget {
         ),
         home: ChangeNotifierProvider(
           create: (context) => StoryListChangeNotifier(GetStoriesService()),
-          child: const SplashPage(),
+          child: !isTest ? const SplashPage() : const Home()
         ),
         routes: {
           '/signup': (context) => SignupPage(),
