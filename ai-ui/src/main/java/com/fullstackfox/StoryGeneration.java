@@ -16,40 +16,56 @@ public class StoryGeneration {
         callApi = inApiLibrary;
         processPrompt = new PromptProcessor("123");
     }
-
-    public Story generateStory(ArrayList<String> inputList) throws URISyntaxException {
+//public Story generateStory(ArrayList<String> inputList) throws URISyntaxException {
         // Generate story text
+        public String storyMaker(ArrayList<String> inputList) {
         String currentPrompt = processPrompt.storyPrompt(inputList);
         String story = this.storyText(currentPrompt);
-        System.out.println(story);
-        if (!story.isBlank()) {
+        return story;
+        //System.out.println(story);
+        }
+
+        public String generateTitle (String story){
+        //if (!story.isBlank()) {
             // Generate story title
-            currentPrompt = processPrompt.storyTitlePrompt(story);
+             String currentPrompt = processPrompt.storyTitlePrompt(story);
             String storyTitle = this.storyTitle(currentPrompt);
+            return storyTitle;
+        }
 
             // Generate character image
-            currentPrompt = processPrompt.characterDescriptionPrompt(story);
+            public String generateCharacter(String story) throws URISyntaxException{
+            String currentPrompt = processPrompt.characterDescriptionPrompt(story);
             String characterImageUrl = this.characterImage(currentPrompt);
+            return characterImageUrl;
+            }
 
             // Generate trailer image
-            currentPrompt = processPrompt.storyTrailerPrompt(story);
+            
+            public String trailerImage(String story, String characterImageUrl) throws URISyntaxException{
+            String currentPrompt = processPrompt.storyTrailerPrompt(story);
             String storyTrailer = this.storyTrailer(currentPrompt, characterImageUrl);
+                return storyTrailer;
+            }
 
             // Generate story images
+            public String oliverChange(String story, String characterImageUrl) throws URISyntaxException{
             ArrayList<String> paragraphs = this.splitParagraphs(story);
             int numPages = paragraphs.size();
-            currentPrompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
+            String currentPrompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
             currentPrompt = this.storyImagePrompts(currentPrompt);
             System.out.println(currentPrompt);
             List<String> imagePrompts = splitNumberedList(currentPrompt);
-            ArrayList<String> storyImages = this.storyImages(imagePrompts,
-                    characterImageUrl);
+            ArrayList<String> storyImages = this.storyImages(imagePrompts, characterImageUrl);
+
+                return "ahhhhhh";
+            } 
 
             // Return final story
-            return this.compileStory(storyTitle, storyTrailer, paragraphs, storyImages);
-        }
-        return null;
-    }
+           // return this.compileStory(storyTitle, storyTrailer, paragraphs, storyImages);
+       // }
+       // return null;
+    
 
     public String storyText(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
