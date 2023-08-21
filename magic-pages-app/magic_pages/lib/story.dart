@@ -8,8 +8,8 @@
 class Story {
   final String title;
   final String trailer;
-  final List<String> textContent;
-  final List<String> imageContent;
+  List<String> textContent;
+  List<String> imageContent;
   final int currentPage;
   int index = 0;
   final int id;
@@ -18,9 +18,9 @@ class Story {
   Story(
       {required this.title,
       required this.trailer,
-      required this.textContent,
-      required this.imageContent,
       required this.currentPage,
+      required this.imageContent,
+      required this.textContent,
       required this.id, 
       required this.isLiked});
 
@@ -59,10 +59,18 @@ class Story {
     return textContent;
   }
 
+  void setTextContent(List<String> textContent) {
+    this.textContent = textContent;
+  }
+
   /// get the image content of the story
   /// @return the image content of the story
   List<String> getImageContent() {
     return imageContent;
+  }
+
+  void setImageContent(List<String> imageContent) {
+    this.imageContent = imageContent;
   }
 
   /// get the current page of the story

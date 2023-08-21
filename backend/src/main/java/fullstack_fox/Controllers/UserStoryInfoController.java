@@ -7,14 +7,15 @@ import fullstack_fox.Entities.User;
 import fullstack_fox.Repositories.LikedRepository;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Repositories.UserRepository;
+import fullstack_fox.services.StoryService;
 import fullstack_fox.services.UserStoryInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.text.html.Option;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserStoryInfoController {
@@ -30,15 +31,28 @@ public class UserStoryInfoController {
 
     private final UserStoryInfoService userStoryInfoService;
 
+    private final StoryService storyService;
+
     @Autowired
-    public UserStoryInfoController(UserStoryInfoService userStoryInfoService) {
+    public UserStoryInfoController(UserStoryInfoService userStoryInfoService, StoryService storyService) {
         this.userStoryInfoService = userStoryInfoService;
+        this.storyService = storyService;
     }
 
-    //todo: should not be callable endpoint!!!!, can return null
-    @GetMapping("/userStoryInfo/all/{userId}")
+    //for library page
+    @GetMapping("/library/{userId}")
     public List<UserStoryInfoDTO> getEntriesByUserId(@PathVariable Long userId) {
-        return userStoryInfoService.findByUserId(userId);
+        List<UserStoryInfoDTO> storiesForUser = userStoryInfoService.findByUserId(userId);
+        return storiesForUser;
+
+        /*List<Story> allOtherStories = storyService.findWhereNotReading(userId);
+
+        //add the other stories to the stories for the user by converting it to the DTO
+        for (Story s : allOtherStories) {
+            storiesForUser.add(new UserStoryInfoDTO(
+                    userId, s.getId(), s.getTitle(), s.getTrailer(), false, 0, s.getPages().size()
+            ));
+        }*/
     }
 
     @GetMapping("/userStoryInfo/liked/{userId}")

@@ -26,7 +26,7 @@ class GetStoriesService {
     List<Story> stories = [];
 
     final url =
-        Uri.parse("http://${GlobalVariables.ipAddress}/userStoryInfo/all/$id");
+        Uri.parse("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id");
 
     try {
       final response = await http.get(url);
@@ -69,7 +69,7 @@ class GetStoriesService {
     List<Story> stories = [];
 
     //make an API call and pass in the id and token
-    final url = Uri.parse("http://${GlobalVariables.ipAddress}/progress/$id");
+    final url = Uri.parse("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id");
 
     try {
       final response = await http.get(url);
@@ -77,32 +77,27 @@ class GetStoriesService {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
-        print(data);
-
-        for (var progressEntity in data) {
+        for (var userStoryInfoEntity in data) {
           //create a book
-          var s = progressEntity['story'];
+          print(userStoryInfoEntity);
 
-          var pages = s['pages'];
-          List<String> textContent = [];
-          List<String> imageContent = [];
+          print(userStoryInfoEntity['title']);
+          print(userStoryInfoEntity['trailer']);
+          print(userStoryInfoEntity['pageNo']);
+          print(userStoryInfoEntity['storyId']);
+          print(userStoryInfoEntity['liked']);
 
-          for (var page in pages) {
-            textContent.add(page["text"]);
-            imageContent.add(page["image"]);
-          }
+          print("trying to add");
 
           Story story = Story(
-              title: s['title'],
-              trailer: s['trailer'],
-              textContent: textContent,
-              imageContent: imageContent,
-              currentPage: progressEntity['pageNumber'],
-              id: s['id'],
-
-              //todo: get like status
-              isLiked: false);
-
+              title: userStoryInfoEntity['title'],
+              trailer: userStoryInfoEntity['trailer'],
+              textContent: [""],
+              imageContent: [""],
+              currentPage: userStoryInfoEntity['pageNo'],
+              id: userStoryInfoEntity['storyId'],
+              isLiked: userStoryInfoEntity['liked']
+          );
           stories.add(story);
         }
 

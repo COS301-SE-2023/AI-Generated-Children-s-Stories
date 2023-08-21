@@ -15,6 +15,16 @@ public class UserStoryInfoDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long userId;
+    private Long storyId;
+    private String title;
+    private String trailer;
+    private boolean liked;
+    private int pageNo;
+    private int totalPages;
+
+    public UserStoryInfoDTO() {}
+
     public UserStoryInfoDTO(Long userId, Long storyId, String title, String trailer, boolean liked, int pageNo, int totalPages) {
         this.userId = userId;
         this.storyId = storyId;
@@ -24,14 +34,6 @@ public class UserStoryInfoDTO {
         this.pageNo = pageNo;
         this.totalPages = totalPages;
     }
-
-    private Long userId;
-    private Long storyId;
-    private String title;
-    private String trailer;
-    private boolean liked;
-    private int pageNo;
-    private int totalPages;
 
     public Long getId() {
         return id;

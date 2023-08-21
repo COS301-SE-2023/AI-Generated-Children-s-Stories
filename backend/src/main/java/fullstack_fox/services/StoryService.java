@@ -1,5 +1,6 @@
 package fullstack_fox.services;
 
+import fullstack_fox.DTOs.UserStoryInfoDTO;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Repositories.StoryRepository;
 import jakarta.persistence.*;
@@ -35,4 +36,7 @@ public class StoryService {
         }
     }
 
+    public List<Story> findWhereNotReading(Long userId) {
+        return storyRepository.findWhereNotReading(userId);
+    }
 }
