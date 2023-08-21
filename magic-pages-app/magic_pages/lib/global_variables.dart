@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class GlobalVariables {
-  static String ipAddress = "192.168.1.39:8000";
+  static String ipAddress = "192.168.1.90:8080";
 
   static void showSnackbarMessage(String message, context) {
     var mySnackbar = SnackBar(content: Text(message));

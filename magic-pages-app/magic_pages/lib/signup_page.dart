@@ -25,15 +25,26 @@ class SignupPage extends StatelessWidget {
 
     final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
 
+    const storage = FlutterSecureStorage();
+
+    //todo: remove
+    // await storage.write(key: "api_token", value: "efbfe7f1-8c09-4584-a389-81fc5cbc6a65");
+    // await storage.write(key: "id", value: "1");
+    // return true;
+
+
     try {
       final response = await http.post(url, body: tokenToSend);
       //check the response code
+
       if (response.statusCode == 200) {
         Map<String, dynamic> data = json.decode(response.body);
 
         if (data["status"] == "success") {
           //save the API token
-          const storage = FlutterSecureStorage();
+
+          //todo: uncomment
+          //const storage = FlutterSecureStorage();
 
           await storage.write(key: "api_token", value: data["api_token"]);
           await storage.write(key: "id", value: data["id"].toString());

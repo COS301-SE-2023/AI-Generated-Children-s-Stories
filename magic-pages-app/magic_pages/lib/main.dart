@@ -21,6 +21,12 @@ import 'package:firebase_core/firebase_core.dart';
 /// It also contains the unit and integration tests.
 /// The unit tests test the inside a story class.
 /// The integration tests test the get stories service class.
+///
+/// Generate firebase keys:
+/// go to android folder
+/// ./gradlew signingReport
+/// Use sha1 and sha256
+/// add to android section in firebase
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +38,7 @@ Future main() async {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   }
   else {
+    print("TEST");
     isTest = true;
   }
 

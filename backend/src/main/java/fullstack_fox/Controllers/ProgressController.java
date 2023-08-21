@@ -2,6 +2,7 @@ package fullstack_fox.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fullstack_fox.DTOs.PostProgressDTO;
+import fullstack_fox.DTOs.UserStoryInfoDTO;
 import fullstack_fox.Entities.Progress;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.User;
@@ -68,6 +69,7 @@ public class ProgressController {
         }
     }
 
+    //todo: this should not be a progress DTO, this should return the trailers
     public List<PostProgressDTO> getAllBooksInProgress(Long userId) {
         Optional<List<Progress>> optionalProgress = progressRepository.findProgressByUserId(userId);
         List<PostProgressDTO> progressLikedDTOS = optionalProgress.stream()
@@ -113,25 +115,11 @@ public class ProgressController {
         return new PostProgressDTO(progress);
     }
 
-    @GetMapping("/progress/{userId}")
-    public List<PostProgressDTO> getProgressForUser(@PathVariable Long userId) {
-        List<PostProgressDTO> currentlyReadingList = getAllBooksInProgress(userId);
-
-        if (!currentlyReadingList.isEmpty())
-            return currentlyReadingList;
-
-        //currently reading is empty, return a random book
-        currentlyReadingList.add(getRandomBook(userId));
-
-        return currentlyReadingList;
-    }
-
     //converts a progress object to a DTO
     public PostProgressDTO convertToProgressDTO(Progress progress) {
         return new PostProgressDTO(progress);
     }
 
-    //todo change to body
     @DeleteMapping(path = "/deleteProgress")
     public ResponseEntity<String> deleteProgress(@RequestParam Long storyId, @RequestParam Long userId,
                                                  @RequestParam String apiKey) {

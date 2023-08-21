@@ -77,6 +77,8 @@ class GetStoriesService {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
+        print(data);
+
         for (var progressEntity in data) {
           //create a book
           var s = progressEntity['story'];
