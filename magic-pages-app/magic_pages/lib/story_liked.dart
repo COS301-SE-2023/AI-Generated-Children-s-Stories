@@ -34,15 +34,17 @@ class _StoryLikedState extends State<StoryLiked> {
   @override
   void initState() {
     super.initState();
-    getStories();
+    Future.delayed(Duration.zero,() {
+      getStories(context);
+    });
     _stories = [];
   }
 
   /// fetch stories
   /// it uses the story list change notifier to fetch the list of stories
   /// @return void
-  void getStories() async {
-    await _storyListChangeNotifier.fetchLikedStories();
+  void getStories(BuildContext context) async {
+    await _storyListChangeNotifier.fetchLikedStories(context);
     setState(() {
       _stories = _storyListChangeNotifier.stories;
     });

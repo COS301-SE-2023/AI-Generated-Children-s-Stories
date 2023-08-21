@@ -60,16 +60,11 @@ class GetStoriesService {
     return stories;
   }
 
-  //read the json file and return the currently reading story (simulates an api call)
-  Future<List<Story>> fetchCurrentlyReading(BuildContext context) async {
-    List<String> idToken = await GlobalVariables.getIdAndToken();
-    String id = idToken[0];
-    String token = idToken[1];
-
+  Future<List<Story>> fetchFromUrl(String apiUlr, BuildContext context) async {
     List<Story> stories = [];
 
     //make an API call and pass in the id and token
-    final url = Uri.parse("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id");
+    final url = Uri.parse(apiUlr);
 
     try {
       final response = await http.get(url);
@@ -102,6 +97,7 @@ class GetStoriesService {
         }
 
         return stories;
+
       } else {
         if (context.mounted) {
           GlobalVariables.showSnackbarMessage(
@@ -115,29 +111,20 @@ class GetStoriesService {
     return stories;
   }
 
-  Future<List<Story>> fetchLikedStories() async {
-    //await Future.delayed(const Duration(seconds: 5));
-    final String response =
-        await rootBundle.loadString('assets/data/stories.json');
-    final data = await json.decode(response);
+  //read the json file and return the currently reading story (simulates an api call)
+  Future<List<Story>> fetchCurrentlyReading(BuildContext context) async {
+    List<String> idToken = await GlobalVariables.getIdAndToken();
+    String id = idToken[0];
+    String token = idToken[1];
+    return fetchFromUrl("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id", context);
+  }
 
-    List<Story> stories = [];
-
-    //add a new story object to the list of stories for each story in the json file
-    for (var i = 0; i < data.length; i++) {
-      if (data[i]['isLiked'] == true) {
-        stories.add(Story(
-            title: data[i]['title'],
-            trailer: data[i]['coverUrl'],
-            textContent: data[i]['textContent'].cast<String>(),
-            imageContent: data[i]['imageContent'].cast<String>(),
-            currentPage: data[i]['currentPage'],
-            isLiked: data[i]['isLiked'],
-            id: data[i]['id']));
-      }
-    }
-
-    return stories;
+  //todo: change to liked stories
+  Future<List<Story>> fetchLikedStories(BuildContext context) async {
+    List<String> idToken = await GlobalVariables.getIdAndToken();
+    String id = idToken[0];
+    String token = idToken[1];
+    return fetchFromUrl("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id", context);
   }
 
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {

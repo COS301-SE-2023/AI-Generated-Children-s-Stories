@@ -85,7 +85,7 @@ class _TrailerPageState extends State<TrailerPage> {
                             Container(
                               margin: const EdgeInsets.fromLTRB(24, 0, 32, 0),
                               child:  const Image(
-                                image: AssetImage('assets/images/MascotWinking.png'),
+                                image: AssetImage('assets/images/mascot-winking.png'),
                                 width: 110,
                               ),
                             ),
@@ -104,7 +104,7 @@ class _TrailerPageState extends State<TrailerPage> {
                               Row(
                                 children: [
                                   const Image(
-                                    image: AssetImage('assets/images/MascotWinking.png'),
+                                    image: AssetImage('assets/images/mascot-winking.png'),
                                     width: 110,
                                   ),
                                   const Text(
@@ -123,10 +123,10 @@ class _TrailerPageState extends State<TrailerPage> {
                               ),
                               AspectRatio(
                                 aspectRatio: 1,
-                                child: Image.asset(
+                                child: Image.network(
                                   widget.imagePath,
-                                  fit: BoxFit.contain,
-                                ),
+                                  fit: BoxFit.contain
+                                )
                               ),
                             ],
                           ),
@@ -277,7 +277,7 @@ class _TrailerPageState extends State<TrailerPage> {
     if (widget.isLiked == true) {
       image =  const Image(image: AssetImage('assets/images/heart.png'), width: 32);
     } else {
-      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 32);
+      image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 32);
     }
 
     return HeartAnimationWidget(

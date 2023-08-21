@@ -202,7 +202,7 @@ class _EndOfStoryState extends State<EndOfStory> {
     if (isLiked == true) {
       image =  const Image(image: AssetImage('assets/images/heart.png'), width: 50);
     } else {
-      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 50);
+      image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 50);
     }
 
     return HeartAnimationWidget(

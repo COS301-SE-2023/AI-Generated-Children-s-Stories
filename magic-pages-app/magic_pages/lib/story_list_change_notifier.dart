@@ -41,10 +41,10 @@ class StoryListChangeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchLikedStories() async {
+  Future<void> fetchLikedStories(BuildContext context) async {
     _isLoading = true;
     notifyListeners();
-    _stories = await _getStoriesService.fetchLikedStories();
+    _stories = await _getStoriesService.fetchLikedStories(context);
     _isLoading = false;
     notifyListeners();
   }

@@ -119,7 +119,7 @@ class _BookWidget extends State<BookWidget> {
     if (widget.isLiked == true) {
       image =  const Image(image: AssetImage('assets/images/heart.png'), width: 32);
     } else {
-      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 32);
+      image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 32);
     }
 
     return HeartAnimationWidget(
