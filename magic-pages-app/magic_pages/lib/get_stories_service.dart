@@ -26,7 +26,7 @@ class GetStoriesService {
     List<Story> stories = [];
 
     final url =
-        Uri.parse("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id");
+        Uri.parse("http://${GlobalVariables.ipAddress}/library/$id");
 
     try {
       final response = await http.get(url);
