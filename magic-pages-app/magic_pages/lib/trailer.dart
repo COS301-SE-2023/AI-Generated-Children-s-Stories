@@ -265,7 +265,7 @@ class _TrailerPageState extends State<TrailerPage> {
     );
   }
   
-  void likeStory() async {
+  void likeStory(bool mustLike) async {
     List<String> idToken = await GlobalVariables.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
@@ -278,10 +278,19 @@ class _TrailerPageState extends State<TrailerPage> {
         "storyId": widget.id.toString()
       };
 
-      final response = await http.post(
-        url,
-        body: data,
-      );
+      http.Response response;
+
+      if (mustLike) {
+        response = await http.post(
+          url,
+          body: data,
+        );
+      } else {
+        response = await http.delete(
+          url,
+          body: data,
+        );
+      }
       
       if (response.statusCode == 200) {
         print(response.body);
@@ -297,10 +306,10 @@ class _TrailerPageState extends State<TrailerPage> {
     Image image;
     if (widget.isLiked == true) {
       image =  const Image(image: AssetImage('assets/images/heart.png'), width: 30);
-      //send a request to like the story
-      likeStory();
+      likeStory(true);
     } else {
       image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 30);
+      likeStory(false);
     }
 
     return HeartAnimationWidget(
