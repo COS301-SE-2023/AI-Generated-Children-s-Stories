@@ -65,7 +65,7 @@ public class SettingsController {
      @FXML
     private void setBotAuth() throws IOException {
         if(botAuth.getText() != null && !botAuth.getText().isEmpty()){
-            updateJson( "botAuthorization", botAuth.getText()); 
+            updateJson( "botAuthorization", "bot " + botAuth.getText()); 
          }
     }
  @FXML

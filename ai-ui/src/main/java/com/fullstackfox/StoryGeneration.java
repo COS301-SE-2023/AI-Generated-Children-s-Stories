@@ -56,7 +56,7 @@ public class StoryGeneration {
             currentPrompt = this.storyImagePrompts(currentPrompt);
             System.out.println(currentPrompt);
             List<String> imagePrompts = splitNumberedList(currentPrompt);
-            ArrayList<String> storyImages = this.storyImages(imagePrompts, characterImageUrl);
+            //ArrayList<String> storyImages = this.storyImages(imagePrompts, characterImageUrl);
 
                 return "ahhhhhh";
             } 
@@ -135,12 +135,32 @@ public class StoryGeneration {
     }
 
     public String finish_reason(String inResponseBody) {
+        // JSONObject responseJson = new JSONObject(inResponseBody);
+        // JSONArray choicesArray = responseJson.getJSONArray("choices");
+        // JSONObject firstChoice = choicesArray.getJSONObject(0);
+        // String finishReason = firstChoice.getString("finish_reason");
+        // System.out.println("Finish Reason: " + finishReason + ". Test Passed.");
+        // return finishReason;
+
+
         JSONObject responseJson = new JSONObject(inResponseBody);
-        JSONArray choicesArray = responseJson.getJSONArray("choices");
-        JSONObject firstChoice = choicesArray.getJSONObject(0);
-        String finishReason = firstChoice.getString("finish_reason");
-        System.out.println("Finish Reason: " + finishReason + ". Test Passed.");
-        return finishReason;
+
+        if (responseJson.has("choices")) {
+            JSONArray choicesArray = responseJson.getJSONArray("choices");
+    
+            if (choicesArray.length() > 0) {
+                JSONObject firstChoice = choicesArray.getJSONObject(0);
+    
+                if (firstChoice.has("finish_reason")) {
+                    String finishReason = firstChoice.getString("finish_reason");
+                    System.out.println("Finish Reason: " + finishReason + ". Test Passed.");
+                    return finishReason;
+                }
+            }
+        }
+    
+        System.out.println("No finish reason found in the JSON response.");
+        return ""; 
     }
 
     /// Splits the story into paragraphs

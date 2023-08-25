@@ -19,16 +19,6 @@ public class APICalls {
         configList = jProcessor.readJson(inFName);
     }
 
-    public APICalls() {
-        configList = new ArrayList<String>();
-        configList.add("123");
-        configList.add("456");
-        configList.add("789");
-        configList.add("101112");
-        configList.add("1311415");
-        configList.add("161718");
-    }
-
     public String getMessage() {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -132,6 +122,11 @@ public class APICalls {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
+        if (configList == null) {
+            // Handle the case where configList is null. For example:
+            System.err.println("configList is null!");
+           
+        } else{
         RequestBody body = RequestBody.create(
                 "{\"model\": \"gpt-3.5-turbo\", \"messages\":[{\"role\":\"user\",\"content\":\"" + inPrompt + "\"}]}",
                 mediaType);
@@ -140,6 +135,7 @@ public class APICalls {
                 .post(body)
                 .addHeader("Authorization", "Bearer " + configList.get(6))
                 .build();
+        
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 System.out.println(response.body().string());
@@ -149,7 +145,7 @@ public class APICalls {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        }}
         return null;
     }
 }
