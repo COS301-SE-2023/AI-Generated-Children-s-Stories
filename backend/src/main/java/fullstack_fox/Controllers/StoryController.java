@@ -44,6 +44,7 @@ public class StoryController {
         return story;
     }
 
+    //todo: change to post
     @DeleteMapping("/story/{id}")
     public ResponseEntity<String> deleteStory(@PathVariable Long id) {
         storyService.deleteStoryById(id);

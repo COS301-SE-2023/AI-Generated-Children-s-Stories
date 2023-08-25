@@ -2,12 +2,10 @@ package fullstack_fox.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fullstack_fox.DTOs.PostProgressDTO;
-import fullstack_fox.DTOs.TrailerDTO;
 import fullstack_fox.DTOs.UserStoryInfoDTO;
 import fullstack_fox.Entities.Progress;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.User;
-import fullstack_fox.Repositories.LikedRepository;
 import fullstack_fox.Repositories.ProgressRepository;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Repositories.UserRepository;
@@ -32,9 +30,6 @@ public class ProgressController {
 
     @Autowired
     StoryRepository storyRepository;
-
-    @Autowired
-    LikedRepository likedRepository;
 
     @PostMapping(path = "/progress")
     public ResponseEntity<Progress> createProgress(@RequestBody Map<String, Object> requestBody) {
@@ -72,23 +67,6 @@ public class ProgressController {
             Progress saved = progressRepository.save(newProgress);
             return ResponseEntity.ok().body(saved);
         }
-    }
-
-    public TrailerDTO convertToTrailerDTO(Progress progress) {
-        System.out.println("User" + progress.getUser().getId());
-        System.out.println("Story" + progress.getStory().getId());
-        boolean isLiked = likedRepository.existsByUserAndStory(progress.getUser(), progress.getStory());
-        System.out.println("Isliked: " + isLiked);
-        return new TrailerDTO(progress.getStory().getTitle(), progress.getStory().getTrailer(), progress.getStory().getId(), isLiked);
-    }
-
-    @GetMapping(path = "/progress/{userId}")
-    public List<TrailerDTO> getAllBooksInProgress(@PathVariable Long userId) {
-        Optional<List<Progress>> optionalProgress = progressRepository.findProgressByUserId(userId);
-        return optionalProgress.stream()
-                .flatMap(List::stream)
-                .map(this::convertToTrailerDTO)
-                .collect(Collectors.toList());
     }
 
     public PostProgressDTO getRandomBook(Long userId) {

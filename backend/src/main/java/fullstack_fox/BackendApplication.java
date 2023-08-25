@@ -27,8 +27,8 @@ public class BackendApplication {
 }
 
 //to create pages
-/*
 
+/*
 @SpringBootApplication
 public class BackendApplication implements CommandLineRunner {
 
