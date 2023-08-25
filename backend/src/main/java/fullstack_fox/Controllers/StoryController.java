@@ -22,9 +22,6 @@ public class StoryController {
     @Autowired
     StoryRepository storyRespository;
 
-    @Autowired
-    PageRepository pageRepository;
-
     private final StoryService storyService;
 
     public StoryController(StoryService storyService) {
@@ -49,23 +46,5 @@ public class StoryController {
     public ResponseEntity<String> deleteStory(@PathVariable Long id) {
         storyService.deleteStoryById(id);
         return ResponseEntity.ok("Story with id " + id + " and its pages have been deleted.");
-    }
-
-    @GetMapping("/pages/{storyId}")
-    public List<PagesDTO> getPages(@PathVariable Long storyId) {
-        return getAllPages(storyId);
-    }
-
-    public List<PagesDTO> getAllPages(Long storyId) {
-        Optional<List<Page>> optionalProgress = pageRepository.findPagesByStoryId(storyId);
-        List<PagesDTO> pageDTOS = optionalProgress.stream()
-                .flatMap(List::stream)
-                .map(this::convertToPagesDTO)
-                .collect(Collectors.toList());
-        return pageDTOS;
-    }
-
-    public PagesDTO convertToPagesDTO(Page page) {
-        return new PagesDTO(page);
     }
 }
