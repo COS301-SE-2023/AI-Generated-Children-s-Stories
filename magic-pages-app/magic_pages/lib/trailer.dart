@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:magic_pages/inside_story_change_notifier.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
 
 import 'Wave_Widget.dart';
 import 'button_widget.dart';
+import 'get_stories_service.dart';
 import 'global_variables.dart';
 import 'heart_animation_widget.dart';
 import 'inside_story.dart';
@@ -23,7 +25,7 @@ class TrailerPage extends StatefulWidget {
   bool isLiked;
 
   // ignore: use_key_in_widget_constructors
-  TrailerPage( {
+  TrailerPage({
     required this.title,
     required this.imagePath,
     required this.id,
@@ -39,6 +41,16 @@ class TrailerPage extends StatefulWidget {
 class _TrailerPageState extends State<TrailerPage> {
   bool isHeartAnimating = false;
   bool isPressed = false;
+
+  //change notifier
+  final InsideStoryChangeNotifier _insideStoryChangeNotifier =
+  InsideStoryChangeNotifier(GetStoriesService());
+
+  @override
+  void initState() {
+    super.initState();
+    _insideStoryChangeNotifier.fetchPages(context, widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,12 +158,20 @@ class _TrailerPageState extends State<TrailerPage> {
                       widget.currentPage == 0
                           ? Container(
                           margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                          child: ButtonWidget(
+                          child: _insideStoryChangeNotifier.isLoading ?
+                          ButtonWidget( //disable
+                            message: 'ON ITS WAY',
+                            destination: '/insideStory',
+                            storyId: widget.id,
+                            pageId: widget.currentPage,
+                            isEnabled: false,
+                          ) : ButtonWidget( //enable
                             message: 'READ NOW',
                             destination: '/insideStory',
                             storyId: widget.id,
                             pageId: widget.currentPage,
                           )
+
                       )
                           : Column(
                         children: [
@@ -187,12 +207,21 @@ class _TrailerPageState extends State<TrailerPage> {
                           ),
                           Container(
                               margin: const EdgeInsets.only(top: 16),
-                              child: ButtonWidget(
-                                message: 'KEEP READING',
+                              child: _insideStoryChangeNotifier.isLoading ? Text("Loading") : Text("Loaded")
+                              
+                              /*_insideStoryChangeNotifier.isLoading ?
+                              ButtonWidget( //disable
+                                message: 'ON ITS WAY',
                                 destination: '/insideStory',
                                 storyId: widget.id,
                                 pageId: widget.currentPage,
-                              )
+                                isEnabled: false,
+                              ) : ButtonWidget( //disable
+                                message: 'KEEP READING',
+                                destination: '/insideStory',
+                                storyId: widget.id,
+                                pageId: widget.currentPage
+                              )*/
                           ),
                           Container(
                             margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
@@ -295,8 +324,9 @@ class _TrailerPageState extends State<TrailerPage> {
       if (response.statusCode == 200) {
         print(response.body);
       } else {
-        GlobalVariables.showSnackbarMessage("Error: ${response.statusCode}", context);
+        GlobalVariables.showSnackbarMessage("Error from post: ${response.body}", context);
       }
+
     }catch (e) {
       print("Error: $e");
     }
@@ -306,10 +336,8 @@ class _TrailerPageState extends State<TrailerPage> {
     Image image;
     if (widget.isLiked == true) {
       image =  const Image(image: AssetImage('assets/images/heart.png'), width: 30);
-      likeStory(true);
     } else {
       image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 30);
-      likeStory(false);
     }
 
     return HeartAnimationWidget(
@@ -322,7 +350,10 @@ class _TrailerPageState extends State<TrailerPage> {
             setState(() {
               widget.isLiked = !widget.isLiked;
               if (widget.isLiked == true) {
+                likeStory(true);
                 isHeartAnimating = true;
+              } else {
+                likeStory(false);
               }
             });
           },

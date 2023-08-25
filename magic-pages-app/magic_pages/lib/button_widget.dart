@@ -7,13 +7,15 @@ class ButtonWidget extends StatefulWidget {
   final String destination;
   final int? storyId;
   final int? pageId;
+  final bool? isEnabled;
 
   const ButtonWidget( {
     super.key,
     required this.message,
     required this.destination,
     this.storyId,
-    this.pageId
+    this.pageId,
+    this.isEnabled
   });
 
   @override
@@ -27,9 +29,15 @@ class _ButtonWidget extends State<ButtonWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapUp: (val){
+        //loading
+        if (widget.isEnabled != null && widget.isEnabled == false) {
+          return;
+        }
+
         setState(() {
           isPressed = false;
         });
+
         widget.storyId == null
             ? Navigator.pushNamed(context, widget.destination)
             : Navigator.push(context, MaterialPageRoute(
@@ -54,11 +62,11 @@ class _ButtonWidget extends State<ButtonWidget> {
         width: double.infinity,
         margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),
         decoration: BoxDecoration(
-            color: const Color(0xFFFE8D29),
+            color: (widget.isEnabled != null && widget.isEnabled == false) ? const Color(0xFFABABAB) : const Color(0xFFFE8D29),
             borderRadius: BorderRadius.circular (25),
             boxShadow: isPressed ? null : [
-              const BoxShadow(
-                color: Color(0xFF84370F),
+               BoxShadow(
+                color: (widget.isEnabled != null && widget.isEnabled == false) ? const Color(0xFF595959) : const Color(0xFF84370F), //Color(0xFF84370F),
                 spreadRadius: 0,
                 blurRadius: 0,
                 offset: Offset(0,6),

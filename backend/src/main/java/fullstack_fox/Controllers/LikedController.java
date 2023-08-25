@@ -45,6 +45,7 @@ public class LikedController {
         Liked liked = new Liked();
         liked.setUser(user);
         liked.setStory(story);
+
         likedRepository.save(liked);
 
         return ResponseEntity.ok("Story added to the liked page.");

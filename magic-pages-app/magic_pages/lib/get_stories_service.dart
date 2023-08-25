@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:magic_pages/story_page.dart';
 import 'global_variables.dart';
 import 'story.dart';
 import 'package:http/http.dart' as http;
@@ -34,6 +35,8 @@ class GetStoriesService {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
+        print(data);
+
         for (var story in data) {
           Story newStory = Story(
               title: story['title'],
@@ -41,7 +44,7 @@ class GetStoriesService {
               textContent:[],
               imageContent:[],
               currentPage: story['pageNo'],
-              id: story['id'],
+              id: story['storyId'],
               isLiked: story['liked']
           );
           stories.add(newStory);
@@ -60,6 +63,35 @@ class GetStoriesService {
     return stories;
   }
 
+  Future<List<StoryPage>> fetchPages(int storyId, BuildContext context) async {
+
+    List<StoryPage> pages = [];
+
+    final url = Uri.parse("http://${GlobalVariables.ipAddress}/pages/${storyId}");
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+
+        print("inside a story data");
+        print(data);
+      } else {
+        if (context.mounted) {
+          GlobalVariables.showSnackbarMessage(
+              "Failed to get story: ${response.statusCode}", context);
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        GlobalVariables.showSnackbarMessage(
+            "Failed to get story: $e", context);
+      }
+    }
+    return pages;
+  }
+
   Future<List<Story>> fetchFromUrl(String apiUlr, BuildContext context) async {
     List<Story> stories = [];
 
@@ -73,16 +105,9 @@ class GetStoriesService {
         final data = jsonDecode(response.body);
 
         for (var userStoryInfoEntity in data) {
+          print("GETTING STORY");
           //create a book
           print(userStoryInfoEntity);
-
-          print(userStoryInfoEntity['title']);
-          print(userStoryInfoEntity['trailer']);
-          print(userStoryInfoEntity['pageNo']);
-          print(userStoryInfoEntity['storyId']);
-          print(userStoryInfoEntity['liked']);
-
-          print("trying to add");
 
           Story story = Story(
               title: userStoryInfoEntity['title'],
