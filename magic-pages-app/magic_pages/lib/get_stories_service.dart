@@ -124,7 +124,7 @@ class GetStoriesService {
     List<String> idToken = await GlobalVariables.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
-    return fetchFromUrl("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id", context);
+    return fetchFromUrl("http://${GlobalVariables.ipAddress}/userStoryInfo/liked/$id", context);
   }
 
   Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {

@@ -1,26 +1,19 @@
 package fullstack_fox.Controllers;
 
-import fullstack_fox.DTOs.PagesDTO;
-import fullstack_fox.DTOs.PostProgressDTO;
-import fullstack_fox.Entities.Page;
-import fullstack_fox.Entities.Progress;
 import fullstack_fox.Entities.Story;
-import fullstack_fox.Repositories.PageRepository;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 public class StoryController {
 
     @Autowired
-    StoryRepository storyRespository;
+    StoryRepository storyRepository;
 
     private final StoryService storyService;
 
@@ -31,13 +24,13 @@ public class StoryController {
     @GetMapping("/story/{id}")
     public Optional<Story> getStoryById(@PathVariable String id){
         Long storyId = Long.parseLong(id);
-        Optional<Story> byId = storyRespository.findById(storyId);
+        Optional<Story> byId = storyRepository.findById(storyId);
         return byId;
     }
 
     @PostMapping("/story")
     public Story create(@RequestBody Story story){
-        storyRespository.save(story);
+        storyRepository.save(story);
         return story;
     }
 
