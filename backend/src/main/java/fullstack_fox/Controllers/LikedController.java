@@ -48,11 +48,11 @@ public class LikedController {
         return null;
     }
 
+    //TODO: liked backend and integrate
     @GetMapping("/liked/stories/{userId}")
     public ResponseEntity<List<Liked>> getLiked(@PathVariable Long userId) {
-//        List<Liked> likedStories = likedRepository.findByUser_Id(userId);
-//        return ResponseEntity.ok(likedStories);
-        return null;
+        List<Liked> likedStories = likedRepository.findByUser_Id(userId);
+        return ResponseEntity.ok(likedStories);
     }
 
     //Unlike a story

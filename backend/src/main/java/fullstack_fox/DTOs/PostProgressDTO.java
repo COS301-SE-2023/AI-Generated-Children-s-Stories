@@ -9,6 +9,12 @@ public class PostProgressDTO {
         this.storyId = progress.getStory().getId();
     }
 
+    public PostProgressDTO(Long userId, Long storyId, int pageNumber) {
+        this.userId = userId;
+        this.storyId = storyId;
+        this.pageNumber = pageNumber;
+    }
+
     public PostProgressDTO(){}
 
     public int getPageNumber() {

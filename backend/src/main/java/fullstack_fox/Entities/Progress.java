@@ -40,6 +40,18 @@ public class Progress {
         return story;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
+
     @Column()
     private int pageNumber;
 

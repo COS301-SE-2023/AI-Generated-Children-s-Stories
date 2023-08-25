@@ -2,10 +2,12 @@ package fullstack_fox.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fullstack_fox.DTOs.PostProgressDTO;
+import fullstack_fox.DTOs.TrailerDTO;
 import fullstack_fox.DTOs.UserStoryInfoDTO;
 import fullstack_fox.Entities.Progress;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.User;
+import fullstack_fox.Repositories.LikedRepository;
 import fullstack_fox.Repositories.ProgressRepository;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Repositories.UserRepository;
@@ -30,6 +32,9 @@ public class ProgressController {
 
     @Autowired
     StoryRepository storyRepository;
+
+    @Autowired
+    LikedRepository likedRepository;
 
     @PostMapping(path = "/progress")
     public ResponseEntity<Progress> createProgress(@RequestBody Map<String, Object> requestBody) {
@@ -69,14 +74,21 @@ public class ProgressController {
         }
     }
 
-    //todo: this should not be a progress DTO, this should return the trailers
-    public List<PostProgressDTO> getAllBooksInProgress(Long userId) {
+    public TrailerDTO convertToTrailerDTO(Progress progress) {
+        System.out.println("User" + progress.getUser().getId());
+        System.out.println("Story" + progress.getStory().getId());
+        boolean isLiked = likedRepository.existsByUserAndStory(progress.getUser(), progress.getStory());
+        System.out.println("Isliked: " + isLiked);
+        return new TrailerDTO(progress.getStory().getTitle(), progress.getStory().getTrailer(), progress.getStory().getId(), isLiked);
+    }
+
+    @GetMapping(path = "/progress/{userId}")
+    public List<TrailerDTO> getAllBooksInProgress(@PathVariable Long userId) {
         Optional<List<Progress>> optionalProgress = progressRepository.findProgressByUserId(userId);
-        List<PostProgressDTO> progressLikedDTOS = optionalProgress.stream()
+        return optionalProgress.stream()
                 .flatMap(List::stream)
-                .map(this::convertToProgressDTO)
+                .map(this::convertToTrailerDTO)
                 .collect(Collectors.toList());
-        return progressLikedDTOS;
     }
 
     public PostProgressDTO getRandomBook(Long userId) {

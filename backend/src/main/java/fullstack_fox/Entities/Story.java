@@ -32,6 +32,14 @@ public class Story {
     )
     private List<Progress> progress = new ArrayList<>();
 
+    public List<Liked> getLikedList() {
+        return likedList;
+    }
+
+    public void setLikedList(List<Liked> likedList) {
+        this.likedList = likedList;
+    }
+
     @JsonManagedReference("story-liked")
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Liked> likedList = new ArrayList<>();

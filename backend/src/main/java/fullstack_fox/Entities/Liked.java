@@ -1,6 +1,7 @@
 package fullstack_fox.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,7 +18,8 @@ public class Liked {
 
     @ManyToOne
     @JoinColumn(name="storyId")
-    @JsonBackReference("story-liked")
+    @JsonIgnoreProperties("likedList")
+    // @JsonBackReference("story-liked")
     private Story story;
 
     public Liked() {};
