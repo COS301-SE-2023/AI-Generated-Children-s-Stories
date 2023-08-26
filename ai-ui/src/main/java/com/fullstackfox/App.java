@@ -31,15 +31,18 @@ public class App extends Application {
     }
 
 
-    static void setRoot(String fxml, BaseController controller) throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+    public static void setRoot(String fxml, BaseController controller) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/controllers/"+fxml+".fxml"));
+        // FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        // controller.setAppInstance(this);
         loader.setController(controller); // Set the controller instance
         try {
             controller.createProcessors();
+            
         } catch (URISyntaxException e) {
-
             e.printStackTrace();
         }
+       
         Parent root = loader.load();
         scene.setRoot(root);
     }

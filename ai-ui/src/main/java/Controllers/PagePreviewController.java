@@ -1,6 +1,10 @@
-package com.fullstackfox;
+package Controllers;
 
 import java.io.IOException;
+
+import com.fullstackfox.App;
+import com.fullstackfox.BaseController;
+
 import javafx.fxml.FXML;
 
 public class PagePreviewController extends BaseController{

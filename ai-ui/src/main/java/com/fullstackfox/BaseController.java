@@ -9,6 +9,9 @@ public abstract class BaseController {
     protected JsonProcessor jProcessor;
     protected APICalls api;
     protected StoryGeneration storyGen;
+    protected App appInstance;  // Add this field
+
+      
 
     public BaseController() {
         jProcessor = new JsonProcessor();
@@ -16,6 +19,10 @@ public abstract class BaseController {
         storyGen = null; // Initialize as needed
     }
     
+ public void setAppInstance(App appInstance) {  // Add this method
+        this.appInstance = appInstance;
+    }
+
         public void createProcessors() throws URISyntaxException {
         ArrayList<String> configList = jProcessor.readJson("config.json");
         api = new APICalls(configList);
