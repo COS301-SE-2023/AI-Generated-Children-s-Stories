@@ -15,8 +15,8 @@ public class APICalls {
     // 5: User Authorization
     ArrayList<String> configList;
 
-    public APICalls(JsonProcessor jProcessor, String inFName) throws URISyntaxException {
-        configList = jProcessor.readJson(inFName);
+    public APICalls(ArrayList<String> inConfigList) throws URISyntaxException {
+        configList =inConfigList;
     }
 
     public String getMessage() {
@@ -35,7 +35,7 @@ public class APICalls {
             }
             return response.body().string();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return null;
@@ -69,7 +69,7 @@ public class APICalls {
                 throw new Exception("Unexpected response code: " + response);
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return requestBodyStr;
@@ -110,7 +110,7 @@ public class APICalls {
             }
             System.out.println(response.body().string());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
     }
@@ -143,7 +143,7 @@ public class APICalls {
             }
             return response.body().string();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }}
         return null;

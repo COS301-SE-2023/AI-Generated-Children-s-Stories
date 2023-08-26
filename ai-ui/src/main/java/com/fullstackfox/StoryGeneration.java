@@ -11,61 +11,63 @@ public class StoryGeneration {
     PromptProcessor processPrompt;
     ImageGeneration imageGenerator;
 
-    public StoryGeneration(APICalls inApiLibrary) throws URISyntaxException {
-        imageGenerator = new ImageGeneration(inApiLibrary);
+    public StoryGeneration(APICalls inApiLibrary, String inSeed) throws URISyntaxException {
         callApi = inApiLibrary;
-        processPrompt = new PromptProcessor("123");
+        imageGenerator = new ImageGeneration(inApiLibrary);
+        processPrompt = new PromptProcessor(inSeed);
     }
-//public Story generateStory(ArrayList<String> inputList) throws URISyntaxException {
-        // Generate story text
-        public String storyMaker(ArrayList<String> inputList) {
+
+    // public Story generateStory(ArrayList<String> inputList) throws
+    // URISyntaxException {
+    // Generate story text
+    public String storyMaker(ArrayList<String> inputList) {
         String currentPrompt = processPrompt.storyPrompt(inputList);
         String story = this.storyText(currentPrompt);
         return story;
-        //System.out.println(story);
-        }
+        // System.out.println(story);
+    }
 
-        public String generateTitle (String story){
-        //if (!story.isBlank()) {
-            // Generate story title
-             String currentPrompt = processPrompt.storyTitlePrompt(story);
-            String storyTitle = this.storyTitle(currentPrompt);
-            return storyTitle;
-        }
+    public String generateTitle(String story) {
+        // if (!story.isBlank()) {
+        // Generate story title
+        String currentPrompt = processPrompt.storyTitlePrompt(story);
+        String storyTitle = this.storyTitle(currentPrompt);
+        return storyTitle;
+    }
 
-            // Generate character image
-            public String generateCharacter(String story) throws URISyntaxException{
-            String currentPrompt = processPrompt.characterDescriptionPrompt(story);
-            String characterImageUrl = this.characterImage(currentPrompt);
-            return characterImageUrl;
-            }
+    // Generate character image
+    public String generateCharacter(String story) throws URISyntaxException {
+        String currentPrompt = processPrompt.characterDescriptionPrompt(story);
+        String characterImageUrl = this.characterImage(currentPrompt);
+        return characterImageUrl;
+    }
 
-            // Generate trailer image
-            
-            public String trailerImage(String story, String characterImageUrl) throws URISyntaxException{
-            String currentPrompt = processPrompt.storyTrailerPrompt(story);
-            String storyTrailer = this.storyTrailer(currentPrompt, characterImageUrl);
-                return storyTrailer;
-            }
+    // Generate trailer image
 
-            // Generate story images
-            public String oliverChange(String story, String characterImageUrl) throws URISyntaxException{
-            ArrayList<String> paragraphs = this.splitParagraphs(story);
-            int numPages = paragraphs.size();
-            String currentPrompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
-            currentPrompt = this.storyImagePrompts(currentPrompt);
-            System.out.println(currentPrompt);
-            List<String> imagePrompts = splitNumberedList(currentPrompt);
-            //ArrayList<String> storyImages = this.storyImages(imagePrompts, characterImageUrl);
+    public String trailerImage(String story, String characterImageUrl) throws URISyntaxException {
+        String currentPrompt = processPrompt.storyTrailerPrompt(story);
+        String storyTrailer = this.storyTrailer(currentPrompt, characterImageUrl);
+        return storyTrailer;
+    }
 
-                return "ahhhhhh";
-            } 
+    // Generate story images
+    public String oliverChange(String story, String characterImageUrl) throws URISyntaxException {
+        ArrayList<String> paragraphs = this.splitParagraphs(story);
+        int numPages = paragraphs.size();
+        String currentPrompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
+        currentPrompt = this.storyImagePrompts(currentPrompt);
+        System.out.println(currentPrompt);
+        List<String> imagePrompts = splitNumberedList(currentPrompt);
+        // ArrayList<String> storyImages = this.storyImages(imagePrompts,
+        // characterImageUrl);
 
-            // Return final story
-           // return this.compileStory(storyTitle, storyTrailer, paragraphs, storyImages);
-       // }
-       // return null;
-    
+        return "ahhhhhh";
+    }
+
+    // Return final story
+    // return this.compileStory(storyTitle, storyTrailer, paragraphs, storyImages);
+    // }
+    // return null;
 
     public String storyText(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
@@ -135,22 +137,19 @@ public class StoryGeneration {
     }
 
     public String finish_reason(String inResponseBody) {
-        // JSONObject responseJson = new JSONObject(inResponseBody);
+        JSONObject responseJson = new JSONObject(inResponseBody);
         // JSONArray choicesArray = responseJson.getJSONArray("choices");
         // JSONObject firstChoice = choicesArray.getJSONObject(0);
         // String finishReason = firstChoice.getString("finish_reason");
         // System.out.println("Finish Reason: " + finishReason + ". Test Passed.");
         // return finishReason;
 
-
-        JSONObject responseJson = new JSONObject(inResponseBody);
-
         if (responseJson.has("choices")) {
             JSONArray choicesArray = responseJson.getJSONArray("choices");
-    
+
             if (choicesArray.length() > 0) {
                 JSONObject firstChoice = choicesArray.getJSONObject(0);
-    
+
                 if (firstChoice.has("finish_reason")) {
                     String finishReason = firstChoice.getString("finish_reason");
                     System.out.println("Finish Reason: " + finishReason + ". Test Passed.");
@@ -158,9 +157,9 @@ public class StoryGeneration {
                 }
             }
         }
-    
+
         System.out.println("No finish reason found in the JSON response.");
-        return ""; 
+        return "";
     }
 
     /// Splits the story into paragraphs

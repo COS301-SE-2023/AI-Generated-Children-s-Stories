@@ -5,11 +5,16 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-public class HomeController {
+public class HomeController extends BaseController{
 
     @FXML
     private void switchToSettings() throws IOException {
-        App.setRoot("settings");
+        SettingsController settingsController = new SettingsController();
+        try {
+            App.setRoot("settings", settingsController );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -19,7 +24,13 @@ public class HomeController {
 
     @FXML
     private void switchToStory() throws IOException {
-        App.setRoot("create-a-story");
+        
+        CreateAStoryController createAStoryController = new CreateAStoryController();
+        try {
+            App.setRoot("create-a-story",createAStoryController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

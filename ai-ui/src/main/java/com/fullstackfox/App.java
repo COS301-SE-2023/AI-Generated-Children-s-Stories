@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * JavaFX App
@@ -18,8 +19,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+      // Processors processes = new Processors();
+       //HomeController homeController = new HomeController();
         scene = new Scene(loadFXML("home"), 1040, 585);
-        
         stage.setResizable(false);
         stage.setTitle("Artificial Intellignece Story Generator");
         Image iconImage = new Image(getClass().getResourceAsStream("/com/fullstackfox/resources/Icon.png"));
@@ -28,9 +30,20 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+
+    static void setRoot(String fxml, BaseController controller) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        loader.setController(controller); // Set the controller instance
+        try {
+            controller.createProcessors();
+        } catch (URISyntaxException e) {
+
+            e.printStackTrace();
+        }
+        Parent root = loader.load();
+        scene.setRoot(root);
     }
+
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));

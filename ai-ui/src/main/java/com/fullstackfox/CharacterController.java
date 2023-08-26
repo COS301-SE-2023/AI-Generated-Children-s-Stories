@@ -3,15 +3,25 @@ package com.fullstackfox;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class CharacterController {
+public class CharacterController extends BaseController {
 
     @FXML
     private void switchToHome() throws IOException {
-        App.setRoot("home");
+        HomeController homeController = new HomeController();
+        try {
+            App.setRoot("home",homeController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void switchToTrailer() throws IOException {
-        App.setRoot("trailer-image");
+        TrailerImageController trailerImageController = new TrailerImageController();
+        try {
+            App.setRoot("trailer-image",trailerImageController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

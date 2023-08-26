@@ -8,7 +8,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class SettingsController {
+public class SettingsController extends BaseController{
     @FXML
     private TextField appID;
     @FXML
@@ -28,7 +28,12 @@ public class SettingsController {
 
     @FXML
     private void switchToHome() throws IOException {
-        App.setRoot("home");
+        HomeController homeController = new HomeController();
+        try {
+            App.setRoot("home",homeController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

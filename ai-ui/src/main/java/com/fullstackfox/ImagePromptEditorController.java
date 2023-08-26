@@ -20,7 +20,12 @@ public class ImagePromptEditorController {
 
     @FXML
     private void switchToHome() throws IOException {
-        App.setRoot("home");
+        HomeController homeController = new HomeController();
+        try {
+            App.setRoot("home",homeController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 

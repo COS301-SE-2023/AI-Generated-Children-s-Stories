@@ -49,7 +49,7 @@ public class ImageGeneration {
                         try {
                             Thread.sleep(5000);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
+                            
                             e.printStackTrace();
                         }
                     }
@@ -58,7 +58,7 @@ public class ImageGeneration {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
+               
                     e.printStackTrace();
                 }
             }

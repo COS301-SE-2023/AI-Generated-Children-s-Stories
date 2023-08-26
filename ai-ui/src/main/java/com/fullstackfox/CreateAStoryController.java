@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 
-public class CreateAStoryController {
+public class CreateAStoryController extends BaseController{
     @FXML
     private Button generationButton;
     @FXML
@@ -21,8 +21,6 @@ public class CreateAStoryController {
     @FXML
     private TextArea storyOut;
 
-
-
     @FXML
     private Button editButton;
     @FXML
@@ -33,24 +31,34 @@ public class CreateAStoryController {
     private Button regenButton;
 
 
-    private JsonProcessor jsonProcessor = new JsonProcessor();
-    private APICalls api;
+  //  private JsonProcessor jsonProcessor = new JsonProcessor();
+   // private APICalls api;
     private StoryGeneration storyMade;
     
     
     @FXML
     private void switchToHome() throws IOException {
-        App.setRoot("home");
+        HomeController homeController = new HomeController();
+        try {
+            App.setRoot("home",homeController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
         @FXML
     private void switchToCharacter() throws IOException {
-        App.setRoot("character");
+        CharacterController characterController = new CharacterController();
+        try {
+            App.setRoot("character",characterController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void getPrompt() throws IOException, URISyntaxException {
-        api = new APICalls(jsonProcessor, "config");
-        storyMade = new StoryGeneration(api);
+         api = this.getAPICalls();
+        storyMade = new StoryGeneration(api,"123");
         ArrayList<String> promptList = new ArrayList<>();
         promptList.add("default prompt");
     
