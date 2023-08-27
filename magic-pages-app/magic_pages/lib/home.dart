@@ -125,13 +125,17 @@ class _HomeState extends State<Home> {
 
   Widget _currentlyReadingListItem(BuildContext context, int index) {
     Story story = _currentlyReadingStory[index];
+
+    print("Story: " );
+    print(story);
+
     return BookWithProgress(
       title: story.title,
       imagePath: story.trailer,
       id: story.id,
       currentPage: story.currentPage,
       totalPages: story.textContent.length,
-      isLiked: story.isLiked,
+      isLiked: story.isLiked
     );
   }
 }
