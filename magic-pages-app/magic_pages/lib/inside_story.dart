@@ -51,6 +51,12 @@ class InsideStoryState extends State<InsideStory> {
   bool isHomePressed = false;
   late int randomMessageIndex = Random().nextInt(widget.messages.length-1);
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   /// This function updates the story index and message index.
   /// It also updates the halfway message.
   /// It is called when the user presses the next button.
@@ -124,7 +130,7 @@ class InsideStoryState extends State<InsideStory> {
                         child:  Transform.rotate(
                           angle: 0.125,
                           child: const Image(
-                            image: AssetImage('assets/images/Mascot.png'),
+                            image: AssetImage('assets/images/mascot.png'),
                             width: 110,
                           ),
                         ),

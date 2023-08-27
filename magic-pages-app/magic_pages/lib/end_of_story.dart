@@ -44,7 +44,7 @@ class _EndOfStoryState extends State<EndOfStory> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Image(
-                          image: AssetImage('assets/images/MascotWinking.png'),
+                          image: AssetImage('assets/images/mascot-winking.png'),
                           width: 55,
                         ),
                         const SizedBox(

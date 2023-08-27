@@ -48,8 +48,16 @@ class _TrailerPageState extends State<TrailerPage> {
   final InsideStoryChangeNotifier _insideStoryChangeNotifier =
   InsideStoryChangeNotifier(GetStoriesService());
 
+  void loadImages() async {
+    for (StoryPage page in pages) {
+      precacheImage(NetworkImage(page.image), context);
+      super.didChangeDependencies();
+    }
+  }
+
   void fetchPages() async {
     pages = await _insideStoryChangeNotifier.fetchPages(context, widget.id);
+    loadImages();
     setState(() {});
   }
 
