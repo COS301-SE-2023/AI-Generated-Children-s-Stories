@@ -1,8 +1,11 @@
-package com.fullstackfox;
+package Controllers;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import org.json.*;
+
+import com.fullstackfox.App;
+import com.fullstackfox.BaseController;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

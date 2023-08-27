@@ -1,6 +1,9 @@
-package com.fullstackfox;
+package Controllers;
 
 import java.io.IOException;
+
+import com.fullstackfox.App;
+
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;

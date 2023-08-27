@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import controllers.HomeController?>
 
 <VBox alignment="TOP_CENTER" prefHeight="585.0" prefWidth="1040.0" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.SettingsController">
     <children>
