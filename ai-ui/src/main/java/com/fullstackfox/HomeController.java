@@ -1,10 +1,8 @@
-package Controllers;
+package com.fullstackfox;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import com.fullstackfox.App;
-import com.fullstackfox.BaseController;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

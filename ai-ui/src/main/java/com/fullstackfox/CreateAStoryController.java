@@ -1,12 +1,9 @@
-package Controllers;
+package com.fullstackfox;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import com.fullstackfox.App;
-import com.fullstackfox.BaseController;
-import com.fullstackfox.StoryGeneration;
 
 import javafx.fxml.FXML;
 

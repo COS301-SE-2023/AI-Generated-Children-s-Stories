@@ -1,9 +1,8 @@
-package Controllers;
+package com.fullstackfox;
 
 import java.io.IOException;
 
-import com.fullstackfox.App;
-import com.fullstackfox.BaseController;
+
 
 import javafx.fxml.FXML;
 

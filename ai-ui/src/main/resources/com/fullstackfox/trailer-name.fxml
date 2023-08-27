@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import controllers.HomeController?>
+
 
 <VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.TrailerNameController">
     <children>
