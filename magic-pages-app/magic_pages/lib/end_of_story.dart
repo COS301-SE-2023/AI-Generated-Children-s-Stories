@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/story_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'Wave_Widget.dart';
@@ -8,8 +9,13 @@ import 'navbar.dart';
 
 class EndOfStory extends StatefulWidget {
   final int storyId;
+  final List<StoryPage> pages;
 
-  const EndOfStory({super.key, required this.storyId});
+  const EndOfStory({
+    super.key,
+    required this.storyId,
+    required this.pages
+  });
 
   @override
   State<EndOfStory> createState() => _EndOfStoryState();
@@ -71,7 +77,8 @@ class _EndOfStoryState extends State<EndOfStory> {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) => InsideStory(
                             storyId: widget.storyId,
-                            pageId: 0,
+                            currentPage: 0,
+                            pages: widget.pages,
                           ),
                         ));
                       },

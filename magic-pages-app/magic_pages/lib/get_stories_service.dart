@@ -74,8 +74,15 @@ class GetStoriesService {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
-        print("inside a story data");
-        print(data);
+        for (var page in data) {
+          pages.add(
+            StoryPage(
+                image: page['image'],
+                text: page['text']
+            )
+          );
+        }
+
       } else {
         if (context.mounted) {
           GlobalVariables.showSnackbarMessage(

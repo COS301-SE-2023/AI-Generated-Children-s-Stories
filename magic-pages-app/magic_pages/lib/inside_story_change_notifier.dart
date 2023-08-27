@@ -7,19 +7,16 @@ class InsideStoryChangeNotifier extends ChangeNotifier {
   final GetStoriesService _getStoriesService;
   InsideStoryChangeNotifier(this._getStoriesService);
 
-  List<StoryPage> _pages = [];
-
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Future<void> fetchPages(BuildContext context, storyId) async {
-    print("Getting inside story");
+  Future<List<StoryPage>> fetchPages(BuildContext context, storyId) async {
     _isLoading = true;
     notifyListeners();
-    _pages = await _getStoriesService.fetchPages(storyId, context);
+    List<StoryPage> pages = await _getStoriesService.fetchPages(storyId, context);
     _isLoading = false;
     notifyListeners();
-    print("got inside story)");
+    return pages;
   }
 
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
+import 'package:magic_pages/story_page.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,13 +42,14 @@ class TrailerPage extends StatefulWidget {
 class _TrailerPageState extends State<TrailerPage> {
   bool isHeartAnimating = false;
   bool isPressed = false;
+  List<StoryPage> pages = [];
 
   //change notifier
   final InsideStoryChangeNotifier _insideStoryChangeNotifier =
   InsideStoryChangeNotifier(GetStoriesService());
 
-  void fetchPages() async{
-    await _insideStoryChangeNotifier.fetchPages(context, widget.id);
+  void fetchPages() async {
+    pages = await _insideStoryChangeNotifier.fetchPages(context, widget.id);
     setState(() {});
   }
 
@@ -55,15 +57,11 @@ class _TrailerPageState extends State<TrailerPage> {
   void initState() {
     super.initState();
     fetchPages();
-
-    //hello
-    /*_insideStoryChangeNotifier.addListener(() {
-      print("isLoading: ${_insideStoryChangeNotifier.isLoading}");
-    });*/
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -86,7 +84,8 @@ class _TrailerPageState extends State<TrailerPage> {
                                 margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                                 padding: const EdgeInsets.all(16),
                                 child: const Image(
-                                  image: AssetImage('assets/images/back-button.png'),
+                                  image: AssetImage(
+                                      'assets/images/back-button.png'),
                                   width: 32,
                                 ),
                               ),
@@ -100,20 +99,28 @@ class _TrailerPageState extends State<TrailerPage> {
                               Stack(
                                 children: [
                                   Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    margin: const EdgeInsets.fromLTRB(64, 0, 64, 0),
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width,
+                                    margin: const EdgeInsets.fromLTRB(
+                                        64, 0, 64, 0),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceEvenly,
                                       children: [
                                         Row(
                                           children: [
                                             const Image(
-                                              image: AssetImage('assets/images/mascot-winking.png'),
+                                              image: AssetImage(
+                                                  'assets/images/mascot-winking.png'),
                                               width: 50,
                                             ),
                                             Container(
-                                              margin: const EdgeInsets.only(bottom: 12),
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 12),
                                               child: const Text(
                                                 'Like this book?',
                                                 textAlign: TextAlign.end,
@@ -135,7 +142,8 @@ class _TrailerPageState extends State<TrailerPage> {
                                     ),
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.fromLTRB(64, 32, 64, 16),
+                                    margin: const EdgeInsets.fromLTRB(
+                                        64, 32, 64, 16),
                                     child: AspectRatio(
                                       aspectRatio: 1,
                                       child: Image.network(
@@ -148,7 +156,8 @@ class _TrailerPageState extends State<TrailerPage> {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: const EdgeInsets.fromLTRB(64, 0, 64, 0),
+                                  margin: const EdgeInsets.fromLTRB(
+                                      64, 0, 64, 0),
                                   child: AutoSizeText(
                                     widget.title,
                                     maxFontSize: double.infinity,
@@ -165,135 +174,10 @@ class _TrailerPageState extends State<TrailerPage> {
                             ]
                         ),
                       ),
-                      widget.currentPage == 0
-                          ? Container(
+                      Container(
                           margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                          child: _insideStoryChangeNotifier.isLoading ?
-                          ButtonWidget( //disable
-                            message: 'ON ITS WAY',
-                            destination: '/insideStory',
-                            storyId: widget.id,
-                            pageId: widget.currentPage,
-                            isEnabled: false,
-                          ) : ButtonWidget( //enable
-                            message: 'READ NOW',
-                            destination: '/insideStory',
-                            storyId: widget.id,
-                            pageId: widget.currentPage,
-                          )
-
+                          child: getReadNowButton()
                       )
-                          : Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(80, 0, 80, 0),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: const Color(0xFFD3D3D3),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: LinearPercentIndicator(
-                              padding: const EdgeInsets.all(0),
-                              barRadius: const Radius.circular(20),
-                              backgroundColor: const Color(0xFFFFFFFF),
-                              animation: true,
-                              lineHeight: 30.0,
-                              animationDuration: 1000,
-                              percent: widget.currentPage / widget.totalPages,
-                              center: Text(
-                                '${(widget.currentPage / widget.totalPages * 100).round()}%',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    color: Color(0xFF542209),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins'
-                                ),
-                              ),
-                              progressColor: const Color(0xFFFE8D29),
-                            ),
-                          ),
-                          Container(
-                              margin: const EdgeInsets.only(top: 16),
-                              child: _insideStoryChangeNotifier.isLoading ? Text("Loading") : Text("Loaded")
-                              
-                              /*_insideStoryChangeNotifier.isLoading ?
-                              ButtonWidget( //disable
-                                message: 'ON ITS WAY',
-                                destination: '/insideStory',
-                                storyId: widget.id,
-                                pageId: widget.currentPage,
-                                isEnabled: false,
-                              ) : ButtonWidget( //disable
-                                message: 'KEEP READING',
-                                destination: '/insideStory',
-                                storyId: widget.id,
-                                pageId: widget.currentPage
-                              )*/
-                          ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                            child: GestureDetector(
-                              onTapUp: (val){
-                                setState(() {
-                                  isPressed = false;
-                                });
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => InsideStory(
-                                    storyId: widget.id,
-                                    pageId: 0,
-                                  ),
-                                ));
-                              },
-                              onTapDown: (val){
-                                setState(() {
-                                  isPressed = true;
-                                });
-                              },
-                              onTapCancel: (){
-                                setState(() {
-                                  isPressed = false;
-                                });
-                              },
-                              child: AnimatedContainer(
-                                height: 50,
-                                width: double.infinity,
-                                margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFFFDFDFD),
-                                    borderRadius: BorderRadius.circular (25),
-                                    border: Border.all(
-                                      color: const Color(0xFFD3D3D3),
-                                      width: 2,
-                                    ),
-                                    boxShadow: isPressed ? null : [
-                                      const BoxShadow(
-                                        color: Color(0xFFD3D3D3),
-                                        spreadRadius: 0,
-                                        blurRadius: 0,
-                                        offset: Offset(0,6),
-                                      )
-                                    ]
-                                ),
-                                duration: const Duration(milliseconds: 75),
-                                child: const Center(
-                                  child: Text(
-                                    'START AGAIN',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFFFE8D29),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
                     ]
                 ),
               ]
@@ -303,17 +187,40 @@ class _TrailerPageState extends State<TrailerPage> {
       bottomNavigationBar: const NavbarWidget(active: 3),
     );
   }
-  
+
+  Widget getReadNowButton() {
+    if (_insideStoryChangeNotifier.isLoading) {
+      return const ButtonWidget( //disable
+        message: 'ON ITS WAY',
+        destination: '/insideStory',
+        isEnabled: false,
+      );
+    } else {
+      print("pages:");
+      print(pages);
+
+      return ButtonWidget( //enable
+        message: 'READ NOW',
+        destination: '/insideStory',
+        storyId: widget.id,
+        currentPage: widget.currentPage,
+        pages: pages
+      );
+    }
+  }
+
+
   void likeStory(bool mustLike) async {
     List<String> idToken = await GlobalVariables.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
-        
+
     try {
-      final url = Uri.parse("http://${GlobalVariables.ipAddress}/liked/stories");
+      final url = Uri.parse(
+          "http://${GlobalVariables.ipAddress}/liked/stories");
 
       final Map<String, dynamic> data = {
-        "userId" :  id,
+        "userId": id,
         "storyId": widget.id.toString()
       };
 
@@ -330,14 +237,14 @@ class _TrailerPageState extends State<TrailerPage> {
           body: data,
         );
       }
-      
+
       if (response.statusCode == 200) {
         print(response.body);
       } else {
-        GlobalVariables.showSnackbarMessage("Error from post: ${response.body}", context);
+        GlobalVariables.showSnackbarMessage(
+            "Error from post: ${response.body}", context);
       }
-
-    }catch (e) {
+    } catch (e) {
       print("Error: $e");
     }
   }
@@ -373,3 +280,5 @@ class _TrailerPageState extends State<TrailerPage> {
     );
   }
 }
+
+

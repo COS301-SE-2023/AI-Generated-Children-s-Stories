@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/trailer.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import 'button_widget.dart';
@@ -11,6 +12,7 @@ class BookWithProgress extends StatefulWidget {
   final String title;
   final int currentPage;
   final int totalPages;
+  final bool isLiked;
 
   // ignore: use_key_in_widget_constructors
   const BookWithProgress( {
@@ -18,7 +20,8 @@ class BookWithProgress extends StatefulWidget {
     required this.imagePath,
     required this.id,
     required this.currentPage,
-    required this.totalPages
+    required this.totalPages,
+    required this.isLiked
   });
 
   @override
@@ -85,11 +88,13 @@ class _BookWithProgressState extends State<BookWithProgress> {
           ),
           Container(
               margin: const EdgeInsets.only(top: 16),
-              child: ButtonWidget(
-                message: 'VIEW',
-                destination: '/insideStory',
-                storyId: widget.id,
-                pageId: widget.currentPage,
+              child: TrailerPage(
+                currentPage: widget.currentPage,
+                isLiked: widget.isLiked,
+                totalPages: widget.totalPages,
+                title: widget.title,
+                imagePath: widget.imagePath,
+                id: widget.id
               )
           ),
         ]

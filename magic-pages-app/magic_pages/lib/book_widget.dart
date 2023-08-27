@@ -32,12 +32,6 @@ class _BookWidget extends State<BookWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        // Navigator.push(context, MaterialPageRoute(
-        //   builder: (context) => InsideStory(
-        //     storyId: widget.id,
-        //     pageId: widget.currentPage,
-        //   ),
-        // ));
         Navigator.push(context, MaterialPageRoute(
           builder: (context) => TrailerPage(
             title: widget.title,
@@ -45,7 +39,7 @@ class _BookWidget extends State<BookWidget> {
             id: widget.id,
             currentPage: widget.currentPage,
             totalPages: widget.totalPages,
-            isLiked: widget.isLiked,
+            isLiked: widget.isLiked
           ),
         ));
 

@@ -131,6 +131,7 @@ class _HomeState extends State<Home> {
       id: story.id,
       currentPage: story.currentPage,
       totalPages: story.textContent.length,
+      isLiked: story.isLiked,
     );
   }
 }
