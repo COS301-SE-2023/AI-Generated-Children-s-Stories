@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:magic_pages/story_page.dart';
 import 'global_variables.dart';
@@ -147,7 +148,12 @@ class GetStoriesService {
     List<String> idToken = await GlobalVariables.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
-    return fetchFromUrl("http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id", context);
+    if (context.mounted) {
+      return fetchFromUrl(
+          "http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id",
+          context);
+    }
+    throw "Context not mounted when fetching random story";
   }
 
   //todo: change to liked stories
@@ -155,14 +161,11 @@ class GetStoriesService {
     List<String> idToken = await GlobalVariables.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
-    return fetchFromUrl("http://${GlobalVariables.ipAddress}/userStoryInfo/liked/$id", context);
-  }
-
-  Future<bool> updateLikeStatus(bool newLike, int storyID, int userID) async {
-    //set the like status to the new one where the story ID and userID match
-
-    //TODO: make a service call to do this!
-
-    return false;
+    if (context.mounted) {
+      return fetchFromUrl(
+          "http://${GlobalVariables.ipAddress}/userStoryInfo/liked/$id",
+          context);
+    }
+    throw "Context not mounted when fetching liked stories";
   }
 }
