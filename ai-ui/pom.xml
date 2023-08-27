@@ -54,6 +54,14 @@
 
     </dependencies>
     <build>
+ <!-- <resources>
+        <resource>
+            <directory>src/main/java/com/fullstackfox/resources</directory>
+            <excludes>
+                <exclude>config.json</exclude>
+            </excludes>
+        </resource>
+    </resources> -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

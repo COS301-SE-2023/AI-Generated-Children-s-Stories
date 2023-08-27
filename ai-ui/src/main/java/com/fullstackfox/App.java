@@ -13,35 +13,27 @@ import java.net.URISyntaxException;
 /**
  * JavaFX App
  */
-public class App extends Application {
+
+public class App extends Application{
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-      // Processors processes = new Processors();
-       //HomeController homeController = new HomeController();
+      
         scene = new Scene(loadFXML("home"), 1040, 585);
         stage.setResizable(false);
         stage.setTitle("Artificial Intellignece Story Generator");
         Image iconImage = new Image(getClass().getResourceAsStream("/com/fullstackfox/resources/Icon.png"));
         stage.getIcons().add(iconImage);
         stage.setScene(scene);
+          Processors process = Processors.getInstance();
         stage.show();
     }
 
 
-    static void setRoot(String fxml, BaseController controller) throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        loader.setController(controller); // Set the controller instance
-        try {
-            controller.createProcessors();
-        } catch (URISyntaxException e) {
-
-            e.printStackTrace();
-        }
-        Parent root = loader.load();
-        scene.setRoot(root);
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
     }
 
 
@@ -50,8 +42,9 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
-        launch();
+    public static void main(String[] args) throws URISyntaxException {
+         launch();
+
     }
 
 }

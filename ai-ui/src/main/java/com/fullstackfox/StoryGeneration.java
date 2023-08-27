@@ -10,64 +10,29 @@ public class StoryGeneration {
     APICalls callApi;
     PromptProcessor processPrompt;
     ImageGeneration imageGenerator;
+    String seed;
+    String story;
 
     public StoryGeneration(APICalls inApiLibrary, String inSeed) throws URISyntaxException {
         callApi = inApiLibrary;
         imageGenerator = new ImageGeneration(inApiLibrary);
         processPrompt = new PromptProcessor(inSeed);
+        seed = inSeed;
+    }
+
+    public void setStory(String finalStory) {
+        story = finalStory;
+        return;
     }
 
     // public Story generateStory(ArrayList<String> inputList) throws
     // URISyntaxException {
     // Generate story text
-    public String storyMaker(ArrayList<String> inputList) {
+    public String storyInput(ArrayList<String> inputList) {
         String currentPrompt = processPrompt.storyPrompt(inputList);
-        String story = this.storyText(currentPrompt);
+        story = this.storyText(currentPrompt);
         return story;
-        // System.out.println(story);
     }
-
-    public String generateTitle(String story) {
-        // if (!story.isBlank()) {
-        // Generate story title
-        String currentPrompt = processPrompt.storyTitlePrompt(story);
-        String storyTitle = this.storyTitle(currentPrompt);
-        return storyTitle;
-    }
-
-    // Generate character image
-    public String generateCharacter(String story) throws URISyntaxException {
-        String currentPrompt = processPrompt.characterDescriptionPrompt(story);
-        String characterImageUrl = this.characterImage(currentPrompt);
-        return characterImageUrl;
-    }
-
-    // Generate trailer image
-
-    public String trailerImage(String story, String characterImageUrl) throws URISyntaxException {
-        String currentPrompt = processPrompt.storyTrailerPrompt(story);
-        String storyTrailer = this.storyTrailer(currentPrompt, characterImageUrl);
-        return storyTrailer;
-    }
-
-    // Generate story images
-    public String oliverChange(String story, String characterImageUrl) throws URISyntaxException {
-        ArrayList<String> paragraphs = this.splitParagraphs(story);
-        int numPages = paragraphs.size();
-        String currentPrompt = processPrompt.genMidjourneyPromptsPrompt(story, numPages);
-        currentPrompt = this.storyImagePrompts(currentPrompt);
-        System.out.println(currentPrompt);
-        List<String> imagePrompts = splitNumberedList(currentPrompt);
-        // ArrayList<String> storyImages = this.storyImages(imagePrompts,
-        // characterImageUrl);
-
-        return "ahhhhhh";
-    }
-
-    // Return final story
-    // return this.compileStory(storyTitle, storyTrailer, paragraphs, storyImages);
-    // }
-    // return null;
 
     public String storyText(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
@@ -75,43 +40,48 @@ public class StoryGeneration {
         return story;
     }
 
-    public String storyTitle(String inPrompt) {
-        String response = callApi.promptGPT(inPrompt);
+    public String storyTitle(String story) {
+        String currentPrompt = processPrompt.storyTitlePrompt(story);
+        String response = callApi.promptGPT(currentPrompt);
         String storyTitle = this.extractContent(response);
         return storyTitle;
     }
 
-    public String characterImage(String inPrompt) throws URISyntaxException {
-        String response = callApi.promptGPT(inPrompt);
+    // Index 0 = url | Index 1 = messageID (Only used for upscaling)
+    public ArrayList<String> characterImage(String story) throws URISyntaxException {
+        String currentPrompt = processPrompt.characterDescriptionPrompt(story);
+        String response = callApi.promptGPT(currentPrompt);
         String characterPrompt = processPrompt.characterImagePrompt(this.extractContent(response));
-        String characterImageUrl = imageGenerator.generateImage(characterPrompt);
-        return characterImageUrl;
+        ArrayList<String> characterImageDetails = imageGenerator.generateImages(characterPrompt);
+        return characterImageDetails;
     }
 
-    public String storyTrailer(String inPrompt, String inCharacterImageUrl) throws URISyntaxException {
-        String response = callApi.promptGPT(inPrompt);
+    // Index 0 = url | Index 1 = messageID (Only used for upscaling)
+    public ArrayList<String> storyTrailer(String story, String inCharacterImageUrl) throws URISyntaxException {
+        String currentPrompt = processPrompt.storyTrailerPrompt(story);
+        String response = callApi.promptGPT(currentPrompt);
         String trailerPrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, this.extractContent(response));
-        String trailerUrl = imageGenerator.generateImage(trailerPrompt);
+        ArrayList<String> trailerUrl = imageGenerator.generateImages(trailerPrompt);
         return trailerUrl;
+    }
+
+    // Index 0 = url | Index 1 = messageID (Only used for upscaling)
+    public ArrayList<String> pageImage(String inPrompt, String inCharacterImageUrl) throws URISyntaxException {
+        String pagePrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, inPrompt);
+        ArrayList<String> pageImageDetails = imageGenerator.generateImages(pagePrompt);
+        return pageImageDetails;
+    }
+
+    // Call this to upscale a image
+    public String imageUpscale(ArrayList<String> inImageDetails, String inUpscale) throws URISyntaxException {
+        String upscaledImage = imageGenerator.upscaleImage(inImageDetails, inUpscale);
+        return upscaledImage;
     }
 
     public String storyImagePrompts(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
         String promptList = this.extractContent(response);
         return promptList;
-    }
-
-    public ArrayList<String> storyImages(List<String> inPrompts, String inCharacterImageUrl) throws URISyntaxException {
-        for (int i = 0; i < inPrompts.size(); i++) {
-            inPrompts.set(i, processPrompt.storyImagePrompt(inCharacterImageUrl,
-                    inPrompts.get(i)));
-        }
-        ArrayList<String> imageUrls = new ArrayList<String>();
-        for (int i = 0; i < inPrompts.size(); i++) {
-            String url = imageGenerator.generateImage(inPrompts.get(i));
-            imageUrls.add(url);
-        }
-        return imageUrls;
     }
 
     public Story compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inParagraphs,

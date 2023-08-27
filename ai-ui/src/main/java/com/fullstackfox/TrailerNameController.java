@@ -3,25 +3,19 @@ package com.fullstackfox;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class TrailerNameController extends BaseController{
+public class TrailerNameController extends Processors{
 
     @FXML
     private void switchToHome() throws IOException {
-        HomeController homeController = new HomeController();
-        try {
-            App.setRoot("home",homeController);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
+            App.setRoot("home");
+        
     }
 
     @FXML
     private void switchToPage() throws IOException {
-        StoryPageController storyPageController = new StoryPageController();
-        try {
-            App.setRoot("story-page",storyPageController);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
+            App.setRoot("story-page");
+       
     }
 }

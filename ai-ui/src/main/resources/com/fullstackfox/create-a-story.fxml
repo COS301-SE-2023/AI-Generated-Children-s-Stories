@@ -22,7 +22,7 @@
                   <Font name="Arial Bold" size="40.0" />
                </font>
             </Label>
-            <Button fx:id="discardButton" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="896.0" layoutY="14.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Discard Story" textAlignment="JUSTIFY" wrapText="true">
+            <Button fx:id="discardButton" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="896.0" layoutY="14.0" onAction="#clearStory" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Discard Story" textAlignment="JUSTIFY" wrapText="true">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -82,7 +82,7 @@
                <font>
                   <Font name="Arial" size="15.0" />
                </font></Button>
-            <Button fx:id="editButton" disable="true" layoutX="561.0" layoutY="22.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Edit" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="editButton" disable="true" layoutX="561.0" layoutY="22.0" onAction="#edit" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Edit" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="15.0" />
                </font></Button>
@@ -91,7 +91,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="regenButton" disable="true" layoutX="863.0" layoutY="23.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Regenerate Story" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="regenButton" disable="true" layoutX="863.0" layoutY="23.0" onAction="#getPrompt" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Regenerate Story" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

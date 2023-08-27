@@ -1,20 +1,18 @@
 package com.fullstackfox;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-public class HomeController extends BaseController{
+public class HomeController extends Processors{
 
     @FXML
     private void switchToSettings() throws IOException {
-        SettingsController settingsController = new SettingsController();
-        try {
-            App.setRoot("settings", settingsController );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       
+            App.setRoot("settings");
+        
     }
 
     @FXML
@@ -23,14 +21,12 @@ public class HomeController extends BaseController{
     }
 
     @FXML
-    private void switchToStory() throws IOException {
+    private void switchToStory() throws IOException, URISyntaxException {
+        Processors process = Processors.getInstance();
+    
+            process.createProcessors();
+            App.setRoot("create-a-story");
         
-        CreateAStoryController createAStoryController = new CreateAStoryController();
-        try {
-            App.setRoot("create-a-story",createAStoryController);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
 

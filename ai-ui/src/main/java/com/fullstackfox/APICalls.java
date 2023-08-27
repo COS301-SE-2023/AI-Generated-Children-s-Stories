@@ -6,17 +6,10 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class APICalls {
-    // Config List Content
-    // 0: Application ID
-    // 1: Channel ID
-    // 2: Guild ID
-    // 3: Session ID
-    // 4: Bot Authorization
-    // 5: User Authorization
     ArrayList<String> configList;
 
     public APICalls(ArrayList<String> inConfigList) throws URISyntaxException {
-        configList =inConfigList;
+        configList = inConfigList;
     }
 
     public String getMessage() {
@@ -75,7 +68,7 @@ public class APICalls {
         return requestBodyStr;
     }
 
-    public void postUpscale(String inImageURL, String inMessageID) {
+    public void postUpscale(String inImageURL, String inMessageID, String inUpscale) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
@@ -83,7 +76,6 @@ public class APICalls {
         int lastDotIndex = inImageURL.lastIndexOf(".");
 
         String imageID = inImageURL.substring(lastUnderscoreIndex + 1, lastDotIndex);
-        int upscaleNum = 1;
         RequestBody body = RequestBody.create(
                 "{\r\n    \"type\": 3,\r\n    \"application_id\": \"" + configList.get(0)
                         + "\",\r\n    \"guild_id\": \"" + configList.get(2)
@@ -92,7 +84,7 @@ public class APICalls {
                         + configList.get(3)
                         + "\",\r\n    \"message_id\": \"" + inMessageID
                         + "\",\r\n    \"data\": {\r\n       \"component_type\": 2,\r\n       \"custom_id\": \"MJ::JOB::upsample::"
-                        + upscaleNum + "::"
+                        + inUpscale + "::"
                         + imageID
                         + "\"\r\n    }\r\n}",
                 mediaType);
@@ -122,11 +114,6 @@ public class APICalls {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
-        if (configList == null) {
-            // Handle the case where configList is null. For example:
-            System.err.println("configList is null!");
-           
-        } else{
         RequestBody body = RequestBody.create(
                 "{\"model\": \"gpt-3.5-turbo\", \"messages\":[{\"role\":\"user\",\"content\":\"" + inPrompt + "\"}]}",
                 mediaType);
@@ -145,7 +132,7 @@ public class APICalls {
         } catch (Exception e) {
 
             e.printStackTrace();
-        }}
+        }
         return null;
     }
 }

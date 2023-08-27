@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 
-public class CreateAStoryController extends BaseController{
+public class CreateAStoryController extends Processors{
     @FXML
     private Button generationButton;
     @FXML
@@ -30,42 +30,47 @@ public class CreateAStoryController extends BaseController{
     @FXML
     private Button regenButton;
 
+    Processors pro = Processors.getInstance();
+    StoryGeneration gen = pro.getStoryGeneration();
 
-  //  private JsonProcessor jsonProcessor = new JsonProcessor();
-   // private APICalls api;
-    private StoryGeneration storyMade;
-    
-    
     @FXML
     private void switchToHome() throws IOException {
-        HomeController homeController = new HomeController();
-        try {
-            App.setRoot("home",homeController);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            App.setRoot("home");
+        
     }
+
+    @FXML
+    private void clearStory() throws IOException {
+            App.setRoot("create-a-story");
+    }
+
         @FXML
     private void switchToCharacter() throws IOException {
-        CharacterController characterController = new CharacterController();
-        try {
-            App.setRoot("character",characterController);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       
+       gen.setStory(storyOut.getText());
+      // System.out.println(storyOut.getText());
+            App.setRoot("character");
     }
+
+         @FXML
+    private void edit() throws IOException {
+        // storyPrompt.setEditable(false);
+        // age.setEditable(false);
+        // lenSlider.setDisable(true);
+        storyOut.setEditable(true);
+    }
+
 
     @FXML
     private void getPrompt() throws IOException, URISyntaxException {
-         api = this.getAPICalls();
-        storyMade = new StoryGeneration(api,"123");
+
         ArrayList<String> promptList = new ArrayList<>();
-        promptList.add("default prompt");
+       // promptList.add("default prompt");
     
         if (storyPrompt.getText() != null && !storyPrompt.getText().isEmpty()) {
             String prompt = storyPrompt.getText();
             promptList.add(prompt);
-            System.out.println(prompt);
+          //  System.out.println(prompt);
         }
     
         if (age.getText() != null && !age.getText().isEmpty()) {
@@ -75,7 +80,7 @@ public class CreateAStoryController extends BaseController{
                 String len = "" + Math.round(lenSlider.getValue());
                 promptList.add(agePrompt);
                 promptList.add(len);
-                System.out.println(agePrompt);
+               // System.out.println(agePrompt);
             } catch (NumberFormatException e) {
                 System.out.println("Age was not a number!");
             }
@@ -86,8 +91,9 @@ public class CreateAStoryController extends BaseController{
 
         @FXML
     private void setStory(ArrayList <String> inStory) throws IOException{
-     String story = "A";
-     if(inStory != null){story = storyMade.storyMaker(inStory);}
+     String story = "Story Failed to Generate";
+     
+     if(inStory != null){story =gen.storyInput(inStory);}
      storyOut.setText(story);
      generationButton.setDisable(true);
      editButton.setDisable(false);

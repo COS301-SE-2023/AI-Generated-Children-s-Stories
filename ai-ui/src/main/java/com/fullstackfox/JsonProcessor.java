@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import org.json.*;
 
-import org.json.JSONException;
+//import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -38,7 +38,6 @@ public class JsonProcessor {
                     configList.add(jsonObject.optString("userAuthorization"));
                     configList.add(jsonObject.optString("chatGPTKey"));
                     configList.add(jsonObject.optString("midjourneySeed"));
-                    System.out.println("---------------------------------------------------------------------");
                     return configList;
                 }
             } else {

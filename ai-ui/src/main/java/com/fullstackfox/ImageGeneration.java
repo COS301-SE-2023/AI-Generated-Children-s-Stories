@@ -1,6 +1,8 @@
 package com.fullstackfox;
 
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.ArrayList;
 import org.json.*;
 
 public class ImageGeneration {
@@ -11,17 +13,24 @@ public class ImageGeneration {
         callApi = inApiLibrary;
     }
 
-    public String generateImage(String inPromt) throws URISyntaxException {
+    public ArrayList<String> generateImages(String inPrompt) {
         String lastMessageID = this.latestMessageID();
-        callApi.postPrompt(inPromt);
+        callApi.postPrompt(inPrompt);
         this.imageGenDelay(lastMessageID);
         String message = callApi.getMessage();
         String imageURL = this.extractImageUrl(message);
         lastMessageID = this.latestMessageID();
-        callApi.postUpscale(imageURL, lastMessageID);
-        this.imageGenDelay(lastMessageID);
-        message = callApi.getMessage();
-        imageURL = this.extractImageUrl(message);
+        ArrayList<String> result = new ArrayList<>();
+        result.add(imageURL);
+        result.add(lastMessageID);
+        return result;
+    }
+
+    public String upscaleImage(List<String> inImageDetails, String inUpscale) throws URISyntaxException {
+        callApi.postUpscale(inImageDetails.get(0), inImageDetails.get(1), inUpscale);
+        this.imageGenDelay(inImageDetails.get(1));
+        String message = callApi.getMessage();
+        String imageURL = this.extractImageUrl(message);
         return imageURL;
     }
 
@@ -49,7 +58,7 @@ public class ImageGeneration {
                         try {
                             Thread.sleep(5000);
                         } catch (InterruptedException e) {
-                            
+
                             e.printStackTrace();
                         }
                     }
@@ -58,7 +67,7 @@ public class ImageGeneration {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
-               
+
                     e.printStackTrace();
                 }
             }
