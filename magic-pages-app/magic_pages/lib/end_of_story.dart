@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:magic_pages/end_of_story_change_notifier.dart';
-import 'package:magic_pages/get_stories_service.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'Wave_Widget.dart';
@@ -23,10 +21,6 @@ class _EndOfStoryState extends State<EndOfStory> {
   bool isHomePressed = false;
   bool isAgainPressed = false;
   late double screenHeight = MediaQuery.of(context).size.height;
-
-  //make a call to the api to get the story info
-  final EndOfStoryChangeNotifier _endOfStoryChangeNotifier =
-  EndOfStoryChangeNotifier(GetStoriesService());
 
   @override
   Widget build(BuildContext context) {

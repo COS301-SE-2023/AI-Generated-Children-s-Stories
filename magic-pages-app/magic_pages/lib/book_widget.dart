@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'heart_animation_widget.dart';
-import 'inside_story.dart';
 import 'trailer.dart';
 
 // ignore: must_be_immutable

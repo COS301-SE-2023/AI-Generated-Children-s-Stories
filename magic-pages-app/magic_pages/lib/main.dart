@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/inside_story_change_notifier.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -76,23 +77,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<InsideStoryChangeNotifier>(
+          create: (context) => InsideStoryChangeNotifier(GetStoriesService()),
+        ),
+        ChangeNotifierProvider<StoryListChangeNotifier>(
+          create: (context) => StoryListChangeNotifier(GetStoriesService())
+        )
+      ],
+    child: MaterialApp(
         title: 'Magic Pages',
         theme: ThemeData(
           primarySwatch: createMaterialColor(const Color(0xFFFE8D29)),
           scaffoldBackgroundColor: const Color(0xFFFFF3E9),
         ),
-        home: ChangeNotifierProvider(
-          create: (context) => StoryListChangeNotifier(GetStoriesService()),
-          child: !isTest ? const SplashPage() : const Home()
-        ),
+        home:  !isTest ? const SplashPage() : const Home(),
         routes: {
-          '/signup': (context) => SignupPage(),
-          '/splash': (context) => SplashPage(),
+          '/signup': (context) => const SignupPage(),
+          '/splash': (context) => const SplashPage(),
           '/storyList': (context) => const StoryList(),
           '/home': (context) => const Home(),
           '/storyLiked': (context) => const StoryLiked(),
           '/profile': (context) => const Profile(),
-        });
+        })
+    );
   }
 }

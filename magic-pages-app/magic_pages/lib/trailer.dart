@@ -46,10 +46,20 @@ class _TrailerPageState extends State<TrailerPage> {
   final InsideStoryChangeNotifier _insideStoryChangeNotifier =
   InsideStoryChangeNotifier(GetStoriesService());
 
+  void fetchPages() async{
+    await _insideStoryChangeNotifier.fetchPages(context, widget.id);
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
-    _insideStoryChangeNotifier.fetchPages(context, widget.id);
+    fetchPages();
+
+    //hello
+    /*_insideStoryChangeNotifier.addListener(() {
+      print("isLoading: ${_insideStoryChangeNotifier.isLoading}");
+    });*/
   }
 
   @override
