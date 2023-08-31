@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:magic_pages/get_stories_service.dart';
 import 'package:magic_pages/story_page.dart';

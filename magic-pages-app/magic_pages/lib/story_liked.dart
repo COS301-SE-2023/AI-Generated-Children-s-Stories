@@ -52,6 +52,7 @@ class _StoryLikedState extends State<StoryLiked> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -225,6 +226,7 @@ class _StoryLikedState extends State<StoryLiked> {
             currentPage: story1.getCurrentPage(),
             totalPages: story1.getTextContent().length,
             isLiked: story1.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
         Container(
@@ -237,6 +239,7 @@ class _StoryLikedState extends State<StoryLiked> {
             currentPage: story2.getCurrentPage(),
             totalPages: story2.getTextContent().length,
             isLiked: story2.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
       ]
@@ -255,6 +258,7 @@ class _StoryLikedState extends State<StoryLiked> {
             currentPage: story1.getCurrentPage(),
             totalPages: story1.getTextContent().length,
             isLiked: story1.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
         Container(
@@ -267,6 +271,7 @@ class _StoryLikedState extends State<StoryLiked> {
             currentPage: story2.getCurrentPage(),
             totalPages: story2.getTextContent().length,
             isLiked: story2.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
       ]
@@ -284,6 +289,7 @@ class _StoryLikedState extends State<StoryLiked> {
             currentPage: story1.getCurrentPage(),
             totalPages: story1.getTextContent().length,
             isLiked: story1.getIsLiked(),
+            updateBookItems: getStories
           ),
         ),
         Container(

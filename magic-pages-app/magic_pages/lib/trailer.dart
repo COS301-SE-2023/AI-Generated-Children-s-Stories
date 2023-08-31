@@ -1,19 +1,17 @@
-import 'dart:convert';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
+import 'package:magic_pages/story_list_change_notifier.dart';
 import 'package:magic_pages/story_page.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import 'package:http/http.dart' as http;
 
 import 'Wave_Widget.dart';
 import 'button_widget.dart';
 import 'get_stories_service.dart';
-import 'global_variables.dart';
 import 'heart_animation_widget.dart';
-import 'inside_story.dart';
 import 'navbar.dart';
+import 'globals.dart';
+
+import 'get_stories_service.dart';
 
 /// This class represents...
 
@@ -86,7 +84,7 @@ class _TrailerPageState extends State<TrailerPage> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Navigator.of(context).pop();
+                                Navigator.pop(context);
                               },
                               child: Container(
                                 margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -204,9 +202,6 @@ class _TrailerPageState extends State<TrailerPage> {
         isEnabled: false,
       );
     } else {
-      print("pages:");
-      print(pages);
-
       return ButtonWidget( //enable
         message: 'READ NOW',
         destination: '/insideStory',
@@ -214,46 +209,6 @@ class _TrailerPageState extends State<TrailerPage> {
         currentPage: widget.currentPage,
         pages: pages
       );
-    }
-  }
-
-
-  void likeStory(bool mustLike) async {
-    List<String> idToken = await GlobalVariables.getIdAndToken();
-    String id = idToken[0];
-    String token = idToken[1];
-
-    try {
-      final url = Uri.parse(
-          "http://${GlobalVariables.ipAddress}/liked/stories");
-
-      final Map<String, dynamic> data = {
-        "userId": id,
-        "storyId": widget.id.toString()
-      };
-
-      http.Response response;
-
-      if (mustLike) {
-        response = await http.post(
-          url,
-          body: data,
-        );
-      } else {
-        response = await http.delete(
-          url,
-          body: data,
-        );
-      }
-
-      if (response.statusCode == 200) {
-        print(response.body);
-      } else {
-        GlobalVariables.showSnackbarMessage(
-            "Error from post: ${response.body}", context);
-      }
-    } catch (e) {
-      print("Error: $e");
     }
   }
 
@@ -275,10 +230,10 @@ class _TrailerPageState extends State<TrailerPage> {
             setState(() {
               widget.isLiked = !widget.isLiked;
               if (widget.isLiked == true) {
-                likeStory(true);
+                Globals.likeStory(true, widget.id, context);
                 isHeartAnimating = true;
               } else {
-                likeStory(false);
+                Globals.likeStory(false, widget.id, context);
               }
             });
           },

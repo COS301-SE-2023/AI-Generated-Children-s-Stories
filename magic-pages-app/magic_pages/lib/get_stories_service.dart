@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:magic_pages/story_page.dart';
-import 'global_variables.dart';
+import 'globals.dart';
 import 'story.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +17,7 @@ class GetStoriesService {
   //continue with integration tests
 
   Future<List<Story>> fetchAllStories(BuildContext context) async {
-    List<String> idToken = await GlobalVariables.getIdAndToken();
+    List<String> idToken = await Globals.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
 
@@ -27,7 +26,7 @@ class GetStoriesService {
     List<Story> stories = [];
 
     final url =
-        Uri.parse("http://${GlobalVariables.ipAddress}/library/$id");
+        Uri.parse("http://${Globals.ipAddress}/library/$id");
 
     try {
       final response = await http.get(url);
@@ -52,7 +51,7 @@ class GetStoriesService {
 
       } else {
         if (context.mounted) {
-          GlobalVariables.showSnackbarMessage(
+          Globals.showSnackbarMessage(
               "Failed to get story: ${response.statusCode}", context);
         }
       }
@@ -67,7 +66,7 @@ class GetStoriesService {
 
     List<StoryPage> pages = [];
 
-    final url = Uri.parse("http://${GlobalVariables.ipAddress}/pages/${storyId}");
+    final url = Uri.parse("http://${Globals.ipAddress}/pages/${storyId}");
 
     try {
       final response = await http.get(url);
@@ -86,13 +85,13 @@ class GetStoriesService {
 
       } else {
         if (context.mounted) {
-          GlobalVariables.showSnackbarMessage(
+          Globals.showSnackbarMessage(
               "Failed to get story: ${response.statusCode}", context);
         }
       }
     } catch (e) {
       if (context.mounted) {
-        GlobalVariables.showSnackbarMessage(
+        Globals.showSnackbarMessage(
             "Failed to get story: $e", context);
       }
     }
@@ -112,7 +111,6 @@ class GetStoriesService {
         final data = jsonDecode(response.body);
 
         for (var userStoryInfoEntity in data) {
-          print("GETTING STORY");
           //create a book
           print(userStoryInfoEntity);
 
@@ -132,7 +130,7 @@ class GetStoriesService {
 
       } else {
         if (context.mounted) {
-          GlobalVariables.showSnackbarMessage(
+          Globals.showSnackbarMessage(
               "Failed to get story: ${response.statusCode}", context);
         }
       }
@@ -145,12 +143,12 @@ class GetStoriesService {
 
   //read the json file and return the currently reading story (simulates an api call)
   Future<List<Story>> fetchCurrentlyReading(BuildContext context) async {
-    List<String> idToken = await GlobalVariables.getIdAndToken();
+    List<String> idToken = await Globals.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
     if (context.mounted) {
       return fetchFromUrl(
-          "http://${GlobalVariables.ipAddress}/userStoryInfo/random/$id",
+          "http://${Globals.ipAddress}/userStoryInfo/random/$id",
           context);
     }
     throw "Context not mounted when fetching random story";
@@ -158,12 +156,12 @@ class GetStoriesService {
 
   //todo: change to liked stories
   Future<List<Story>> fetchLikedStories(BuildContext context) async {
-    List<String> idToken = await GlobalVariables.getIdAndToken();
+    List<String> idToken = await Globals.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
     if (context.mounted) {
       return fetchFromUrl(
-          "http://${GlobalVariables.ipAddress}/userStoryInfo/liked/$id",
+          "http://${Globals.ipAddress}/userStoryInfo/liked/$id",
           context);
     }
     throw "Context not mounted when fetching liked stories";

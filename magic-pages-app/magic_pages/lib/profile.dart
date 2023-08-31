@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'global_variables.dart';
+import 'globals.dart';
 import 'navbar.dart';
 import 'my_header.dart';
 import 'package:http/http.dart' as http;
@@ -61,7 +61,7 @@ class _ProfileState extends State<Profile> {
 
                       if (checkId != null) {
                         final url = Uri.parse(
-                            "http://${GlobalVariables.ipAddress}/logout/${checkId}");
+                            "http://${Globals.ipAddress}/logout/${checkId}");
 
                         print(url);
 
@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
                           final response = await http.post(url);
                           if (response.statusCode == 200) {
                             if (context.mounted) {
-                              GlobalVariables.showSnackbarMessage(
+                              Globals.showSnackbarMessage(
                                   'Logged out', context);
                               Navigator.pushNamed(context, '/login');
                             }
@@ -77,21 +77,21 @@ class _ProfileState extends State<Profile> {
                             String message =
                                 'Error logging out, status code: ${response.statusCode}';
                             if (context.mounted) {
-                              GlobalVariables.showSnackbarMessage(
+                              Globals.showSnackbarMessage(
                                   message, context);
                             }
                           }
                         } catch (e) {
                           String message = 'Error logging out, message: $e';
                           if (context.mounted) {
-                            GlobalVariables.showSnackbarMessage(
+                            Globals.showSnackbarMessage(
                                 message, context);
                           }
                         }
                       } else {
                         String message = 'Failed to log out';
                         if (context.mounted) {
-                          GlobalVariables.showSnackbarMessage(message, context);
+                          Globals.showSnackbarMessage(message, context);
                         }
                       }
                     },

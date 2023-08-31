@@ -6,7 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'global_variables.dart';
+import 'globals.dart';
 import 'icon_button_widget.dart';
 import 'wave_widget.dart';
 
@@ -23,15 +23,9 @@ class SignupPage extends StatelessWidget {
       tokenToSend = token.toString();
     }
 
-    final url = Uri.parse("http://${GlobalVariables.ipAddress}/authenticate");
+    final url = Uri.parse("http://${Globals.ipAddress}/authenticate");
 
     const storage = FlutterSecureStorage();
-
-    //todo: remove
-    // await storage.write(key: "api_token", value: "efbfe7f1-8c09-4584-a389-81fc5cbc6a65");
-    // await storage.write(key: "id", value: "1");
-    // return true;
-
 
     try {
       final response = await http.post(url, body: tokenToSend);
@@ -65,13 +59,13 @@ class SignupPage extends StatelessWidget {
         String message =
             'Error logging in, response code: ${response.statusCode}';
         if (context.mounted) {
-          GlobalVariables.showSnackbarMessage(message, context);
+          Globals.showSnackbarMessage(message, context);
         }
         return false;
       }
     } catch (e) {
       String message = 'Error logging in, message: $e';
-      GlobalVariables.showSnackbarMessage(message, context);
+      Globals.showSnackbarMessage(message, context);
       return false;
     }
     return false;
@@ -105,19 +99,19 @@ class SignupPage extends StatelessWidget {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           if (context.mounted) {
-            GlobalVariables.showSnackbarMessage(
+            Globals.showSnackbarMessage(
                 'The account already exists with a different credential',
                 context);
           }
         } else if (e.code == 'invalid-credential') {
           if (context.mounted) {
-            GlobalVariables.showSnackbarMessage(
+            Globals.showSnackbarMessage(
                 'Error occurred while accessing credentials. Try again.',
                 context);
           }
         } else {
           if (context.mounted) {
-            GlobalVariables.showSnackbarMessage('Error $e', context);
+            Globals.showSnackbarMessage('Error $e', context);
           }
         }
       }
