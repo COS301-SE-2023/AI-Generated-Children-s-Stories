@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:magic_pages/inside_story.dart';
 import 'package:magic_pages/story_page.dart';
 
+//todo: make a parent button
+//two children: navigate to route
+//navigate to inside story page
+
 // ignore: must_be_immutable
 class ButtonWidget extends StatefulWidget {
   final String message;

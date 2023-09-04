@@ -3,8 +3,6 @@ import 'package:magic_pages/inside_story.dart';
 import 'package:magic_pages/progress_bar.dart';
 import 'package:magic_pages/trailer.dart';
 
-/// This class represents
-
 class BookWithProgress extends StatefulWidget {
   final String imagePath;
   final int id;
@@ -56,7 +54,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
             ),
           ),
           ProgressBar(
-              totalPages: widget.totalPages, currentPages: widget.currentPage),
+              totalPages: widget.totalPages, currentPage: widget.currentPage),
           GestureDetector(
             onTap: () {
               Navigator.push(context,

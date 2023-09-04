@@ -186,11 +186,9 @@ class SignupPage extends StatelessWidget {
                                   child: GestureDetector(
                                       behavior: HitTestBehavior.opaque, // Allow outer GestureDetector to receive the tap event
                                       onTap: () async {
-                                        print("tap outer");
                                         bool success = await signInWithGoogle(
                                             context);
                                         if (success) {
-                                          print("Success!!!!");
                                           if (context.mounted) {
                                             Navigator.pushNamed(context, "/home");
                                           }
@@ -205,13 +203,13 @@ class SignupPage extends StatelessWidget {
                                     ),
                                   ),
 
-
-                                Platform.isIOS ? const IconButtonWidget(
-                                  message: 'GET STARTED WITH APPLE',
-                                  destination: '/home',
-                                  image: 'assets/images/apple-logo.png',
-                                  imageSize: 25,
-                                ) : const SizedBox(height: 0,),
+                                //If we get apple signup to work
+                                // Platform.isIOS ? const IconButtonWidget(
+                                //   message: 'GET STARTED WITH APPLE',
+                                //   destination: '/home',
+                                //   image: 'assets/images/apple-logo.png',
+                                //   imageSize: 25,
+                                // ) : const SizedBox(height: 0,),
                               ],
                             ),
                           ),

@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 /// The third icon takes the user to the liked page.
 /// The navbar is displayed at the bottom of the screen.
 
+//todo: use ternary statements to determine which is active
+//widget.active == 0 ? 'assets/images/explore.png' : 'explore-outline',
+
 class NavbarWidget extends StatefulWidget {
   const NavbarWidget({super.key, this.active = 1});
 
@@ -30,7 +33,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: Column(children: [
                 Image.asset(
-                  'assets/images/explore.png',
+                  widget.active == 0 ? 'assets/images/explore.png' : 'explore-outline',
                   width: 42,
                 ),
                 const SizedBox(height: 3),
@@ -49,7 +52,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: Column(children: [
                   Image.asset(
@@ -73,7 +76,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyLiked');
+                  Navigator.pushReplacementNamed(context, '/storyLiked');
                 },
                 child: Column(children: [
                   Image.asset(
@@ -105,7 +108,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyList');
+                  Navigator.pushReplacementNamed(context, '/storyList');
                 },
                 child: Column(children: [
                   Image.asset(
@@ -148,7 +151,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyLiked');
+                  Navigator.pushReplacementNamed(context, '/storyLiked');
                 },
                 child: Column(children: [
                   Image.asset(
@@ -180,7 +183,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyList');
+                  Navigator.pushReplacementNamed(context, '/storyList');
                 },
                 child: Column(children: [
                   Image.asset(
@@ -204,7 +207,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: Column(children: [
                   Image.asset(
@@ -255,7 +258,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/storyList');
+                Navigator.pushReplacementNamed(context, '/storyList');
               },
               child: Column(
                 children: [
@@ -281,7 +284,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/home');
               },
               child: Column(
                 children: [
@@ -307,7 +310,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/storyLiked');
+                Navigator.pushReplacementNamed(context, '/storyLiked');
               },
               child: Column(
                 children: [
