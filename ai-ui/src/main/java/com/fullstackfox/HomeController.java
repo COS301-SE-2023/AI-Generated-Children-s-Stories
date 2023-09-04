@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-public class HomeController extends Processors{
+public class HomeController{
 
     @FXML
     private void switchToSettings() throws IOException {
@@ -24,7 +24,6 @@ public class HomeController extends Processors{
     @FXML
     private void switchToStory() throws IOException, URISyntaxException {
         Processors process = Processors.getInstance();
-    
             process.createProcessors();
             App.setRoot("create-a-story");
         

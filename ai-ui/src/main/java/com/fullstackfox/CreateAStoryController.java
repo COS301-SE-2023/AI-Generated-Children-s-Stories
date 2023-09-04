@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 
-public class CreateAStoryController extends Processors{
+public class CreateAStoryController{
     @FXML
     private Button generationButton;
     @FXML
@@ -64,10 +64,10 @@ public class CreateAStoryController extends Processors{
 
     @FXML
     private void getPrompt() throws IOException, URISyntaxException {
-
+         generationButton.setDisable(true);
         ArrayList<String> promptList = new ArrayList<>();
        // promptList.add("default prompt");
-    
+   
         if (storyPrompt.getText() != null && !storyPrompt.getText().isEmpty()) {
             String prompt = storyPrompt.getText();
             promptList.add(prompt);
@@ -92,11 +92,12 @@ public class CreateAStoryController extends Processors{
 
         @FXML
     private void setStory(ArrayList <String> inStory) throws IOException{
+           
      String story = "Story Failed to Generate";
      
      if(inStory != null){story =gen.storyInput(inStory);}
      storyOut.setText(story);
-     generationButton.setDisable(true);
+     //generationButton.setDisable(true);
      editButton.setDisable(false);
      acceptButton.setDisable(false);
      regenButton.setDisable(false);
