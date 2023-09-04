@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
-import 'package:magic_pages/story_list_change_notifier.dart';
 import 'package:magic_pages/story_page.dart';
 
 import 'Wave_Widget.dart';
@@ -11,8 +10,6 @@ import 'heart_animation_widget.dart';
 import 'navbar.dart';
 import 'globals.dart';
 
-import 'get_stories_service.dart';
-
 /// This class represents...
 
 class TrailerPage extends StatefulWidget {
@@ -21,10 +18,10 @@ class TrailerPage extends StatefulWidget {
   final String title;
   final int currentPage;
   final int totalPages;
-  bool isLiked;
+  final bool isLiked;
 
   // ignore: use_key_in_widget_constructors
-  TrailerPage({
+  const TrailerPage({
     required this.title,
     required this.imagePath,
     required this.id,
@@ -41,6 +38,7 @@ class _TrailerPageState extends State<TrailerPage> {
   bool isHeartAnimating = false;
   bool isPressed = false;
   List<StoryPage> pages = [];
+  late bool isLiked = widget.isLiked;
 
   //change notifier
   final InsideStoryChangeNotifier _insideStoryChangeNotifier =
@@ -207,7 +205,8 @@ class _TrailerPageState extends State<TrailerPage> {
         destination: '/insideStory',
         storyId: widget.id,
         currentPage: widget.currentPage,
-        pages: pages
+        pages: pages,
+        isLiked: widget.isLiked
       );
     }
   }
@@ -222,14 +221,14 @@ class _TrailerPageState extends State<TrailerPage> {
 
     return HeartAnimationWidget(
       alwaysAnimate: true,
-      isAnimating: widget.isLiked,
+      isAnimating: isLiked,
       child: Container(
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
         child: GestureDetector(
           onTap: () {
             setState(() {
-              widget.isLiked = !widget.isLiked;
-              if (widget.isLiked == true) {
+              isLiked = !isLiked;
+              if (isLiked == true) {
                 Globals.likeStory(true, widget.id, context);
                 isHeartAnimating = true;
               } else {

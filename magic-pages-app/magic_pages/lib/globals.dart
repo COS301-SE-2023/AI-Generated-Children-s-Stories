@@ -14,7 +14,7 @@ class Globals {
     }
   }
 
-  static void likeStory(bool mustLike, int bookId, context) async {
+  static Future<bool> likeStory(bool mustLike, int bookId, context) async {
     List<String> idToken = await Globals.getIdAndToken();
     String id = idToken[0];
     String token = idToken[1];
@@ -47,10 +47,13 @@ class Globals {
       } else {
         Globals.showSnackbarMessage(
             "Error from post: ${response.body}", context);
+        return false;
       }
     } catch (e) {
       print("Error: $e");
     }
+
+    return true;
   }
 
   static Future<List<String>> getIdAndToken() async {

@@ -13,11 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /*
 To make jar
-1. mvn clean package
+1. mvn clean package -DskipTests
 2. cd target
 2. java -jar .\target\backend-1.0-SNAPSHOT.jar
 */
-
+/*
 @SpringBootApplication
 public class BackendApplication {
 	public static void main(String[] args) {
@@ -25,10 +25,10 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 }
-
+*/
 //to create pages
 
-/*
+
 @SpringBootApplication
 public class BackendApplication implements CommandLineRunner {
 
@@ -70,4 +70,3 @@ public class BackendApplication implements CommandLineRunner {
 	}
 
 }
-*/

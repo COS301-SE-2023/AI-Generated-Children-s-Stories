@@ -10,6 +10,7 @@ class ButtonWidget extends StatefulWidget {
   final bool? isEnabled;
   final List<StoryPage>? pages;
   final int? currentPage;
+  final bool? isLiked;
 
   //for story...
 
@@ -20,7 +21,8 @@ class ButtonWidget extends StatefulWidget {
     this.isEnabled,
     this.storyId,
     this.pages,
-    this.currentPage
+    this.currentPage,
+    this.isLiked
   });
 
   @override
@@ -57,6 +59,7 @@ class _ButtonWidget extends State<ButtonWidget> {
                         storyId: widget.storyId!,
                         currentPage: widget.currentPage!,
                         pages: widget.pages!,
+                        isLiked: widget.isLiked!,
                       )
                 ));
       },

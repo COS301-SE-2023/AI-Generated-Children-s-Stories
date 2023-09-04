@@ -1,11 +1,12 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:magic_pages/end_of_story.dart';
+import 'package:magic_pages/heart_toggle.dart';
 import 'package:magic_pages/story_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
-import 'heart_animation_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:magic_pages/globals.dart';
 
 /// This class represents the state of the inside story page.
 /// It keeps track of the current story index, the current message index, and whether the halfway message has been shown.
@@ -21,12 +22,14 @@ class InsideStory extends StatefulWidget {
   //this allows it to call the api to get the story
   final int storyId;
   final int currentPage;
+  final bool isLiked;
 
   InsideStory({
     super.key,
     required this.storyId,
     required this.pages,
-    required this.currentPage
+    required this.currentPage,
+    required this.isLiked
   });
 
   //messages displayed by the mascot
@@ -45,16 +48,43 @@ class InsideStory extends StatefulWidget {
 class InsideStoryState extends State<InsideStory> {
   late int storyIndex = widget.currentPage;
   bool isHeartAnimating = false;
-  bool isLiked = false;
+  late bool isLiked = widget.isLiked;
   bool isBackPressed = false;
   bool isNextPressed = false;
   bool isHomePressed = false;
   late int randomMessageIndex = Random().nextInt(widget.messages.length-1);
 
+  /*
+  {
+    "apiKey": "123",
+    "progressData": {
+        "userId": 1,
+        "storyId": 3,
+        "pageNumber":4
+    }
+}
+   */
+  Future<void> updatePageNumber(int pageNumber) async {
+    final url = Uri.parse("http://${Globals.ipAddress}/");
+
+    List<String> idToken = await Globals.getIdAndToken();
+
+    final jsonString = "{'apiKey':'${idToken[1]}', 'progressData':'{'userId':'${idToken[0]}', 'storyId':'${widget.storyId}', 'pageNumber':'${storyIndex + 1}'}'}";
+    final data = jsonEncode(jsonString);
+
+    print("Sending data");
+    print(data);
+
+    //todo: make post request
+  }
+
 
   @override
   void initState() {
     super.initState();
+    print("Inside story...");
+    print("Sending request to database with page number = 1");
+    updatePageNumber(1);
   }
 
   /// This function updates the story index and message index.
@@ -100,7 +130,7 @@ class InsideStoryState extends State<InsideStory> {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(left: 16),
-                      child: HeartToggle()
+                      child: HeartToggle(isLiked: isLiked, id: widget.storyId)
                   ),
                   Row(
                     children: [
@@ -369,34 +399,6 @@ class InsideStoryState extends State<InsideStory> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget HeartToggle() {
-    Image image;
-    if (isLiked == true) {
-      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 50);
-    } else {
-      image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 50);
-    }
-
-    return HeartAnimationWidget(
-      alwaysAnimate: true,
-      isAnimating: isLiked,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              isLiked = !isLiked;
-              if (isLiked == true) {
-                isHeartAnimating = true;
-              }
-            });
-          },
-          child: image,
         ),
       ),
     );

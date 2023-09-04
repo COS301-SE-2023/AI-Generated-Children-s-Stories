@@ -79,6 +79,7 @@ class _EndOfStoryState extends State<EndOfStory> {
                             storyId: widget.storyId,
                             currentPage: 0,
                             pages: widget.pages,
+                            isLiked: isLiked
                           ),
                         ));
                       },
