@@ -27,6 +27,12 @@ class SignupPage extends StatelessWidget {
 
     const storage = FlutterSecureStorage();
 
+    //todo: remove
+    // await storage.write(key: "api_token", value: "efbfe7f1-8c09-4584-a389-81fc5cbc6a65");
+    // await storage.write(key: "id", value: "1");
+    // return true;
+
+
     try {
       final response = await http.post(url, body: tokenToSend);
       //check the response code
@@ -127,192 +133,194 @@ class SignupPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Stack(
-            children: [
-              const WaveHeaderWidget(),
-              Column(
-                children: [
-                  Stack(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/splash');
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(2, 52, 0, 0),
-                          padding: const EdgeInsets.all(16),
-                          child: const Image(
+              children: [
+                const WaveHeaderWidget(),
+                Column(
+                  children: [
+                    Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/splash');
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(2, 52, 0, 0),
+                            padding: const EdgeInsets.all(16),
+                            child: const Image(
                               image: AssetImage('assets/images/back-button.png'),
                               width: 24,
                             ),
+                          ),
                         ),
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 62, 17, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 54, 19, 0),
-                                  width: 137,
-                                  child: const Text(
-                                    'Ask a grown up to help you',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF000000),
+                        Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 62, 17, 0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 54, 19, 0),
+                                      width: 137,
+                                      child: const Text(
+                                        'Ask a grown up to help you',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xFF000000),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    const Image(
+                                      image: AssetImage('assets/images/mascot-winking.png'),
+                                      width: 144,
+                                    )
+                                  ],
                                 ),
-                                const Image(
-                                  image: AssetImage('assets/images/mascot-winking.png'),
-                                  width: 144,
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height-(306+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-
-                                Container(
-                                  margin: const EdgeInsets.only(bottom: 20),
-                                  child: GestureDetector(
-                                      behavior: HitTestBehavior.opaque, // Allow outer GestureDetector to receive the tap event
-                                      onTap: () async {
-                                        bool success = await signInWithGoogle(
-                                            context);
-                                        if (success) {
-                                          if (context.mounted) {
-                                            Navigator.pushNamed(context, "/home");
-                                          }
-                                        }
-                                      },
-                                      child: const IconButtonWidget(
-                                        message: 'GET STARTED WITH GOOGLE',
-                                        image: 'assets/images/google-logo.png',
-                                        imageSize: 25
-                                      ),
-                                    ),
-                                  ),
-
-                                //If we get apple signup to work
-                                // Platform.isIOS ? const IconButtonWidget(
-                                //   message: 'GET STARTED WITH APPLE',
-                                //   destination: '/home',
-                                //   image: 'assets/images/apple-logo.png',
-                                //   imageSize: 25,
-                                // ) : const SizedBox(height: 0,),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 212,
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: 'By continuing, you agree to our ',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xFF000000),
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'Terms and Conditions ',
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xFF000000),
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    recognizer: new TapGestureRecognizer()
-                                      ..onTap = () => showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return const AlertDialog(
-                                            backgroundColor: Color(0xFFFFF3E9),
-                                            title: Text(
-                                              'Terms and Conditions', 
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            content: Text(
-                                              '...', 
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                      ),
-                                  ),
-                                  const TextSpan(
-                                    text: 'and ',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xFF000000),
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'Privacy Policy',
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xFF000000),
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    recognizer: new TapGestureRecognizer()
-                                      ..onTap = () => showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return const AlertDialog(
-                                            backgroundColor: Color(0xFFFFF3E9),
-                                            title: Text(
-                                              'Privacy Policy', 
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            content: Text(
-                                              '...', 
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                      ),
-                                  ),
-                                ],
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ]
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height-(306+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+
+                                    Container(
+                                      margin: const EdgeInsets.only(bottom: 20),
+                                      child: GestureDetector(
+                                        behavior: HitTestBehavior.translucent, // Allow outer GestureDetector to receive the tap event
+                                        onTap: () async {
+                                          print("tap outer");
+                                          bool success = await signInWithGoogle(
+                                              context);
+                                          if (success) {
+                                            print("Success!!!!");
+                                            if (context.mounted) {
+                                              Navigator.pushNamed(context, "/home");
+                                            }
+                                          }
+                                        },
+                                        child: const IconButtonWidget(
+                                            message: 'GET STARTED WITH GOOGLE',
+                                            image: 'assets/images/google-logo.png',
+                                            imageSize: 25
+                                        ),
+                                      ),
+                                    ),
+
+
+                                    Platform.isIOS ? const IconButtonWidget(
+                                      message: 'GET STARTED WITH APPLE',
+                                      destination: '/home',
+                                      image: 'assets/images/apple-logo.png',
+                                      imageSize: 25,
+                                    ) : const SizedBox(height: 0,),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 212,
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      const TextSpan(
+                                        text: 'By continuing, you agree to our ',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFF000000),
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Terms and Conditions ',
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFF000000),
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                        recognizer: new TapGestureRecognizer()
+                                          ..onTap = () => showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return const AlertDialog(
+                                                  backgroundColor: Color(0xFFFFF3E9),
+                                                  title: Text(
+                                                    'Terms and Conditions',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  content: Text(
+                                                    '...',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                          ),
+                                      ),
+                                      const TextSpan(
+                                        text: 'and ',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFF000000),
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Privacy Policy',
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xFF000000),
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                        recognizer: new TapGestureRecognizer()
+                                          ..onTap = () => showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return const AlertDialog(
+                                                  backgroundColor: Color(0xFFFFF3E9),
+                                                  title: Text(
+                                                    'Privacy Policy',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  content: Text(
+                                                    '...',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                          ),
+                                      ),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ]
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ]
           ),
         ),
       ),

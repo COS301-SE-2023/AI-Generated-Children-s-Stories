@@ -7,6 +7,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:magic_pages/globals.dart';
+import 'package:http/http.dart' as http;
 
 /// This class represents the state of the inside story page.
 /// It keeps track of the current story index, the current message index, and whether the halfway message has been shown.
@@ -65,18 +66,33 @@ class InsideStoryState extends State<InsideStory> {
 }
    */
   Future<void> updatePageNumber(int pageNumber) async {
-    final url = Uri.parse("http://${Globals.ipAddress}/");
+    final url = Uri.parse("http://${Globals.ipAddress}/progress");
 
     List<String> idToken = await Globals.getIdAndToken();
 
-    final jsonString = "{'apiKey':'${idToken[1]}', 'progressData':'{'userId':'${idToken[0]}', 'storyId':'${widget.storyId}', 'pageNumber':'${storyIndex + 1}'}'}";
-    final data = jsonEncode(jsonString);
+    final jsonString = "{\"apiKey\":\"${idToken[1]}\", \"progressData\":{\"userId\":${idToken[0]}, \"storyId\":${widget.storyId}, \"pageNumber\":${storyIndex + 1}}}";
+    final data = jsonString;
 
     print("Sending data");
     print(data);
 
     //todo: make post request
-  }
+
+      http.Response response = await http.post(
+        url,
+        headers: {
+          'content-type': 'application/json; charset=utf-8'
+        },
+        body: data
+      );
+
+      if (response.statusCode == 200) {
+        print("Sent data: ");
+        print(response.body);
+      } else {
+        Globals.showSnackbarMessage("Error: ${response.body}", context);
+      }
+    }
 
 
   @override
@@ -103,6 +119,7 @@ class InsideStoryState extends State<InsideStory> {
         ),
       ));
     }
+    updatePageNumber(storyIndex + 1);
   }
 
   /// This function updates the story index and message index.
@@ -114,6 +131,7 @@ class InsideStoryState extends State<InsideStory> {
         storyIndex -= 1;
       });
     }
+    updatePageNumber(storyIndex + 1);
   }
 
   @override
