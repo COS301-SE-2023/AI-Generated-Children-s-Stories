@@ -11,8 +11,8 @@ public class StoryGeneration {
     PromptProcessor processPrompt;
     ImageGeneration imageGenerator;
     private String seed;
-    private String story;
-    private String charURL;
+    private String story,charURL, trailerURL,title;
+//    private String charURL;
 
     public StoryGeneration(APICalls inApiLibrary, String inSeed) throws URISyntaxException {
         callApi = inApiLibrary;
@@ -35,6 +35,23 @@ public class StoryGeneration {
     }
     public String getChar() {
         return charURL;
+    }
+
+
+    public void setTrailer(String trailer) {
+        trailerURL = trailer;
+        return;
+    }
+    public String getTrailer() {
+        return trailerURL;
+    }
+
+         public void setTitle(String name) {
+        title= name;
+        return;
+    }
+    public String getTitle() {
+        return title;
     }
 
     // Generate story text

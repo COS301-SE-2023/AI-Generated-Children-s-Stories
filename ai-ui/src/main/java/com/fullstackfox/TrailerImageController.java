@@ -14,9 +14,9 @@ Processors process = Processors.getInstance();
         StoryGeneration gen = process.getStoryGeneration();
 
         @FXML
-    private TextArea story = new TextArea(gen.getStory());
-       // @FXML
-      //  story.setText(gen.getStory());
+    private TextArea story;
+ 
+      
 
     @FXML
     private Pane image;
@@ -117,6 +117,7 @@ Processors process = Processors.getInstance();
 
        try {
         String url = gen.imageUpscale(lst ,"1");
+        gen.setTrailer(url);
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
                 imageView.setFitHeight(360); 
@@ -139,6 +140,7 @@ Processors process = Processors.getInstance();
 
        try {
         String url = gen.imageUpscale(lst ,"2");
+        gen.setTrailer(url);
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
                 imageView.setFitHeight(360); 
@@ -160,6 +162,7 @@ Processors process = Processors.getInstance();
 
        try {
         String url = gen.imageUpscale(lst ,"3");
+        gen.setTrailer(url);
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
                 imageView.setFitHeight(380); 
@@ -180,6 +183,7 @@ Processors process = Processors.getInstance();
 
        try {
         String url = gen.imageUpscale(lst ,"4");
+        gen.setTrailer(url);
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
                 imageView.setFitHeight(380); 
