@@ -27,7 +27,6 @@ public class App extends Application{
         Image iconImage = new Image(getClass().getResourceAsStream("/com/fullstackfox/resources/Icon.png"));
         stage.getIcons().add(iconImage);
         stage.setScene(scene);
-          Processors process = Processors.getInstance();
         stage.show();
     }
 

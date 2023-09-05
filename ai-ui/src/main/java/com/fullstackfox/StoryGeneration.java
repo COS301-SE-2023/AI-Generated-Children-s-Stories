@@ -10,8 +10,9 @@ public class StoryGeneration {
     APICalls callApi;
     PromptProcessor processPrompt;
     ImageGeneration imageGenerator;
-    String seed;
-    String story;
+    private String seed;
+    private String story;
+    private String charURL;
 
     public StoryGeneration(APICalls inApiLibrary, String inSeed) throws URISyntaxException {
         callApi = inApiLibrary;
@@ -24,6 +25,20 @@ public class StoryGeneration {
         story = finalStory;
         return;
     }
+    public String getStory() {
+        return story;
+    }
+
+     public void setChar(String character) {
+        charURL = character;
+        return;
+    }
+    public String getChar() {
+        return charURL;
+    }
+
+    
+
 
     // public Story generateStory(ArrayList<String> inputList) throws
     // URISyntaxException {
@@ -57,17 +72,23 @@ public class StoryGeneration {
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> characterImageCustom(String story, String prompt) throws URISyntaxException {
+    public ArrayList<String> characterImageCustom(String prompt) throws URISyntaxException {
         String characterPrompt = processPrompt.characterImagePrompt(prompt);
         ArrayList<String> characterImageDetails = imageGenerator.generateImages(characterPrompt);
         return characterImageDetails;
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> storyTrailer(String story, String inCharacterImageUrl) throws URISyntaxException {
+    public ArrayList<String> storyTrailerImage(String story, String inCharacterImageUrl) throws URISyntaxException {
         String currentPrompt = processPrompt.storyTrailerPrompt(story);
         String response = callApi.promptGPT(currentPrompt);
         String trailerPrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, this.extractContent(response));
+        ArrayList<String> trailerUrl = imageGenerator.generateImages(trailerPrompt);
+        return trailerUrl;
+    }
+
+    public ArrayList<String> storyTrailerImageCustom(String inCharacterImageUrl,String prompt) throws URISyntaxException {
+        String trailerPrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, prompt);
         ArrayList<String> trailerUrl = imageGenerator.generateImages(trailerPrompt);
         return trailerUrl;
     }
