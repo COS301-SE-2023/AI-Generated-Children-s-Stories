@@ -92,21 +92,23 @@ Processors process = Processors.getInstance();
     private void disable() throws IOException {
 
             regenButton.setDisable(true);
+
        
     }
     private void disableTillUpscale() throws IOException {
         acceptButton.setDisable(true);  
+         button1.setDisable(false);  
+        button2.setDisable(false);  
+        button3.setDisable(false);  
+        button4.setDisable(false); 
+        
+    }
+    private void upscaleEnable() throws IOException {
+        acceptButton.setDisable(false);  
         button1.setDisable(true);  
         button2.setDisable(true);  
         button3.setDisable(true);  
         button4.setDisable(true);  
-    }
-    private void upscaleEnable() throws IOException {
-        acceptButton.setDisable(false);  
-        button1.setDisable(false);  
-        button2.setDisable(false);  
-        button3.setDisable(false);  
-        button4.setDisable(false);  
     }
 
 
@@ -117,8 +119,8 @@ Processors process = Processors.getInstance();
         String url = gen.imageUpscale(lst ,"1");
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
                 this.upscaleEnable();
 
@@ -139,8 +141,8 @@ Processors process = Processors.getInstance();
         String url = gen.imageUpscale(lst ,"2");
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
                 this.upscaleEnable();
         } catch (URISyntaxException e) {

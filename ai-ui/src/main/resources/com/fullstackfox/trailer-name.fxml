@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.TrailerNameController">
     <children>
       <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
@@ -48,18 +47,18 @@
                      <font>
                         <Font name="Arial Bold" size="25.0" />
                      </font></Label>
-                  <TextArea prefHeight="344.0" prefWidth="327.0" style="-fx-border-color: #1e1e1e; -fx-border-width: 1;" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="7" />
+                  <TextArea editable="false" prefHeight="344.0" prefWidth="327.0" style="-fx-border-color: #1e1e1e; -fx-border-width: 1;" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="7" />
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <Button fx:id="secondaryButton1" layoutX="100.0" onAction="#switchToPage" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="secondaryButton1" disable="true" layoutX="100.0" onAction="#switchToPage" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
                         </Button>
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #e1e1e1; -fx-background-color: #0f4876;" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="4" />
-                  <Button fx:id="secondaryButton11" onAction="#switchToHome" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Regenerate Image" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Pane maxHeight="350.0" maxWidth="350.0" minHeight="350.0" minWidth="350.0" prefHeight="350.0" prefWidth="350.0" style="-fx-border-color: #e1e1e1; -fx-background-color: #0f4876;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.rowSpan="5" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER" />
+                  <Button fx:id="secondaryButton11" onAction="#switchToHome" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Name" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
@@ -69,7 +68,7 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Button>
-                  <TextField prefHeight="35.0" promptText="Story Name" style="-fx-border-color: #1e1e1e;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField editable="false" prefHeight="35.0" promptText="Story Name" style="-fx-border-color: #1e1e1e;" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>

@@ -37,11 +37,6 @@ public class StoryGeneration {
         return charURL;
     }
 
-    
-
-
-    // public Story generateStory(ArrayList<String> inputList) throws
-    // URISyntaxException {
     // Generate story text
     public String storyInput(ArrayList<String> inputList) {
         String currentPrompt = processPrompt.storyPrompt(inputList);

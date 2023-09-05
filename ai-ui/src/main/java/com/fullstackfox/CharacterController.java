@@ -62,10 +62,12 @@ Processors process = Processors.getInstance();
                 imageView.setFitWidth(380); 
                 image.getChildren().add(imageView);
                 this.disableTillUpscale();
+                regenButton.setDisable(false);
     }
 
     @FXML
     private void makeCharacter() throws IOException, URISyntaxException {
+        this.disableTillUpscale();
         story.setText(gen.getStory());
       
                 lst=gen.characterImage(gen.getStory());
@@ -76,7 +78,7 @@ Processors process = Processors.getInstance();
                 imageView.setFitWidth(380); 
                 image.getChildren().add(imageView);
         regenButton.setDisable(false);
-        this.disableTillUpscale();
+        
     }
 
     @FXML
@@ -86,17 +88,18 @@ Processors process = Processors.getInstance();
 
     private void disableTillUpscale() throws IOException {
         acceptButton.setDisable(true);  
+         button1.setDisable(false);  
+        button2.setDisable(false);  
+        button3.setDisable(false);  
+        button4.setDisable(false); 
+        
+    }
+    private void upscaleEnable() throws IOException {
+        acceptButton.setDisable(false);  
         button1.setDisable(true);  
         button2.setDisable(true);  
         button3.setDisable(true);  
         button4.setDisable(true);  
-    }
-    private void upscaleEnable() throws IOException {
-        acceptButton.setDisable(false);  
-        button1.setDisable(false);  
-        button2.setDisable(false);  
-        button3.setDisable(false);  
-        button4.setDisable(false);  
     }
 
 
