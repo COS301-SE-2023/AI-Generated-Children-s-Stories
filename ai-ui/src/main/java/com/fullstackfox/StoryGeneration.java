@@ -57,6 +57,13 @@ public class StoryGeneration {
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
+    public ArrayList<String> characterImageCustom(String story, String prompt) throws URISyntaxException {
+        String characterPrompt = processPrompt.characterImagePrompt(prompt);
+        ArrayList<String> characterImageDetails = imageGenerator.generateImages(characterPrompt);
+        return characterImageDetails;
+    }
+
+    // Index 0 = url | Index 1 = messageID (Only used for upscaling)
     public ArrayList<String> storyTrailer(String story, String inCharacterImageUrl) throws URISyntaxException {
         String currentPrompt = processPrompt.storyTrailerPrompt(story);
         String response = callApi.promptGPT(currentPrompt);

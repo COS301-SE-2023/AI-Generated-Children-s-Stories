@@ -11,9 +11,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class CharacterController {
+Processors process = Processors.getInstance();
+        StoryGeneration gen = process.getStoryGeneration();
 
         @FXML
-    private TextArea story;
+    private TextArea story = new TextArea(gen.story);
+       // @FXML
+      //  story.setText(gen.story);
+
     @FXML
     private Pane image;
     @FXML
@@ -29,28 +34,60 @@ public class CharacterController {
     }
 
     @FXML
-    private void makeCharacter() throws IOException {
+    private void customCharacter() throws IOException {
         regenButton.setDisable(true);
-        Processors process = Processors.getInstance();
-        StoryGeneration gen = process.getStoryGeneration();
-       // ArrayList<String> lst = gen.characterImage(gen.story);
-        story.setText(gen.story);
-        try {
-               lst = gen.characterImage(gen.story);
-               String url = lst.get(0);
+      //  Processors process = Processors.getInstance();
+      //  StoryGeneration gen = process.getStoryGeneration();
+       // story.setText(gen.story);
+        String prpt = prompt.getText();
+
+            if(!prpt.isEmpty()){
+               try {
+                lst = gen.characterImageCustom(gen.story, prpt);
+        } catch (URISyntaxException e) {
+                System.out.println("fail");
+                e.printStackTrace();
+        }
+        }
+                String url = lst.get(0);
                 Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
                 imageView.setFitHeight(380); 
                 imageView.setFitWidth(380); 
                 image.getChildren().add(imageView);
-                } catch (URISyntaxException e) {
-                System.out.println("Error in Character Generation");
-                e.printStackTrace();
-        }
+                
+       
+    }
+
+
+    @FXML
+    private void makeCharacter() throws IOException, URISyntaxException {
+       //  regenButton.setDisable(true);
+      //  Processors process = Processors.getInstance();
+      //  StoryGeneration gen = process.getStoryGeneration();
+        story.setText(gen.story);
+      
+                lst=gen.characterImage(gen.story);
+                String url = lst.get(0);
+                Image imageU = new Image(url); 
+                ImageView imageView = new ImageView(imageU);
+                imageView.setFitHeight(380); 
+                imageView.setFitWidth(380); 
+                image.getChildren().add(imageView);
+                
         regenButton.setDisable(false);
-        regenButton.setText("Regenerate Image");
+
+       
+       
            // App.setRoot("home");
         
+    }
+
+    @FXML
+    private void disable() throws IOException {
+
+            regenButton.setDisable(true);
+       
     }
 
     @FXML
@@ -63,8 +100,8 @@ public class CharacterController {
 
     @FXML
     private void upscale1() throws IOException {
-        Processors process = Processors.getInstance();
-        StoryGeneration gen = process.getStoryGeneration();
+      //  Processors process = Processors.getInstance();
+       // StoryGeneration gen = process.getStoryGeneration();
 
        try {
         String url = gen.imageUpscale(lst ,"1");
@@ -84,8 +121,8 @@ public class CharacterController {
         @FXML
     private void upscale2() throws IOException {
 
-        Processors process = Processors.getInstance();
-        StoryGeneration gen = process.getStoryGeneration();
+       // Processors process = Processors.getInstance();
+       // StoryGeneration gen = process.getStoryGeneration();
 
        try {
         String url = gen.imageUpscale(lst ,"2");
@@ -105,8 +142,8 @@ public class CharacterController {
         @FXML
     private void upscale3() throws IOException {
 
-        Processors process = Processors.getInstance();
-        StoryGeneration gen = process.getStoryGeneration();
+       // Processors process = Processors.getInstance();
+      //  StoryGeneration gen = process.getStoryGeneration();
 
        try {
         String url = gen.imageUpscale(lst ,"3");
@@ -125,8 +162,8 @@ public class CharacterController {
         @FXML
     private void upscale4() throws IOException {
 
-        Processors process = Processors.getInstance();
-        StoryGeneration gen = process.getStoryGeneration();
+      //  Processors process = Processors.getInstance();
+       // StoryGeneration gen = process.getStoryGeneration();
 
        try {
         String url = gen.imageUpscale(lst ,"4");
