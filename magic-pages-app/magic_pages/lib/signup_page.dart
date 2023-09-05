@@ -196,7 +196,6 @@ class SignupPage extends StatelessWidget {
                                       },
                                       child: const IconButtonWidget(
                                         message: 'GET STARTED WITH GOOGLE',
-                                        destination: 'invalid',
                                         image: 'assets/images/google-logo.png',
                                         imageSize: 25
                                       ),

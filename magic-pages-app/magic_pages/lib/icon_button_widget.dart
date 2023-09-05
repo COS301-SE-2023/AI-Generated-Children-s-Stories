@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class IconButtonWidget extends StatefulWidget {
   final String message;
-  final String destination;
+  final String? destination;
   final String image;
   final double imageSize;
 
   const IconButtonWidget( {
     super.key,
     required this.message,
-    required this.destination,
+    this.destination,
     required this.image,
     required this.imageSize
   });
@@ -29,7 +29,9 @@ class _IconButtonWidget extends State<IconButtonWidget> {
         setState(() {
           isPressed = false;
         });
-        Navigator.pushNamed(context, widget.destination);
+        if (widget.destination != null) {
+          Navigator.pushNamed(context, widget.destination!);
+        }
       },
       onTapDown: (val){
         setState(() {
