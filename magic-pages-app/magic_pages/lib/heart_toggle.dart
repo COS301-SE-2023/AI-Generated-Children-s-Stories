@@ -6,7 +6,7 @@ class HeartToggle extends StatefulWidget {
   bool isLiked;
   int id;
 
-  HeartToggle({required this.isLiked, required this.id});
+  HeartToggle({super.key, required this.isLiked, required this.id});
 
   @override
   State<StatefulWidget> createState() => _HeartToggleWidget();
