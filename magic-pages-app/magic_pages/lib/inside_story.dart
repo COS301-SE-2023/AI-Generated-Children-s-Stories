@@ -66,10 +66,6 @@ class InsideStoryState extends State<InsideStory> {
 }
    */
 
-  Future<void> deleteProgress() async {
-
-  }
-
   Future<void> updatePageNumber(int pageNumber) async {
     final url = Uri.parse("http://${Globals.ipAddress}/progress");
 
@@ -119,11 +115,14 @@ class InsideStoryState extends State<InsideStory> {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => EndOfStory(
           storyId: widget.storyId,
-          pages: widget.pages
+          pages: widget.pages,
+          isLiked: widget.isLiked
         ),
       ));
     }
-    updatePageNumber(storyIndex + 1);
+
+    if (storyIndex < widget.pages.length && storyIndex >= 0)
+      updatePageNumber(storyIndex + 1);
   }
 
   /// This function updates the story index and message index.

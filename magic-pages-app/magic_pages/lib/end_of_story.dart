@@ -3,18 +3,23 @@ import 'package:magic_pages/story_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'Wave_Widget.dart';
+import 'globals.dart';
 import 'heart_animation_widget.dart';
+import 'heart_toggle.dart';
 import 'inside_story.dart';
 import 'navbar.dart';
+import 'package:http/http.dart' as http;
 
 class EndOfStory extends StatefulWidget {
   final int storyId;
   final List<StoryPage> pages;
+  final bool isLiked;
 
   const EndOfStory({
     super.key,
     required this.storyId,
-    required this.pages
+    required this.pages,
+    required this.isLiked
   });
 
   @override
@@ -23,10 +28,41 @@ class EndOfStory extends StatefulWidget {
 
 class _EndOfStoryState extends State<EndOfStory> {
   bool isHeartAnimating = false;
-  bool isLiked = false;
+  late bool isLiked = widget.isLiked;
   bool isHomePressed = false;
   bool isAgainPressed = false;
   late double screenHeight = MediaQuery.of(context).size.height;
+
+  Future<void> deleteProgress() async {
+    final url = Uri.parse("http://${Globals.ipAddress}/deleteProgress");
+
+    List<String> idToken = await Globals.getIdAndToken();
+
+    //{"apiKey":"aac7c266-aa4c-49c2-80d4-7f7e54c688a4", "userId":2, "storyId":5, "pageNumber":2}
+    final jsonString = "{\"apiKey\":\"${idToken[1]}\", \"userId\":${idToken[0]}, \"storyId\":${widget.storyId}, \"pageNumber\":0}}";
+    final data = jsonString;
+
+    http.Response response = await http.delete(
+        url,
+        headers: {
+          'content-type': 'application/json; charset=utf-8'
+        },
+        body: data
+    );
+
+    if (response.statusCode == 200) {
+      print("Sent data: ");
+      print(response.body);
+    } else {
+      Globals.showSnackbarMessage("Error: ${response.body}", context);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    deleteProgress();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +96,7 @@ class _EndOfStoryState extends State<EndOfStory> {
                             ),
                           ),
                         ),
-                        HeartToggle(),
+                        HeartToggle(id: widget.storyId, isLiked: widget.isLiked,),
                       ],
                     ),
                   ),
@@ -196,34 +232,6 @@ class _EndOfStoryState extends State<EndOfStory> {
         ),
       ),
       bottomNavigationBar: const NavbarWidget(active: 3),
-    );
-  }
-
-  Widget HeartToggle() {
-    Image image;
-    if (isLiked == true) {
-      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 50);
-    } else {
-      image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 50);
-    }
-
-    return HeartAnimationWidget(
-      alwaysAnimate: true,
-      isAnimating: isLiked,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              isLiked = !isLiked;
-              if (isLiked == true) {
-                isHeartAnimating = true;
-              }
-            });
-          },
-          child: image,
-        ),
-      ),
     );
   }
 }
