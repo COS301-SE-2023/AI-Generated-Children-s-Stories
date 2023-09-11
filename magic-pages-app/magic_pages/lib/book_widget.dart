@@ -34,6 +34,8 @@ class _BookWidget extends State<BookWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+
+        //initially calls push to add to the route
         Navigator.push(context, MaterialPageRoute(
           builder: (context) => TrailerPage(
             title: widget.title,
@@ -43,10 +45,15 @@ class _BookWidget extends State<BookWidget> {
             totalPages: widget.totalPages,
             isLiked: widget.isLiked
           ),
-        )).then((value) => {
+        ))
+
+          //when context is popped, this function is called
+          //when you press back button
+            .then((value) => {
           if (widget.updateBookItems != null) {
             widget.updateBookItems?.call(context)
           }
+
         });
       },
       child: Column(

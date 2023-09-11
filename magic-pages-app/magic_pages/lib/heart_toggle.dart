@@ -14,45 +14,32 @@ class HeartToggle extends StatefulWidget {
 
 class _HeartToggleWidget extends State<HeartToggle> {
   bool isHeartAnimating = false;
-  Image image =
-  const Image(image: AssetImage('assets/images/heart.png'), width: 32);
+  late Image image = widget.isLiked ? const Image(image: AssetImage('assets/images/heart.png'), width: 32) : const Image(image: AssetImage('assets/images/heart-outline.png'), width: 32);
 
   void likeUnlike() async {
     widget.isLiked = !widget.isLiked;
-    if (widget.isLiked == true) {
-      image = const Image(
-          image: AssetImage('assets/images/heart-outline.png'),
-          width: 32);
-      isHeartAnimating = true;
-    } else {
-      image = const Image(
-          image: AssetImage('assets/images/heart.png'), width: 32);
-    }
+    ToggleHeart();
     bool success = await Globals.likeStory(widget.isLiked, widget.id, context);
 
     //failed, revert the changes
     if (!success) {
-      if (widget.isLiked) {
-        image =
-        const Image(image: AssetImage('assets/images/heart.png'), width: 32);
-      } else {
-        image =
-        const Image(image: AssetImage('assets/images/heart.png'), width: 32);
-      }
       widget.isLiked = !widget.isLiked;
-      setState(() {});
+      ToggleHeart();
     }
+  }
 
-    //call the global variables file
-    setState(() {
-      widget.isLiked = !widget.isLiked;
-      if (widget.isLiked == true) {
-        Globals.likeStory(true, widget.id, context);
-        isHeartAnimating = true;
-      } else {
-        Globals.likeStory(false, widget.id, context);
-      }
-    });
+  void ToggleHeart() {
+    print(widget.isLiked);
+    if (widget.isLiked == true) {
+      image = const Image(
+          image: AssetImage('assets/images/heart.png'),
+          width: 32);
+      isHeartAnimating = true;
+    } else {
+      image = const Image(
+          image: AssetImage('assets/images/heart-outline.png'), width: 32);
+    }
+    setState(() {});
   }
 
   @override
@@ -61,7 +48,7 @@ class _HeartToggleWidget extends State<HeartToggle> {
         alwaysAnimate: true,
         isAnimating: widget.isLiked,
         child: Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.only(top: 0, left: 8, right: 8),
             child: GestureDetector(
                 onTap: () {
                   likeUnlike();

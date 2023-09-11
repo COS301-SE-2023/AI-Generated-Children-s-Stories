@@ -193,13 +193,14 @@ class SignupPage extends StatelessWidget {
                                         behavior: HitTestBehavior.translucent, // Allow outer GestureDetector to receive the tap event
                                         onTap: () async {
                                           print("tap outer");
-                                          bool success = await signInWithGoogle(
-                                              context);
+                                          bool success = await signInWithGoogle(context);
                                           if (success) {
                                             print("Success!!!!");
                                             if (context.mounted) {
                                               Navigator.pushNamed(context, "/home");
                                             }
+                                          } else {
+                                            print("failed....");
                                           }
                                         },
                                         child: const IconButtonWidget(

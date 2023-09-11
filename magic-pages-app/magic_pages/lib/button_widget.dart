@@ -15,6 +15,7 @@ class ButtonWidget extends StatefulWidget {
   final List<StoryPage>? pages;
   final int? currentPage;
   final bool? isLiked;
+  final void Function(BuildContext)? updateBookItems;
 
   //for story...
 
@@ -26,7 +27,8 @@ class ButtonWidget extends StatefulWidget {
     this.storyId,
     this.pages,
     this.currentPage,
-    this.isLiked
+    this.isLiked,
+    this.updateBookItems
   });
 
   @override
@@ -49,12 +51,10 @@ class _ButtonWidget extends State<ButtonWidget> {
           isPressed = false;
         });
 
-        print(widget.storyId);
-        print(widget.currentPage);
-        print(widget.pages);
-
         widget.storyId == null
+            //push a normal string route
             ? Navigator.pushNamed(context, widget.destination ?? widget.destination!)
+            //push a book widget
             : Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -65,7 +65,15 @@ class _ButtonWidget extends State<ButtonWidget> {
                         pages: widget.pages!,
                         isLiked: widget.isLiked!,
                       )
-                ));
+                ))
+
+            //when you navigate back, call the update book items function
+            //to get a list of updated books
+            //used for if you like the story
+            .then((value) => {
+                  if (widget.updateBookItems != null)
+                    widget.updateBookItems!.call(context)
+              });
       },
       onTapDown: (val) {
         setState(() {

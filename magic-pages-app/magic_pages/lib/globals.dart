@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class Globals {
   //make sure you copy ipv4 wireless lan
-  static String ipAddress = "192.168.1.90:8080";
+  static String ipAddress = "192.168.68.112:8080";
 
   static void showSnackbarMessage(String message, context) {
     var mySnackbar = SnackBar(content: Text(message));

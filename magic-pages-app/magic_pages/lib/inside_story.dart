@@ -65,12 +65,18 @@ class InsideStoryState extends State<InsideStory> {
     }
 }
    */
+
+  Future<void> deleteProgress() async {
+
+  }
+
   Future<void> updatePageNumber(int pageNumber) async {
     final url = Uri.parse("http://${Globals.ipAddress}/progress");
 
     List<String> idToken = await Globals.getIdAndToken();
 
-    final jsonString = "{\"apiKey\":\"${idToken[1]}\", \"progressData\":{\"userId\":${idToken[0]}, \"storyId\":${widget.storyId}, \"pageNumber\":${storyIndex + 1}}}";
+    //{"apiKey":"aac7c266-aa4c-49c2-80d4-7f7e54c688a4", "userId":2, "storyId":5, "pageNumber":2}
+    final jsonString = "{\"apiKey\":\"${idToken[1]}\", \"userId\":${idToken[0]}, \"storyId\":${widget.storyId}, \"pageNumber\":${storyIndex + 1}}";
     final data = jsonString;
 
     print("Sending data");
@@ -98,9 +104,7 @@ class InsideStoryState extends State<InsideStory> {
   @override
   void initState() {
     super.initState();
-    print("Inside story...");
-    print("Sending request to database with page number = 1");
-    updatePageNumber(1);
+    print(widget.isLiked);
   }
 
   /// This function updates the story index and message index.
@@ -148,7 +152,7 @@ class InsideStoryState extends State<InsideStory> {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(left: 16),
-                      child: HeartToggle(isLiked: isLiked, id: widget.storyId)
+                      child: HeartToggle(isLiked: widget.isLiked, id: widget.storyId)
                   ),
                   Row(
                     children: [

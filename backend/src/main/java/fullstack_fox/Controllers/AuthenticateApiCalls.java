@@ -23,10 +23,7 @@ public class AuthenticateApiCalls {
 
         if (u.isPresent()) {
             User user = u.get();
-            if (user.getApiToken().equals(apiToken)) {
-                return true;
-            }
-            return false;
+            return user.getApiToken().equals(apiToken);
         }
         throw new NoSuchElementException("No user found with id " + userId);
     }

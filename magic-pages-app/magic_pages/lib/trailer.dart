@@ -6,7 +6,7 @@ import 'package:magic_pages/story_page.dart';
 import 'Wave_Widget.dart';
 import 'button_widget.dart';
 import 'get_stories_service.dart';
-import 'heart_animation_widget.dart';
+import 'heart_toggle.dart';
 import 'navbar.dart';
 import 'globals.dart';
 
@@ -61,6 +61,8 @@ class _TrailerPageState extends State<TrailerPage> {
   void initState() {
     super.initState();
     fetchPages();
+    print("isliked: " );
+    print(widget.isLiked);
   }
 
   @override
@@ -140,7 +142,7 @@ class _TrailerPageState extends State<TrailerPage> {
                                           ],
                                         ),
                                         Container(
-                                            child: HeartToggle()
+                                            child: HeartToggle(id: widget.id, isLiked: widget.isLiked)
                                         ),
                                       ],
                                     ),
@@ -211,36 +213,7 @@ class _TrailerPageState extends State<TrailerPage> {
     }
   }
 
-  Widget HeartToggle() {
-    Image image;
-    if (widget.isLiked == true) {
-      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 30);
-    } else {
-      image =  const Image(image: AssetImage('assets/images/heart-outline.png'), width: 30);
-    }
-
-    return HeartAnimationWidget(
-      alwaysAnimate: true,
-      isAnimating: isLiked,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              isLiked = !isLiked;
-              if (isLiked == true) {
-                Globals.likeStory(true, widget.id, context);
-                isHeartAnimating = true;
-              } else {
-                Globals.likeStory(false, widget.id, context);
-              }
-            });
-          },
-          child: image,
-        ),
-      ),
-    );
-  }
 }
+
 
 

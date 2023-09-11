@@ -31,19 +31,15 @@ public class ProgressController {
     @Autowired
     StoryRepository storyRepository;
 
+
     @PostMapping(path = "/progress")
-    public ResponseEntity<Progress> createProgress(@RequestBody Map<String, Object> requestBody) {
-
-        String apiKey = (String) requestBody.get("apiKey");
-
-        // Extract progress data
-        ObjectMapper objectMapper = new ObjectMapper();
-        PostProgressDTO postProgress = objectMapper.convertValue(requestBody.get("progressData"), PostProgressDTO.class);
+    public ResponseEntity<Progress> createProgress(@RequestBody PostProgressDTO postProgress) {
 
         AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
-
-        if (authenticateApiCalls.authenticateApiKey(postProgress.getUserId(), apiKey))
+        if (!authenticateApiCalls.authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
+            System.out.println("Unauthorised");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
 
         // Get the user and story from the provided IDs in the DTO
         Optional<User> optionalUser = userRepository.findById(postProgress.getUserId());
@@ -111,12 +107,15 @@ public class ProgressController {
     }
 
     @DeleteMapping(path = "/deleteProgress")
-    public ResponseEntity<String> deleteProgress(@RequestParam Long storyId, @RequestParam Long userId,
-                                                 @RequestParam String apiKey) {
+    public ResponseEntity<String> deleteProgress(@RequestBody PostProgressDTO postProgress) {
 
-        //todo: authenticate api key...
+        AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
+        if (!authenticateApiCalls.authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
+            System.out.println("Unauthorised");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
 
-        Progress progressToDelete = progressRepository.findByUser_IdAndStory_Id(userId, storyId);
+        Progress progressToDelete = progressRepository.findByUser_IdAndStory_Id(postProgress.getUserId(), postProgress.getStoryId());
 
         if (progressToDelete != null) {
             progressRepository.delete(progressToDelete);
