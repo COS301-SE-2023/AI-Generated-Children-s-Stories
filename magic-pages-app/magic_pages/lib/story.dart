@@ -14,6 +14,7 @@ class Story {
   int index = 0;
   final int id;
   bool isLiked = false;
+  final int totalPages;
 
   Story(
       {required this.title,
@@ -22,42 +23,9 @@ class Story {
       required this.imageContent,
       required this.textContent,
       required this.id, 
-      required this.isLiked});
+      required this.isLiked,
+      required this.totalPages});
 
-  /// get the liked status of the story
-  /// @return the like status
-  bool getIsLiked() {
-    return isLiked;
-  }
-
-  /// set the like status of the story
-  void setIsLiked(bool likeStatus) {
-    isLiked = likeStatus;
-  }
-
-  /// get the id of the story
-  /// @return the id of the story
-  int getId() {
-    return id;
-  }
-
-  /// get the title of the story
-  /// @return the title of the story
-  String getTitle() {
-    return title;
-  }
-
-  /// get the cover url of the story
-  /// @return the cover url of the story
-  String getCoverUrl() {
-    return trailer;
-  }
-
-  /// get the text content of the story
-  /// @return the text content of the story
-  List<String> getTextContent() {
-    return textContent;
-  }
 
   void setTextContent(List<String> textContent) {
     this.textContent = textContent;
@@ -71,12 +39,6 @@ class Story {
 
   void setImageContent(List<String> imageContent) {
     this.imageContent = imageContent;
-  }
-
-  /// get the current page of the story
-  /// @return the current page of the story
-  int getCurrentPage() {
-    return currentPage;
   }
 
   /// get the next page

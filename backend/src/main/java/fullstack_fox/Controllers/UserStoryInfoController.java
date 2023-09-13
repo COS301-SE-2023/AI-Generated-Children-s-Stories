@@ -49,6 +49,8 @@ public class UserStoryInfoController {
     //for library page
     @GetMapping("/library/{userId}")
     public List<UserStoryInfoDTO> getEntriesByUserId(@PathVariable Long userId) {
+
+        //stories being read
         List<UserStoryInfoDTO> storiesForUser = userStoryInfoService.findByUserId(userId);
 
         List<Story> allOtherStories = storyService.findWhereNotReading(userId);
@@ -115,27 +117,16 @@ public class UserStoryInfoController {
 
     @GetMapping("/userStoryInfo/random/{userId}")
     private List<UserStoryInfoDTO> getRandomBook(@PathVariable Long userId) {
-        List<Story> allBooks =  storyRepository.findAll();
 
-        List<UserStoryInfoDTO> currentList = new ArrayList<>();
+        List<UserStoryInfoDTO> storiesForUser = userStoryInfoService.findByUserId(userId);
 
-        if (allBooks.isEmpty()) {
-            throw new NoSuchElementException("Empty books");
-        }
+        List<UserStoryInfoDTO> randomList = new ArrayList<>();
 
-        //get random index
         Random random = new Random();
-        Story randomStory = allBooks.get(random.nextInt(allBooks.size()));
+        UserStoryInfoDTO randomUserStory = storiesForUser.get(random.nextInt(storiesForUser.size()));
+        randomList.add(randomUserStory);
 
-        Optional<User> optionalUser = userRepository.findById(userId);
-        User u = null;
-        if (optionalUser.isPresent()){
-            u = optionalUser.get();
-        }
-
-        currentList.add(convertToUserStoryInfoDTO(randomStory, u.getId(), 0));
-
-        return currentList;
+        return randomList;
 
     }
 

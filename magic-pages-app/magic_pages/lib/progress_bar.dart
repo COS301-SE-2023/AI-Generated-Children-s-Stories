@@ -40,9 +40,9 @@ class _ProgressBarState extends State<ProgressBar> {
           animation: true,
           lineHeight: 35.0,
           animationDuration: 1000,
-          percent: widget.currentPage / widget.totalPages,
+          percent: (widget.currentPage)/ widget.totalPages,
           center: Text(
-            '${(widget.currentPage / widget.totalPages * 100).round()}%',
+            '${((widget.currentPage)/ widget.totalPages * 100).round()}%',
             textAlign: TextAlign.center,
             style: const TextStyle(
                 color: Color(0xFF542209),

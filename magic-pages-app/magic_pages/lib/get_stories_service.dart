@@ -44,7 +44,8 @@ class GetStoriesService {
               imageContent:[],
               currentPage: story['pageNo'],
               id: story['storyId'],
-              isLiked: story['liked']
+              isLiked: story['liked'],
+              totalPages: story['totalPages']
           );
           stories.add(newStory);
         }
@@ -112,7 +113,7 @@ class GetStoriesService {
 
         for (var userStoryInfoEntity in data) {
           //create a book
-          print(userStoryInfoEntity);
+          print(userStoryInfoEntity['totalPages']);
 
           Story story = Story(
               title: userStoryInfoEntity['title'],
@@ -121,7 +122,8 @@ class GetStoriesService {
               imageContent: [""],
               currentPage: userStoryInfoEntity['pageNo'],
               id: userStoryInfoEntity['storyId'],
-              isLiked: userStoryInfoEntity['liked']
+              isLiked: userStoryInfoEntity['liked'],
+              totalPages: userStoryInfoEntity['totalPages']
           );
           stories.add(story);
         }

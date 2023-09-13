@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
       imagePath: story.trailer,
       id: story.id,
       currentPage: story.currentPage,
-      totalPages: story.textContent.length,
+      totalPages: story.totalPages,
       isLiked: story.isLiked
     );
   }
