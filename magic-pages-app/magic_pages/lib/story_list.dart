@@ -44,6 +44,7 @@ class _StoryListState extends State<StoryList> {
   /// it uses the story list change notifier to fetch the list of stories
   /// @return void
   void getStories(BuildContext context) async {
+    print("getting stories");
     await _storyListChangeNotifier.fetchAllStories(context);
     setState(() {
       _stories = _storyListChangeNotifier.stories;
@@ -185,6 +186,7 @@ class _StoryListState extends State<StoryList> {
             currentPage: story1.getCurrentPage(),
             totalPages: story1.getTextContent().length,
             isLiked: story1.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
         Container(
@@ -197,6 +199,7 @@ class _StoryListState extends State<StoryList> {
             currentPage: story2.getCurrentPage(),
             totalPages: story2.getTextContent().length,
             isLiked: story2.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
       ]
@@ -216,6 +219,7 @@ class _StoryListState extends State<StoryList> {
             currentPage: story1.getCurrentPage(),
             totalPages: story1.getTextContent().length,
             isLiked: story1.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
         Container(
@@ -228,6 +232,7 @@ class _StoryListState extends State<StoryList> {
             currentPage: story2.getCurrentPage(),
             totalPages: story2.getTextContent().length,
             isLiked: story2.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
       ]
@@ -246,6 +251,7 @@ class _StoryListState extends State<StoryList> {
             currentPage: story1.getCurrentPage(),
             totalPages: story1.getTextContent().length,
             isLiked: story1.getIsLiked(),
+            updateBookItems: getStories,
           ),
         ),
         Container(

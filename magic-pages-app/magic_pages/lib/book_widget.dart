@@ -10,7 +10,7 @@ class BookWidget extends StatefulWidget {
   final int currentPage;
   final int totalPages;
   bool isLiked;
-  void Function(BuildContext)? updateBookItems;
+  void Function(BuildContext) updateBookItems;
 
   // ignore: use_key_in_widget_constructors
   BookWidget( {
@@ -20,7 +20,7 @@ class BookWidget extends StatefulWidget {
     required this.currentPage,
     required this.totalPages,
     required this.isLiked,
-    this.updateBookItems
+    required this.updateBookItems
   });
 
   @override
@@ -49,11 +49,8 @@ class _BookWidget extends State<BookWidget> {
 
           //when context is popped, this function is called
           //when you press back button
-            .then((value) => {
-          if (widget.updateBookItems != null) {
-            widget.updateBookItems?.call(context)
-          }
-
+        .then((value) => {
+          widget.updateBookItems.call(context)
         });
       },
       child: Column(

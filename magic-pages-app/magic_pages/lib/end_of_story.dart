@@ -4,7 +4,6 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'wave_widget.dart';
 import 'globals.dart';
-import 'heart_animation_widget.dart';
 import 'heart_toggle.dart';
 import 'inside_story.dart';
 import 'navbar.dart';
@@ -14,12 +13,14 @@ class EndOfStory extends StatefulWidget {
   final int storyId;
   final List<StoryPage> pages;
   final bool isLiked;
+  final void Function(int) updatePage;
 
   const EndOfStory({
     super.key,
     required this.storyId,
     required this.pages,
-    required this.isLiked
+    required this.isLiked,
+    required this.updatePage
   });
 
   @override
@@ -110,12 +111,15 @@ class _EndOfStoryState extends State<EndOfStory> {
                         setState(() {
                           isAgainPressed = false;
                         });
-                        Navigator.push(context, MaterialPageRoute(
+                        widget.updatePage(1);
+                        Navigator.pop(context);
+                        Navigator.pushReplacement(context, MaterialPageRoute(
                           builder: (context) => InsideStory(
                             storyId: widget.storyId,
                             currentPage: 0,
                             pages: widget.pages,
-                            isLiked: isLiked
+                            isLiked: isLiked,
+                            updatePage: widget.updatePage
                           ),
                         ));
                       },

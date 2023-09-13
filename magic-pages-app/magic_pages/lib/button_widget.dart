@@ -16,6 +16,7 @@ class ButtonWidget extends StatefulWidget {
   final int? currentPage;
   final bool? isLiked;
   final void Function(BuildContext)? updateBookItems;
+  final void Function(int)? updatePage;
 
   //for story...
 
@@ -28,7 +29,8 @@ class ButtonWidget extends StatefulWidget {
     this.pages,
     this.currentPage,
     this.isLiked,
-    this.updateBookItems
+    this.updateBookItems,
+    this.updatePage
   });
 
   @override
@@ -64,6 +66,7 @@ class _ButtonWidget extends State<ButtonWidget> {
                         currentPage: widget.currentPage!,
                         pages: widget.pages!,
                         isLiked: widget.isLiked!,
+                        updatePage: widget.updatePage!,
                       )
                 ))
 

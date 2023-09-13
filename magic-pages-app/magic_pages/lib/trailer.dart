@@ -8,7 +8,6 @@ import 'button_widget.dart';
 import 'get_stories_service.dart';
 import 'heart_toggle.dart';
 import 'navbar.dart';
-import 'globals.dart';
 
 /// This class represents...
 
@@ -39,10 +38,18 @@ class _TrailerPageState extends State<TrailerPage> {
   bool isPressed = false;
   List<StoryPage> pages = [];
   late bool isLiked = widget.isLiked;
+  late int currentPage = widget.currentPage;
 
   //change notifier
   final InsideStoryChangeNotifier _insideStoryChangeNotifier =
   InsideStoryChangeNotifier(GetStoriesService());
+
+  void updatePage(int newPage) {
+    print("updating page on trailer to ${newPage}");
+    setState(() {
+      currentPage = newPage;
+    });
+  }
 
   void loadImages() async {
     for (StoryPage page in pages) {
@@ -61,8 +68,6 @@ class _TrailerPageState extends State<TrailerPage> {
   void initState() {
     super.initState();
     fetchPages();
-    print("isliked: " );
-    print(widget.isLiked);
   }
 
   @override
@@ -206,9 +211,10 @@ class _TrailerPageState extends State<TrailerPage> {
         message: 'READ NOW',
         destination: '/insideStory',
         storyId: widget.id,
-        currentPage: widget.currentPage,
+        currentPage: currentPage,
         pages: pages,
-        isLiked: widget.isLiked
+        isLiked: isLiked,
+        updatePage: updatePage,
       );
     }
   }
