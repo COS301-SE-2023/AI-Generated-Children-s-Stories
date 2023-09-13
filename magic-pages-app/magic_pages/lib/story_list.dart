@@ -1,4 +1,4 @@
-import 'Wave_Widget.dart';
+import 'wave_widget.dart';
 import 'story.dart';
 import 'package:flutter/material.dart';
 import 'navbar.dart';

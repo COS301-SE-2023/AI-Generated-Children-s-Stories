@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:magic_pages/story_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import 'Wave_Widget.dart';
+import 'wave_widget.dart';
 import 'globals.dart';
 import 'heart_animation_widget.dart';
 import 'heart_toggle.dart';

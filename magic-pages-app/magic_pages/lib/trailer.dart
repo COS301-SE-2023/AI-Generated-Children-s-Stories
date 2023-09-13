@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
 import 'package:magic_pages/story_page.dart';
 
-import 'Wave_Widget.dart';
+import 'wave_widget.dart';
 import 'button_widget.dart';
 import 'get_stories_service.dart';
 import 'heart_toggle.dart';

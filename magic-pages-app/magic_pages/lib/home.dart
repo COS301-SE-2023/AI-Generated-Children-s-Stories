@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_pages/Wave_Widget.dart';
+import 'package:magic_pages/wave_widget.dart';
 
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:wave/config.dart';
