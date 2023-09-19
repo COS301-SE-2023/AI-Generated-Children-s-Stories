@@ -25,12 +25,12 @@ public class LikedController {
     @Autowired
     StoryRepository storyRepository;
 
-    //Like a story
+    // Authenticated
+    // Like a story
     @PostMapping("/liked/stories")
     public ResponseEntity<String> likeStory(@RequestParam Long userId, @RequestParam Long storyId, @RequestParam String apiKey) {
 
-        AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
-        if (!authenticateApiCalls.authenticateApiKey(userId, apiKey)) {
+        if (!new AuthenticateApiCalls(userRepository).authenticateApiKey(userId, apiKey)) {
             System.out.println("Unauthorised");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
@@ -46,6 +46,7 @@ public class LikedController {
         // Check if the story is already liked by the user
         boolean isLiked = likedRepository.existsByUserAndStory(user, story);
         if (isLiked) {
+            System.out.println("Story already liked by user");
             return ResponseEntity.badRequest().body("Story is already liked by the user.");
         }
 
@@ -59,7 +60,8 @@ public class LikedController {
         return ResponseEntity.ok("Story added to the liked page.");
     }
 
-    //Unlike a story
+    // Authenticated
+    // Unlike a story
     @DeleteMapping("/liked/stories")
     public ResponseEntity<String> deleteStoryFromLikedPage(@RequestParam Long userId, @RequestParam Long storyId, @RequestParam String apiKey) {
 

@@ -35,8 +35,7 @@ public class ProgressController {
     @PostMapping(path = "/progress")
     public ResponseEntity<Progress> createProgress(@RequestBody PostProgressDTO postProgress) {
 
-        AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
-        if (!authenticateApiCalls.authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
+        if (!new AuthenticateApiCalls(userRepository).authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
             System.out.println("Unauthorised");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
@@ -69,8 +68,7 @@ public class ProgressController {
     @DeleteMapping(path = "/deleteProgress")
     public ResponseEntity<String> deleteProgress(@RequestBody PostProgressDTO postProgress) {
 
-        AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
-        if (!authenticateApiCalls.authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
+        if (!new AuthenticateApiCalls(userRepository).authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
             System.out.println("Unauthorised");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
@@ -85,74 +83,4 @@ public class ProgressController {
         }
     }
 
-//converts a progress object to a DTO
-//    public PostProgressDTO convertToProgressDTO(Progress progress) {
-//        return new PostProgressDTO(progress);
-//    }
-    
-//    public PostProgressDTO getRandomBook(Long userId) {
-//        Iterable<Story> allBooks = storyRepository.findAll();
-//        List<PostProgressDTO> progressLikedDTOList = new ArrayList<>();
-//
-//        Optional<User> currentUser = userRepository.findById(userId);
-//        User myUser = null;
-//        if (currentUser.isPresent()){
-//            myUser = currentUser.get();
-//        } else {
-//            throw new NoSuchElementException("No user found");
-//        }
-//
-//        for (Story story : allBooks) {
-//            Optional<Progress> progress = progressRepository.findByUserAndStory(myUser, story);
-//            if (progress.isPresent()) {
-//                Progress p = progress.get();
-//                progressLikedDTOList.add(convertToProgressDTO(p));
-//            }
-//        }
-//
-//        if (progressLikedDTOList.size() != 0) {
-//            Random random = new Random();
-//            return progressLikedDTOList.get(random.nextInt(progressLikedDTOList.size()));
-//        }
-//
-//        // If no available books, return a random book from allBooks
-//        List<Story> allBooksList = StreamSupport.stream(allBooks.spliterator(), false)
-//                .collect(Collectors.toList());
-//        Random random = new Random();
-//        Story randomStory = allBooksList.get(random.nextInt(allBooksList.size()));
-//
-//        //convert to progress DTO
-//        Progress progress = new Progress(myUser, randomStory, 0);
-//        return new PostProgressDTO(progress);
-//    }
-
-//    @PostMapping(path = "/createProgress")
-//    public ResponseEntity<String> postProgress(@RequestBody PostProgressDTO progress) {
-//        if (progress.getUserId() == null || progress.getStoryId() == null) {
-//            return ResponseEntity.badRequest().body("User ID or Story ID cannot be null.");
-//        }
-//
-//        Progress progressToUpdate = progressRepository.findByUser_IdAndStory_Id(progress.getUserId(), progress.getStoryId());
-//
-//        if (progressToUpdate != null) { //update
-//            progressToUpdate.setPageNumber(progress.getPageNumber());
-//            progressRepository.save(progressToUpdate);
-//            return ResponseEntity.ok("Progress updated.");
-//        } else { //update
-//            Optional<User> userToPostOptional = userRepository.findById(progress.getUserId());
-//            Optional<Story> storyToPostOptional = storyRepository.findById(progress.getStoryId());
-//            User userToPost = null;
-//            Story storyToPost = null;
-//            if (userToPostOptional.isPresent() && storyToPostOptional.isPresent()) {
-//                userToPost = userToPostOptional.get();
-//                storyToPost = storyToPostOptional.get();
-//
-//                Progress newProgress = new Progress(userToPost, storyToPost, progress.getPageNumber());
-//                progressRepository.save(newProgress);
-//                return ResponseEntity.ok("Progress created.");
-//            }
-//            return ResponseEntity.badRequest().body("User or story is not present: " + userToPostOptional.isPresent() + ", " + storyToPostOptional.isPresent());
-//        }
-//
-//    }
 }

@@ -17,6 +17,7 @@ public class PagesController {
 
     @Autowired
     PageRepository pageRepository;
+
     @GetMapping("/pages/{storyId}")
     public List<PagesDTO> getPages(@PathVariable Long storyId) {
         Optional<List<Page>> optionalProgress = pageRepository.findPagesByStoryId(storyId);

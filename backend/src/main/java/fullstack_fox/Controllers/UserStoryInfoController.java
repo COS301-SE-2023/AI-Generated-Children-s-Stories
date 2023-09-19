@@ -35,7 +35,6 @@ public class UserStoryInfoController {
     @Autowired
     ProgressRepository progressRepository;
 
-
     private final UserStoryInfoService userStoryInfoService;
 
     private final StoryService storyService;
@@ -96,7 +95,8 @@ public class UserStoryInfoController {
         storiesForUser = userStoryInfoService.findByUserId(userId);
         Random random = new Random();
         List<UserStoryInfoDTO> list = new ArrayList<>();
-        list.add(storiesForUser.get(random.nextInt(storiesForUser.size())));
+        if (!storiesForUser.isEmpty())
+            list.add(storiesForUser.get(random.nextInt(storiesForUser.size())));
         return list;
 
     }

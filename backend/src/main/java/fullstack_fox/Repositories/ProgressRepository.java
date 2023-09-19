@@ -15,6 +15,5 @@ public interface ProgressRepository extends CrudRepository<Progress, Long> {
 
     Optional<Progress> findByUserAndStory(User user, Story story);
 
-
     Optional<List<Progress>> findProgressByUserId(Long userId);
 }
