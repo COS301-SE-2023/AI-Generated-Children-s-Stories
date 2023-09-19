@@ -64,14 +64,6 @@ public class UserStoryInfoController {
 
         return storiesForUser;
     }
-    public List<UserStoryInfoDTO> getAllBooksInProgress(Long userId) {
-        Optional<List<Progress>> optionalProgress = progressRepository.findProgressByUserId(userId);
-        List<UserStoryInfoDTO> UserStoryInfoDTOs = optionalProgress.stream()
-                .flatMap(List::stream)
-                .map(this::convertToUserStoryInfoDTO)
-                .collect(Collectors.toList());
-        return UserStoryInfoDTOs;
-    }
 
     private UserStoryInfoDTO convertToUserStoryInfoDTO(Progress progress) {
         boolean isLiked = likedRepository.existsByUserAndStory(progress.getUser(), progress.getStory());
@@ -91,52 +83,13 @@ public class UserStoryInfoController {
         return userStoryInfoService.findLikedByUserId(userId);
     }
 
-    private UserStoryInfoDTO convertToUserStoryInfoDTO(Story story, Long userId, int pageNumber) {
-        //get the user
-        Optional<User> optionalUser = userRepository.findById(userId);
-
-        if (optionalUser.isPresent()) {
-
-            User u  = optionalUser.get();
-            Optional<Liked> liked = likedRepository.findByUserAndStory(u, story);
-            boolean isLiked = false;
-
-            if (liked.isPresent())
-                isLiked = true;
-
-            //get page number
-
-            return new UserStoryInfoDTO(userId, story.getId(), story.getTitle(), story.getTrailer(),
-                    isLiked, pageNumber, story.getPages().size());
-
-        }
-
-        throw new NoSuchElementException("User not found");
-
-    }
-
-    private UserStoryInfoDTO convertToUserStoryInfoDTOFromStory(Story story, Long userId) {
-        return new UserStoryInfoDTO(
-                userId,
-                story.getId(),
-                story.getTitle(),
-                story.getTrailer(),
-                false,
-                0,
-                story.getPages().size()
-        );
-    }
-
     @GetMapping("/userStoryInfo/random/{userId}")
     private List<UserStoryInfoDTO> getRandomBook(@PathVariable Long userId) {
 
         //return list of all in progress, else return 1 random book
         List<UserStoryInfoDTO> storiesForUser = userStoryInfoService.findProgressByUserId(userId);
         if (!storiesForUser.isEmpty()) {
-            Random random = new Random();
-            List<UserStoryInfoDTO> list = new ArrayList<>();
-            list.add(storiesForUser.get(random.nextInt(storiesForUser.size())));
-            return list;
+            return storiesForUser;
         }
 
         //all books
