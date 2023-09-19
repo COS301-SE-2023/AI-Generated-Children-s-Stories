@@ -2,6 +2,7 @@ package fullstack_fox.Controllers;
 
 import com.google.firebase.auth.FirebaseAuthException;
 import fullstack_fox.Entities.User;
+import fullstack_fox.Repositories.UserRepository;
 import fullstack_fox.services.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -23,7 +27,7 @@ public class UserController {
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@RequestBody Long id) {
 
-        System.out.println("hello");
+        System.out.println("Logging out...");
 
         try {
             //set the api token to null
@@ -47,7 +51,6 @@ public class UserController {
         System.out.println("Got token at backend: ");
         System.out.println(tokenBody);
 
-
         try {
             User user = userService.authenticateFirebaseToken(tokenBody);
             System.out.println("Success");
@@ -57,6 +60,10 @@ public class UserController {
             response.put("id", user.getId());
 
             user.generateAPIToken();
+            userRepository.save(user);
+
+            //update in the repo
+
             response.put("api_token", user.getApiToken());
             return ResponseEntity.ok(response.toString());
 

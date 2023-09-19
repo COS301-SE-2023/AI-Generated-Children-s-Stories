@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:magic_pages/end_of_story.dart';
 import 'package:magic_pages/heart_toggle.dart';
@@ -64,18 +65,22 @@ class InsideStoryState extends State<InsideStory> {
 
     List<String> idToken = await Globals.getIdAndToken();
 
-    //{"apiKey":"aac7c266-aa4c-49c2-80d4-7f7e54c688a4", "userId":2, "storyId":5, "pageNumber":2}
-    final jsonString = "{\"apiKey\":\"${idToken[1]}\", \"userId\":${idToken[0]}, \"storyId\":${widget.storyId}, \"pageNumber\":${storyIndex}}";
-    final data = jsonString;
+    print(idToken[1]);
 
-    //todo: make post request
+
+    final Map<String, dynamic> data = {
+        "apiKey": idToken[1],
+        "userId": idToken[0],
+        "storyId": widget.storyId,
+        "pageNumber": storyIndex
+      };
 
       http.Response response = await http.post(
         url,
         headers: {
           'content-type': 'application/json; charset=utf-8'
         },
-        body: data
+        body: jsonEncode(data)
       );
 
       if (response.statusCode == 200) {
