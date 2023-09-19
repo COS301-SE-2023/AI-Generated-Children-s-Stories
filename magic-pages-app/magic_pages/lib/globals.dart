@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class Globals {
   //make sure you copy ipv4 wireless lan
 
-  static String ipAddress = "192.168.68.112:8080";
+  static String ipAddress = "192.168.68.114:8080";
 
   static void showSnackbarMessage(String message, context) {
     var mySnackbar = SnackBar(content: Text(message));
@@ -62,16 +62,8 @@ class Globals {
     String? id = await storage.read(key: 'id');
     String? token = await storage.read(key: 'api_token');
 
-    print("id from storage: ");
-    print(id);
-
-    print("token from storage: ");
-    print(token);
-
-    if (id == null || token == null) {
-      //store mock for testing
-      return ["1", "12345678"];
-    }
+    if (id == null || token == null)
+      print("error");
 
     List<String> list = [];
     if (id != null) list.add(id);

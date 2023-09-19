@@ -192,10 +192,8 @@ class SignupPage extends StatelessWidget {
                                       child: GestureDetector(
                                         behavior: HitTestBehavior.translucent, // Allow outer GestureDetector to receive the tap event
                                         onTap: () async {
-                                          print("tap outer");
                                           bool success = await signInWithGoogle(context);
                                           if (success) {
-                                            print("Success!!!!");
                                             if (context.mounted) {
                                               Navigator.pushNamed(context, "/home");
                                             }

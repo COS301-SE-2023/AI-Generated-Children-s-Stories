@@ -14,13 +14,15 @@ class EndOfStory extends StatefulWidget {
   final List<StoryPage> pages;
   final bool isLiked;
   final void Function(int) updatePage;
+  final void Function(bool) updateLiked;
 
   const EndOfStory({
     super.key,
     required this.storyId,
     required this.pages,
     required this.isLiked,
-    required this.updatePage
+    required this.updatePage,
+    required this.updateLiked
   });
 
   @override
@@ -97,7 +99,7 @@ class _EndOfStoryState extends State<EndOfStory> {
                             ),
                           ),
                         ),
-                        HeartToggle(id: widget.storyId, isLiked: widget.isLiked,),
+                        HeartToggle(id: widget.storyId, isLiked: widget.isLiked, updateLiked: widget.updateLiked),
                       ],
                     ),
                   ),
@@ -119,7 +121,8 @@ class _EndOfStoryState extends State<EndOfStory> {
                             currentPage: 0,
                             pages: widget.pages,
                             isLiked: isLiked,
-                            updatePage: widget.updatePage
+                            updatePage: widget.updatePage,
+                            updateLiked: widget.updateLiked,
                           ),
                         ));
                       },

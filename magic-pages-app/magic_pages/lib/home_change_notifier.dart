@@ -27,8 +27,6 @@ class HomeChangeNotifier extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     _stories = await _getStoriesService.fetchCurrentlyReading(context);
-    print("Currently reading: ");
-    print(_stories);
     _isLoading = false;
     notifyListeners();
   }

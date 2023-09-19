@@ -24,6 +24,7 @@ class InsideStory extends StatefulWidget {
   final int currentPage;
   final bool isLiked;
   final void Function(int) updatePage;
+  final void Function(bool) updateLiked;
 
   InsideStory({
     super.key,
@@ -31,7 +32,8 @@ class InsideStory extends StatefulWidget {
     required this.pages,
     required this.currentPage,
     required this.isLiked,
-    required this.updatePage
+    required this.updatePage,
+    required this.updateLiked
   });
 
   //messages displayed by the mascot
@@ -56,17 +58,6 @@ class InsideStoryState extends State<InsideStory> {
   bool isHomePressed = false;
   late int randomMessageIndex = Random().nextInt(widget.messages.length-1);
 
-  /*
-  {
-    "apiKey": "123",
-    "progressData": {
-        "userId": 1,
-        "storyId": 3,
-        "pageNumber":4
-    }
-}
-   */
-
   Future<void> updatePageNumber(int pageNumber) async {
 
     final url = Uri.parse("http://${Globals.ipAddress}/progress");
@@ -76,9 +67,6 @@ class InsideStoryState extends State<InsideStory> {
     //{"apiKey":"aac7c266-aa4c-49c2-80d4-7f7e54c688a4", "userId":2, "storyId":5, "pageNumber":2}
     final jsonString = "{\"apiKey\":\"${idToken[1]}\", \"userId\":${idToken[0]}, \"storyId\":${widget.storyId}, \"pageNumber\":${storyIndex}}";
     final data = jsonString;
-
-    print("Sending data");
-    print(data);
 
     //todo: make post request
 
@@ -90,7 +78,6 @@ class InsideStoryState extends State<InsideStory> {
         body: data
       );
 
-      print("Inside story");
       if (response.statusCode == 200) {
         widget.updatePage(pageNumber);
       } else {
@@ -101,8 +88,6 @@ class InsideStoryState extends State<InsideStory> {
   @override
   void initState() {
     super.initState();
-    print(widget.isLiked);
-    print(widget.currentPage);
   }
 
   /// This function updates the story index and message index.
@@ -120,12 +105,14 @@ class InsideStoryState extends State<InsideStory> {
           pages: widget.pages,
           isLiked: widget.isLiked,
           updatePage: widget.updatePage,
+          updateLiked: widget.updateLiked,
         ),
       ));
     }
 
-    if (storyIndex < widget.pages.length && storyIndex >= 0)
+    if (storyIndex < widget.pages.length && storyIndex >= 0) {
       updatePageNumber(storyIndex);
+    }
   }
 
   /// This function updates the story index and message index.
@@ -154,7 +141,7 @@ class InsideStoryState extends State<InsideStory> {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(left: 16),
-                      child: HeartToggle(isLiked: widget.isLiked, id: widget.storyId)
+                      child: HeartToggle(isLiked: isLiked, id: widget.storyId, updateLiked: widget.updateLiked)
                   ),
                   Row(
                     children: [

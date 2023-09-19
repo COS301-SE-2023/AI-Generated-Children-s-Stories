@@ -17,8 +17,7 @@ class ButtonWidget extends StatefulWidget {
   final bool? isLiked;
   final void Function(BuildContext)? updateBookItems;
   final void Function(int)? updatePage;
-
-  //for story...
+  final void Function(bool)? updateLiked;
 
   const ButtonWidget({
     super.key,
@@ -30,7 +29,8 @@ class ButtonWidget extends StatefulWidget {
     this.currentPage,
     this.isLiked,
     this.updateBookItems,
-    this.updatePage
+    this.updatePage,
+    this.updateLiked
   });
 
   @override
@@ -39,12 +39,13 @@ class ButtonWidget extends StatefulWidget {
 
 class _ButtonWidget extends State<ButtonWidget> {
   bool isPressed = false;
+  bool? isLiked;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapUp: (val) {
-//loading
+
         if (widget.isEnabled != null && widget.isEnabled == false) {
           return;
         }
@@ -67,6 +68,7 @@ class _ButtonWidget extends State<ButtonWidget> {
                         pages: widget.pages!,
                         isLiked: widget.isLiked!,
                         updatePage: widget.updatePage!,
+                        updateLiked: widget.updateLiked!,
                       )
                 ))
 
@@ -74,8 +76,12 @@ class _ButtonWidget extends State<ButtonWidget> {
             //to get a list of updated books
             //used for if you like the story
             .then((value) => {
-                  if (widget.updateBookItems != null)
-                    widget.updateBookItems!.call(context)
+                  print("Setting state...${widget.isLiked}"),
+                  if (widget.updateBookItems != null) {
+                    widget.updateBookItems!.call(context),
+                  },
+                  widget.updateLiked!.call(widget.isLiked!),
+                  setState(() {}),
               });
       },
       onTapDown: (val) {

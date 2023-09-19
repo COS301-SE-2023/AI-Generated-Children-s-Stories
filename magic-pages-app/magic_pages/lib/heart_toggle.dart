@@ -5,8 +5,9 @@ import 'globals.dart';
 class HeartToggle extends StatefulWidget {
   bool isLiked;
   int id;
+  final void Function(bool) updateLiked;
 
-  HeartToggle({super.key, required this.isLiked, required this.id});
+  HeartToggle({super.key, required this.isLiked, required this.id, required this.updateLiked});
 
   @override
   State<StatefulWidget> createState() => _HeartToggleWidget();
@@ -20,16 +21,14 @@ class _HeartToggleWidget extends State<HeartToggle> {
     widget.isLiked = !widget.isLiked;
     ToggleHeart();
     bool success = await Globals.likeStory(widget.isLiked, widget.id, context);
+    widget.updateLiked.call(widget.isLiked);
 
-    //failed, revert the changes
-    if (!success) {
-      widget.isLiked = !widget.isLiked;
+    if (!success) { //fails
       ToggleHeart();
     }
   }
 
   void ToggleHeart() {
-    print(widget.isLiked);
     if (widget.isLiked == true) {
       image = const Image(
           image: AssetImage('assets/images/heart.png'),

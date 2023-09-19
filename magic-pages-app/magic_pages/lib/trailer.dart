@@ -45,10 +45,20 @@ class _TrailerPageState extends State<TrailerPage> {
   InsideStoryChangeNotifier(GetStoriesService());
 
   void updatePage(int newPage) {
-    print("updating page on trailer to ${newPage}");
     setState(() {
       currentPage = newPage;
     });
+  }
+
+  void updateLiked(bool updatedIsLiked) {
+    print("updating liked in trailer to $updatedIsLiked");
+    setState(() {
+      isLiked = updatedIsLiked;
+    });
+  }
+
+  void updateUi() {
+    setState(() {});
   }
 
   void loadImages() async {
@@ -146,9 +156,7 @@ class _TrailerPageState extends State<TrailerPage> {
                                             ),
                                           ],
                                         ),
-                                        Container(
-                                            child: HeartToggle(id: widget.id, isLiked: widget.isLiked)
-                                        ),
+                                        HeartToggle(id: widget.id, isLiked: isLiked, updateLiked: updateLiked),
                                       ],
                                     ),
                                   ),
@@ -215,6 +223,7 @@ class _TrailerPageState extends State<TrailerPage> {
         pages: pages,
         isLiked: isLiked,
         updatePage: updatePage,
+        updateLiked: updateLiked
       );
     }
   }

@@ -115,18 +115,36 @@ public class UserStoryInfoController {
 
     }
 
+    private UserStoryInfoDTO convertToUserStoryInfoDTOFromStory(Story story, Long userId) {
+        return new UserStoryInfoDTO(
+                userId,
+                story.getId(),
+                story.getTitle(),
+                story.getTrailer(),
+                false,
+                0,
+                story.getPages().size()
+        );
+    }
+
     @GetMapping("/userStoryInfo/random/{userId}")
     private List<UserStoryInfoDTO> getRandomBook(@PathVariable Long userId) {
 
-        List<UserStoryInfoDTO> storiesForUser = userStoryInfoService.findByUserId(userId);
+        //return list of all in progress, else return 1 random book
+        List<UserStoryInfoDTO> storiesForUser = userStoryInfoService.findProgressByUserId(userId);
+        if (!storiesForUser.isEmpty()) {
+            Random random = new Random();
+            List<UserStoryInfoDTO> list = new ArrayList<>();
+            list.add(storiesForUser.get(random.nextInt(storiesForUser.size())));
+            return list;
+        }
 
-        List<UserStoryInfoDTO> randomList = new ArrayList<>();
-
+        //all books
+        storiesForUser = userStoryInfoService.findByUserId(userId);
         Random random = new Random();
-        UserStoryInfoDTO randomUserStory = storiesForUser.get(random.nextInt(storiesForUser.size()));
-        randomList.add(randomUserStory);
-
-        return randomList;
+        List<UserStoryInfoDTO> list = new ArrayList<>();
+        list.add(storiesForUser.get(random.nextInt(storiesForUser.size())));
+        return list;
 
     }
 
