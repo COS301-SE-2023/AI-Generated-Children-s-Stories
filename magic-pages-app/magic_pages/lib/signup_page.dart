@@ -25,13 +25,6 @@ class SignupPage extends StatelessWidget {
 
     final url = Uri.parse("http://${Globals.ipAddress}/authenticate");
 
-    const storage = FlutterSecureStorage();
-
-    //todo: remove
-    // await storage.write(key: "api_token", value: "efbfe7f1-8c09-4584-a389-81fc5cbc6a65");
-    // await storage.write(key: "id", value: "1");
-    // return true;
-
 
     try {
       final response = await http.post(url, body: tokenToSend);
@@ -41,20 +34,14 @@ class SignupPage extends StatelessWidget {
         Map<String, dynamic> data = json.decode(response.body);
 
         if (data["status"] == "success") {
-          //save the API token
-
           //todo: uncomment
-          //const storage = FlutterSecureStorage();
+          const storage = FlutterSecureStorage();
 
           await storage.write(key: "api_token", value: data["api_token"]);
           await storage.write(key: "id", value: data["id"].toString());
 
           String? checkToken = await storage.read(key: 'api_token');
           String? checkId = await storage.read(key: 'id');
-
-          print("token: ");
-          print(checkToken);
-          print(checkId);
 
           if (checkToken == null || checkId == null) {
             return false;
@@ -99,8 +86,10 @@ class SignupPage extends StatelessWidget {
         await auth.signInWithCredential(credential);
 
         String? token = await userCredential.user?.getIdToken();
-
+        print("Sending token: ");
         bool success = await sendTokenToBackend(token, context);
+        print(success);
+
         return success;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
