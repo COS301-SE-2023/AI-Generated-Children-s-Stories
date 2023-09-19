@@ -35,6 +35,7 @@ public class StoryController {
         return byId;
     }
 
+    // Authenticated
     @PostMapping("/story")
     public ResponseEntity<Story> create(@RequestBody PostStoryDTO postStoryDTO){
 
@@ -48,13 +49,6 @@ public class StoryController {
 
        storyRepository.save(postStoryDTO.getStory());
         return ResponseEntity.status(HttpStatus.OK).body(postStoryDTO.getStory());
-    }
-
-    //todo: change to post
-    @DeleteMapping("/story/{id}")
-    public ResponseEntity<String> deleteStory(@PathVariable Long id) {
-        storyService.deleteStoryById(id);
-        return ResponseEntity.ok("Story with id " + id + " and its pages have been deleted.");
     }
 
 }

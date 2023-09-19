@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:magic_pages/button_widget.dart';
 
 class SplashPage extends StatelessWidget {
@@ -58,3 +59,5 @@ class SplashPage extends StatelessWidget {
     );
   }
 }
+
+

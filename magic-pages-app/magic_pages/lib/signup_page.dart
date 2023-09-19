@@ -184,7 +184,8 @@ class SignupPage extends StatelessWidget {
                                           bool success = await signInWithGoogle(context);
                                           if (success) {
                                             if (context.mounted) {
-                                              Navigator.pushNamed(context, "/home");
+                                              Navigator.of(context).popUntil((route) => route.isFirst);
+                                              Navigator.pushReplacementNamed(context, "/home");
                                             }
                                           } else {
                                             print("failed....");

@@ -37,7 +37,6 @@ class _ProfileState extends State<Profile> {
     if (checkId != null) {
 
 
-
       final url = Uri.parse(
           "http://${Globals.ipAddress}/logout");
 
@@ -54,6 +53,10 @@ class _ProfileState extends State<Profile> {
           if (context.mounted) {
             Globals.showSnackbarMessage(
                 'Logged out', context);
+
+            await storage.delete(key: 'id');
+            await storage.delete(key: 'apiKey');
+
             Navigator.pushNamed(context, '/splash');
           }
         } else {

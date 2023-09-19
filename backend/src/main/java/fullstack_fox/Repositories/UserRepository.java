@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByFirebaseUid(String firebaseUid);
 
-
     @Query("select u from User u where u.firebaseUid = 'admin'")
     User getAdminUserId();
 }

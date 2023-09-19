@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
 import 'package:provider/provider.dart';
 
@@ -32,18 +33,24 @@ import 'package:firebase_core/firebase_core.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  bool isTest = false;
 
   // Conditionally initialize Firebase
-  if (DefaultFirebaseOptions.currentPlatform.apiKey != "test") {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  }
-  else {
-    print("TEST");
-    isTest = true;
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FlutterSecureStorage storage = FlutterSecureStorage();
+  String? id = await storage.read(key: 'id');
+  String? token = await storage.read(key: 'api_token');
+
+  bool loggedInPreviously = false;
+
+  if (id != null && token != null){
+    print("logged in already...");
+    loggedInPreviously = true;
+  } else {
+    print("not logged in preveously");
   }
 
-  runApp(MyApp(isTest: isTest));
+  runApp(MyApp(loggedInPreviously));
 }
 
 MaterialColor createMaterialColor(Color color) {
@@ -67,12 +74,46 @@ MaterialColor createMaterialColor(Color color) {
 }
 
 class MyApp extends StatelessWidget {
+  final bool loggedInPreviously;
 
-  final bool isTest;
+  const MyApp(this.loggedInPreviously, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<InsideStoryChangeNotifier>(
+            create: (context) => InsideStoryChangeNotifier(GetStoriesService()),
+          ),
+          ChangeNotifierProvider<StoryListChangeNotifier>(
+              create: (context) => StoryListChangeNotifier(GetStoriesService())
+          )
+        ],
+        child: MaterialApp(
+            title: 'Magic Pages',
+            theme: ThemeData(
+              primarySwatch: createMaterialColor(const Color(0xFFFE8D29)),
+              scaffoldBackgroundColor: const Color(0xFFFFF3E9),
+            ),
+            home:  loggedInPreviously ? const Home() : const SplashPage(),
+            routes: {
+              '/signup': (context) => const SignupPage(),
+              '/splash': (context) => const SplashPage(),
+              '/storyList': (context) => const StoryList(),
+              '/home': (context) => const Home(),
+              '/storyLiked': (context) => const StoryLiked(),
+              '/profile': (context) => const Profile(),
+            })
+    );
+  }
+
+}
+
+/*
+class MyApp extends StatelessWidget {
 
   MyApp({
-    super.key,
-    required this.isTest
+    super.key
   });
 
   @override
@@ -92,7 +133,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: createMaterialColor(const Color(0xFFFE8D29)),
           scaffoldBackgroundColor: const Color(0xFFFFF3E9),
         ),
-        home:  !isTest ? const SplashPage() : const Home(),
+        home:  const SplashPage(),
         routes: {
           '/signup': (context) => const SignupPage(),
           '/splash': (context) => const SplashPage(),
@@ -103,4 +144,4 @@ class MyApp extends StatelessWidget {
         })
     );
   }
-}
+}*/
