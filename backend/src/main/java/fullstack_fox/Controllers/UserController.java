@@ -22,6 +22,9 @@ public class UserController {
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@RequestBody Long id) {
+
+        System.out.println("hello");
+
         try {
             //set the api token to null
             userService.nullifyApiToken(id);
@@ -47,18 +50,19 @@ public class UserController {
 
         try {
             User user = userService.authenticateFirebaseToken(tokenBody);
-
-            //store the token an UID in the database...
-            System.out.println(user);
+            System.out.println("Success");
 
             JSONObject response = new JSONObject();
             response.put("status", "success");
             response.put("id", user.getId());
-            response.put("api_token", user.getApiToken());
 
+            user.generateAPIToken();
+            response.put("api_token", user.getApiToken());
             return ResponseEntity.ok(response.toString());
 
         } catch (FirebaseAuthException e) {
+
+            System.out.println("Exception authenticating");
 
             JSONObject response = new JSONObject();
             response.put("status", "failed");

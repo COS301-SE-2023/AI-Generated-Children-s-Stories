@@ -35,18 +35,26 @@ class _ProfileState extends State<Profile> {
     String? checkId = await storage.read(key: 'id');
 
     if (checkId != null) {
+
+
+
       final url = Uri.parse(
-          "http://${Globals.ipAddress}/logout/${checkId}");
+          "http://${Globals.ipAddress}/logout");
 
       print(url);
 
       try {
-        final response = await http.post(url);
+        final response = await http.post(
+            url,
+            headers: {'content-type': 'application/json'},
+            body: checkId
+        );
+
         if (response.statusCode == 200) {
           if (context.mounted) {
             Globals.showSnackbarMessage(
                 'Logged out', context);
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushNamed(context, '/splash');
           }
         } else {
           String message =
