@@ -7,6 +7,7 @@ import fullstack_fox.Repositories.LikedRepository;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,10 +27,10 @@ public class LikedController {
 
     //Like a story
     @PostMapping("/liked/stories")
-    public ResponseEntity<String> likeStory(@RequestParam Long userId, @RequestParam Long storyId) {
+    public ResponseEntity<String> likeStory(@RequestParam Long userId, @RequestParam Long storyId, @RequestParam String apiKey) {
 
         AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
-        if (!authenticateApiCalls.authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
+        if (!authenticateApiCalls.authenticateApiKey(userId, apiKey)) {
             System.out.println("Unauthorised");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }

@@ -26,7 +26,8 @@ class Globals {
 
       final Map<String, dynamic> data = {
         "userId": id,
-        "storyId": bookId.toString()
+        "storyId": bookId.toString(),
+        "apiKey": token
       };
 
       http.Response response;

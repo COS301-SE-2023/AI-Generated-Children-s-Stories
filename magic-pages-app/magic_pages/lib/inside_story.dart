@@ -65,9 +65,6 @@ class InsideStoryState extends State<InsideStory> {
 
     List<String> idToken = await Globals.getIdAndToken();
 
-    print(idToken[1]);
-
-
     final Map<String, dynamic> data = {
         "apiKey": idToken[1],
         "userId": idToken[0],
