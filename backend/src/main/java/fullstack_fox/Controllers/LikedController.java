@@ -26,10 +26,10 @@ public class LikedController {
 
     //Like a story
     @PostMapping("/liked/stories")
-    public ResponseEntity<String> likeStory(@RequestParam Long userId, @RequestParam Long storyId) {
+    public ResponseEntity<String> likeStory(@RequestParam Long userId, @RequestParam Long storyId, @RequestParam String apiKey) {
 
         AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
-        if (!authenticateApiCalls.authenticateApiKey(postProgress.getUserId(), postProgress.getApiKey())) {
+        if (!authenticateApiCalls.authenticateApiKey(userId, apiKey)) {
             System.out.println("Unauthorised");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
@@ -60,7 +60,14 @@ public class LikedController {
 
     //Unlike a story
     @DeleteMapping("/liked/stories")
-    public ResponseEntity<String> deleteStoryFromLikedPage(@RequestParam Long userId, @RequestParam Long storyId) {
+    public ResponseEntity<String> deleteStoryFromLikedPage(@RequestParam Long userId, @RequestParam Long storyId, @RequestParam String apiKey) {
+
+        AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
+        if (!authenticateApiCalls.authenticateApiKey(userId, apiKey)) {
+            System.out.println("Unauthorised");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
         // Check if the user and story exist in the database
         User user = userRepository.findById(userId).orElse(null);
         Story story = storyRepository.findById(storyId).orElse(null);
