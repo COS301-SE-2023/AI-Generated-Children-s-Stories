@@ -20,344 +20,6 @@ class _NavbarWidgetState extends State<NavbarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Widget navigation;
-    switch (widget.active) {
-      case 0:
-        navigation = Row(
-        //add a border
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/explore.png',
-                  width: 42,
-                ),
-                const SizedBox(height: 3),
-                const Text(
-                  'Books',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF000000),
-                  ),
-                ),
-              ]
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/homeOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/storyLiked');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/likedOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Liked',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-        ],
-      );
-        break;
-      case 1:
-        navigation = Row(
-        //add a border
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/storyList');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/exploreOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Books',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/home.png',
-                  width: 42,
-                ),
-                const SizedBox(height: 3),
-                const Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF000000),
-                  ),
-                ),
-              ]
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/storyLiked');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/likedOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Liked',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-        ],
-      );
-        break;
-      case 2:
-        navigation = Row(
-        //add a border
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/storyList');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/exploreOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Books',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/homeOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/liked.png',
-                  width: 42,
-                ),
-                const SizedBox(height: 3),
-                const Text(
-                  'Liked',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF000000),
-                  ),
-                ),
-              ]
-            ),
-          ),
-        ],
-      );
-        break;
-      case 3:
-        navigation = Row(
-        //add a border
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/storyList');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/exploreOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Books',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/homeOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/storyLiked');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/likedOutline.png',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Liked',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-        ],
-      );
-        break;
-      default:
-        throw UnimplementedError('no widget for $widget.active');
-    }
-
-    // The container for the current page, with its background color
-    // and subtle switching animation.
-    
     return Container(
       height: 94,
       //round the corners
@@ -381,13 +43,120 @@ class _NavbarWidgetState extends State<NavbarWidget> {
           ),
           bottom: BorderSide(
             color: Color(0xFFD3D3D3),
-            width: 0,
+            width: 0.01,
           ),
         ),
         color: Colors.white,
       ),
-      //row of three icons
-      child: navigation
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/storyList');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.active == 0 ? 'assets/images/nav-icons/books.webp' : 'assets/images/nav-icons/books-outline.webp',
+                    width: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Books',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/home');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.active == 1 ? 'assets/images/nav-icons/home.webp' : 'assets/images/nav-icons/home-outline.webp',
+                    width: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/storyLiked');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.active == 2 ? 'assets/images/nav-icons/liked.webp' : 'assets/images/nav-icons/liked-outline.webp',
+                    width: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Liked',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/storyLiked');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.active == 3 ? 'assets/images/nav-icons/download.webp' : 'assets/images/nav-icons/download-outline.webp',
+                    width: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Downloads',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
