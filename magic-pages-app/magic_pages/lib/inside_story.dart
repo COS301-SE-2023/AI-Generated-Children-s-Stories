@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:magic_pages/end_of_story.dart';
 import 'package:magic_pages/heart_toggle.dart';
 import 'package:magic_pages/story_page.dart';
@@ -58,6 +60,36 @@ class InsideStoryState extends State<InsideStory> {
   bool isNextPressed = false;
   bool isHomePressed = false;
   late int randomMessageIndex = Random().nextInt(widget.messages.length-1);
+
+  Completer<void> speakingCompleter = Completer<void>();
+  bool ttsSpeaking = false;
+
+  //tts
+  FlutterTts flutterTts = FlutterTts();
+
+  Future<void> speak(String text) async {
+
+    if (!ttsSpeaking) {
+      setState(() {
+        ttsSpeaking = true;
+      });
+      await flutterTts.speak(text);
+    } else {
+      await flutterTts.pause();
+      setState(() {
+        ttsSpeaking = false;
+      });
+    }
+
+
+    flutterTts.setCompletionHandler(() {
+      print("done speaking...");
+      setState(() {
+        ttsSpeaking = false;
+      });
+    });
+  }
+
 
   Future<void> updatePageNumber(int pageNumber) async {
 
@@ -138,81 +170,10 @@ class InsideStoryState extends State<InsideStory> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               //heart and halfway message
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      margin: const EdgeInsets.only(left: 16),
-                      child: HeartToggle(isLiked: isLiked, id: widget.storyId, updateLiked: widget.updateLiked)
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width-(16+24+110+108),
-                        margin: const EdgeInsets.only(top: 20),
-                        child: Text(
-                          storyIndex == 0
-                              ? widget.firstMessage
-                              : storyIndex == widget.pages.length - 1
-                              ? widget.lastMessage
-                              : storyIndex == (widget.pages.length) / 2
-                              ? widget.halfwayMessage
-                              : widget.messages[randomMessageIndex],
-                          textAlign: TextAlign.end,
-                          style: const TextStyle(
-                            overflow: TextOverflow.clip,
-                            fontSize: 18,
-                            color: Color(0xFF542209),
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(24, 0, 16, 0),
-                        child:  Transform.rotate(
-                          angle: 0.125,
-                          child: const Image(
-                            image: AssetImage('assets/images/mascot.png'),
-                            width: 110,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color(0xFFD3D3D3),
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                margin: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                child: LinearPercentIndicator(
-                  animateFromLastPercent: true,
-                  padding: const EdgeInsets.all(0),
-                  barRadius: const Radius.circular(20),
-                  backgroundColor: const Color(0xFFFFFFFF),
-                  animation: true,
-                  lineHeight: 35.0,
-                  animationDuration: 1000,
-                  percent: widget.pages.isEmpty ? 0 : storyIndex / (widget.pages.length),
-                  center: Text(
-                    '${widget.pages.isEmpty ? 0 : (storyIndex / (widget.pages.length) * 100).round()}%',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Color(0xFF542209),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        fontFamily: 'Poppins'
-                    ),
-                  ),
-                  progressColor: const Color(0xFFFE8D29),
-                ),
-              ),
+              Header(context),
+              ProgressBar(),
+
+              //image
               AspectRatio(
                 aspectRatio: 1.25,
                 child: SizedBox(
@@ -223,6 +184,21 @@ class InsideStoryState extends State<InsideStory> {
                   ),
                 ),
               ),
+
+              //play button
+              GestureDetector(
+                onTap: () {
+                  print("reading out loud");
+
+                  speak(widget.pages[storyIndex].text);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ttsSpeaking ? Text("Pause TTS") : Text("Play TTS"),
+                ),
+              ),
+
+              //text
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -234,24 +210,123 @@ class InsideStoryState extends State<InsideStory> {
                       fontSize: 64,
                       color: Color(0xFF542209),
                       fontFamily: 'Poppins',
-                    ),
+                    )
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              NavBar(context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Row Header(BuildContext context) {
+    return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(left: 16),
+                    child: HeartToggle(isLiked: isLiked, id: widget.storyId, updateLiked: widget.updateLiked)
+                ),
+                Row(
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: Opacity(
-                        opacity: storyIndex == 0 ? 0.5 : 1,
-                        child: storyIndex == 0
-                            ? Container(
+                    Container(
+                      width: MediaQuery.of(context).size.width-(16+24+110+108),
+                      margin: const EdgeInsets.only(top: 20),
+                      child: Text(
+                        storyIndex == 0
+                            ? widget.firstMessage
+                            : storyIndex == widget.pages.length - 1
+                            ? widget.lastMessage
+                            : storyIndex == (widget.pages.length) / 2
+                            ? widget.halfwayMessage
+                            : widget.messages[randomMessageIndex],
+                        textAlign: TextAlign.end,
+                        style: const TextStyle(
+                          overflow: TextOverflow.clip,
+                          fontSize: 18,
+                          color: Color(0xFF542209),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(24, 0, 16, 0),
+                      child:  Transform.rotate(
+                        angle: 0.125,
+                        child: const Image(
+                          image: AssetImage('assets/images/mascot.png'),
+                          width: 110,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+  }
+
+  Container NavBar(BuildContext context) {
+    return Container(
+              margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Opacity(
+                      opacity: storyIndex == 0 ? 0.5 : 1,
+                      child: storyIndex == 0
+                          ? Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width/2-(16+8),
+                        margin: const EdgeInsets.fromLTRB(16, 0, 8, 6),
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFDFDFD),
+                            borderRadius: BorderRadius.circular (25),
+                            border: Border.all(
+                              color: const Color(0xFFD3D3D3),
+                              width: 2,
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0xFFD3D3D3),
+                                spreadRadius: 0,
+                                blurRadius: 0,
+                                offset: Offset(0,6),
+                              )
+                            ]
+                        ),
+                        child: Center(
+                          child: Transform.rotate(
+                              angle: 3.13,
+                              child: const Image(image: AssetImage('assets/images/arrow-orange.png'), width: 35)
+                          ),
+                        ),
+                      )
+                          : GestureDetector(
+                        onTapUp: (val){
+                          setState(() {
+                            isBackPressed = false;
+                          });
+                          prev();
+                        },
+                        onTapDown: (val){
+                          setState(() {
+                            isBackPressed = true;
+                          });
+                        },
+                        onTapCancel: (){
+                          setState(() {
+                            isBackPressed = false;
+                          });
+                        },
+                        child: AnimatedContainer(
                           height: 50,
-                          width: MediaQuery.of(context).size.width/2-(16+8),
-                          margin: const EdgeInsets.fromLTRB(16, 0, 8, 6),
+                          margin: isBackPressed ? const EdgeInsets.fromLTRB(16, 6, 8, 0) : const EdgeInsets.fromLTRB(16, 0, 8, 6),
                           decoration: BoxDecoration(
                               color: const Color(0xFFFDFDFD),
                               borderRadius: BorderRadius.circular (25),
@@ -259,8 +334,8 @@ class InsideStoryState extends State<InsideStory> {
                                 color: const Color(0xFFD3D3D3),
                                 width: 2,
                               ),
-                              boxShadow: const [
-                                BoxShadow(
+                              boxShadow: isBackPressed ? null : [
+                                const BoxShadow(
                                   color: Color(0xFFD3D3D3),
                                   spreadRadius: 0,
                                   blurRadius: 0,
@@ -268,152 +343,138 @@ class InsideStoryState extends State<InsideStory> {
                                 )
                               ]
                           ),
+                          duration: const Duration(milliseconds: 75),
                           child: Center(
                             child: Transform.rotate(
                                 angle: 3.13,
                                 child: const Image(image: AssetImage('assets/images/arrow-orange.png'), width: 35)
                             ),
                           ),
-                        )
-                            : GestureDetector(
-                          onTapUp: (val){
-                            setState(() {
-                              isBackPressed = false;
-                            });
-                            prev();
-                          },
-                          onTapDown: (val){
-                            setState(() {
-                              isBackPressed = true;
-                            });
-                          },
-                          onTapCancel: (){
-                            setState(() {
-                              isBackPressed = false;
-                            });
-                          },
-                          child: AnimatedContainer(
-                            height: 50,
-                            margin: isBackPressed ? const EdgeInsets.fromLTRB(16, 6, 8, 0) : const EdgeInsets.fromLTRB(16, 0, 8, 6),
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFFDFDFD),
-                                borderRadius: BorderRadius.circular (25),
-                                border: Border.all(
-                                  color: const Color(0xFFD3D3D3),
-                                  width: 2,
-                                ),
-                                boxShadow: isBackPressed ? null : [
-                                  const BoxShadow(
-                                    color: Color(0xFFD3D3D3),
-                                    spreadRadius: 0,
-                                    blurRadius: 0,
-                                    offset: Offset(0,6),
-                                  )
-                                ]
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTapUp: (val){
+                        setState(() {
+                          isHomePressed = false;
+                        });
+                        Navigator.pushNamed(context, '/home');
+                      },
+                      onTapDown: (val){
+                        setState(() {
+                          isHomePressed = true;
+                        });
+                      },
+                      onTapCancel: (){
+                        setState(() {
+                          isHomePressed = false;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        height: 50,
+                        margin: isHomePressed ? const EdgeInsets.fromLTRB(0, 6, 0, 0) : const EdgeInsets.fromLTRB(0, 0, 0, 6),
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFDFDFD),
+                            borderRadius: BorderRadius.circular (25),
+                            border: Border.all(
+                              color: const Color(0xFFD3D3D3),
+                              width: 2,
                             ),
-                            duration: const Duration(milliseconds: 75),
-                            child: Center(
-                              child: Transform.rotate(
-                                  angle: 3.13,
-                                  child: const Image(image: AssetImage('assets/images/arrow-orange.png'), width: 35)
-                              ),
-                            ),
-                          ),
+                            boxShadow: isHomePressed ? null : [
+                              const BoxShadow(
+                                color: Color(0xFFD3D3D3),
+                                spreadRadius: 0,
+                                blurRadius: 0,
+                                offset: Offset(0,6),
+                              )
+                            ]
+                        ),
+                        duration: const Duration(milliseconds: 75),
+                        child: const Center(
+                          child: Image(image: AssetImage('assets/images/home.png'), width: 35),
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTapUp: (val){
-                          setState(() {
-                            isHomePressed = false;
-                          });
-                          Navigator.pushNamed(context, '/home');
-                        },
-                        onTapDown: (val){
-                          setState(() {
-                            isHomePressed = true;
-                          });
-                        },
-                        onTapCancel: (){
-                          setState(() {
-                            isHomePressed = false;
-                          });
-                        },
-                        child: AnimatedContainer(
-                          height: 50,
-                          margin: isHomePressed ? const EdgeInsets.fromLTRB(0, 6, 0, 0) : const EdgeInsets.fromLTRB(0, 0, 0, 6),
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFFDFDFD),
-                              borderRadius: BorderRadius.circular (25),
-                              border: Border.all(
-                                color: const Color(0xFFD3D3D3),
-                                width: 2,
-                              ),
-                              boxShadow: isHomePressed ? null : [
-                                const BoxShadow(
-                                  color: Color(0xFFD3D3D3),
-                                  spreadRadius: 0,
-                                  blurRadius: 0,
-                                  offset: Offset(0,6),
-                                )
-                              ]
-                          ),
-                          duration: const Duration(milliseconds: 75),
-                          child: const Center(
-                            child: Image(image: AssetImage('assets/images/home.png'), width: 35),
-                          ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: GestureDetector(
+                      onTapUp: (val){
+                        setState(() {
+                          isNextPressed = false;
+                        });
+                        next();
+                      },
+                      onTapDown: (val){
+                        setState(() {
+                          isNextPressed = true;
+                        });
+                      },
+                      onTapCancel: (){
+                        setState(() {
+                          isNextPressed = false;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        height: 50,
+                        margin: isNextPressed ? const EdgeInsets.fromLTRB(8, 6, 16, 0) : const EdgeInsets.fromLTRB(8, 0, 16, 6),
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFE8D29),
+                            borderRadius: BorderRadius.circular (25),
+                            boxShadow: isNextPressed ? null : [
+                              const BoxShadow(
+                                color: Color(0xFF84370F),
+                                spreadRadius: 0,
+                                blurRadius: 0,
+                                offset: Offset(0,6),
+                              )
+                            ]
+                        ),
+                        duration: const Duration(milliseconds: 75),
+                        child: const Center(
+                          child: Image(image: AssetImage('assets/images/arrow-white.png'), width: 35),
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: GestureDetector(
-                        onTapUp: (val){
-                          setState(() {
-                            isNextPressed = false;
-                          });
-                          next();
-                        },
-                        onTapDown: (val){
-                          setState(() {
-                            isNextPressed = true;
-                          });
-                        },
-                        onTapCancel: (){
-                          setState(() {
-                            isNextPressed = false;
-                          });
-                        },
-                        child: AnimatedContainer(
-                          height: 50,
-                          margin: isNextPressed ? const EdgeInsets.fromLTRB(8, 6, 16, 0) : const EdgeInsets.fromLTRB(8, 0, 16, 6),
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFFE8D29),
-                              borderRadius: BorderRadius.circular (25),
-                              boxShadow: isNextPressed ? null : [
-                                const BoxShadow(
-                                  color: Color(0xFF84370F),
-                                  spreadRadius: 0,
-                                  blurRadius: 0,
-                                  offset: Offset(0,6),
-                                )
-                              ]
-                          ),
-                          duration: const Duration(milliseconds: 75),
-                          child: const Center(
-                            child: Image(image: AssetImage('assets/images/arrow-white.png'), width: 35),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            );
+  }
+
+  Container ProgressBar() {
+    return Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color(0xFFD3D3D3),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              margin: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+              child: LinearPercentIndicator(
+                animateFromLastPercent: true,
+                padding: const EdgeInsets.all(0),
+                barRadius: const Radius.circular(20),
+                backgroundColor: const Color(0xFFFFFFFF),
+                animation: true,
+                lineHeight: 35.0,
+                animationDuration: 1000,
+                percent: widget.pages.isEmpty ? 0 : storyIndex / (widget.pages.length),
+                center: Text(
+                  '${widget.pages.isEmpty ? 0 : (storyIndex / (widget.pages.length) * 100).round()}%',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: Color(0xFF542209),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      fontFamily: 'Poppins'
+                  ),
+                ),
+                progressColor: const Color(0xFFFE8D29),
+              ),
+            );
   }
 }

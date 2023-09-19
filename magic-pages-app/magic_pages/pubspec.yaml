@@ -51,6 +51,9 @@ dependencies:
   # For storing API key
   flutter_secure_storage: ^8.0.0
 
+  # For TTS
+  flutter_tts: ^3.8.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
