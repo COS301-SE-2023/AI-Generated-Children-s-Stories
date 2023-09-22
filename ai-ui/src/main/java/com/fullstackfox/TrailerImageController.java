@@ -45,7 +45,6 @@ Processors process = Processors.getInstance();
 
     @FXML
     private void switchToName() throws IOException {
-        
             App.setRoot("trailer-name");
       
     }
@@ -66,8 +65,8 @@ Processors process = Processors.getInstance();
                 String url = lst.get(0);
                 Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
                 this.disableTillUpscale();
     }
@@ -81,8 +80,8 @@ Processors process = Processors.getInstance();
                 String url = lst.get(0);
                 Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
         regenButton.setDisable(false);    
         this.disableTillUpscale();    
@@ -165,8 +164,8 @@ Processors process = Processors.getInstance();
         gen.setTrailer(url);
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
                 this.upscaleEnable();
         } catch (URISyntaxException e) {
@@ -186,8 +185,8 @@ Processors process = Processors.getInstance();
         gen.setTrailer(url);
          Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
                 this.upscaleEnable();
         } catch (URISyntaxException e) {

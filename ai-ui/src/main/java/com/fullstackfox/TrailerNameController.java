@@ -45,8 +45,8 @@ public class TrailerNameController{
                 String url = gen.getTrailer();
                 Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
                 name.setText(title);
                 regenButton.setText("Regenerate Name");
@@ -60,8 +60,8 @@ public class TrailerNameController{
                 String url = gen.getTrailer();
                 Image imageU = new Image(url); 
                 ImageView imageView = new ImageView(imageU);
-                imageView.setFitHeight(380); 
-                imageView.setFitWidth(380); 
+                imageView.setFitHeight(360); 
+                imageView.setFitWidth(360); 
                 image.getChildren().add(imageView);
                // name.setText(title);
                name.setEditable(true);
@@ -73,7 +73,8 @@ public class TrailerNameController{
     @FXML
     private void switchToPage() throws IOException {
                 gen.setTitle(name.getText());
-            App.setRoot("story-page");
+          //  App.setRoot("story-page");
+App.setRoot("imagePromptEditor");
        
     }
 }

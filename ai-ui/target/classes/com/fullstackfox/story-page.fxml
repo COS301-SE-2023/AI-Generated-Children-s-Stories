@@ -68,7 +68,7 @@
                   </Button>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <Button fx:id="secondaryButton1" disable="true" onAction="#switchToName" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="secondaryButton1" disable="true" onAction="#switchToHome" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>

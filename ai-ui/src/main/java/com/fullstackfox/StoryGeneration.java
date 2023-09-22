@@ -12,6 +12,10 @@ public class StoryGeneration {
     ImageGeneration imageGenerator;
     private String seed;
     private String story,charURL, trailerURL,title;
+    private int pageNums;
+    private List<String> pagePrompts;
+    private ArrayList<String> inImages;
+
 //    private String charURL;
 
     public StoryGeneration(APICalls inApiLibrary, String inSeed) throws URISyntaxException {
@@ -27,6 +31,22 @@ public class StoryGeneration {
     }
     public String getStory() {
         return story;
+    }
+
+    public String getPagePrompt(int num) {
+        return (String) pagePrompts.get(num-1);
+       // return pagePrompts;
+    }
+
+      public int getPageNums() {
+        return pageNums;
+    }
+     public void decPages() {
+        pageNums=pageNums-1;
+    }
+    public void setinPages(String imageURL) {
+        inImages.add(inImages.size(),imageURL);
+        return;
     }
 
      public void setChar(String character) {
@@ -124,8 +144,12 @@ public class StoryGeneration {
         return promptList;
     }
 
-    public Story compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inParagraphs,
-            ArrayList<String> inStoryImages) {
+    //public Story compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inParagraphs,
+   //        ArrayList<String> inStoryImages) {
+    public Story compileStory(String inStoryTitle, String inStoryTrailer, String story,
+          ArrayList<String> inStoryImages) {
+            ArrayList<String> inParagraphs = this.splitParagraphs(story);
+
         Story finalStory = new Story(inStoryTitle, inStoryTrailer);
         for (int i = 0; i < inParagraphs.size(); i++) {
             Page newPage = new Page(inParagraphs.get(i), inStoryImages.get(i));
@@ -188,7 +212,9 @@ public class StoryGeneration {
         return list;
     }
 
-    public List<String> splitNumberedList(String inPromptList) {
+
+    //split image prompts --  public List<String> splitNumberedList(String inPromptList) {
+    public void splitNumberedList(String inPromptList) {
         inPromptList = this.trim(inPromptList);
         List<String> resultList = new ArrayList<>();
         String[] lines = inPromptList.split("\n");
@@ -201,8 +227,9 @@ public class StoryGeneration {
                 resultList.add(item);
             }
         }
-
-        return resultList;
+        pageNums = resultList.size();
+        pagePrompts = resultList;
+      //  return resultList;
     }
 
     public String trim(String inPrompts) {

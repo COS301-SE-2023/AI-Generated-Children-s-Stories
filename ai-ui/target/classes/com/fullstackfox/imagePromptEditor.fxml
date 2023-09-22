@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.CreateAStoryController">
+<VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.ImagePromptEditorController">
     <children>
       <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
          <children>
@@ -55,6 +54,20 @@
                   <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" ellipsisString="" prefHeight="46.0" prefWidth="973.0" text="                       2. This is the second prompt.&quot; " textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
+            <Button fx:id="generateButton" layoutX="436.0" layoutY="424.0" onAction="#getPrompts" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Prompts" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font></Button>
+            <Button fx:id="acceptButton" disable="true" layoutX="585.0" layoutY="424.0" onAction="#switchToPage" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="editButton" disable="true" layoutX="287.0" layoutY="424.0" onAction="#editPrompts" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Edit" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />
@@ -63,18 +76,6 @@
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </Pane>
-      <Pane layoutX="-100.0" maxHeight="40.0" prefHeight="80.0" prefWidth="1040.0">
-         <children>
-            <Button fx:id="secondaryButton1" layoutX="381.0" layoutY="-30.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Edit" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Arial" size="15.0" />
-               </font></Button>
-            <Button fx:id="secondaryButton11" layoutX="525.0" layoutY="-30.0" onAction="#switchToCharacter" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Arial" size="15.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+      <Pane layoutX="-100.0" maxHeight="40.0" prefHeight="80.0" prefWidth="1040.0" />
     </children>
 </VBox>

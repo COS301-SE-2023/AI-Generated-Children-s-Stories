@@ -63,7 +63,7 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="editButton" onAction="#switchToHome" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Edit" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Button fx:id="editButton" onAction="#edit" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Edit" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
