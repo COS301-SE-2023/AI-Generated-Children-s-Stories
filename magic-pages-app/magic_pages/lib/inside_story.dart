@@ -62,22 +62,22 @@ class InsideStoryState extends State<InsideStory> {
   late int randomMessageIndex = Random().nextInt(widget.messages.length-1);
 
   Completer<void> speakingCompleter = Completer<void>();
-  bool ttsSpeaking = false;
+  String ttsSpeaking = "start";
 
   //tts
   FlutterTts flutterTts = FlutterTts();
 
   Future<void> speak(String text) async {
 
-    if (!ttsSpeaking) {
+    if (ttsSpeaking != "start") {
       setState(() {
-        ttsSpeaking = true;
+        ttsSpeaking = "play";
       });
       await flutterTts.speak(text);
     } else {
       await flutterTts.pause();
       setState(() {
-        ttsSpeaking = false;
+        ttsSpeaking = "pause";
       });
     }
 
@@ -85,7 +85,7 @@ class InsideStoryState extends State<InsideStory> {
     flutterTts.setCompletionHandler(() {
       print("done speaking...");
       setState(() {
-        ttsSpeaking = false;
+        ttsSpeaking = "start";
       });
     });
   }
@@ -185,33 +185,44 @@ class InsideStoryState extends State<InsideStory> {
                 ),
               ),
 
-              //play button
-              GestureDetector(
-                onTap: () {
-                  print("reading out loud");
-
-                  speak(widget.pages[storyIndex].text);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ttsSpeaking ? Text("Pause TTS") : Text("Play TTS"),
-                ),
-              ),
-
               //text
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: AutoSizeText(
-                    widget.pages[storyIndex].getText(),
-                    maxFontSize: double.infinity,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 64,
-                      color: Color(0xFF542209),
-                      fontFamily: 'Poppins',
-                    )
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //play button
+                    GestureDetector(
+                      onTap: () {
+                        print("reading out loud");
+
+                        speak(widget.pages[storyIndex].text);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(16,19,0,16),
+                        child: ttsSpeaking == "start" ?
+                          const Image(image: AssetImage('assets/images/tts/start.webp'))
+                         : ttsSpeaking == "play" ?
+                          const Image(image: AssetImage('assets/images/tts/play.webp'), width: 30)
+                         : const Image(image: AssetImage('assets/images/tts/pause.webp'))
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                        child: AutoSizeText(
+                          widget.pages[storyIndex].getText(),
+                          maxFontSize: double.infinity,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 64,
+                            color: Color(0xFF542209),
+                            fontFamily: 'Poppins',
+                          )
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               NavBar(context),

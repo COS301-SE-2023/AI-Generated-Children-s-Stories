@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
+import 'package:magic_pages/progress_bar.dart';
 import 'package:magic_pages/story_page.dart';
 
 import 'wave_widget.dart';
 import 'button_widget.dart';
 import 'get_stories_service.dart';
 import 'heart_toggle.dart';
-import 'navbar.dart';
+import 'rounded-image.dart';
 
 /// This class represents...
 
@@ -93,7 +94,7 @@ class _TrailerPageState extends State<TrailerPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 52.0),
+                        margin: const EdgeInsets.only(top: 32.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -161,14 +162,10 @@ class _TrailerPageState extends State<TrailerPage> {
                                     ),
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.fromLTRB(
-                                        64, 32, 64, 16),
+                                    margin: const EdgeInsets.fromLTRB(48, 32, 48, 16),
                                     child: AspectRatio(
                                       aspectRatio: 1,
-                                      child: Image.network(
-                                        widget.imagePath,
-                                        fit: BoxFit.contain,
-                                      ),
+                                      child: RoundedImage(size: 300, url: widget.imagePath),
                                     ),
                                   ),
                                 ],
@@ -182,7 +179,7 @@ class _TrailerPageState extends State<TrailerPage> {
                                     maxFontSize: double.infinity,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
-                                      fontSize: 64,
+                                      fontSize: 52,
                                       color: Color(0xFF542209),
                                       fontFamily: 'NotoSerif',
                                       fontWeight: FontWeight.w700,
@@ -193,21 +190,45 @@ class _TrailerPageState extends State<TrailerPage> {
                             ]
                         ),
                       ),
-                      Container(
+                      widget.currentPage == 0
+                      ? Container(
                           margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                          child: getReadNowButton()
+                          child: getReadNowButton(message: 'READ NOW'),
                       )
+                      : Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(64, 16, 64, 0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFFD3D3D3),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: ProgressBar(totalPages: widget.totalPages, currentPage: widget.currentPage),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 16),
+                            child: getReadNowButton(message: 'KEEP READING'),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+                            child: getReadNowButton(message: 'START AGAIN'),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 32),
                     ]
                 ),
               ]
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(active: 3),
     );
   }
 
-  Widget getReadNowButton() {
+  Widget getReadNowButton({required String message}) {
     if (_insideStoryChangeNotifier.isLoading) {
       return const ButtonWidget( //disable
         message: 'ON ITS WAY',

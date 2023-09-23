@@ -80,20 +80,26 @@ class _HomeState extends State<Home> {
                           ),
                 !_homeChangeNotifier.isLoading
                     ? SizedBox(
-                        height: MediaQuery.of(context).size.height -
-                              (MediaQuery.of(context).padding.top +
-                                MediaQuery.of(context).padding.bottom + 94 + 138),
-                        child: ScrollSnapList(
+                        height: MediaQuery.of(context).size.height-(94+138),
+                        child: _currentlyReadingStory.length > 1 ? ScrollSnapList(
                           itemBuilder: _currentlyReadingListItem,
                           itemCount: _currentlyReadingStory.length,
-                          itemSize: 469,
+                          itemSize: MediaQuery.of(context).size.height-(94+138),
                           onItemFocus: (index) {},
                           dynamicItemSize: true,
                           scrollDirection: Axis.vertical,
+                        ) : BookWithProgress(
+                          title: _currentlyReadingStory[0].title,
+                          imagePath: _currentlyReadingStory[0].trailer,
+                          id: _currentlyReadingStory[0].id,
+                          currentPage: _currentlyReadingStory[0].currentPage,
+                          totalPages: _currentlyReadingStory[0].textContent.length,
+                          isLiked: _currentlyReadingStory[0].isLiked,
+                          ifSnapScroll: false,
                         ),
-                      )
-                    : const SizedBox(height: 30),
-              ]),
+                      ) : const SizedBox(height: 30),
+                ]
+              ),
             ],
           ),
         ),
@@ -111,7 +117,8 @@ class _HomeState extends State<Home> {
       id: story.id,
       currentPage: story.currentPage,
       totalPages: story.totalPages,
-      isLiked: story.isLiked
+      isLiked: story.isLiked,
+      ifSnapScroll: true,
     );
   }
 }

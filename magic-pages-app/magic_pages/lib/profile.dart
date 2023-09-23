@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:magic_pages/button_widget.dart';
 import 'package:magic_pages/wave_widget.dart';
 import 'globals.dart';
 import 'navbar.dart';
@@ -20,6 +21,10 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  bool isBackPressed = false;
+  bool isNextPressed = false;
+  bool isHomePressed = false;
+  bool isPressed = false;
   //change notifier
 
   //set story to empty story
@@ -93,31 +98,106 @@ class _ProfileState extends State<Profile> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  Column(
                     children: [
-                      MyHeader(
-                        message: 'Profile',
+                      const MyHeader(
+                        message: 'Logout',
                       ),
-                      SizedBox(height: 50),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        FilledButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                const Color(0xFFFE8D29)),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Image(
+                              image: const AssetImage('assets/images/sad-fox.png'),
+                              height: MediaQuery.of(context).size.height*0.4,
+                            ),
                           ),
-                          onPressed: () async {
-                            logout();
-                          },
-                          child: const Text('Log Out'),
-                        ),
-                      ],
-                    ),
+                          const Padding(
+                            padding: EdgeInsets.fromLTRB(64, 8, 64, 32),
+                            child: Text(
+                              'Are you sure you want to leave?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF000000),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 16),
+                              child: const ButtonWidget(
+                                message: 'NO',
+                                destination: '/home',
+                                color: 'grey',
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 16),
+                              child: GestureDetector(
+                                onTapUp: (val) {
+                                  setState(() {
+                                    isPressed = false;
+                                  });
+                                  logout();
+                                },
+                                onTapDown: (val) {
+                                  setState(() {
+                                    isPressed = true;
+                                  });
+                                },
+                                onTapCancel: () {
+                                  setState(() {
+                                    isPressed = false;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  height: 50,
+                                  width: double.infinity,
+                                  margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFFE8D29),
+                                    borderRadius: BorderRadius.circular (25),
+                                    boxShadow: isPressed ? null : [
+                                      const BoxShadow(
+                                        color: Color(0xFF84370F),
+                                        spreadRadius: 0,
+                                        blurRadius: 0,
+                                        offset: Offset(0,6),
+                                      )
+                                    ]
+                                  ),
+                                  duration: const Duration(milliseconds: 75),
+                                  child: const Center(
+                                    child: Text(
+                                      'YES',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFFFDFDFD),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),

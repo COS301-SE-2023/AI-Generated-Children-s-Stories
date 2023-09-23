@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'heart_animation_widget.dart';
+import 'rounded-image.dart';
 import 'trailer.dart';
 
 // ignore: must_be_immutable
@@ -61,10 +62,7 @@ class _BookWidget extends State<BookWidget> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Image.network(
-                    widget.imagePath,
-                    fit: BoxFit.contain,
-                  ),
+                  const RoundedImage(size: 200, url: 'widget.imagePath'),
                   Opacity(
                     opacity: isHeartAnimating ? 1 : 0,
                     child: HeartAnimationWidget(

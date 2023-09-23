@@ -18,6 +18,7 @@ class ButtonWidget extends StatefulWidget {
   final void Function(BuildContext)? updateBookItems;
   final void Function(int)? updatePage;
   final void Function(bool)? updateLiked;
+  final String? color;
 
   const ButtonWidget({
     super.key,
@@ -30,7 +31,8 @@ class ButtonWidget extends StatefulWidget {
     this.isLiked,
     this.updateBookItems,
     this.updatePage,
-    this.updateLiked
+    this.updateLiked,
+    this.color,
   });
 
   @override

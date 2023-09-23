@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
 import 'package:provider/provider.dart';
 
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<InsideStoryChangeNotifier>(
