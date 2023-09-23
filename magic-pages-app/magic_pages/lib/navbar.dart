@@ -55,39 +55,13 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/storyList');
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    widget.active == 0 ? 'assets/images/nav-icons/books.webp' : 'assets/images/nav-icons/books-outline.webp',
-                    width: 42,
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Books',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF000000),
-                    ),
-                  ),
-                ]
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: GestureDetector(
-              onTap: () {
                 Navigator.pushNamed(context, '/home');
               },
               child: Column(
                 children: [
                   Image.asset(
-                    widget.active == 1 ? 'assets/images/nav-icons/home.webp' : 'assets/images/nav-icons/home-outline.webp',
-                    width: 42,
+                    widget.active == 0 ? 'assets/images/nav-icons/home.webp' : 'assets/images/nav-icons/home-outline.webp',
+                    height: 42,
                   ),
                   const SizedBox(height: 3),
                   const Text(
@@ -112,8 +86,8 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               child: Column(
                 children: [
                   Image.asset(
-                    widget.active == 2 ? 'assets/images/nav-icons/liked.webp' : 'assets/images/nav-icons/liked-outline.webp',
-                    width: 42,
+                    widget.active == 1 ? 'assets/images/nav-icons/liked.webp' : 'assets/images/nav-icons/liked-outline.webp',
+                    height: 42,
                   ),
                   const SizedBox(height: 3),
                   const Text(
@@ -133,13 +107,39 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/storyLiked');
+                Navigator.pushNamed(context, '/storyList');
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.active == 2 ? 'assets/images/nav-icons/books.webp' : 'assets/images/nav-icons/books-outline.webp',
+                    height: 42,
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'Books',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/download');
               },
               child: Column(
                 children: [
                   Image.asset(
                     widget.active == 3 ? 'assets/images/nav-icons/download.webp' : 'assets/images/nav-icons/download-outline.webp',
-                    width: 42,
+                    height: 42,
                   ),
                   const SizedBox(height: 3),
                   const Text(

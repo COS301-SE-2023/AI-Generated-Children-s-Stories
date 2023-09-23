@@ -82,12 +82,12 @@ class SignupPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Platform.isIOS ? const IconButtonWidget(
+                                /*Platform.isIOS ? const IconButtonWidget(
                                   message: 'GET STARTED WITH APPLE',
                                   destination: '/home',
                                   image: 'assets/images/apple-logo.png',
                                   imageSize: 25,
-                                ) : const SizedBox(height: 0,),
+                                ) : const SizedBox(height: 0,),*/
                               ],
                             ),
                           ),

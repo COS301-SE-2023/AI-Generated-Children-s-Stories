@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'heart_animation_widget.dart';
 import 'inside_story.dart';
+import 'rounded-image.dart';
 import 'trailer.dart';
 
 // ignore: must_be_immutable
@@ -59,10 +60,7 @@ class _BookWidget extends State<BookWidget> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Image.asset(
-                    widget.imagePath,
-                    fit: BoxFit.contain,
-                  ),
+                  const RoundedImage(size: 200, url: 'https://media.discordapp.net/attachments/1109207920551416000/1135767659384950984/fullstackfox_The_main_character_Ben_is_a_little_boy_who_has_a_b_fa066e6f-c121-49a1-a5bf-67ca908ef34f.png?width=657&height=657'),
                   Opacity(
                     opacity: isHeartAnimating ? 1 : 0,
                     child: HeartAnimationWidget(

@@ -6,7 +6,7 @@ import 'Wave_Widget.dart';
 import 'button_widget.dart';
 import 'heart_animation_widget.dart';
 import 'inside_story.dart';
-import 'navbar.dart';
+import 'rounded-image.dart';
 
 /// This class represents...
 
@@ -48,7 +48,7 @@ class _TrailerPageState extends State<TrailerPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 52.0),
+                    margin: const EdgeInsets.only(top: 32.0),
                     child: Row( 
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -109,13 +109,10 @@ class _TrailerPageState extends State<TrailerPage> {
                                 ),
                             ),
                             Container(
-                              margin: const EdgeInsets.fromLTRB(64, 32, 64, 16),
-                              child: AspectRatio(
+                              margin: const EdgeInsets.fromLTRB(48, 32, 48, 16),
+                              child: const AspectRatio(
                                 aspectRatio: 1,
-                                child: Image.asset(
-                                  widget.imagePath,
-                                  fit: BoxFit.contain,
-                                ),
+                                child: RoundedImage(size: 300, url: 'https://media.discordapp.net/attachments/1109207920551416000/1135767659384950984/fullstackfox_The_main_character_Ben_is_a_little_boy_who_has_a_b_fa066e6f-c121-49a1-a5bf-67ca908ef34f.png?width=657&height=657'),
                               ),
                             ),
                           ],
@@ -128,7 +125,7 @@ class _TrailerPageState extends State<TrailerPage> {
                               maxFontSize: double.infinity,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 64,
+                                fontSize: 52,
                                 color: Color(0xFF542209),
                                 fontFamily: 'NotoSerif',
                                 fontWeight: FontWeight.w700,
@@ -152,7 +149,7 @@ class _TrailerPageState extends State<TrailerPage> {
                   : Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(80, 0, 80, 0),
+                        margin: const EdgeInsets.fromLTRB(64, 16, 64, 0),
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: const Color(0xFFD3D3D3),
@@ -165,7 +162,7 @@ class _TrailerPageState extends State<TrailerPage> {
                           barRadius: const Radius.circular(20),
                           backgroundColor: const Color(0xFFFFFFFF),
                           animation: true,
-                          lineHeight: 30.0,
+                          lineHeight: 35.0,
                           animationDuration: 1000,
                           percent: widget.currentPage / widget.totalPages,
                           center: Text(
@@ -248,16 +245,16 @@ class _TrailerPageState extends State<TrailerPage> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
+                  const SizedBox(height: 32),
                 ]
               ),
             ]
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(active: 3),
     );
   }
 

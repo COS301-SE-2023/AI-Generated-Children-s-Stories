@@ -24,9 +24,9 @@ class _MyHeaderState extends State<MyHeader> {
       margin: const EdgeInsets.only(top: 50.0),
       child: Center(
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
+                  widget.message != 'Logout' ? Expanded(
                     child: Container(
                       margin: const EdgeInsets.only(left: 16.0),
                       child: Transform.rotate(
@@ -37,9 +37,9 @@ class _MyHeaderState extends State<MyHeader> {
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 3,
+                  ) : const SizedBox(),
+                   widget.message != 'Logout' ? Expanded(
+                    flex: widget.message != 'Logout' ? 3 : 2,
                     child: Text(
                       widget.message,
                       textAlign: TextAlign.center,
@@ -50,19 +50,29 @@ class _MyHeaderState extends State<MyHeader> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                  Expanded(
+                  ) : const SizedBox(),
+                  widget.message != 'Logout' ? Expanded(
                     child: GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, '/profile');
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Image(
-                            image: AssetImage('assets/images/Profile.png'),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: widget.message == 'Logout' ? const Image(
+                            image: AssetImage('assets/images/nav-icons/signout.webp'),
+                            width: 40,
+                          ) : const Image(
+                            image: AssetImage('assets/images/nav-icons/signout-outline.webp'),
                             width: 40,
                           ),
                         ),
+                    ),
+                  )
+                  : Container(
+                    margin: const EdgeInsets.only(right: 16),
+                    child: const Image(
+                      image: AssetImage('assets/images/nav-icons/signout.webp'),
+                      width: 40,
                     ),
                   ),
                 ]

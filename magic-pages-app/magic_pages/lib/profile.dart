@@ -18,6 +18,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  bool isBackPressed = false;
+  bool isNextPressed = false;
+  bool isHomePressed = false;
   //change notifier
 
   //set story to empty story
@@ -37,17 +40,58 @@ class _ProfileState extends State<Profile> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  const MyHeader(
+                    message: 'Logout',
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      MyHeader(
-                        message: 'Profile',
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Image(
+                          image: const AssetImage('assets/images/sad-fox.png'),
+                          height: MediaQuery.of(context).size.height*0.4,
+                        ),
                       ),
-                      SizedBox(height: 50),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(64, 8, 64, 32),
+                        child: Text(
+                          'Are you sure you want to leave?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF000000),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: const ButtonWidget(destination: '/signup', message: 'LOGOUT',),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          child: const ButtonWidget(
+                            message: 'NO',
+                            destination: '/home',
+                            color: 'grey',
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          child: const ButtonWidget(
+                            message: 'YES',
+                            destination: '/splash',
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -55,7 +99,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(active: 3),
+      bottomNavigationBar: const NavbarWidget(active: 4),
     );
   }
 }

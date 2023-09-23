@@ -10,19 +10,19 @@ import 'get_stories_service.dart';
 /// The UI contains a header and a list of stories.
 /// The list of stories shows the user the list of stories they can read.
 
-class StoryLiked extends StatefulWidget {
-  const StoryLiked({super.key});
+class Download extends StatefulWidget {
+  const Download({super.key});
 
   @override
-  State<StoryLiked> createState() => _StoryLikedState();
+  State<Download> createState() => _DownloadState();
 
   //for testing purposes
   isLoading() {
-    return _StoryLikedState()._storyListChangeNotifier.isLoading;
+    return _DownloadState()._storyListChangeNotifier.isLoading;
   }
 }
 
-class _StoryLikedState extends State<StoryLiked> {
+class _DownloadState extends State<Download> {
   late List<Story> _stories;
 
   //change notifier

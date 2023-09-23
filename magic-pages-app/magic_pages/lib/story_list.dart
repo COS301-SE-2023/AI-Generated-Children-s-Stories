@@ -154,7 +154,7 @@ class _StoryListState extends State<StoryList> {
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(active: 0),
+      bottomNavigationBar: const NavbarWidget(active: 2),
     );
     
     // Scaffold(

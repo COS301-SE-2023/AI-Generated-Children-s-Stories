@@ -154,7 +154,7 @@ class _StoryLikedState extends State<StoryLiked> {
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(active: 2),
+      bottomNavigationBar: const NavbarWidget(active: 1),
     );
     
     // Scaffold(

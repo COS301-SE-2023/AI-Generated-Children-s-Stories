@@ -7,13 +7,15 @@ class ButtonWidget extends StatefulWidget {
   final String destination;
   final int? storyId;
   final int? pageId;
+  final String? color;
   
   const ButtonWidget( {
     super.key, 
     required this.message,
     required this.destination, 
     this.storyId, 
-    this.pageId
+    this.pageId,
+    this.color,
   });
 
   @override
@@ -53,7 +55,7 @@ class _ButtonWidget extends State<ButtonWidget> {
         height: 50,
         width: double.infinity,
         margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),
-        decoration: BoxDecoration(
+        decoration: widget.color != 'grey' ? BoxDecoration(
           color: const Color(0xFFFE8D29),
           borderRadius: BorderRadius.circular (25),
           boxShadow: isPressed ? null : [
@@ -64,16 +66,31 @@ class _ButtonWidget extends State<ButtonWidget> {
               offset: Offset(0,6),
             )
           ]
+        ) : BoxDecoration(
+          color: const Color(0xFFFDFDFD),
+          borderRadius: BorderRadius.circular (25),
+          border: Border.all(
+            color: const Color(0xFFD3D3D3),
+            width: 2,
+          ),
+          boxShadow: isPressed ? null : [
+            const BoxShadow(
+              color: Color(0xFFD3D3D3),
+              spreadRadius: 0,
+              blurRadius: 0,
+              offset: Offset(0,6),
+            )
+          ]
         ),
         duration: const Duration(milliseconds: 75),
         child: Center(
           child: Text(
             widget.message,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
-              color: Color(0xFFFDFDFD),
+              color: widget.color != 'grey' ? const Color(0xFFFDFDFD) : const Color(0xFFFE8D29),
             ),
           ),
         ),

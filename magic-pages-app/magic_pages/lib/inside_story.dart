@@ -186,18 +186,35 @@ class InsideStoryState extends State<InsideStory> {
                 ),
               ),
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: AutoSizeText(
-                    widget.storyText[storyIndex],
-                    maxFontSize: double.infinity,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 64,
-                      color: Color(0xFF542209),
-                      fontFamily: 'Poppins',
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        print('tap');
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(16,19,0,16),
+                        child: const Image(image: AssetImage('assets/images/tts/start.webp'), width: 30),
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                        child: AutoSizeText(
+                          widget.storyText[storyIndex],
+                          maxFontSize: double.infinity,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            fontSize: 64,
+                            color: Color(0xFF542209),
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -323,7 +340,7 @@ class InsideStoryState extends State<InsideStory> {
                           ),
                           duration: const Duration(milliseconds: 75),
                           child: const Center(
-                            child: Image(image: AssetImage('assets/images/home.png'), width: 35),
+                            child: Image(image: AssetImage('assets/images/nav-icons/home.webp'), width: 35),
                           ),
                         ),
                       ),

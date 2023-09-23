@@ -77,26 +77,34 @@ class _HomeState extends State<Home> {
                   : const MyHeader(
                     message: 'Welcome back!\nKeep reading your books.',
                   ),
+//Add to backend *************************************************************************************************************
                   !_homeChangeNotifier.isLoading
                   ? SizedBox(
-                    height: MediaQuery.of(context).size.height-(MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom+94+138),
-                    child: ScrollSnapList(
-                        itemBuilder: _currentlyReadingListItem,
-                        itemCount: _currentlyReadingStory.length,
-                        itemSize: 469,
-                        onItemFocus: (index) {},
-                        dynamicItemSize: true,
-                        scrollDirection: Axis.vertical,
-                      ),
-                  )
-                  : const SizedBox(height: 30),
+                    height: MediaQuery.of(context).size.height-(94+138),
+                    child: _currentlyReadingStory.length > 1 ? ScrollSnapList(
+                      itemBuilder: _currentlyReadingListItem,
+                      itemCount: _currentlyReadingStory.length,
+                      itemSize: MediaQuery.of(context).size.height-(94+138),
+                      onItemFocus: (index) {},
+                      dynamicItemSize: true,
+                      scrollDirection: Axis.vertical,
+                    ) : BookWithProgress(
+                      title: _currentlyReadingStory[0].title,
+                      imagePath: _currentlyReadingStory[0].coverUrl,
+                      id: _currentlyReadingStory[0].id,
+                      currentPage: _currentlyReadingStory[0].currentPage,
+                      totalPages: _currentlyReadingStory[0].textContent.length,
+                      ifSnapScroll: false,
+                    ),
+                  ) : const SizedBox(height: 30),
+//
                 ]
               ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(active: 1),
+      bottomNavigationBar: const NavbarWidget(active: 0),
     );
   }
 
@@ -108,6 +116,7 @@ class _HomeState extends State<Home> {
       id: story.id,
       currentPage: story.currentPage,
       totalPages: story.textContent.length,
+      ifSnapScroll: true,
     );
   }
 }

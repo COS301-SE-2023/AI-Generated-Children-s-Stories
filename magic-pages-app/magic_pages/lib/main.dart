@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:magic_pages/end_of_story.dart';
 import 'package:provider/provider.dart';
 
 import 'get_stories_service.dart';
 import 'inside_story.dart';
 import 'login_page.dart';
+import 'downloads.dart';
 import 'signup_page.dart';
 import 'story_list.dart';
 import 'story_liked.dart';
@@ -49,6 +51,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+//Add to backend **************************************************************************************************
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+//
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Magic Pages',
@@ -67,6 +72,7 @@ class MyApp extends StatelessWidget {
           '/home': (context) => const Home(),
           '/storyLiked': (context) => const StoryLiked(),
           '/profile': (context) => const Profile(),
+          '/download': (context) => const Download(),
         });
   }
 }
