@@ -62,7 +62,7 @@ class _BookWidget extends State<BookWidget> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  const RoundedImage(size: 200, url: 'widget.imagePath'),
+                  RoundedImage(size: 200, url: widget.imagePath),
                   Opacity(
                     opacity: isHeartAnimating ? 1 : 0,
                     child: HeartAnimationWidget(
