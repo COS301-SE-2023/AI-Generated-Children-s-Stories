@@ -199,13 +199,12 @@ class SignupPage extends StatelessWidget {
                                       ),
                                     ),
 
-
-                                    Platform.isIOS ? const IconButtonWidget(
-                                      message: 'GET STARTED WITH APPLE',
-                                      destination: '/home',
-                                      image: 'assets/images/apple-logo.png',
-                                      imageSize: 25,
-                                    ) : const SizedBox(height: 0,),
+                                    // Platform.isIOS ? const IconButtonWidget(
+                                    //   message: 'GET STARTED WITH APPLE',
+                                    //   destination: '/home',
+                                    //   image: 'assets/images/apple-logo.png',
+                                    //   imageSize: 25,
+                                    // ) : const SizedBox(height: 0,),
                                   ],
                                 ),
                               ),
@@ -233,7 +232,28 @@ class SignupPage extends StatelessWidget {
                                           decoration: TextDecoration.underline,
                                         ),
                                         recognizer: new TapGestureRecognizer()
-                                          ..onTap = () => Navigator.pushNamed(context, "/termsAndConditions"),
+                                          ..onTap = () => showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return const AlertDialog(
+                                                  backgroundColor: Color(0xFFFFF3E9),
+                                                  title: Text(
+                                                    'Terms and Conditions',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  content: Text(
+                                                    '...',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                          ),
                                       ),
                                       const TextSpan(
                                         text: 'and ',
@@ -254,7 +274,28 @@ class SignupPage extends StatelessWidget {
                                           decoration: TextDecoration.underline,
                                         ),
                                         recognizer: new TapGestureRecognizer()
-                                          ..onTap = () => Navigator.pushNamed(context, "/privacyPolicy"),
+                                          ..onTap = () => showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return const AlertDialog(
+                                                  backgroundColor: Color(0xFFFFF3E9),
+                                                  title: Text(
+                                                    'Privacy Policy',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  content: Text(
+                                                    '...',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                          ),
                                       ),
                                     ],
                                   ),

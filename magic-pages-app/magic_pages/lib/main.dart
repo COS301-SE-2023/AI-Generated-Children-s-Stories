@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
-import 'package:magic_pages/privacy_policy.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -12,7 +12,6 @@ import 'story_liked.dart';
 import 'home.dart';
 import 'profile.dart';
 import 'splash.dart';
-import 'terms_and_conditions.dart';
 
 import 'story_list_change_notifier.dart';
 
@@ -82,6 +81,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<InsideStoryChangeNotifier>(
@@ -105,8 +105,6 @@ class MyApp extends StatelessWidget {
               '/home': (context) => const Home(),
               '/storyLiked': (context) => const StoryLiked(),
               '/profile': (context) => const Profile(),
-              '/termsAndConditions': (context) => const TermsAndConditions(),
-              '/privacyPolicy': (context) => const PrivacyPolicy(),
             })
     );
   }
