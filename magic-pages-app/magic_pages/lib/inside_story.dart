@@ -481,7 +481,7 @@ class InsideStoryState extends State<InsideStory> {
                       color: Color(0xFF542209),
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
-                      fontFamily: 'Poppins'
+                      fontFamily: 'Poppins' 
                   ),
                 ),
                 progressColor: const Color(0xFFFE8D29),
