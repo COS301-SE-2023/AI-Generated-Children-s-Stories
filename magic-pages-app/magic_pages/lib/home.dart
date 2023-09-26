@@ -88,7 +88,8 @@ class _HomeState extends State<Home> {
                           onItemFocus: (index) {},
                           dynamicItemSize: true,
                           scrollDirection: Axis.vertical,
-                        ) : BookWithProgress(
+                        ) : _currentlyReadingStory.length > 0 ?
+                        BookWithProgress(
                           title: _currentlyReadingStory[0].title,
                           imagePath: _currentlyReadingStory[0].trailer,
                           id: _currentlyReadingStory[0].id,
@@ -96,7 +97,7 @@ class _HomeState extends State<Home> {
                           totalPages: _currentlyReadingStory[0].textContent.length,
                           isLiked: _currentlyReadingStory[0].isLiked,
                           ifSnapScroll: false,
-                        ),
+                        ) : SizedBox(height: 0),
                       ) : const SizedBox(height: 30),
                 ]
               ),
