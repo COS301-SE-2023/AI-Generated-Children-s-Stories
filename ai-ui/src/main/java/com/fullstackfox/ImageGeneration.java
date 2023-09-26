@@ -1,9 +1,11 @@
 package com.fullstackfox;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.ArrayList;
-import org.json.*;
+import java.util.List;
 
 public class ImageGeneration {
 
@@ -97,11 +99,11 @@ public class ImageGeneration {
     }
 
     private void urlUnitTest(String inUrl) {
+        System.out.println(inUrl);
         if (inUrl == "") {
             System.out.println("Message recived not an image");
         } else {
-            String fileType = inUrl.substring(inUrl.length() - 3);
-            if (fileType.compareTo("png") == 0) {
+            if (inUrl.contains("fullstackfox") && inUrl.contains(".png")) {
                 System.out.println("Message recived is a complete image");
             } else {
                 System.out.println("Message recived is not a complete image");

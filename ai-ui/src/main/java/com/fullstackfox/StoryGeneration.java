@@ -1,189 +1,125 @@
 package com.fullstackfox;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.*;
-
 public class StoryGeneration {
-    APICalls callApi;
-    PromptProcessor processPrompt;
-    ImageGeneration imageGenerator;
-    private String seed;
-    private String story,charURL, trailerURL,title;
-    private int pageNums;
-    private List<String> pagePrompts;
-    private ArrayList<String> inImages;
+    private static StoryGeneration instance;
+    private static APICalls  callApi;
+    private static PromptProcessor processPrompt;
+    private static ImageGeneration imageGenerator;
+    private static String story;
+    private static String characterImageUrl;
 
-//    private String charURL;
-
-    public StoryGeneration(APICalls inApiLibrary, String inSeed) throws URISyntaxException {
-        callApi = inApiLibrary;
-        imageGenerator = new ImageGeneration(inApiLibrary);
-        processPrompt = new PromptProcessor(inSeed);
-        seed = inSeed;
+    private StoryGeneration() throws URISyntaxException {
+        callApi = new APICalls();
+        imageGenerator = new ImageGeneration(callApi);
+        processPrompt = new PromptProcessor();
     }
 
-    public void setStory(String finalStory) {
-        story = finalStory;
-        return;
-    }
-    public String getStory() {
-        return story;
-    }
-
-    public String getPagePrompt(int num) {
-        return (String) pagePrompts.get(num-1);
-       // return pagePrompts;
-    }
-
-      public int getPageNums() {
-        return pageNums;
-    }
-     public void decPages() {
-        pageNums=pageNums-1;
-    }
-    public void setinPages(String imageURL) {
-        inImages.add(inImages.size(),imageURL);
-        return;
-    }
-
-     public void setChar(String character) {
-        charURL = character;
-        return;
-    }
-    public String getChar() {
-        return charURL;
-    }
-
-
-    public void setTrailer(String trailer) {
-        trailerURL = trailer;
-        return;
-    }
-    public String getTrailer() {
-        return trailerURL;
-    }
-
-         public void setTitle(String name) {
-        title= name;
-        return;
-    }
-    public String getTitle() {
-        return title;
+    public static StoryGeneration getInstance() throws URISyntaxException {
+        if (instance == null) {
+            instance = new StoryGeneration();
+        }
+        return instance;
     }
 
     // Generate story text
-    public String storyInput(ArrayList<String> inputList) {
+    public static String storyInput(ArrayList<String> inputList) {
+
+        for(String ls : inputList){
+            System.out.println(ls);
+        }
+
         String currentPrompt = processPrompt.storyPrompt(inputList);
-        story = this.storyText(currentPrompt);
-        return story;
+        return storyText(currentPrompt);
     }
 
-    public String storyText(String inPrompt) {
+    public static String storyText(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
-        String story = this.extractContent(response);
-        return story;
+        return extractContent(response);
     }
 
-    public String storyTitle(String story) {
+    public static String storyTitle(String story) {
         String currentPrompt = processPrompt.storyTitlePrompt(story);
         String response = callApi.promptGPT(currentPrompt);
-        String storyTitle = this.extractContent(response);
-        return storyTitle;
+        return extractContent(response);
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> characterImage(String story) throws URISyntaxException {
+    public static ArrayList<String> characterImage(String story) throws URISyntaxException {
         String currentPrompt = processPrompt.characterDescriptionPrompt(story);
         String response = callApi.promptGPT(currentPrompt);
-        String characterPrompt = processPrompt.characterImagePrompt(this.extractContent(response));
-        ArrayList<String> characterImageDetails = imageGenerator.generateImages(characterPrompt);
-        return characterImageDetails;
+        String characterPrompt = processPrompt.characterImagePrompt(extractContent(response));
+        return imageGenerator.generateImages(characterPrompt);
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> characterImageCustom(String prompt) throws URISyntaxException {
+    public static ArrayList<String> characterImageCustom(String prompt) throws URISyntaxException {
         String characterPrompt = processPrompt.characterImagePrompt(prompt);
-        ArrayList<String> characterImageDetails = imageGenerator.generateImages(characterPrompt);
-        return characterImageDetails;
+        return imageGenerator.generateImages(characterPrompt);
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> storyTrailerImage(String story, String inCharacterImageUrl) throws URISyntaxException {
+    public static ArrayList<String> storyTrailerImage(String story) throws URISyntaxException {
         String currentPrompt = processPrompt.storyTrailerPrompt(story);
         String response = callApi.promptGPT(currentPrompt);
-        String trailerPrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, this.extractContent(response));
-        ArrayList<String> trailerUrl = imageGenerator.generateImages(trailerPrompt);
-        return trailerUrl;
+        String trailerPrompt = processPrompt.storyImagePrompt(characterImageUrl, extractContent(response));
+        return imageGenerator.generateImages(trailerPrompt);
     }
 
-    public ArrayList<String> storyTrailerImageCustom(String inCharacterImageUrl,String prompt) throws URISyntaxException {
-        String trailerPrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, prompt);
-        ArrayList<String> trailerUrl = imageGenerator.generateImages(trailerPrompt);
-        return trailerUrl;
+    public static ArrayList<String> storyTrailerImageCustom(String prompt) throws URISyntaxException {
+        String trailerPrompt = processPrompt.storyImagePrompt(characterImageUrl, prompt);
+        return imageGenerator.generateImages(trailerPrompt);
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> pageImage(String inPrompt, String inCharacterImageUrl) throws URISyntaxException {
-        String pagePrompt = processPrompt.storyImagePrompt(inCharacterImageUrl, inPrompt);
-        ArrayList<String> pageImageDetails = imageGenerator.generateImages(pagePrompt);
-        return pageImageDetails;
+    public ArrayList<String> pageImage(String inPrompt) throws URISyntaxException {
+        String pagePrompt = processPrompt.storyImagePrompt(characterImageUrl, inPrompt);
+        return imageGenerator.generateImages(pagePrompt);
     }
 
     // Call this to upscale a image
-    public String imageUpscale(ArrayList<String> inImageDetails, String inUpscale) throws URISyntaxException {
-        String upscaledImage = imageGenerator.upscaleImage(inImageDetails, inUpscale);
-        return upscaledImage;
+    public static String imageUpscale(ArrayList<String> inImageDetails, String inUpscale) throws URISyntaxException {
+        return imageGenerator.upscaleImage(inImageDetails, inUpscale);
     }
 
-    public String storyImagePrompts(String inPrompt) {
+    public static String storyImagePrompts(String inPrompt) {
         String response = callApi.promptGPT(inPrompt);
-        String promptList = this.extractContent(response);
-        return promptList;
+        return extractContent(response);
     }
 
-    //public Story compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inParagraphs,
-   //        ArrayList<String> inStoryImages) {
-    public Story compileStory(String inStoryTitle, String inStoryTrailer, String story,
-          ArrayList<String> inStoryImages) {
-            ArrayList<String> inParagraphs = this.splitParagraphs(story);
-
-        Story finalStory = new Story(inStoryTitle, inStoryTrailer);
+    public static void compileStory(String inStoryTitle, String inStoryTrailer, String story, ArrayList<String> inStoryImages) {
+        ArrayList<String> inParagraphs = splitParagraphs(story);
+        Story.setTitle(inStoryTitle);
+        Story.setTrailer(inStoryTrailer);
         for (int i = 0; i < inParagraphs.size(); i++) {
             Page newPage = new Page(inParagraphs.get(i), inStoryImages.get(i));
-            finalStory.addPage(newPage);
+            Story.addPage(newPage);
         }
-        return finalStory;
     }
 
-    public String extractContent(String inResponseBody) {
-        String finishReason = this.finish_reason(inResponseBody);
+    public static String extractContent(String inResponseBody) {
+        String finishReason = finish_reason(inResponseBody);
         if (finishReason.compareTo("stop") == 0) {
             JSONObject responseJson = new JSONObject(inResponseBody);
             JSONArray choicesArray = responseJson.getJSONArray("choices");
             JSONObject messageObject = choicesArray.getJSONObject(0).getJSONObject("message");
-            String content = messageObject.getString("content");
-            return content;
+            return messageObject.getString("content");
         }
         return null;
     }
 
-    public String finish_reason(String inResponseBody) {
+    public static String finish_reason(String inResponseBody) {
         JSONObject responseJson = new JSONObject(inResponseBody);
-        // JSONArray choicesArray = responseJson.getJSONArray("choices");
-        // JSONObject firstChoice = choicesArray.getJSONObject(0);
-        // String finishReason = firstChoice.getString("finish_reason");
-        // System.out.println("Finish Reason: " + finishReason + ". Test Passed.");
-        // return finishReason;
-
         if (responseJson.has("choices")) {
             JSONArray choicesArray = responseJson.getJSONArray("choices");
-
-            if (choicesArray.length() > 0) {
+            if (!choicesArray.isEmpty()) {
                 JSONObject firstChoice = choicesArray.getJSONObject(0);
-
                 if (firstChoice.has("finish_reason")) {
                     String finishReason = firstChoice.getString("finish_reason");
                     System.out.println("Finish Reason: " + finishReason + ". Test Passed.");
@@ -191,7 +127,6 @@ public class StoryGeneration {
                 }
             }
         }
-
         System.out.println("No finish reason found in the JSON response.");
         return "";
     }
@@ -199,10 +134,9 @@ public class StoryGeneration {
     /// Splits the story into paragraphs
     /// @param inStory The story to split
     /// @return An ArrayList of paragraphs
-    public ArrayList<String> splitParagraphs(String inStory) {
+    public static ArrayList<String> splitParagraphs(String inStory) {
         String[] paragraphs = inStory.split("\n");
         ArrayList<String> list = new ArrayList<>();
-
         for (String paragraph : paragraphs) {
             String trimmedParagraph = paragraph.trim();
             if (!trimmedParagraph.isEmpty()) {
@@ -212,13 +146,10 @@ public class StoryGeneration {
         return list;
     }
 
-
-    //split image prompts --  public List<String> splitNumberedList(String inPromptList) {
-    public void splitNumberedList(String inPromptList) {
-        inPromptList = this.trim(inPromptList);
+    public static List<String> splitNumberedList(String inPromptList) {
+        inPromptList = trim(inPromptList);
         List<String> resultList = new ArrayList<>();
         String[] lines = inPromptList.split("\n");
-
         for (String line : lines) {
             int dotIndex = line.indexOf(".");
             if (dotIndex != -1) {
@@ -227,12 +158,10 @@ public class StoryGeneration {
                 resultList.add(item);
             }
         }
-        pageNums = resultList.size();
-        pagePrompts = resultList;
-      //  return resultList;
+        return resultList;
     }
 
-    public String trim(String inPrompts) {
+    public static String trim(String inPrompts) {
         int index = inPrompts.indexOf("1");
 
         if (index != -1) {
@@ -241,5 +170,21 @@ public class StoryGeneration {
             System.out.println("ChatGPT returned non numbered list");
         }
         return inPrompts;
+    }
+
+    public static String getStory() {
+        return story;
+    }
+
+    public static void setStory(String inStory) {
+        story = inStory;
+    }
+
+    public static String getCharacter() {
+        return characterImageUrl;
+    }
+
+    public static void setCharacter(String character) {
+        characterImageUrl = character;
     }
 }

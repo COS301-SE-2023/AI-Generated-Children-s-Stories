@@ -1,16 +1,20 @@
 package com.fullstackfox;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 
-import javafx.fxml.FXML;
+public class CreateAStoryController {
 
-import javafx.scene.control.*;
+    StoryGeneration storyGeneration;
 
-
-public class CreateAStoryController{
     @FXML
     private Button generationButton;
     @FXML
@@ -21,7 +25,6 @@ public class CreateAStoryController{
     private Slider lenSlider;
     @FXML
     private TextArea storyOut;
-
     @FXML
     private Button editButton;
     @FXML
@@ -31,79 +34,53 @@ public class CreateAStoryController{
     @FXML
     private Button regenButton;
 
-    Processors pro = Processors.getInstance();
-    StoryGeneration gen = pro.getStoryGeneration();
+    public CreateAStoryController() throws URISyntaxException {
+        storyGeneration = StoryGeneration.getInstance();
+    }
 
     @FXML
     private void switchToHome() throws IOException {
-            App.setRoot("home");
-        
+        App.setRoot("home");
     }
 
     @FXML
     private void clearStory() throws IOException {
-            App.setRoot("create-a-story");
+        App.setRoot("create-a-story");
     }
 
-        @FXML
+    @FXML
     private void switchToCharacter() throws IOException {
-       
-       gen.setStory(storyOut.getText());
-      // System.out.println(storyOut.getText());
-            App.setRoot("character");
+        StoryGeneration.setStory(storyOut.getText());
+        App.setRoot("character");
     }
 
-         @FXML
+    @FXML
     private void edit() throws IOException {
-        // storyPrompt.setEditable(false);
-        // age.setEditable(false);
-        // lenSlider.setDisable(true);
         storyOut.setEditable(true);
     }
 
 
     @FXML
     private void getPrompt() throws IOException, URISyntaxException {
-         generationButton.setDisable(true);
+        generationButton.setDisable(true);
         ArrayList<String> promptList = new ArrayList<>();
-       // promptList.add("default prompt");
-   
-        if (storyPrompt.getText() != null && !storyPrompt.getText().isEmpty()) {
-            String prompt = storyPrompt.getText();
-            promptList.add(prompt);
-          //  System.out.println(prompt);
-        }
-    
-        if (age.getText() != null && !age.getText().isEmpty()) {
-            try {
-                Integer.parseInt(age.getText());
-                String agePrompt = age.getText() ;
-                String len = "" + Math.round(lenSlider.getValue());
-                promptList.add(agePrompt);
-                promptList.add(len);
-               // System.out.println(agePrompt);
-            } catch (NumberFormatException e) {
-                System.out.println("Age was not a number!");
-            }
-        }
-    
-        setStory(promptList);
+        promptList.add(storyPrompt.getText());
+        promptList.add(age.getText());
+        promptList.add("" + Math.round(lenSlider.getValue()));
+        this.setStory(promptList);
     }
 
-        @FXML
-    private void setStory(ArrayList <String> inStory) throws IOException{
-           
-     String story = "Story Failed to Generate";
-     
-     if(inStory != null){story =gen.storyInput(inStory);}
-     storyOut.setText(story);
-     //generationButton.setDisable(true);
-     editButton.setDisable(false);
-     acceptButton.setDisable(false);
-     regenButton.setDisable(false);
-     discardButton.setDisable(false);
+    @FXML
+    private void setStory(ArrayList<String> inPromptList) throws URISyntaxException {
+        String story = "Story Failed to Generate";
+        if (inPromptList != null) {
+            String prompt = StoryGeneration.storyInput(inPromptList);
+            story = StoryGeneration.storyText(prompt);
+        }
+        storyOut.setText(story);
+        editButton.setDisable(false);
+        acceptButton.setDisable(false);
+        regenButton.setDisable(false);
+        discardButton.setDisable(false);
     }
-
-
-
 }

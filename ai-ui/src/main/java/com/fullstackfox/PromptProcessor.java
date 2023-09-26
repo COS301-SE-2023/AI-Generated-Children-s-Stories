@@ -6,8 +6,8 @@ public class PromptProcessor {
 
     String seed;
 
-    public PromptProcessor(String inSeed) {
-        seed = inSeed;
+    public PromptProcessor() {
+        seed = "123";
     }
 
     // ChatGPT ---

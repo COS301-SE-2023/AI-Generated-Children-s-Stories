@@ -1,15 +1,16 @@
 package com.fullstackfox;
 
-import java.net.URISyntaxException;
 import okhttp3.*;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class APICalls {
     ArrayList<String> configList;
 
-    public APICalls(ArrayList<String> inConfigList) throws URISyntaxException {
-        configList = inConfigList;
+    public APICalls() {
+        JsonProcessor jsonProcessor = new JsonProcessor();
+        configList = jsonProcessor.readJson();
     }
 
     public String getMessage() {
@@ -28,7 +29,6 @@ public class APICalls {
             }
             return response.body().string();
         } catch (Exception e) {
-
             e.printStackTrace();
         }
         return null;
@@ -122,7 +122,7 @@ public class APICalls {
                 .post(body)
                 .addHeader("Authorization", "Bearer " + configList.get(6))
                 .build();
-        
+
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 System.out.println(response.body().string());
