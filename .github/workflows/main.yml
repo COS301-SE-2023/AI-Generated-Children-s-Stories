@@ -35,4 +35,3 @@ jobs:
         
       - name: Run tests
         run: cd ai-story-generation-app && mvn --batch-mode --update-snapshots package
-
