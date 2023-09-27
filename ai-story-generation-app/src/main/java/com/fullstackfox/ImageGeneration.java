@@ -1,7 +1,11 @@
-package fullstack_fox;
+package com.fullstackfox;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
-import org.json.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageGeneration {
 
@@ -11,17 +15,28 @@ public class ImageGeneration {
         callApi = inApiLibrary;
     }
 
-    public String generateImage(String inPromt) throws URISyntaxException {
+    public ArrayList<String> generateImage(String inPrompt) {
+        System.out.println("1");
         String lastMessageID = this.latestMessageID();
-        callApi.postPrompt(inPromt);
+        callApi.postPrompt(inPrompt);
+        System.out.println("2");
         this.imageGenDelay(lastMessageID);
         String message = callApi.getMessage();
         String imageURL = this.extractImageUrl(message);
+        System.out.println("3");
         lastMessageID = this.latestMessageID();
-        callApi.postUpscale(imageURL, lastMessageID);
-        this.imageGenDelay(lastMessageID);
-        message = callApi.getMessage();
-        imageURL = this.extractImageUrl(message);
+        ArrayList<String> result = new ArrayList<>();
+        result.add(imageURL);
+        result.add(lastMessageID);
+        System.out.println("4");
+        return result;
+    }
+
+    public String upscaleImage(List<String> inImageDetails, String inUpscale) throws URISyntaxException {
+        callApi.postUpscale(inImageDetails.get(0), inImageDetails.get(1), inUpscale);
+        this.imageGenDelay(inImageDetails.get(1));
+        String message = callApi.getMessage();
+        String imageURL = this.extractImageUrl(message);
         return imageURL;
     }
 
@@ -40,8 +55,7 @@ public class ImageGeneration {
                     url = this.extractImageUrl(message);
                     if (url != null) {
                         this.urlUnitTest(url);
-                        String fileType = url.substring(url.length() - 3);
-                        if (fileType.compareTo("png") == 0) {
+                        if (url.contains("fullstackfox") && url.contains(".png")) {
                             check = false;
                         }
                     }
@@ -49,7 +63,7 @@ public class ImageGeneration {
                         try {
                             Thread.sleep(5000);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
+
                             e.printStackTrace();
                         }
                     }
@@ -58,7 +72,7 @@ public class ImageGeneration {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
+
                     e.printStackTrace();
                 }
             }
@@ -88,11 +102,11 @@ public class ImageGeneration {
     }
 
     private void urlUnitTest(String inUrl) {
+        System.out.println(inUrl);
         if (inUrl == "") {
             System.out.println("Message recived not an image");
         } else {
-            String fileType = inUrl.substring(inUrl.length() - 3);
-            if (fileType.compareTo("png") == 0) {
+            if (inUrl.contains("fullstackfox") && inUrl.contains(".png")) {
                 System.out.println("Message recived is a complete image");
             } else {
                 System.out.println("Message recived is not a complete image");

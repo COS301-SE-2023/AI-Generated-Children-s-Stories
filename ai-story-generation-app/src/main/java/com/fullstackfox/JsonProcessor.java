@@ -1,4 +1,8 @@
-package fullstack_fox;
+package com.fullstackfox;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,23 +11,22 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
-import org.json.*;
+import java.util.ArrayList;
+
 
 public class JsonProcessor {
 
     public JsonProcessor() {
     }
 
-    public ArrayList<String> readJson(String inFName) {
-        try (InputStream inputStream = this.getClass().getResourceAsStream("resources/" + inFName)) {
+    public ArrayList<String> readJson() {
+        try (InputStream inputStream = this.getClass().getResourceAsStream("config.json")) {
             if (inputStream != null) {
                 // Read the resource using BufferedReader or any other appropriate method
                 try (BufferedReader reader = new BufferedReader(
                         new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                     JSONTokener tokener = new JSONTokener(reader);
                     JSONObject jsonObject = new JSONObject(tokener);
-
                     ArrayList<String> configList = new ArrayList<>();
                     configList.add(jsonObject.optString("applicationID"));
                     configList.add(jsonObject.optString("channelID"));
@@ -32,12 +35,12 @@ public class JsonProcessor {
                     configList.add(jsonObject.optString("botAuthorization"));
                     configList.add(jsonObject.optString("userAuthorization"));
                     configList.add(jsonObject.optString("chatGPTKey"));
-
+                    configList.add(jsonObject.optString("midjourneySeed"));
                     return configList;
                 }
             } else {
                 // The resource could not be found
-                System.out.println("Resource not found: " + inFName);
+                System.out.println("Resource not found: config.json");
             }
         } catch (IOException e) {
             // Handle any potential IO exceptions
@@ -48,11 +51,10 @@ public class JsonProcessor {
 
     public void writeStoryToJson(Story story, String inFName) {
         JSONObject jsonStory = new JSONObject();
-        jsonStory.put("title", story.title);
-        // jsonStory.put("size", story.numPages);
-        jsonStory.put("trailer", story.trailer);
+        jsonStory.put("title", Story.getTitle());
+        jsonStory.put("trailer", Story.getTrailer());
         JSONArray jsonPages = new JSONArray();
-        for (Page page : story.pages) {
+        for (Page page : Story.getPages()) {
             JSONObject jsonPage = new JSONObject();
             jsonPage.put("image", page.getImageUrl());
             jsonPage.put("text", page.getContent());

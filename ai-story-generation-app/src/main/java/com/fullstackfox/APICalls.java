@@ -1,34 +1,16 @@
-package fullstack_fox;
+package com.fullstackfox;
 
-import java.net.URISyntaxException;
 import okhttp3.*;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.JOptionPane;
-
 public class APICalls {
-    // Config List Content
-    // 0: Application ID
-    // 1: Channel ID
-    // 2: Guild ID
-    // 3: Session ID
-    // 4: Bot Authorization
-    // 5: User Authorization
     ArrayList<String> configList;
 
-    public APICalls(JsonProcessor jProcessor, String inFName) throws URISyntaxException {
-        configList = jProcessor.readJson(inFName);
-    }
-
     public APICalls() {
-        configList = new ArrayList<String>();
-        configList.add("123");
-        configList.add("456");
-        configList.add("789");
-        configList.add("101112");
-        configList.add("1311415");
-        configList.add("161718");
+        JsonProcessor jsonProcessor = new JsonProcessor();
+        configList = jsonProcessor.readJson();
     }
 
     public String getMessage() {
@@ -47,7 +29,6 @@ public class APICalls {
             }
             return response.body().string();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
@@ -81,13 +62,13 @@ public class APICalls {
                 throw new Exception("Unexpected response code: " + response);
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return requestBodyStr;
     }
 
-    public void postUpscale(String inImageURL, String inMessageID) {
+    public void postUpscale(String inImageURL, String inMessageID, String inUpscale) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
@@ -95,7 +76,6 @@ public class APICalls {
         int lastDotIndex = inImageURL.lastIndexOf(".");
 
         String imageID = inImageURL.substring(lastUnderscoreIndex + 1, lastDotIndex);
-        int upscaleNum = Integer.parseInt(JOptionPane.showInputDialog("Which image do you want to upscale 1-4"));
         RequestBody body = RequestBody.create(
                 "{\r\n    \"type\": 3,\r\n    \"application_id\": \"" + configList.get(0)
                         + "\",\r\n    \"guild_id\": \"" + configList.get(2)
@@ -104,7 +84,7 @@ public class APICalls {
                         + configList.get(3)
                         + "\",\r\n    \"message_id\": \"" + inMessageID
                         + "\",\r\n    \"data\": {\r\n       \"component_type\": 2,\r\n       \"custom_id\": \"MJ::JOB::upsample::"
-                        + upscaleNum + "::"
+                        + inUpscale + "::"
                         + imageID
                         + "\"\r\n    }\r\n}",
                 mediaType);
@@ -122,7 +102,7 @@ public class APICalls {
             }
             System.out.println(response.body().string());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
     }
@@ -149,7 +129,7 @@ public class APICalls {
             }
             return response.body().string();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return null;

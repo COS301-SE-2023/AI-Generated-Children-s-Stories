@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+
+<VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" minHeight="585.0" minWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="25.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.HomeController">
+   <children>
+      <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="18.0" text="DVT - AI Story Generator" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="100.0" prefWidth="1040.0" style="-fx-background-color: white;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="414.0" layoutY="30.0" text="Welcome Back" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="storyButton" alignment="CENTER" contentDisplay="CENTER" onAction="#switchToStory" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Create A Story" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Button>
+      <Button fx:id="settingsButton" alignment="CENTER" contentDisplay="CENTER" onAction="#switchToSettings" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Settings" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Button>
+      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" onAction="#close" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Exit" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Button>
+      <Pane prefHeight="150.0" style="-fx-background-color: white;" />
+   </children>
+</VBox>
