@@ -20,9 +20,9 @@ import 'package:http/http.dart' as http;
 /// The halfway message is randomly selected from a list of messages.
 
 enum TtsState {
-  stop,
+  stopped,
   play,
-  pause
+  paused
 }
 
 class InsideStory extends StatefulWidget {
@@ -71,7 +71,7 @@ class InsideStoryState extends State<InsideStory> {
   bool isNextPressed = false;
   bool isHomePressed = false;
   late int randomMessageIndex = Random().nextInt(widget.messages.length - 1);
-  bool ttsSpeaking = false;
+  TtsState ttsState = TtsState.stopped;
   int start = 0;
   int end = 0;
   int savedValue = 0;
@@ -82,22 +82,33 @@ class InsideStoryState extends State<InsideStory> {
   FlutterTts flutterTts = FlutterTts();
 
   Future<void> speak(String text) async {
-    if (!ttsSpeaking) {
+    if (ttsState == TtsState.stopped) {
       setState(() {
-        ttsSpeaking = true;
+        start = 0;
+        end = 0;
+        ttsState = TtsState.play;
       });
       await flutterTts.speak(text);
-    } else {
-      await flutterTts.pause();
+    }
+    else if (ttsState == TtsState.paused) {
       setState(() {
-        ttsSpeaking = false;
+        start = savedValue;
+        end = savedValue;
+        ttsState = TtsState.play;
       });
+      await flutterTts.speak(text);
+    }
+   else if (ttsState == TtsState.play) {
+      setState(() {
+        savedValue = start;
+        ttsState = TtsState.paused;
+      });
+      flutterTts.pause();
     }
 
     flutterTts.setCompletionHandler(() {
-      print("done speaking...");
       setState(() {
-        ttsSpeaking = false;
+        ttsState = TtsState.stopped;
         start = 0;
         end = 0;
       });
@@ -144,14 +155,13 @@ class InsideStoryState extends State<InsideStory> {
       setState(() {
         start = startOffset + savedValue;
         end = endOffset + savedValue;
-        ttsSpeaking = true;
       });
     });
 
     flutterTts.setPauseHandler(() {
       setState(() {
         savedValue = start;
-        ttsSpeaking = false;
+        ttsState = TtsState.paused;
       });
     });
   }
@@ -198,6 +208,7 @@ class InsideStoryState extends State<InsideStory> {
       savedValue = 0;
       start = 0;
       end = 0;
+      ttsState = TtsState.stopped;
     });
   }
 
@@ -232,60 +243,87 @@ class InsideStoryState extends State<InsideStory> {
               ProgressBar(),
 
               //image
-              AspectRatio(
-                aspectRatio: 1.25,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.network(
-                    widget.pages[storyIndex].getImage(),
-                    fit: BoxFit.cover,
+              Stack(
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1.25,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.network(
+                        widget.pages[storyIndex].getImage(),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //play button
-                      GestureDetector(
-                        onTap: () {
-                          speak(widget.pages[storyIndex].text);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(16.0, 19.0, 0.0, 16.0),
-                          child: ttsSpeaking ? const Image(image: AssetImage('assets/images/tts/pause.webp'), height: 25) : const Image(image: AssetImage('assets/images/tts/play.webp'), height: 25),
+                  Positioned(
+                    bottom: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        speak(widget.pages[storyIndex].text);
+                      },
+                      child: Container(
+                        height: 35,
+                        width: 92,
+                        margin: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFDFDFD),
+                          borderRadius: BorderRadius.circular (25),
+                          border: Border.all(
+                            color: const Color(0xFFD3D3D3),
+                            width: 2,
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                image: ttsState == TtsState.stopped ? const AssetImage('assets/images/tts/start.webp') : ttsState == TtsState.play ? const AssetImage('assets/images/tts/pause.webp') : const AssetImage('assets/images/tts/play.webp'),
+                                width: ttsState == TtsState.stopped ? 17 : ttsState == TtsState.play ? 10 : 12,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                  ttsState == TtsState.stopped ? 'READ' : ttsState == TtsState.play ? 'PAUSE' : 'PLAY',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFFFE8D29),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      //text
-                      Expanded(
-                        child: Container(
-                            margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                            child: AutoSizeText.rich(
-                                maxFontSize: double.infinity,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 64,
-                                  color: Color(0xFF542209),
-                                  fontFamily: 'Poppins',
-                                ),
-                                TextSpan(children: [
-                                  TextSpan(
-                                      text: widget.pages[storyIndex].text
-                                          .substring(0, start)),
-                                  TextSpan(
-                                      text: widget.pages[storyIndex].text
-                                          .substring(start, end),
-                                      style: const TextStyle(fontWeight: FontWeight.w500,
-                                          color: Color(0xFFFE8D29))),
-                                  TextSpan(
-                                      text: widget.pages[storyIndex].text.substring(
-                                          end, widget.pages[storyIndex].text.length))
-                                ])),
-                          ),
-                      ),
-                    ],
+                    ),
                   ),
+                ],
+              ),
+              Expanded(
+                  child: Container(
+                      margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                      child: AutoSizeText.rich(
+                          maxFontSize: double.infinity,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 64,
+                            color: Color(0xFF542209),
+                            fontFamily: 'Poppins',
+                          ),
+                          TextSpan(children: [
+                            TextSpan(
+                                text: widget.pages[storyIndex].text
+                                    .substring(0, start)),
+                            TextSpan(
+                                text: widget.pages[storyIndex].text
+                                    .substring(start, end),
+                                style: const TextStyle(
+                                    color: Color(0xFFFE8D29))),
+                            TextSpan(
+                                text: widget.pages[storyIndex].text.substring(
+                                    end, widget.pages[storyIndex].text.length))
+                          ])),
+                    ),
               ),
 
 

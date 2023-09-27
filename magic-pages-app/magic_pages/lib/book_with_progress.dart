@@ -35,18 +35,16 @@ class _BookWithProgressState extends State<BookWithProgress> {
   @override
   Widget build(BuildContext context) {
     return widget.ifSnapScroll ?
-    SizedBox(
-        height: MediaQuery.of(context).size.height-(94+138+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
+    Container(
+        margin: const EdgeInsets.only(bottom: 0),
+        height: MediaQuery.of(context).size.height-(94+138+35+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: RoundedImage(size: 0.35, url: widget.imagePath, relative: true),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: RoundedImage(size: 0.35, url: widget.imagePath, relative: true),
             ),
             Expanded(
               child: Container(

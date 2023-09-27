@@ -77,7 +77,7 @@ class _MyHeaderState extends State<MyHeader> {
                           left: 0,
                           child: GestureDetector(
                             onTap: () async {
-                                if (!await launchUrl(Uri.parse('https://fullstackfox.co.za'))) {
+                                if (!await launchUrl(Uri.parse('https://fullstackfox.co.za/help'))) {
                                   throw Exception('Could not launch help page');
                                 }
                               },
