@@ -1,12 +1,6 @@
-import 'dart:math';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:magic_pages/main.dart' as app;
-import 'package:magic_pages/book_with_progress.dart';
 import 'package:magic_pages/story.dart';
 
 //to run: flutter test integration_test
