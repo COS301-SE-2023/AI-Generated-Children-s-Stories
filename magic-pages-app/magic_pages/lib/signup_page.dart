@@ -231,29 +231,8 @@ class SignupPage extends StatelessWidget {
                                           color: Color(0xFF000000),
                                           decoration: TextDecoration.underline,
                                         ),
-                                        recognizer: new TapGestureRecognizer()
-                                          ..onTap = () => showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return const AlertDialog(
-                                                  backgroundColor: Color(0xFFFFF3E9),
-                                                  title: Text(
-                                                    'Terms and Conditions',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight: FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                  content: Text(
-                                                    '...',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight: FontWeight.w300,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                          ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () => Navigator.pushNamed(context, '/terms'),
                                       ),
                                       const TextSpan(
                                         text: 'and ',
@@ -273,29 +252,8 @@ class SignupPage extends StatelessWidget {
                                           color: Color(0xFF000000),
                                           decoration: TextDecoration.underline,
                                         ),
-                                        recognizer: new TapGestureRecognizer()
-                                          ..onTap = () => showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return const AlertDialog(
-                                                  backgroundColor: Color(0xFFFFF3E9),
-                                                  title: Text(
-                                                    'Privacy Policy',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight: FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                  content: Text(
-                                                    '...',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight: FontWeight.w300,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                          ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () => Navigator.pushNamed(context, '/privacy'),
                                       ),
                                     ],
                                   ),

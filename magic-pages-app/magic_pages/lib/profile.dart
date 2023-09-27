@@ -107,15 +107,12 @@ class _ProfileState extends State<Profile> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image(
-                              image: const AssetImage('assets/images/sad-fox.png'),
-                              height: MediaQuery.of(context).size.height*0.4,
-                            ),
+                          Image(
+                            image: const AssetImage('assets/images/sad-fox.png'),
+                            height: MediaQuery.of(context).size.height*0.4,
                           ),
                           const Padding(
-                            padding: EdgeInsets.fromLTRB(64, 8, 64, 32),
+                            padding: EdgeInsets.fromLTRB(64, 16, 64, 32),
                             child: Text(
                               'Are you sure you want to leave?',
                               textAlign: TextAlign.center,
@@ -163,7 +160,6 @@ class _ProfileState extends State<Profile> {
                                   });
                                 },
                                 child: AnimatedContainer(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
                                   height: 50,
                                   width: double.infinity,
                                   margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),

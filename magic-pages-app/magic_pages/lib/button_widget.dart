@@ -105,8 +105,12 @@ class _ButtonWidget extends State<ButtonWidget> {
         decoration: BoxDecoration(
             color: (widget.isEnabled != null && widget.isEnabled == false)
                 ? const Color(0xFFABABAB)
-                : const Color(0xFFFE8D29),
+                : widget.color == 'grey' ? const Color(0xFFFDFDFD) : const Color(0xFFFE8D29),
             borderRadius: BorderRadius.circular(25),
+            border: widget.color == 'grey' ? Border.all(
+              color: const Color(0xFFD3D3D3),
+              width: 2,
+            ) :Border.all(width: 0),
             boxShadow: isPressed
                 ? null
                 : [
@@ -114,21 +118,21 @@ class _ButtonWidget extends State<ButtonWidget> {
                       color: (widget.isEnabled != null &&
                               widget.isEnabled == false)
                           ? const Color(0xFF595959)
-                          : const Color(0xFF84370F), //Color(0xFF84370F),
+                          : widget.color == 'grey' ? const Color(0xFFD3D3D3) : const Color(0xFF84370F), //Color(0xFF84370F),
                       spreadRadius: 0,
                       blurRadius: 0,
-                      offset: Offset(0, 6),
+                      offset: const Offset(0, 6),
                     )
                   ]),
         duration: const Duration(milliseconds: 75),
         child: Center(
           child: Text(
             widget.message,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
-              color: Color(0xFFFDFDFD),
+              color: widget.color == 'grey' ? const Color(0xFFFE8D29) : const Color(0xFFFDFDFD),
             ),
           ),
         ),

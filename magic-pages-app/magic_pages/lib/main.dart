@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:magic_pages/inside_story_change_notifier.dart';
+import 'package:magic_pages/privacy_policy.dart';
+import 'package:magic_pages/terms.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -105,6 +107,8 @@ class MyApp extends StatelessWidget {
               '/home': (context) => const Home(),
               '/storyLiked': (context) => const StoryLiked(),
               '/profile': (context) => const Profile(),
+              '/terms': (context) => const TermsAndConditions(),
+              '/privacy': (context) => const PrivacyPolicy(),
             })
     );
   }

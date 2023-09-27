@@ -144,13 +144,31 @@ class _StoryLikedState extends State<StoryLiked> {
                       ),
                       !_storyListChangeNotifier.isLoading
                   ? SizedBox(
-                    height: MediaQuery.of(context).size.height-(MediaQuery.of(context).padding.top+288),
-                    child: ListView.builder(
+                    height: MediaQuery.of(context).size.height-(MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom+288),
+                    child: _stories.isNotEmpty ? ListView.builder(
                       itemCount: _stories.length,
                       itemBuilder: _BookListItem,                        
-                    ),
+                    ) : const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(48, 16, 48, 56),
+                            child: Text(
+                              'You have not liked any books yet. Press the heart icons when you enjoy a book to add it here for safe keeping!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF000000),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                   )
-                  : const SizedBox(height: 30),
+                  : const SizedBox(height: 0),
                 ]
               ),
             ],

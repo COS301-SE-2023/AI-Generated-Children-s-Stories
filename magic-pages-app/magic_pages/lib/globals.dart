@@ -47,12 +47,12 @@ class Globals {
       if (response.statusCode == 200) {
         print(response.body);
       } else {
-        Globals.showSnackbarMessage(
-            "Error from post: ${response.body}", context);
+        // Globals.showSnackbarMessage(
+        //     "Error from post: ${response.body}", context);
         return false;
       }
     } catch (e) {
-      print("Error: $e");
+      // print("Error: $e");
     }
 
     return true;

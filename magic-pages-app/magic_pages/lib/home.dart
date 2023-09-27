@@ -80,24 +80,25 @@ class _HomeState extends State<Home> {
                           ),
                 !_homeChangeNotifier.isLoading
                     ? SizedBox(
-                        height: MediaQuery.of(context).size.height-(94+138),
+                        height: MediaQuery.of(context).size.height-(94+138+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
                         child: _currentlyReadingStory.length > 1 ? ScrollSnapList(
                           itemBuilder: _currentlyReadingListItem,
                           itemCount: _currentlyReadingStory.length,
-                          itemSize: MediaQuery.of(context).size.height-(94+138),
+                          itemSize: MediaQuery.of(context).size.height-(94+138+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
                           onItemFocus: (index) {},
+                          shrinkWrap: true,
                           dynamicItemSize: true,
                           scrollDirection: Axis.vertical,
-                        ) : _currentlyReadingStory.length > 0 ?
+                        ) : _currentlyReadingStory.isNotEmpty ?
                         BookWithProgress(
                           title: _currentlyReadingStory[0].title,
                           imagePath: _currentlyReadingStory[0].trailer,
                           id: _currentlyReadingStory[0].id,
                           currentPage: _currentlyReadingStory[0].currentPage,
-                          totalPages: _currentlyReadingStory[0].textContent.length,
+                          totalPages: _currentlyReadingStory[0].totalPages,
                           isLiked: _currentlyReadingStory[0].isLiked,
                           ifSnapScroll: false,
-                        ) : SizedBox(height: 0),
+                        ) : const SizedBox(height: 0),
                       ) : const SizedBox(height: 30),
                 ]
               ),

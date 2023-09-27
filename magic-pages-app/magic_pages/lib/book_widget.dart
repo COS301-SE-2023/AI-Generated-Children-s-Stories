@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'globals.dart';
 import 'heart_animation_widget.dart';
 import 'rounded-image.dart';
 import 'trailer.dart';
@@ -62,7 +63,7 @@ class _BookWidget extends State<BookWidget> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  RoundedImage(size: 200, url: widget.imagePath),
+                  RoundedImage(size: 200, url: widget.imagePath, relative: false),
                   Opacity(
                     opacity: isHeartAnimating ? 1 : 0,
                     child: HeartAnimationWidget(
@@ -86,6 +87,7 @@ class _BookWidget extends State<BookWidget> {
                   isHeartAnimating = true;
                   widget.isLiked = true;
                 });
+                Globals.likeStory(true, widget.id, context);
               },
             ),
           ),

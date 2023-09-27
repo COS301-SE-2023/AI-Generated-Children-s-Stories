@@ -165,7 +165,7 @@ class _TrailerPageState extends State<TrailerPage> {
                                     margin: const EdgeInsets.fromLTRB(48, 32, 48, 16),
                                     child: AspectRatio(
                                       aspectRatio: 1,
-                                      child: RoundedImage(size: 300, url: widget.imagePath),
+                                      child: RoundedImage(size: 0.4, url: widget.imagePath, relative: true),
                                     ),
                                   ),
                                 ],
@@ -182,7 +182,7 @@ class _TrailerPageState extends State<TrailerPage> {
                                       fontSize: 52,
                                       color: Color(0xFF542209),
                                       fontFamily: 'NotoSerif',
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
@@ -197,17 +197,7 @@ class _TrailerPageState extends State<TrailerPage> {
                       )
                       : Column(
                         children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(64, 16, 64, 0),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: const Color(0xFFD3D3D3),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: ProgressBar(totalPages: widget.totalPages, currentPage: widget.currentPage),
-                          ),
+                         ProgressBar(totalPages: widget.totalPages, currentPage: widget.currentPage),
                           Container(
                             margin: const EdgeInsets.only(top: 16),
                             child: getReadNowButton(message: 'KEEP READING'),
@@ -236,15 +226,27 @@ class _TrailerPageState extends State<TrailerPage> {
         isEnabled: false,
       );
     } else {
-      return ButtonWidget( //enable
-        message: 'READ NOW',
+      return message == 'START AGAIN'
+          ? ButtonWidget( //enable
+        message: message,
+        destination: '/insideStory',
+        storyId: widget.id,
+        currentPage: 0,
+        pages: pages,
+        isLiked: isLiked,
+        updatePage: updatePage,
+        updateLiked: updateLiked,
+        color: 'grey',
+      )
+          : ButtonWidget( //enable
+        message: message,
         destination: '/insideStory',
         storyId: widget.id,
         currentPage: currentPage,
         pages: pages,
         isLiked: isLiked,
         updatePage: updatePage,
-        updateLiked: updateLiked
+        updateLiked: updateLiked,
       );
     }
   }
