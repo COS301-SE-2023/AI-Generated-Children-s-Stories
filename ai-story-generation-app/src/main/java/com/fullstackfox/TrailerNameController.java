@@ -41,7 +41,7 @@ public class TrailerNameController {
     }
 
     @FXML
-    void setOutput_image(String inUrl) throws IOException {
+    void setOutput_image(String inUrl){
         Image imageU = new Image(inUrl);
         ImageView imageView = new ImageView(imageU);
         imageView.setFitHeight(360);
