@@ -50,15 +50,6 @@ public class UiParent {
     }
 
     @FXML
-    protected void disableTillUpscale() {
-        button_accept.setDisable(true);
-        button_upscale_1.setDisable(false);
-        button_upscale_2.setDisable(false);
-        button_upscale_3.setDisable(false);
-        button_upscale_4.setDisable(false);
-    }
-
-    @FXML
     protected void upscaleAll(String toUpscale) throws IOException, URISyntaxException {
         String url = StoryGeneration.imageUpscale(list, toUpscale);
         StoryGeneration.setCharacter(url);

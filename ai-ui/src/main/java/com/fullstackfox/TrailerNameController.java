@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -11,56 +13,54 @@ import java.io.IOException;
 
 public class TrailerNameController {
     @FXML
-    private TextArea story;
+    private TextArea output_story;
     @FXML
-    private Pane image;
+    private Pane output_image;
     @FXML
-    private TextField name;
+    private TextField output_name;
     @FXML
-    private Button regenButton;
+    private Button button_generate;
     @FXML
-    private Button acceptButton;
+    private Button button_accept;
 
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
     }
 
-//    @FXML
-//    private void makeTitle() throws IOException, URISyntaxException {
-//        story.setText(gen.getStory());
-//        String title = gen.storyTitle(gen.getStory());
-//        String url = gen.getTrailer();
-//        Image imageU = new Image(url);
-//        ImageView imageView = new ImageView(imageU);
-//        imageView.setFitHeight(360);
-//        imageView.setFitWidth(360);
-//        image.getChildren().add(imageView);
-//        name.setText(title);
-//        regenButton.setText("Regenerate Name");
-//        acceptButton.setDisable(false);
-//    }
-//
-//    @FXML
-//    private void edit() throws IOException, URISyntaxException {
-//        story.setText(gen.getStory());
-//        //String title=gen.storyTitle(gen.getStory());
-//        String url = gen.getTrailer();
-//        Image imageU = new Image(url);
-//        ImageView imageView = new ImageView(imageU);
-//        imageView.setFitHeight(360);
-//        imageView.setFitWidth(360);
-//        image.getChildren().add(imageView);
-//        // name.setText(title);
-//        name.setEditable(true);
-//        //   regenButton.setText("Regenerate Name");
-//        acceptButton.setDisable(false);
-//    }
-//
-//    @FXML
-//    private void switchToPage() throws IOException {
-//        gen.setTitle(name.getText());
-//        //  App.setRoot("story-page");
-//        App.setRoot("imagePromptEditor");
-//    }
+    @FXML
+    private void makeTitle() throws IOException {
+        button_accept.setDisable(true);
+        output_story.setText(StoryGeneration.getStory());
+        String title = StoryGeneration.storyTitle(StoryGeneration.getStory());
+        String url = Story.getTrailer();
+        setOutput_image(url);
+        output_name.setText(title);
+        button_generate.setText("Regenerate Name");
+        button_accept.setDisable(false);
+    }
+
+    @FXML
+    void setOutput_image(String inUrl) throws IOException {
+        Image imageU = new Image(inUrl);
+        ImageView imageView = new ImageView(imageU);
+        imageView.setFitHeight(360);
+        imageView.setFitWidth(360);
+        output_image.getChildren().add(imageView);
+    }
+
+
+    @FXML
+    private void edit() throws IOException {
+        String url = Story.getTrailer();
+        setOutput_image(url);
+        output_name.setEditable(true);
+        button_accept.setDisable(false);
+    }
+
+    @FXML
+    private void switchToPage() throws IOException {
+        Story.setTitle(output_name.getText());
+        App.setRoot("imagePromptEditor");
+    }
 }

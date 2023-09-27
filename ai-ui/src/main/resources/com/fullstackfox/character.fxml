@@ -98,7 +98,7 @@
                   <Pane fx:id="output_image" maxHeight="394.0" maxWidth="380.0" minHeight="380.0" minWidth="380.0" prefHeight="394.0" prefWidth="380.0" style="-fx-border-color: #e1e1e1; -fx-background-color: #0f4876;" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" />
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7">
                      <children>
-                        <Button fx:id="button_custom_generate" layoutX="35.0" onMousePressed="#disableGeneration" onMouseReleased="#customCharacter" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Custom Generate" textAlignment="CENTER" wrapText="true">
+                        <Button fx:id="button_custom_generate" layoutX="35.0" onMousePressed="#disableGeneration" onMouseReleased="#customCharacter" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Custom Image" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>

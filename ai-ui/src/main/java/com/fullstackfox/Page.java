@@ -17,7 +17,7 @@ public class Page {
         return imageUrl;
     }
 
-    public String print() {
+    public void print() {
         String toRet = "----------\n";
         toRet += "Image URL:\n";
         toRet += imageUrl + "\n\n";
@@ -25,6 +25,5 @@ public class Page {
         toRet += content;
         toRet += "\n----------\n";
         System.out.println(toRet);
-        return toRet;
     }
 }

@@ -29,6 +29,7 @@ public class Story {
     }
 
     public static void setTitle(String title) {
+        output(title);
         Story.title = title;
     }
 
@@ -37,6 +38,7 @@ public class Story {
     }
 
     public static void setTrailer(String trailer) {
+        output(trailer);
         Story.trailer = trailer;
     }
 
@@ -44,20 +46,17 @@ public class Story {
         return pages;
     }
 
-    public static void setPages(ArrayList<Page> pages) {
-        Story.pages = pages;
-    }
-
     public static int getNumPages() {
         return numPages;
     }
 
-    public static void setNumPages(int numPages) {
-        Story.numPages = numPages;
-    }
-
     public static void addPage(Page inPage) {
+        inPage.print();
         pages.add(inPage);
         numPages++;
+    }
+
+    public static void output(String inString) {
+        System.out.println("Received" + inString);
     }
 }

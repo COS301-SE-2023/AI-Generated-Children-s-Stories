@@ -16,6 +16,7 @@ public class TrailerImageController extends UiParent {
         list = StoryGeneration.storyTrailerImageCustom(prompt);
         String url = list.get(0);
         setImage(url);
+        Story.setTrailer(url);
     }
 
     @FXML
@@ -23,6 +24,7 @@ public class TrailerImageController extends UiParent {
         list = StoryGeneration.storyTrailerImage(StoryGeneration.getStory());
         String url = list.get(0);
         setImage(url);
+        Story.setTrailer(url);
     }
 
 
