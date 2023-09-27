@@ -12,9 +12,9 @@ import java.io.IOException;
 public class StoryPageController {
 
     @FXML
-    private Pane image;
+    private Pane output_image;
     @FXML
-    private TextArea prompt;
+    private TextArea output_paragraph;
     @FXML
     private Button regenButton;
     @FXML

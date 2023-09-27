@@ -82,6 +82,6 @@
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </Pane>
-      <Pane fx:id="button_generate" layoutX="-100.0" maxHeight="40.0" prefHeight="80.0" prefWidth="1040.0" />
+      <Pane fx:id="pane" layoutX="-100.0" maxHeight="40.0" prefHeight="80.0" prefWidth="1040.0" />
     </children>
 </VBox>
