@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/inside_story.dart';
 import 'globals.dart';
 import 'heart_animation_widget.dart';
 import 'rounded-image.dart';
@@ -52,6 +53,7 @@ class _BookWidget extends State<BookWidget> {
           //when context is popped, this function is called
           //when you press back button
         .then((value) => {
+
           widget.updateBookItems.call(context)
         });
       },

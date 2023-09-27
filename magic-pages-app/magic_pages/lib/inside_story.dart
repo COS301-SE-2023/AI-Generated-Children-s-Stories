@@ -19,6 +19,12 @@ import 'package:http/http.dart' as http;
 /// The halfway message is shown when the user is halfway through the story.
 /// The halfway message is randomly selected from a list of messages.
 
+enum TtsState {
+  stop,
+  play,
+  pause
+}
+
 class InsideStory extends StatefulWidget {
   //for routing to the book with progress page
   //instantiate the inside story page with the id of the story
@@ -68,6 +74,7 @@ class InsideStoryState extends State<InsideStory> {
   bool ttsSpeaking = false;
   int start = 0;
   int end = 0;
+  int savedValue = 0;
 
   Completer<void> speakingCompleter = Completer<void>();
 
@@ -91,6 +98,8 @@ class InsideStoryState extends State<InsideStory> {
       print("done speaking...");
       setState(() {
         ttsSpeaking = false;
+        start = 0;
+        end = 0;
       });
     });
   }
@@ -120,6 +129,10 @@ class InsideStoryState extends State<InsideStory> {
 
   @override
   void initState() {
+
+    if (widget.currentPage == 0) {
+      updatePageNumber(0);
+    }
     super.initState();
 
     flutterTts = FlutterTts();
@@ -129,17 +142,15 @@ class InsideStoryState extends State<InsideStory> {
     flutterTts.setProgressHandler(
         (String text, int startOffset, int endOffset, String word) {
       setState(() {
-        start = startOffset;
-        end = endOffset;
+        start = startOffset + savedValue;
+        end = endOffset + savedValue;
         ttsSpeaking = true;
       });
-      print(start.toString() + " " + end.toString());
     });
 
     flutterTts.setPauseHandler(() {
       setState(() {
-        start = 0;
-        end = 0;
+        savedValue = start;
         ttsSpeaking = false;
       });
     });
@@ -149,6 +160,9 @@ class InsideStoryState extends State<InsideStory> {
   /// It also updates the halfway message.
   /// It is called when the user presses the next button.
   void next() {
+
+    resetTTS();
+
     if (storyIndex < widget.pages.length - 1) {
       setState(() {
         storyIndex += 1;
@@ -172,13 +186,34 @@ class InsideStoryState extends State<InsideStory> {
     }
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    resetTTS();
+  }
+
+   void resetTTS() {
+    flutterTts.stop();
+    setState(() {
+      savedValue = 0;
+      start = 0;
+      end = 0;
+    });
+  }
+
   /// This function updates the story index and message index.
   /// It is called when the user presses the previous button.
   /// It does not update the halfway message.
   void prev() {
+
+    resetTTS();
+
     if (storyIndex > 0) {
       setState(() {
         storyIndex -= 1;
+        savedValue = 0;
+        start = 0;
+        end = 0;
       });
     }
     updatePageNumber(storyIndex);
@@ -215,8 +250,6 @@ class InsideStoryState extends State<InsideStory> {
                       //play button
                       GestureDetector(
                         onTap: () {
-                          print("reading out loud");
-
                           speak(widget.pages[storyIndex].text);
                         },
                         child: Container(
@@ -243,9 +276,8 @@ class InsideStoryState extends State<InsideStory> {
                                   TextSpan(
                                       text: widget.pages[storyIndex].text
                                           .substring(start, end),
-                                      style: const TextStyle(
-                                          color: Color(0xFFFE8D29),
-                                          fontWeight: FontWeight.w600)),
+                                      style: const TextStyle(fontWeight: FontWeight.w500,
+                                          color: Color(0xFFFE8D29))),
                                   TextSpan(
                                       text: widget.pages[storyIndex].text.substring(
                                           end, widget.pages[storyIndex].text.length))
@@ -412,6 +444,7 @@ class InsideStoryState extends State<InsideStory> {
                 setState(() {
                   isHomePressed = false;
                 });
+                flutterTts.stop();
                 Navigator.pushNamed(context, '/home');
               },
               onTapDown: (val) {
