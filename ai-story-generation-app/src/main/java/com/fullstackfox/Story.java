@@ -51,6 +51,8 @@ public class Story {
     }
 
     public static void addPage(Page inPage) {
+        if (pages == null)
+            pages = new ArrayList<>();
         inPage.print();
         pages.add(inPage);
         numPages++;
