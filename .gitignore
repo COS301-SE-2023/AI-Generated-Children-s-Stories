@@ -29,6 +29,8 @@ configTest.json
 linux/
 ai-story-generation-app/target/surefire-reports/fullstack_fox.APICallsTest.txt
 ai-story-generation-app/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+magic-pages-app/magic_pages/pubspec.lock
+
 ai-story-generation-app/resources/configReal.json
 ai-story-generation-app/src/test/java/fullstack_fox/resources/configReal.json
 *.properties
@@ -40,4 +42,6 @@ backend/src/main/resources/firebase-config.json
 magic-pages-app/magic_pages/android/app/google-services.json
 magic-pages-app/magic_pages/lib/firebase_options.dart
 backend/out/artifacts/backend_jar/backend.jar
-
+backend/src/main/resources.zip
+backend/docker-app/backend-0.0.1-SNAPSHOT.jar
+backend/.env

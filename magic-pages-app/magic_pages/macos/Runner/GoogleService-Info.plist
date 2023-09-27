@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>748680725012-h7l2mvc0qqng88crdfn4o82am9kr3ih0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.748680725012-h7l2mvc0qqng88crdfn4o82am9kr3ih0</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>748680725012-9ekk2a6a95b2a0q62dar071jlco0fi1h.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDZQvtRnE4e3ZH3Os1J3SyxacC9I_lshGg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>748680725012</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.magicPages.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>heroic-cedar-392010</string>
+	<key>STORAGE_BUCKET</key>
+	<string>heroic-cedar-392010.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:748680725012:ios:8fdd8f8454b456f7585d01</string>
+</dict>
+</plist>

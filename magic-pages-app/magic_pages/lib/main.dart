@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:magic_pages/end_of_story.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/services.dart';
+import 'package:magic_pages/inside_story_change_notifier.dart';
+import 'package:magic_pages/privacy_policy.dart';
+import 'package:magic_pages/terms.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 import 'get_stories_service.dart';
-import 'inside_story.dart';
 import 'signup_page.dart';
 import 'story_list.dart';
 import 'story_liked.dart';
@@ -15,20 +19,41 @@ import 'story_list_change_notifier.dart';
 
 //firebase
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+
 
 /// This is the main file for the app.
 /// It contains the main function, which runs the app.
 /// It also contains the unit and integration tests.
 /// The unit tests test the inside a story class.
 /// The integration tests test the get stories service class.
+///
+/// Generate firebase keys:
+/// go to android folder
+/// ./gradlew signingReport
+/// Use sha1 and sha256
+/// add to android section in firebase
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //firebase
+
+
+  // Conditionally initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const MyApp());
+  FlutterSecureStorage storage = FlutterSecureStorage();
+  String? id = await storage.read(key: 'id');
+  String? token = await storage.read(key: 'api_token');
+
+  bool loggedInPreviously = false;
+
+  if (id != null && token != null){
+    print("logged in already...");
+    loggedInPreviously = true;
+  } else {
+    print("not logged in preveously");
+  }
+
+  runApp(MyApp(loggedInPreviously));
 }
 
 MaterialColor createMaterialColor(Color color) {
@@ -52,27 +77,77 @@ MaterialColor createMaterialColor(Color color) {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool loggedInPreviously;
+
+  const MyApp(this.loggedInPreviously, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<InsideStoryChangeNotifier>(
+            create: (context) => InsideStoryChangeNotifier(GetStoriesService()),
+          ),
+          ChangeNotifierProvider<StoryListChangeNotifier>(
+              create: (context) => StoryListChangeNotifier(GetStoriesService())
+          )
+        ],
+        child: MaterialApp(
+            title: 'Magic Pages',
+            theme: ThemeData(
+              primarySwatch: createMaterialColor(const Color(0xFFFE8D29)),
+              scaffoldBackgroundColor: const Color(0xFFFFF3E9),
+            ),
+            home:  loggedInPreviously ? const Home() : const SplashPage(),
+            routes: {
+              '/signup': (context) => const SignupPage(),
+              '/splash': (context) => const SplashPage(),
+              '/storyList': (context) => const StoryList(),
+              '/home': (context) => const Home(),
+              '/storyLiked': (context) => const StoryLiked(),
+              '/profile': (context) => const Profile(),
+              '/terms': (context) => const TermsAndConditions(),
+              '/privacy': (context) => const PrivacyPolicy(),
+            })
+    );
+  }
+
+}
+
+/*
+class MyApp extends StatelessWidget {
+
+  MyApp({
+    super.key
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<InsideStoryChangeNotifier>(
+          create: (context) => InsideStoryChangeNotifier(GetStoriesService()),
+        ),
+        ChangeNotifierProvider<StoryListChangeNotifier>(
+          create: (context) => StoryListChangeNotifier(GetStoriesService())
+        )
+      ],
+    child: MaterialApp(
         title: 'Magic Pages',
         theme: ThemeData(
           primarySwatch: createMaterialColor(const Color(0xFFFE8D29)),
           scaffoldBackgroundColor: const Color(0xFFFFF3E9),
         ),
-        home: ChangeNotifierProvider(
-          create: (context) => StoryListChangeNotifier(GetStoriesService()),
-          child: const SplashPage(),
-        ),
+        home:  const SplashPage(),
         routes: {
-          '/signup': (context) => SignupPage(),
-          '/splash': (context) => SplashPage(),
+          '/signup': (context) => const SignupPage(),
+          '/splash': (context) => const SplashPage(),
           '/storyList': (context) => const StoryList(),
           '/home': (context) => const Home(),
           '/storyLiked': (context) => const StoryLiked(),
           '/profile': (context) => const Profile(),
-        });
+        })
+    );
   }
-}
+}*/

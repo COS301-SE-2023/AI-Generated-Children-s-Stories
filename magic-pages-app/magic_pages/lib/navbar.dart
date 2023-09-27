@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 /// The third icon takes the user to the liked page.
 /// The navbar is displayed at the bottom of the screen.
 
+//todo: use ternary statements to determine which is active
+
 class NavbarWidget extends StatefulWidget {
   const NavbarWidget({super.key, this.active = 1});
 
@@ -30,7 +32,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: Column(children: [
                 Image.asset(
-                  'assets/images/explore.png',
+                  widget.active == 0 ? 'assets/images/nav-icons/books.webp' : 'books-outline.webp',
                   width: 42,
                 ),
                 const SizedBox(height: 3),
@@ -49,11 +51,11 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/home-outline.png',
+                    'assets/images/nav-icons/home-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -73,11 +75,11 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyLiked');
+                  Navigator.pushReplacementNamed(context, '/storyLiked');
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/liked-outline.png',
+                    'assets/images/nav-icons/liked-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -105,11 +107,11 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyList');
+                  Navigator.pushReplacementNamed(context, '/storyList');
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/explore-outline.png',
+                    'assets/images/nav-icons/books-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -129,7 +131,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: Column(children: [
                 Image.asset(
-                  'assets/images/home.png',
+                  'assets/images/nav-icons/home.webp',
                   width: 42,
                 ),
                 const SizedBox(height: 3),
@@ -148,11 +150,11 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyLiked');
+                  Navigator.pushReplacementNamed(context, '/storyLiked');
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/liked-outline.png',
+                    'assets/images/nav-icons/liked-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -180,11 +182,11 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/storyList');
+                  Navigator.pushReplacementNamed(context, '/storyList');
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/explore-outline.png',
+                    'assets/images/nav-icons/books-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -204,11 +206,11 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: Column(children: [
                   Image.asset(
-                    'assets/images/home-outline.png',
+                    'assets/images/nav-icons/home-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -228,7 +230,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               padding: const EdgeInsets.all(16.0),
               child: Column(children: [
                 Image.asset(
-                  'assets/images/liked.png',
+                  'assets/images/nav-icons/liked.webp',
                   width: 42,
                 ),
                 const SizedBox(height: 3),
@@ -255,12 +257,12 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/storyList');
+                Navigator.pushReplacementNamed(context, '/storyList');
               },
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/exploreOutline.png',
+                    'assets/images/nav-icons/books-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -281,12 +283,12 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/home');
               },
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/homeOutline.png',
+                    'assets/images/nav-icons/home-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),
@@ -307,12 +309,12 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/storyLiked');
+                Navigator.pushReplacementNamed(context, '/storyLiked');
               },
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/likedOutline.png',
+                    'assets/images/nav-icons/liked-outline.webp',
                     width: 42,
                   ),
                   const SizedBox(height: 3),

@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:magic_pages/end_of_story_change_notifier.dart';
-import 'package:magic_pages/get_stories_service.dart';
+import 'package:magic_pages/story_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import 'Wave_Widget.dart';
-import 'heart_animation_widget.dart';
+import 'wave_widget.dart';
+import 'globals.dart';
+import 'heart_toggle.dart';
 import 'inside_story.dart';
 import 'navbar.dart';
+import 'package:http/http.dart' as http;
 
 class EndOfStory extends StatefulWidget {
   final int storyId;
+  final List<StoryPage> pages;
+  final bool isLiked;
+  final void Function(int) updatePage;
+  final void Function(bool) updateLiked;
 
-  const EndOfStory({super.key, required this.storyId});
+  const EndOfStory({
+    super.key,
+    required this.storyId,
+    required this.pages,
+    required this.isLiked,
+    required this.updatePage,
+    required this.updateLiked
+  });
 
   @override
   State<EndOfStory> createState() => _EndOfStoryState();
@@ -19,14 +31,41 @@ class EndOfStory extends StatefulWidget {
 
 class _EndOfStoryState extends State<EndOfStory> {
   bool isHeartAnimating = false;
-  bool isLiked = false;
+  late bool isLiked = widget.isLiked;
   bool isHomePressed = false;
   bool isAgainPressed = false;
   late double screenHeight = MediaQuery.of(context).size.height;
 
-  //make a call to the api to get the story info
-  final EndOfStoryChangeNotifier _endOfStoryChangeNotifier =
-  EndOfStoryChangeNotifier(GetStoriesService());
+  Future<void> deleteProgress() async {
+    final url = Uri.parse("http://${Globals.ipAddress}/deleteProgress");
+
+    List<String> idToken = await Globals.getIdAndToken();
+
+    //{"apiKey":"aac7c266-aa4c-49c2-80d4-7f7e54c688a4", "userId":2, "storyId":5, "pageNumber":2}
+    final jsonString = "{\"apiKey\":\"${idToken[1]}\", \"userId\":${idToken[0]}, \"storyId\":${widget.storyId}, \"pageNumber\":0}}";
+    final data = jsonString;
+
+    http.Response response = await http.delete(
+        url,
+        headers: {
+          'content-type': 'application/json; charset=utf-8'
+        },
+        body: data
+    );
+
+    if (response.statusCode == 200) {
+      print("Sent data: ");
+      print(response.body);
+    } else {
+      Globals.showSnackbarMessage("Error: ${response.body}", context);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    deleteProgress();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +83,7 @@ class _EndOfStoryState extends State<EndOfStory> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Image(
-                          image: AssetImage('assets/images/MascotWinking.png'),
+                          image: AssetImage('assets/images/mascot-winking.png'),
                           width: 55,
                         ),
                         const SizedBox(
@@ -60,7 +99,7 @@ class _EndOfStoryState extends State<EndOfStory> {
                             ),
                           ),
                         ),
-                        HeartToggle(),
+                        HeartToggle(id: widget.storyId, isLiked: widget.isLiked, updateLiked: widget.updateLiked),
                       ],
                     ),
                   ),
@@ -74,10 +113,16 @@ class _EndOfStoryState extends State<EndOfStory> {
                         setState(() {
                           isAgainPressed = false;
                         });
-                        Navigator.push(context, MaterialPageRoute(
+                        widget.updatePage(1);
+                        Navigator.pop(context);
+                        Navigator.pushReplacement(context, MaterialPageRoute(
                           builder: (context) => InsideStory(
                             storyId: widget.storyId,
-                            pageId: 0,
+                            currentPage: 0,
+                            pages: widget.pages,
+                            isLiked: isLiked,
+                            updatePage: widget.updatePage,
+                            updateLiked: widget.updateLiked,
                           ),
                         ));
                       },
@@ -194,34 +239,6 @@ class _EndOfStoryState extends State<EndOfStory> {
         ),
       ),
       bottomNavigationBar: const NavbarWidget(active: 3),
-    );
-  }
-
-  Widget HeartToggle() {
-    Image image;
-    if (isLiked == true) {
-      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 50);
-    } else {
-      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 50);
-    }
-
-    return HeartAnimationWidget(
-      alwaysAnimate: true,
-      isAnimating: isLiked,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              isLiked = !isLiked;
-              if (isLiked == true) {
-                isHeartAnimating = true;
-              }
-            });
-          },
-          child: image,
-        ),
-      ),
     );
   }
 }

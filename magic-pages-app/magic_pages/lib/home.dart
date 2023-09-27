@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_pages/wave_widget.dart';
 
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:wave/config.dart';
@@ -58,27 +59,7 @@ class _HomeState extends State<Home> {
         child: Center(
           child: Stack(
             children: [
-              WaveWidget(
-                config: CustomConfig(
-                  colors: [
-                    const Color(0xFF84370F),
-                    const Color(0xFFFE8D29),
-                    const Color(0xFFFFF3E9),
-                  ],
-                  durations: [
-                    16000,
-                    18000,
-                    22000,
-                  ],
-                  heightPercentages: [
-                    -0.08,
-                    -0.07,
-                    -0.0525,
-                  ],
-                ),
-                size: const Size(double.infinity, double.infinity),
-                waveAmplitude: 0,
-              ),
+              const WaveHeaderWidget(),
               Column(children: [
                 //if loading, show loading message
                 _homeChangeNotifier.isLoading
@@ -99,22 +80,28 @@ class _HomeState extends State<Home> {
                           ),
                 !_homeChangeNotifier.isLoading
                     ? SizedBox(
-                        height: MediaQuery.of(context).size.height -
-                            (MediaQuery.of(context).padding.top +
-                                MediaQuery.of(context).padding.bottom +
-                                94 +
-                                138),
-                        child: ScrollSnapList(
+                        height: MediaQuery.of(context).size.height-(94+138+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
+                        child: _currentlyReadingStory.length > 1 ? ScrollSnapList(
                           itemBuilder: _currentlyReadingListItem,
                           itemCount: _currentlyReadingStory.length,
-                          itemSize: 469,
+                          itemSize: MediaQuery.of(context).size.height-(94+138+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
                           onItemFocus: (index) {},
+                          shrinkWrap: true,
                           dynamicItemSize: true,
                           scrollDirection: Axis.vertical,
-                        ),
-                      )
-                    : const SizedBox(height: 30),
-              ]),
+                        ) : _currentlyReadingStory.isNotEmpty ?
+                        BookWithProgress(
+                          title: _currentlyReadingStory[0].title,
+                          imagePath: _currentlyReadingStory[0].trailer,
+                          id: _currentlyReadingStory[0].id,
+                          currentPage: _currentlyReadingStory[0].currentPage,
+                          totalPages: _currentlyReadingStory[0].totalPages,
+                          isLiked: _currentlyReadingStory[0].isLiked,
+                          ifSnapScroll: false,
+                        ) : const SizedBox(height: 0),
+                      ) : const SizedBox(height: 30),
+                ]
+              ),
             ],
           ),
         ),
@@ -125,15 +112,15 @@ class _HomeState extends State<Home> {
 
   Widget _currentlyReadingListItem(BuildContext context, int index) {
     Story story = _currentlyReadingStory[index];
+
     return BookWithProgress(
       title: story.title,
       imagePath: story.trailer,
       id: story.id,
       currentPage: story.currentPage,
-      totalPages: story.textContent.length,
+      totalPages: story.totalPages,
+      isLiked: story.isLiked,
+      ifSnapScroll: true,
     );
   }
 }
-
-
-// For image Image.network('url')

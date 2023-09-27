@@ -6,12 +6,12 @@ class IconButtonWidget extends StatefulWidget {
   final String? destination;
   final String image;
   final double imageSize;
-  
+
   const IconButtonWidget( {
-    super.key, 
+    super.key,
     required this.message,
     this.destination,
-    required this.image, 
+    required this.image,
     required this.imageSize
   });
 
@@ -24,31 +24,48 @@ class _IconButtonWidget extends State<IconButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerUp: (val){
-        setState(() {
-          isPressed = false;
-        });
-        if (widget.destination != null) {
-          String dest = widget.destination.toString();
-          Navigator.pushNamed(context, dest);
-        }
-      },
-      onPointerDown: (val){
-        setState(() {
-          isPressed = true;
-        });
-      },
-      onPointerCancel: (val){
-        setState(() {
-          isPressed = false;
-        });
-      },
-      child: AnimatedContainer(
-        height: 50,
-        width: double.infinity,
-        margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),
-        decoration: BoxDecoration(
+    return widget.destination != null ? GestureDetector(
+        onTapUp: (val){
+          print("Tap inner");
+          setState(() {
+            isPressed = false;
+          });
+          if (widget.destination != null) {
+            Navigator.pushNamed(context, widget.destination!);
+          }
+        },
+        onTapDown: (val){
+          setState(() {
+            isPressed = true;
+          });
+        },
+        onTapCancel: (){
+          setState(() {
+            isPressed = false;
+          });
+        },
+        child: ButtonWidget(isPressed: isPressed, widget: widget)
+    ) : ButtonWidget(isPressed: isPressed, widget: widget);
+  }
+}
+
+class ButtonWidget extends StatelessWidget {
+  const ButtonWidget({
+    super.key,
+    required this.isPressed,
+    required this.widget,
+  });
+
+  final bool isPressed;
+  final IconButtonWidget widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      height: 50,
+      width: double.infinity,
+      margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),
+      decoration: BoxDecoration(
           color: const Color(0xFFFDFDFD),
           borderRadius: BorderRadius.circular (25),
           border: Border.all(
@@ -63,28 +80,27 @@ class _IconButtonWidget extends State<IconButtonWidget> {
               offset: Offset(0,6),
             )
           ]
-        ),
-        duration: const Duration(milliseconds: 75),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(
-                  image: AssetImage(widget.image),
-                    width: widget.imageSize,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  widget.message,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFFE8D29),
-                  ),
-                ),
-              ],
-          ),
+      ),
+      duration: const Duration(milliseconds: 75),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image: AssetImage(widget.image),
+              width: widget.imageSize,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              widget.message,
+              style: const TextStyle(
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                color: Color(0xFFFE8D29),
+              ),
+            ),
+          ],
         ),
       ),
     );

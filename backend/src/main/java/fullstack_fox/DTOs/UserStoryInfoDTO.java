@@ -1,13 +1,20 @@
 package fullstack_fox.DTOs;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.Subselect;
+
 
 @Entity
-@Table(name = "user_story_info")
+//prevent the table for automatically being created
+@Subselect("select * from user_story_info")
 public class UserStoryInfoDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long userId;
     private Long storyId;
     private String title;
@@ -15,6 +22,18 @@ public class UserStoryInfoDTO {
     private boolean liked;
     private int pageNo;
     private int totalPages;
+
+    public UserStoryInfoDTO() {}
+
+    public UserStoryInfoDTO(Long userId, Long storyId, String title, String trailer, boolean liked, int pageNo, int totalPages) {
+        this.userId = userId;
+        this.storyId = storyId;
+        this.title = title;
+        this.trailer = trailer;
+        this.liked = liked;
+        this.pageNo = pageNo;
+        this.totalPages = totalPages;
+    }
 
     public Long getId() {
         return id;

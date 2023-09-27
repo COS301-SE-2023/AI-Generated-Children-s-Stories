@@ -1,8 +1,8 @@
 package fullstack_fox.Entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +37,8 @@ public class User {
     }
 
     public String generateAPIToken() {
-        return  UUID.randomUUID().toString();
+        this.apiToken = UUID.randomUUID().toString();
+        return apiToken;
     }
 
     public Long getId() {

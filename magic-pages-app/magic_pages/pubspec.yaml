@@ -39,6 +39,7 @@ dependencies:
   wave: ^0.2.2
   percent_indicator: ^4.0.1
   scroll_snap_list: ^0.9.1
+  url_launcher: ^6.1.11
   auto_size_text: ^3.0.0
 
   # For firebase authentication and sign in
@@ -50,6 +51,9 @@ dependencies:
 
   # For storing API key
   flutter_secure_storage: ^8.0.0
+
+  # For TTS
+  flutter_tts: ^3.8.3
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +85,8 @@ flutter:
     - assets/images/stories/AndyTheAnt/
     - assets/data/stories.json
     - assets/data/currentlyReading.json
+    - assets/images/nav-icons/
+    - assets/images/tts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

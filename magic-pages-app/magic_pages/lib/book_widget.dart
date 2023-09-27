@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'globals.dart';
 import 'heart_animation_widget.dart';
-import 'inside_story.dart';
+import 'rounded-image.dart';
 import 'trailer.dart';
 
 // ignore: must_be_immutable
@@ -11,6 +12,7 @@ class BookWidget extends StatefulWidget {
   final int currentPage;
   final int totalPages;
   bool isLiked;
+  void Function(BuildContext) updateBookItems;
 
   // ignore: use_key_in_widget_constructors
   BookWidget( {
@@ -19,7 +21,8 @@ class BookWidget extends StatefulWidget {
     required this.id,
     required this.currentPage,
     required this.totalPages,
-    required this.isLiked
+    required this.isLiked,
+    required this.updateBookItems
   });
 
   @override
@@ -33,12 +36,8 @@ class _BookWidget extends State<BookWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        // Navigator.push(context, MaterialPageRoute(
-        //   builder: (context) => InsideStory(
-        //     storyId: widget.id,
-        //     pageId: widget.currentPage,
-        //   ),
-        // ));
+
+        //initially calls push to add to the route
         Navigator.push(context, MaterialPageRoute(
           builder: (context) => TrailerPage(
             title: widget.title,
@@ -46,10 +45,15 @@ class _BookWidget extends State<BookWidget> {
             id: widget.id,
             currentPage: widget.currentPage,
             totalPages: widget.totalPages,
-            isLiked: widget.isLiked,
+            isLiked: widget.isLiked
           ),
-        ));
+        ))
 
+          //when context is popped, this function is called
+          //when you press back button
+        .then((value) => {
+          widget.updateBookItems.call(context)
+        });
       },
       child: Column(
         children: [
@@ -59,10 +63,7 @@ class _BookWidget extends State<BookWidget> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Image.network(
-                    widget.imagePath,
-                    fit: BoxFit.contain,
-                  ),
+                  RoundedImage(size: 200, url: widget.imagePath, relative: false),
                   Opacity(
                     opacity: isHeartAnimating ? 1 : 0,
                     child: HeartAnimationWidget(
@@ -86,6 +87,7 @@ class _BookWidget extends State<BookWidget> {
                   isHeartAnimating = true;
                   widget.isLiked = true;
                 });
+                Globals.likeStory(true, widget.id, context);
               },
             ),
           ),
@@ -113,55 +115,4 @@ class _BookWidget extends State<BookWidget> {
       ),
     );
   }
-
-  Widget HeartToggle() {
-    Image image;
-    if (widget.isLiked == true) {
-      image =  const Image(image: AssetImage('assets/images/heart.png'), width: 32);
-    } else {
-      image =  const Image(image: AssetImage('assets/images/heartOutline.png'), width: 32);
-    }
-
-    return HeartAnimationWidget(
-      alwaysAnimate: true,
-      isAnimating: widget.isLiked,
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              widget.isLiked = !widget.isLiked;
-              if (widget.isLiked == true) {
-                isHeartAnimating = true;
-              }
-            });
-          },
-          child: image,
-        ),
-      ),
-    );
-  }
-// Widget HeartToggle() {
-//     IconData icon;
-//     Color color = const Color(0xFF542209);
-//     if (widget.isLiked == true) {
-//       icon = Icons.favorite;
-//     } else {
-//       icon = Icons.favorite_outline;
-//     }
-
-//     return HeartAnimationWidget(
-//       alwaysAnimate: true,
-//       isAnimating: widget.isLiked,
-//       child: IconButton(
-//         icon: Icon(icon, color: color, size: 32),
-//         onPressed: () => setState(() {
-//           widget.isLiked = !widget.isLiked;
-//           if (widget.isLiked == true) {
-//             isHeartAnimating = true;
-//           }
-//         }),
-//       ),
-//     );
-//   }
 }

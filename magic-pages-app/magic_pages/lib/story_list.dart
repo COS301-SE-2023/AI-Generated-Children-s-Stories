@@ -1,4 +1,4 @@
-import 'Wave_Widget.dart';
+import 'wave_widget.dart';
 import 'story.dart';
 import 'package:flutter/material.dart';
 import 'navbar.dart';
@@ -44,6 +44,7 @@ class _StoryListState extends State<StoryList> {
   /// it uses the story list change notifier to fetch the list of stories
   /// @return void
   void getStories(BuildContext context) async {
+    print("getting stories");
     await _storyListChangeNotifier.fetchAllStories(context);
     setState(() {
       _stories = _storyListChangeNotifier.stories;
@@ -179,24 +180,26 @@ class _StoryListState extends State<StoryList> {
           width: MediaQuery.of(context).size.width/2-32,
           margin: const EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: BookWidget(
-            title: story1.getTitle(),
-            imagePath: story1.getCoverUrl(),
-            id: story1.getId(),
-            currentPage: story1.getCurrentPage(),
-            totalPages: story1.getTextContent().length,
-            isLiked: story1.getIsLiked(),
+            title: story1.title,
+            imagePath: story1.trailer,
+            id: story1.id,
+            currentPage: story1.currentPage,
+            totalPages: story1.totalPages,
+            isLiked: story1.isLiked,
+            updateBookItems: getStories,
           ),
         ),
         Container(
           width: MediaQuery.of(context).size.width/2-32,
           margin: const EdgeInsets.fromLTRB(0, 10, 16, 10),
           child: BookWidget(
-            title: story2.getTitle(),
-            imagePath: story2.getCoverUrl(),
-            id: story2.getId(),
-            currentPage: story2.getCurrentPage(),
-            totalPages: story2.getTextContent().length,
-            isLiked: story2.getIsLiked(),
+            title: story2.title,
+            imagePath: story2.trailer,
+            id: story2.id,
+            currentPage: story2.currentPage,
+            totalPages: story2.totalPages,
+            isLiked: story2.isLiked,
+            updateBookItems: getStories,
           ),
         ),
       ]
@@ -210,24 +213,26 @@ class _StoryListState extends State<StoryList> {
           width: MediaQuery.of(context).size.width/2-32,
           margin: const EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: BookWidget(
-            title: story1.getTitle(),
-            imagePath: story1.getCoverUrl(),
-            id: story1.getId(),
-            currentPage: story1.getCurrentPage(),
-            totalPages: story1.getTextContent().length,
-            isLiked: story1.getIsLiked(),
+            title: story1.title,
+            imagePath: story1.trailer,
+            id: story1.id,
+            currentPage: story1.currentPage,
+            totalPages: story1.totalPages,
+            isLiked: story1.isLiked,
+            updateBookItems: getStories,
           ),
         ),
         Container(
           width: MediaQuery.of(context).size.width/2-32,
           margin: const EdgeInsets.fromLTRB(0, 10, 16, 10),
           child: BookWidget(
-            title: story2.getTitle(),
-            imagePath: story2.getCoverUrl(),
-            id: story2.getId(),
-            currentPage: story2.getCurrentPage(),
-            totalPages: story2.getTextContent().length,
-            isLiked: story2.getIsLiked(),
+            title: story2.title,
+            imagePath: story2.trailer,
+            id: story2.id,
+            currentPage: story2.currentPage,
+            totalPages: story2.totalPages,
+            isLiked: story2.isLiked,
+            updateBookItems: getStories,
           ),
         ),
       ]
@@ -240,12 +245,13 @@ class _StoryListState extends State<StoryList> {
           width: MediaQuery.of(context).size.width/2-32,
           margin: const EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: BookWidget(
-            title: story1.getTitle(),
-            imagePath: story1.getCoverUrl(),
-            id: story1.getId(),
-            currentPage: story1.getCurrentPage(),
-            totalPages: story1.getTextContent().length,
-            isLiked: story1.getIsLiked(),
+            title: story1.title,
+            imagePath: story1.trailer,
+            id: story1.id,
+            currentPage: story1.currentPage,
+            totalPages: story1.totalPages,
+            isLiked: story1.isLiked,
+            updateBookItems: getStories,
           ),
         ),
         Container(

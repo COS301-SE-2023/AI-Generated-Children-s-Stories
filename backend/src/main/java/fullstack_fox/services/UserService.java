@@ -53,6 +53,7 @@ public class UserService {
 
         if (user.getApiToken() == null) { //generate a new token
             user.generateAPIToken();
+            userRepository.save(user);
         }
 
         return user;

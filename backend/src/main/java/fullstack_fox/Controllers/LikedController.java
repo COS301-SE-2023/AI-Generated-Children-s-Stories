@@ -1,6 +1,5 @@
 package fullstack_fox.Controllers;
 
-import fullstack_fox.DTOs.StoryDTO;
 import fullstack_fox.Entities.Liked;
 import fullstack_fox.Entities.Story;
 import fullstack_fox.Entities.User;
@@ -8,10 +7,12 @@ import fullstack_fox.Repositories.LikedRepository;
 import fullstack_fox.Repositories.StoryRepository;
 import fullstack_fox.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class LikedController {
@@ -24,9 +25,16 @@ public class LikedController {
     @Autowired
     StoryRepository storyRepository;
 
-    //Like a story
+    // Authenticated
+    // Like a story
     @PostMapping("/liked/stories")
-    public ResponseEntity<String> likeStory(@RequestParam Long userId, @RequestParam Long storyId) {
+    public ResponseEntity<String> likeStory(@RequestParam Long userId, @RequestParam Long storyId, @RequestParam String apiKey) {
+
+        if (!new AuthenticateApiCalls(userRepository).authenticateApiKey(userId, apiKey)) {
+            System.out.println("Unauthorised");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
         // Check if the user and story exist in the database
         User user = userRepository.findById(userId).orElse(null);
         Story story = storyRepository.findById(storyId).orElse(null);
@@ -38,6 +46,7 @@ public class LikedController {
         // Check if the story is already liked by the user
         boolean isLiked = likedRepository.existsByUserAndStory(user, story);
         if (isLiked) {
+            System.out.println("Story already liked by user");
             return ResponseEntity.badRequest().body("Story is already liked by the user.");
         }
 
@@ -45,20 +54,23 @@ public class LikedController {
         Liked liked = new Liked();
         liked.setUser(user);
         liked.setStory(story);
+
         likedRepository.save(liked);
 
         return ResponseEntity.ok("Story added to the liked page.");
     }
 
-    @GetMapping("/liked/stories/{userId}")
-    public ResponseEntity<List<Liked>> getLiked(@PathVariable Long userId) {
-        List<Liked> likedStories = likedRepository.findByUser_Id(userId);
-        return ResponseEntity.ok(likedStories);
-    }
-
-    //Unlike a story
+    // Authenticated
+    // Unlike a story
     @DeleteMapping("/liked/stories")
-    public ResponseEntity<String> deleteStoryFromLikedPage(@RequestParam Long userId, @RequestParam Long storyId) {
+    public ResponseEntity<String> deleteStoryFromLikedPage(@RequestParam Long userId, @RequestParam Long storyId, @RequestParam String apiKey) {
+
+        AuthenticateApiCalls authenticateApiCalls = new AuthenticateApiCalls(userRepository);
+        if (!authenticateApiCalls.authenticateApiKey(userId, apiKey)) {
+            System.out.println("Unauthorised");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
         // Check if the user and story exist in the database
         User user = userRepository.findById(userId).orElse(null);
         Story story = storyRepository.findById(storyId).orElse(null);
@@ -68,15 +80,15 @@ public class LikedController {
         }
 
         // Find the Liked entity associated with the user and story
-        Liked liked = likedRepository.findByUserAndStory(user, story);
+        Optional<Liked> isLiked = likedRepository.findByUserAndStory(user, story);
+        if (isLiked.isPresent()) {
+            Liked liked = isLiked.get();
 
-        if (liked == null) {
-            return ResponseEntity.badRequest().body("Story is not liked by the user.");
+            // Delete the Liked entity from the database
+            likedRepository.delete(liked);
+            return ResponseEntity.ok("Story deleted from the liked page.");
         }
 
-        // Delete the Liked entity from the database
-        likedRepository.delete(liked);
-
-        return ResponseEntity.ok("Story deleted from the liked page.");
+        return ResponseEntity.badRequest().body("Story is not liked by the user.");
     }
 }

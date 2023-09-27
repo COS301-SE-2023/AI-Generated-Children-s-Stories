@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:magic_pages/inside_story.dart';
+import 'package:magic_pages/story_page.dart';
+
+//todo: make a parent button
+//two children: navigate to route
+//navigate to inside story page
 
 // ignore: must_be_immutable
 class ButtonWidget extends StatefulWidget {
   final String message;
-  final String destination;
+  final String? destination;
   final int? storyId;
-  final int? pageId;
+  final bool? isEnabled;
+  final List<StoryPage>? pages;
+  final int? currentPage;
+  final bool? isLiked;
+  final void Function(BuildContext)? updateBookItems;
+  final void Function(int)? updatePage;
+  final void Function(bool)? updateLiked;
+  final String? color;
 
-  const ButtonWidget( {
+  const ButtonWidget({
     super.key,
     required this.message,
-    required this.destination,
+    this.destination,
+    this.isEnabled,
     this.storyId,
-    this.pageId
+    this.pages,
+    this.currentPage,
+    this.isLiked,
+    this.updateBookItems,
+    this.updatePage,
+    this.updateLiked,
+    this.color,
   });
 
   @override
@@ -22,29 +41,57 @@ class ButtonWidget extends StatefulWidget {
 
 class _ButtonWidget extends State<ButtonWidget> {
   bool isPressed = false;
+  bool? isLiked;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapUp: (val){
+      onTapUp: (val) {
+
+        if (widget.isEnabled != null && widget.isEnabled == false) {
+          return;
+        }
+
         setState(() {
           isPressed = false;
         });
+
         widget.storyId == null
-            ? Navigator.pushNamed(context, widget.destination)
-            : Navigator.push(context, MaterialPageRoute(
-          builder: (context) => InsideStory(
-            storyId: widget.storyId!,
-            pageId: widget.pageId!,
-          ),
-        ));
+            //push a normal string route
+            ? Navigator.pushNamed(context, widget.destination ?? widget.destination!)
+            //push a book widget
+            : Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      InsideStory(
+                        storyId: widget.storyId!,
+                        currentPage: widget.currentPage!,
+                        pages: widget.pages!,
+                        isLiked: widget.isLiked!,
+                        updatePage: widget.updatePage!,
+                        updateLiked: widget.updateLiked!,
+                      )
+                ))
+
+            //when you navigate back, call the update book items function
+            //to get a list of updated books
+            //used for if you like the story
+            .then((value) => {
+                  print("Setting state...${widget.isLiked}"),
+                  if (widget.updateBookItems != null) {
+                    widget.updateBookItems!.call(context),
+                  },
+                  widget.updateLiked!.call(widget.isLiked!),
+                  setState(() {}),
+              });
       },
-      onTapDown: (val){
+      onTapDown: (val) {
         setState(() {
           isPressed = true;
         });
       },
-      onTapCancel: (){
+      onTapCancel: () {
         setState(() {
           isPressed = false;
         });
@@ -52,28 +99,40 @@ class _ButtonWidget extends State<ButtonWidget> {
       child: AnimatedContainer(
         height: 50,
         width: double.infinity,
-        margin: isPressed ? const EdgeInsets.fromLTRB(16, 6, 16, 0) : const EdgeInsets.fromLTRB(16, 0, 16, 6),
+        margin: isPressed
+            ? const EdgeInsets.fromLTRB(16, 6, 16, 0)
+            : const EdgeInsets.fromLTRB(16, 0, 16, 6),
         decoration: BoxDecoration(
-            color: const Color(0xFFFE8D29),
-            borderRadius: BorderRadius.circular (25),
-            boxShadow: isPressed ? null : [
-              const BoxShadow(
-                color: Color(0xFF84370F),
-                spreadRadius: 0,
-                blurRadius: 0,
-                offset: Offset(0,6),
-              )
-            ]
-        ),
+            color: (widget.isEnabled != null && widget.isEnabled == false)
+                ? const Color(0xFFABABAB)
+                : widget.color == 'grey' ? const Color(0xFFFDFDFD) : const Color(0xFFFE8D29),
+            borderRadius: BorderRadius.circular(25),
+            border: widget.color == 'grey' ? Border.all(
+              color: const Color(0xFFD3D3D3),
+              width: 2,
+            ) :Border.all(width: 0),
+            boxShadow: isPressed
+                ? null
+                : [
+                    BoxShadow(
+                      color: (widget.isEnabled != null &&
+                              widget.isEnabled == false)
+                          ? const Color(0xFF595959)
+                          : widget.color == 'grey' ? const Color(0xFFD3D3D3) : const Color(0xFF84370F), //Color(0xFF84370F),
+                      spreadRadius: 0,
+                      blurRadius: 0,
+                      offset: const Offset(0, 6),
+                    )
+                  ]),
         duration: const Duration(milliseconds: 75),
         child: Center(
           child: Text(
             widget.message,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
-              color: Color(0xFFFDFDFD),
+              color: widget.color == 'grey' ? const Color(0xFFFE8D29) : const Color(0xFFFDFDFD),
             ),
           ),
         ),

@@ -8,55 +8,27 @@
 class Story {
   final String title;
   final String trailer;
-  final List<String> textContent;
-  final List<String> imageContent;
+  List<String> textContent;
+  List<String> imageContent;
   final int currentPage;
   int index = 0;
   final int id;
   bool isLiked = false;
+  final int totalPages;
 
   Story(
       {required this.title,
       required this.trailer,
-      required this.textContent,
-      required this.imageContent,
       required this.currentPage,
+      required this.imageContent,
+      required this.textContent,
       required this.id, 
-      required this.isLiked});
+      required this.isLiked,
+      required this.totalPages});
 
-  /// get the liked status of the story
-  /// @return the like status
-  bool getIsLiked() {
-    return isLiked;
-  }
 
-  /// set the like status of the story
-  void setIsLiked(bool likeStatus) {
-    isLiked = likeStatus;
-  }
-
-  /// get the id of the story
-  /// @return the id of the story
-  int getId() {
-    return id;
-  }
-
-  /// get the title of the story
-  /// @return the title of the story
-  String getTitle() {
-    return title;
-  }
-
-  /// get the cover url of the story
-  /// @return the cover url of the story
-  String getCoverUrl() {
-    return trailer;
-  }
-
-  /// get the text content of the story
-  /// @return the text content of the story
-  List<String> getTextContent() {
-    return textContent;
+  void setTextContent(List<String> textContent) {
+    this.textContent = textContent;
   }
 
   /// get the image content of the story
@@ -65,32 +37,30 @@ class Story {
     return imageContent;
   }
 
-  /// get the current page of the story
-  /// @return the current page of the story
-  int getCurrentPage() {
-    return currentPage;
+  void setImageContent(List<String> imageContent) {
+    this.imageContent = imageContent;
   }
 
   /// get the next page
   /// if the current page is the last page, return the last page
   /// else return the next page
   /// @return the next page
-  Object getNext() {
+  Map<String, dynamic> getNext() {
     if (index < textContent.length - 1) {
       index = index + 1;
     }
 
     if (index == textContent.length - 1) {
       return {
-        textContent[index],
-        imageContent[index],
-        true //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': true //is last item
       };
     } else {
       return {
-        textContent[index],
-        imageContent[index],
-        false //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': false //is last item
       };
     }
   }
@@ -99,22 +69,22 @@ class Story {
   /// if the current page is the first page, return the first page
   /// else return the previous page
   /// @return the previous page
-  Object getPrev() {
+  Map<String, dynamic> getPrev() {
     if (index > 0) {
       index = index - 1;
     }
 
     if (index == textContent.length - 1) {
       return {
-        textContent[index],
-        imageContent[index],
-        true //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': true
       };
     } else {
       return {
-        textContent[index],
-        imageContent[index],
-        false //is last item
+        'text': textContent[index],
+        'image': imageContent[index],
+        'isLast': false //is last item
       };
     }
   }
