@@ -20,7 +20,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
-
         scene = new Scene(loadFXML("home"), 1040, 585);
         stage.setResizable(false);
         stage.setTitle("Artificial Intellignece Story Generator");
@@ -28,8 +27,6 @@ public class App extends Application {
         stage.getIcons().add(iconImage);
         stage.setScene(scene);
         stage.show();
-        StoryGeneration.getInstance();
-        Story.getInstance();
     }
 
     static void setRoot(String fxml) throws IOException {

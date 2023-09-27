@@ -29,18 +29,9 @@ public class StoryGeneration {
     }
 
     // Generate story text
-    public static String storyInput(ArrayList<String> inputList) {
-
-        for(String ls : inputList){
-            System.out.println(ls);
-        }
-
-        String currentPrompt = processPrompt.storyPrompt(inputList);
-        return storyText(currentPrompt);
-    }
-
-    public static String storyText(String inPrompt) {
-        String response = callApi.promptGPT(inPrompt);
+    public static String storyText(ArrayList<String> inputList) {
+        String prompt = processPrompt.storyPrompt(inputList);
+        String response = callApi.promptGPT(prompt);
         return extractContent(response);
     }
 
@@ -55,13 +46,13 @@ public class StoryGeneration {
         String currentPrompt = processPrompt.characterDescriptionPrompt(story);
         String response = callApi.promptGPT(currentPrompt);
         String characterPrompt = processPrompt.characterImagePrompt(extractContent(response));
-        return imageGenerator.generateImages(characterPrompt);
+        return imageGenerator.generateImage(characterPrompt);
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
     public static ArrayList<String> characterImageCustom(String prompt) throws URISyntaxException {
         String characterPrompt = processPrompt.characterImagePrompt(prompt);
-        return imageGenerator.generateImages(characterPrompt);
+        return imageGenerator.generateImage(characterPrompt);
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
@@ -69,18 +60,18 @@ public class StoryGeneration {
         String currentPrompt = processPrompt.storyTrailerPrompt(story);
         String response = callApi.promptGPT(currentPrompt);
         String trailerPrompt = processPrompt.storyImagePrompt(characterImageUrl, extractContent(response));
-        return imageGenerator.generateImages(trailerPrompt);
+        return imageGenerator.generateImage(trailerPrompt);
     }
 
     public static ArrayList<String> storyTrailerImageCustom(String prompt) throws URISyntaxException {
         String trailerPrompt = processPrompt.storyImagePrompt(characterImageUrl, prompt);
-        return imageGenerator.generateImages(trailerPrompt);
+        return imageGenerator.generateImage(trailerPrompt);
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
     public ArrayList<String> pageImage(String inPrompt) throws URISyntaxException {
         String pagePrompt = processPrompt.storyImagePrompt(characterImageUrl, inPrompt);
-        return imageGenerator.generateImages(pagePrompt);
+        return imageGenerator.generateImage(pagePrompt);
     }
 
     // Call this to upscale a image

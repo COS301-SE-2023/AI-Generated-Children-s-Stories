@@ -13,30 +13,22 @@ import java.util.ArrayList;
 
 public class CreateAStoryController {
 
-    StoryGeneration storyGeneration;
-
     @FXML
-    private Button generationButton;
+    private Button button_generate;
     @FXML
-    private TextArea storyPrompt;
+    private Button button_edit;
     @FXML
-    private TextField age;
+    private Button button_discard;
     @FXML
-    private Slider lenSlider;
+    private Button button_accept;
     @FXML
-    private TextArea storyOut;
+    private TextArea input_story_idea;
     @FXML
-    private Button editButton;
+    private TextField input_age;
     @FXML
-    private Button discardButton;
+    private Slider input_length;
     @FXML
-    private Button acceptButton;
-    @FXML
-    private Button regenButton;
-
-    public CreateAStoryController() throws URISyntaxException {
-        storyGeneration = StoryGeneration.getInstance();
-    }
+    private TextArea output_story;
 
     @FXML
     private void switchToHome() throws IOException {
@@ -49,38 +41,56 @@ public class CreateAStoryController {
     }
 
     @FXML
-    private void switchToCharacter() throws IOException {
-        StoryGeneration.setStory(storyOut.getText());
+    private void switchToCharacter() throws IOException, URISyntaxException {
+        StoryGeneration.getInstance().setStory(output_story.getText());
         App.setRoot("character");
     }
 
     @FXML
     private void edit() throws IOException {
-        storyOut.setEditable(true);
+        if(output_story.isEditable())
+        {
+            output_story.setEditable(false);
+        }
+        else {
+            output_story.setEditable(true);
+        }
     }
 
 
     @FXML
     private void getPrompt() throws IOException, URISyntaxException {
-        generationButton.setDisable(true);
         ArrayList<String> promptList = new ArrayList<>();
-        promptList.add(storyPrompt.getText());
-        promptList.add(age.getText());
-        promptList.add("" + Math.round(lenSlider.getValue()));
-        this.setStory(promptList);
+        promptList.add(input_story_idea.getText());
+        promptList.add(input_age.getText());
+        promptList.add("" + Math.round(input_length.getValue()));
+        setStory(promptList);
     }
 
     @FXML
     private void setStory(ArrayList<String> inPromptList) throws URISyntaxException {
-        String story = "Story Failed to Generate";
-        if (inPromptList != null) {
-            String prompt = StoryGeneration.storyInput(inPromptList);
-            story = StoryGeneration.storyText(prompt);
-        }
-        storyOut.setText(story);
-        editButton.setDisable(false);
-        acceptButton.setDisable(false);
-        regenButton.setDisable(false);
-        discardButton.setDisable(false);
+        String story = StoryGeneration.getInstance().storyText(inPromptList);
+        System.out.println(
+                "create a story controller: "
+        );
+        System.out.println(story);
+        output_story.setText(story);
+        enableGeneration();
     }
+
+    @FXML
+    private void disableGeneration(){
+        button_edit.setDisable(true);
+        button_accept.setDisable(true);
+        button_discard.setDisable(true);
+        button_generate.setDisable(true);
+    }
+
+    private void enableGeneration(){
+        button_edit.setDisable(false);
+        button_accept.setDisable(false);
+        button_discard.setDisable(false);
+        button_generate.setDisable(false);
+    }
+
 }

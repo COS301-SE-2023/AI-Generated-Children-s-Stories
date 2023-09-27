@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+//can't abstract no output story
 public class StoryPageController {
 
     @FXML

@@ -15,16 +15,20 @@ public class ImageGeneration {
         callApi = inApiLibrary;
     }
 
-    public ArrayList<String> generateImages(String inPrompt) {
+    public ArrayList<String> generateImage(String inPrompt) {
+        System.out.println("1");
         String lastMessageID = this.latestMessageID();
         callApi.postPrompt(inPrompt);
+        System.out.println("2");
         this.imageGenDelay(lastMessageID);
         String message = callApi.getMessage();
         String imageURL = this.extractImageUrl(message);
+        System.out.println("3");
         lastMessageID = this.latestMessageID();
         ArrayList<String> result = new ArrayList<>();
         result.add(imageURL);
         result.add(lastMessageID);
+        System.out.println("4");
         return result;
     }
 
@@ -51,8 +55,7 @@ public class ImageGeneration {
                     url = this.extractImageUrl(message);
                     if (url != null) {
                         this.urlUnitTest(url);
-                        String fileType = url.substring(url.length() - 3);
-                        if (fileType.compareTo("png") == 0) {
+                        if (url.contains("fullstackfox") && url.contains(".png")) {
                             check = false;
                         }
                     }

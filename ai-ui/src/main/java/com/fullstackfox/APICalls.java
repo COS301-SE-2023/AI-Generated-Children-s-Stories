@@ -122,7 +122,6 @@ public class APICalls {
                 .post(body)
                 .addHeader("Authorization", "Bearer " + configList.get(6))
                 .build();
-
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 System.out.println(response.body().string());
