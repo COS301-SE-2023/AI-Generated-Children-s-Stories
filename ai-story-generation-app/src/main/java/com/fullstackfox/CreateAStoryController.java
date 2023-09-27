@@ -43,6 +43,7 @@ public class CreateAStoryController {
     @FXML
     private void switchToCharacter() throws IOException, URISyntaxException {
         StoryGeneration.setStory(output_story.getText());
+        StoryGeneration.setParagraphs();
         App.setRoot("character");
     }
 

@@ -16,19 +16,15 @@ public class ImageGeneration {
     }
 
     public ArrayList<String> generateImage(String inPrompt) {
-        System.out.println("1");
         String lastMessageID = this.latestMessageID();
         callApi.postPrompt(inPrompt);
-        System.out.println("2");
         this.imageGenDelay(lastMessageID);
         String message = callApi.getMessage();
         String imageURL = this.extractImageUrl(message);
-        System.out.println("3");
         lastMessageID = this.latestMessageID();
         ArrayList<String> result = new ArrayList<>();
         result.add(imageURL);
         result.add(lastMessageID);
-        System.out.println("4");
         return result;
     }
 
@@ -102,7 +98,6 @@ public class ImageGeneration {
     }
 
     private void urlUnitTest(String inUrl) {
-        System.out.println(inUrl);
         if (inUrl == "") {
             System.out.println("Message recived not an image");
         } else {

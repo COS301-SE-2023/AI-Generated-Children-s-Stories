@@ -60,7 +60,7 @@
                   <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" ellipsisString="" prefHeight="46.0" prefWidth="973.0" text="                       2. This is the second prompt.&quot; " textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="button_generate" layoutX="436.0" layoutY="424.0" onAction="#getPrompts" onMousePressed="#disableGeneration" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Prompts" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="button_generate" layoutX="436.0" layoutY="424.0" onMousePressed="#disableGeneration" onMouseReleased="#getPrompts" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Prompts" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="15.0" />
                </font></Button>

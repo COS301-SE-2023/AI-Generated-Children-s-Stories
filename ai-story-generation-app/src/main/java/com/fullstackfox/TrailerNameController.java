@@ -42,10 +42,11 @@ public class TrailerNameController {
     }
 
     @FXML
-    private void makeTitle() {
+    private void makeTitle() throws IOException {
         String title = StoryGeneration.storyTitle(StoryGeneration.getStory());
         output_name.setText(title);
         button_generate.setText("Regenerate Name");
+        enableGeneration();
     }
 
     @FXML

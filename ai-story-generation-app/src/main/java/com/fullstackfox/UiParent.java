@@ -38,6 +38,9 @@ public class UiParent {
     protected Button button_discard;
 
     protected ArrayList<String> list;
+
+    String finalImage;
+
     public UiParent() {
         Platform.runLater(() -> {
             output_story.setText(StoryGeneration.getStory());
@@ -54,6 +57,7 @@ public class UiParent {
         String url = StoryGeneration.imageUpscale(list, toUpscale);
         StoryGeneration.setCharacter(url);
         setImage(url);
+        finalImage = url;
         enableGeneration();
         button_accept.setDisable(false);
         disableUpscale();

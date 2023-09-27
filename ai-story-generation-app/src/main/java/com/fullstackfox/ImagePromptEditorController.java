@@ -34,7 +34,7 @@ public class ImagePromptEditorController {
 
     @FXML
     private void switchToPage() throws IOException {
-        StoryGeneration.splitNumberedList(prompts);
+        StoryGeneration.setImagePrompts(output_prompts.getText());
         App.setRoot("story-page");
     }
 
@@ -48,6 +48,7 @@ public class ImagePromptEditorController {
         button_accept.setDisable(true);
         button_discard.setDisable(true);
         button_generate.setDisable(true);
+        button_edit.setDisable(true);
     }
 
     @FXML
@@ -55,6 +56,7 @@ public class ImagePromptEditorController {
         button_accept.setDisable(false);
         button_discard.setDisable(false);
         button_generate.setDisable(false);
+        button_edit.setDisable(false);
     }
 
 }
