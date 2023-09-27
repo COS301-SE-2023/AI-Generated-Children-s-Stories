@@ -1,4 +1,4 @@
-package fullstack_fox;
+package com.fullstackfox;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,8 @@ public class PromptProcessor {
 
     String seed;
 
-    public PromptProcessor(String inSeed) {
-        seed = inSeed;
+    public PromptProcessor() {
+        seed = "123";
     }
 
     // ChatGPT ---
