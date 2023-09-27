@@ -14,14 +14,19 @@ void main() {
     Story story = Story(
         title: "title",
         trailer: "trailer",
-        textContent: ["textContent"], imageContent: ["imageContent"], currentPage: 0, id: 1, isLiked: true);
+        textContent: ["textContent"],
+        imageContent: ["imageContent"],
+        currentPage: 0,
+        id: 1,
+        isLiked: true,
+        totalPages: 1);
 
-    expect(story.getTitle(), "title");
-    expect(story.getCoverUrl(), "trailer");
-    expect(story.getCurrentPage(), 0);
-    expect(story.getId(), 1);
-    expect(story.getIsLiked(), true);
-    expect(story.getImageContent()[0], "imageContent");
-    expect(story.getTextContent()[0], "textContent");
+    expect(story.title, "title");
+    expect(story.trailer, "trailer");
+    expect(story.currentPage, 0);
+    expect(story.id, 1);
+    expect(story.isLiked, true);
+    expect(story.imageContent[0], "imageContent");
+    expect(story.textContent[0], "textContent");
   });
 }
