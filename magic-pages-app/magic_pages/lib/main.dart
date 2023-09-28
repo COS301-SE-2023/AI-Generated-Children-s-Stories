@@ -100,6 +100,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: const Color(0xFFFFF3E9),
             ),
             home:  loggedInPreviously ? const Home() : const SplashPage(),
+            debugShowCheckedModeBanner: false,
             routes: {
               '/signup': (context) => const SignupPage(),
               '/splash': (context) => const SplashPage(),

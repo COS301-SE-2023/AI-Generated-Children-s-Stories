@@ -53,9 +53,9 @@ class PrivacyPolicy extends StatelessWidget {
                   ),
                 ])
               ]))),
-      bottomNavigationBar: const Padding(
-          padding: EdgeInsets.only(top: 8.0, bottom: 20.0),
-          child: ButtonWidget(message: 'BACK', destination: '/signup')
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(top: 8.0, bottom: 20.0),
+          child: const ButtonWidget(message: 'BACK', destination: '/signup')
       ),
     );
   }
