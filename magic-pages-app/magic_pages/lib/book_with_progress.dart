@@ -54,7 +54,7 @@ class _BookWithProgressState extends State<BookWithProgress> {
                   maxFontSize: double.infinity,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 52,
+                    fontSize: 64,
                     color: Color(0xFF542209),
                     fontFamily: 'NotoSerif',
                     fontWeight: FontWeight.w500,
