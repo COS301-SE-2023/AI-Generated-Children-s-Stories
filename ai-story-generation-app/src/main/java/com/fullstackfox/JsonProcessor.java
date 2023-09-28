@@ -49,28 +49,33 @@ public class JsonProcessor {
         return null;
     }
 
-    public void writeStoryToJson(Story story, String inFName) {
+    public JSONObject writeStoryToJson() {
+        String apiKey = "f0181441-a6f4-4eea-ba72-fcb15a675e63";
         JSONObject jsonStory = new JSONObject();
-        jsonStory.put("title", Story.getTitle());
-        jsonStory.put("trailer", Story.getTrailer());
+        jsonStory.put("apiKey", apiKey);
+
+        JSONObject jsonStoryObject = new JSONObject();
+        jsonStoryObject.put("title", Story.getTitle());
+        jsonStoryObject.put("trailer", Story.getTrailer());
+
         JSONArray jsonPages = new JSONArray();
         for (Page page : Story.getPages()) {
             JSONObject jsonPage = new JSONObject();
             jsonPage.put("image", page.getImageUrl());
             jsonPage.put("text", page.getContent());
-            // jsonPage.put("pageNumber", jsonPages.length() + 1);
             jsonPages.put(jsonPage);
         }
-        jsonStory.put("pages", jsonPages);
-        // New Code ---
-        jsonStory.put("userStories", new JSONArray());
+
+        jsonStoryObject.put("pages", jsonPages);
+        jsonStoryObject.put("userStories", new JSONArray());
+        jsonStory.put("story", jsonStoryObject);
         try {
             String jsonString = jsonStory.toString(4);
-            Files.write(Paths.get(inFName), jsonString.getBytes());
-
+            Files.write(Paths.get("Output.json"), jsonString.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return jsonStory;
     }
+
 }

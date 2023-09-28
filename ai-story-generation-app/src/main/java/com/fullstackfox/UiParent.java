@@ -36,15 +36,27 @@ public class UiParent {
     protected Button button_custom_generate;
     @FXML
     protected Button button_discard;
+    @FXML
+    protected TextArea output_paragraph;
 
     protected ArrayList<String> list;
 
     String finalImage;
 
-    public UiParent() {
-        Platform.runLater(() -> {
-            output_story.setText(StoryGeneration.getStory());
-        });
+    public UiParent(){
+        {
+            Platform.runLater(() -> {
+                output_story.setText(StoryGeneration.getStory());
+            });
+        }
+    }
+
+    public UiParent(boolean page) {
+        if (page) {
+            Platform.runLater(() -> {
+                output_paragraph.setText(StoryGeneration.getCurrentParagraph());
+            });
+        }
     }
 
     @FXML
@@ -110,6 +122,7 @@ public class UiParent {
     protected void upscale1() throws IOException, URISyntaxException {
         upscaleAll("1");
     }
+
     @FXML
     protected void upscale2() throws IOException, URISyntaxException {
         upscaleAll("2");

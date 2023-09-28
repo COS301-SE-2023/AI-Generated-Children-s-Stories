@@ -1,75 +1,62 @@
 package com.fullstackfox;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
-//can't abstract no output story
-public class StoryPageController {
+public class StoryPageController extends UiParent {
 
     @FXML
-    private Pane output_image;
+    private Label title;
+
     @FXML
     private TextArea output_paragraph;
-    @FXML
-    private Button regenButton;
-    @FXML
-    private Button acceptButton;
-    @FXML
-    private Button button1;
-    @FXML
-    private Button button2;
-    @FXML
-    private Button button3;
-    @FXML
-    private Button button4;
-    @FXML
-    private Label paraNum;
-
-    @FXML
-    private TextArea storyOut;
-
-    @FXML
-    private Button editButton;
-
-    @FXML
-    private void switchToHome() throws IOException {
-        App.setRoot("home");
-
+    public StoryPageController() {
+        super(true);
     }
-//
-//    @FXML
-//    private void generate() throws IOException {
-//        String prompt = gen.getPagePrompt(gen.getPageNums());
-//        ArrayList<String> page;
-//        try {
-//            page = gen.pageImage(prompt, gen.getChar());
-//            String url = page.get(0);
-//            Image imageU = new Image(url);
-//            ImageView imageView = new ImageView(imageU);
-//            imageView.setFitHeight(380);
-//            imageView.setFitWidth(380);
-//            image.getChildren().add(imageView);
-//            regenButton.setDisable(false);
-//        } catch (URISyntaxException e) {
-//
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
-//    @FXML
-//    private void switchToPreview() throws IOException {
-//        //  if (gen.getPageNums()>0){
-//        gen.decPages();
-//        App.setRoot("story-page");
-//        //}else{
-//        if (gen.getPageNums() == 0) {
-//            App.setRoot("page-preview");
-//        }
-//    }
+
+    @FXML
+    private void generate() throws IOException, URISyntaxException {
+        list = StoryGeneration.pageImage(StoryGeneration.getCurrentImagePrompt());
+        finalImage = list.get(0);
+        setImage(finalImage);
+    }
+
+    @FXML
+    private void generateCustom() throws IOException, URISyntaxException {
+        list = StoryGeneration.pageImage(input_custom_prompt.getPromptText());
+        finalImage = list.get(0);
+        setImage(finalImage);
+    }
+
+    @FXML
+    private void next() throws IOException {
+        Page newPage = new Page(StoryGeneration.getCurrentParagraph(), finalImage);
+        Story.addPage(newPage);
+        StoryGeneration.incCurrentPage();
+        if (StoryGeneration.lastPageCheck()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Completed");
+            alert.setHeaderText(null);
+            alert.setContentText("Story sent to database");
+            alert.showAndWait();
+            Story.printStory();
+            StoryGeneration.sendStory();
+        } else {
+            title.setText("Page " + (StoryGeneration.getCurrentPage()+1));
+            output_image.getChildren().clear();
+            output_paragraph.setText(StoryGeneration.getCurrentParagraph());
+            baseState();
+        }
+    }
+
+
+    private void baseState() throws IOException {
+        button_accept.setDisable(true);
+        disableUpscale();
+    }
 }

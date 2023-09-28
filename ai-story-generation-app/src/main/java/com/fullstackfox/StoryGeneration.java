@@ -14,15 +14,18 @@ public class StoryGeneration {
     private static ImageGeneration imageGenerator;
     private static String story;
     private static String characterImageUrl;
-
     private static ArrayList<String> paragraphs;
-
     private static ArrayList<String> imagePrompts;
+    private static JsonProcessor jsonProcessor;
+
+    static int currentPage;
 
     private StoryGeneration() throws URISyntaxException {
         callApi = new APICalls();
         imageGenerator = new ImageGeneration(callApi);
         processPrompt = new PromptProcessor();
+        currentPage = 0;
+        jsonProcessor = new JsonProcessor();
     }
 
     public static StoryGeneration getInstance() throws URISyntaxException {
@@ -73,7 +76,7 @@ public class StoryGeneration {
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> pageImage(String inPrompt) throws URISyntaxException {
+    public static ArrayList<String> pageImage(String inPrompt) throws URISyntaxException {
         String pagePrompt = processPrompt.storyImagePrompt(characterImageUrl, inPrompt);
         return imageGenerator.generateImage(pagePrompt);
     }
@@ -92,13 +95,18 @@ public class StoryGeneration {
         return extractContent(response);
     }
 
-    public static void compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inStoryImages) {
-        Story.setTitle(inStoryTitle);
-        Story.setTrailer(inStoryTrailer);
-        for (int i = 0; i < paragraphs.size(); i++) {
-            Page newPage = new Page(paragraphs.get(i), inStoryImages.get(i));
-            Story.addPage(newPage);
-        }
+//    public static void compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inStoryImages) {
+//        Story.setTitle(inStoryTitle);
+//        Story.setTrailer(inStoryTrailer);
+//        for (int i = 0; i < paragraphs.size(); i++) {
+//            Page newPage = new Page(paragraphs.get(i), inStoryImages.get(i));
+//            Story.addPage(newPage);
+//        }
+//    }
+
+    public static void sendStory(){
+        JSONObject story = jsonProcessor.writeStoryToJson();
+        callApi.sendJsonObject(story);
     }
 
     public static String extractContent(String inResponseBody) {
@@ -171,16 +179,8 @@ public class StoryGeneration {
         story = inStory;
     }
 
-    public static String getCharacter() {
-        return characterImageUrl;
-    }
-
     public static void setCharacter(String character) {
         characterImageUrl = character;
-    }
-
-    public static ArrayList<String> getImagePrompts() {
-        return imagePrompts;
     }
 
     public static void setImagePrompts(String inImagePrompts) {
@@ -188,5 +188,26 @@ public class StoryGeneration {
         System.out.println(imagePrompts);
     }
 
-    
+    public static void incCurrentPage() {
+        currentPage++;
+    }
+
+    public static String getCurrentParagraph(){
+        return paragraphs.get(currentPage);
+    }
+
+    public static String getCurrentImagePrompt(){
+        return imagePrompts.get(currentPage);
+    }
+
+    public static boolean lastPageCheck(){
+        if(currentPage == paragraphs.size()){
+            return true;
+        }
+        return false;
+    }
+
+    public static int getCurrentPage(){
+        return currentPage;
+    }
 }

@@ -15,7 +15,7 @@
     <children>
         <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="16.0" prefHeight="47.0" prefWidth="1040.0" text="Page #" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+                <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutY="16.0" prefHeight="47.0" prefWidth="1040.0" text="Page 1" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
                     <font>
                         <Font name="Arial Bold" size="40.0" />
                     </font>
@@ -54,7 +54,7 @@
                             <font>
                                 <Font name="Arial Bold" size="25.0" />
                             </font></Label>
-                        <TextArea fx:id="output_story" editable="false" prefHeight="344.0" prefWidth="327.0" style="-fx-border-color: #1e1e1e; -fx-border-width: 1;" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="7" />
+                        <TextArea fx:id="output_paragraph" editable="false" prefHeight="344.0" prefWidth="327.0" style="-fx-border-color: #1e1e1e; -fx-border-width: 1;" wrapText="true" GridPane.rowIndex="1" GridPane.rowSpan="7" />
                         <TextArea fx:id="input_custom_prompt" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #1e1e1e;" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="431.0" text="Custom Image Prompt" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
                             <font>
@@ -73,12 +73,12 @@
                         </Button>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                             <children>
-                                <Button fx:id="button_accept" disable="true" onAction="#switchToTrailer" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
+                                <Button fx:id="button_accept" disable="true" onAction="#next" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Accept" textAlignment="CENTER" wrapText="true">
                                     <font>
                                         <Font name="Arial" size="15.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="button_generate" layoutX="197.0" onMousePressed="#disableGeneration" onMouseReleased="#makeCharacter" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Image" textAlignment="CENTER" wrapText="true">
+                                <Button fx:id="button_generate" layoutX="197.0" onMousePressed="#disableGeneration" onMouseReleased="#generate" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Image" textAlignment="CENTER" wrapText="true">
                                     <font>
                                         <Font name="Arial" size="15.0" />
                                     </font>
@@ -98,7 +98,7 @@
                         <Pane fx:id="output_image" maxHeight="380.0" maxWidth="380.0" minHeight="380.0" minWidth="380.0" prefHeight="380.0" prefWidth="380.0" style="-fx-border-color: #e1e1e1; -fx-background-color: #0f4876;" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" />
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7">
                             <children>
-                                <Button fx:id="button_custom_generate" layoutX="35.0" onMousePressed="#disableGeneration" onMouseReleased="#customCharacter" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Custom Image" textAlignment="CENTER" wrapText="true">
+                                <Button fx:id="button_custom_generate" layoutX="35.0" onMousePressed="#disableGeneration" onMouseReleased="#generateCustom" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Custom Image" textAlignment="CENTER" wrapText="true">
                                     <font>
                                         <Font name="Arial" size="15.0" />
                                     </font>

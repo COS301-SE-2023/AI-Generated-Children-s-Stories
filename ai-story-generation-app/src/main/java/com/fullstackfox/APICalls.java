@@ -1,6 +1,7 @@
 package com.fullstackfox;
 
 import okhttp3.*;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -133,5 +134,37 @@ public class APICalls {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void sendJsonObject(JSONObject jsonObject) {
+        try {
+            String url = "http://13.247.19.241:8080/story";
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .build();
+            // Define the request body as JSON
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody requestBody = RequestBody.create(jsonObject.toString(), JSON);
+
+            // Create a POST request with the JSON data
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+
+            // Send the request and get the response
+            Response response = client.newCall(request).execute();
+
+            // Check if the response is successful
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                System.out.println("Response: " + responseBody);
+            } else {
+                System.out.println("Request failed: " + response.code() + " " + response.message());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
