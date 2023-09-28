@@ -233,6 +233,7 @@ class _StoryLikedState extends State<StoryLiked> {
     return _stories.length.isEven
       ? Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: MediaQuery.of(context).size.width/2-32,
@@ -265,6 +266,7 @@ class _StoryLikedState extends State<StoryLiked> {
     : index < _stories.length-1 
     ? Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: MediaQuery.of(context).size.width/2-32,
@@ -296,6 +298,7 @@ class _StoryLikedState extends State<StoryLiked> {
     )
     : Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: MediaQuery.of(context).size.width/2-32,

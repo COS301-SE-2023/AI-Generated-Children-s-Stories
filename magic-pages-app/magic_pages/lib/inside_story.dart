@@ -84,6 +84,7 @@ class InsideStoryState extends State<InsideStory> {
   Future<void> speak(String text) async {
     if (ttsState == TtsState.stopped) {
       setState(() {
+        savedValue = 0;
         start = 0;
         end = 0;
         ttsState = TtsState.play;
@@ -111,6 +112,7 @@ class InsideStoryState extends State<InsideStory> {
         ttsState = TtsState.stopped;
         start = 0;
         end = 0;
+        savedValue = 0;
       });
     });
   }
