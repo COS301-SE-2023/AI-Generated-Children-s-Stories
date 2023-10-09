@@ -13,7 +13,8 @@ To make jar
 2. cd target
 2. java -jar .\target\backend-1.0-SNAPSHOT.jar
 
-To copy to ec2 server scp -i fsf-ssh-key.pem backend-0.0.1-SNAPSHOT.jar ubuntu@ec2-13-245-255-235.af-south-1.compute.amazonaws.com:/home/ubuntu
+To copy to ec2 server | scp -i fsf-ssh-key.pem backend-0.0.1-SNAPSHOT.jar ubuntu@ec2-13-245-255-235.af-south-1.compute.amazonaws.com:/home/ubuntu
+To run in background of ec2 server | nohup java -jar backend-0.0.1-SNAPSHOT.jar &
 */
 
 @SpringBootApplication
