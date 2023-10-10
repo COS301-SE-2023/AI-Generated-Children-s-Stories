@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:magic_pages/button_widget.dart';
 import 'package:magic_pages/wave_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'globals.dart';
 import 'navbar.dart';
 import 'my_header.dart';
@@ -100,8 +101,64 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Column(
                     children: [
-                      const MyHeader(
-                        message: 'Logout',
+                      Container(
+                        height: 88,
+                        margin: const EdgeInsets.only(top: 50.0),
+                        child: Center(
+                             child: Row(
+                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: [
+                                 GestureDetector(
+                                   onTap: () async {
+                                     if (!await launchUrl(Uri.parse('https://fullstackfox.co.za/help'))) {
+                                       throw Exception('Could not launch help page');
+                                     }
+                                   },
+                                   child: Container(
+                                     height: 50,
+                                     width: 100,
+                                     margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                     decoration: BoxDecoration(
+                                       color: const Color(0xFFFDFDFD),
+                                       borderRadius: BorderRadius.circular (25),
+                                       border: Border.all(
+                                         color: const Color(0xFFD3D3D3),
+                                         width: 2,
+                                       ),
+                                     ),
+                                     child: const Center(
+                                       child: Row(
+                                         mainAxisAlignment: MainAxisAlignment.center,
+                                         children: [
+                                           Image(
+                                             image: AssetImage('assets/images/nav-icons/help.webp'),
+                                             width: 25,
+                                           ),
+                                           SizedBox(width: 8),
+                                           Text(
+                                             'HELP',
+                                             style: TextStyle(
+                                               fontSize: 18,
+                                               fontFamily: 'Poppins',
+                                               fontWeight: FontWeight.w500,
+                                               color: Color(0xFFFE8D29),
+                                             ),
+                                           ),
+                                         ],
+                                       ),
+                                     ),
+                                   ),
+                                 ),
+                                 Container(
+                                   margin: const EdgeInsets.only(right: 16),
+                                   child: const Image(
+                                     image: AssetImage('assets/images/nav-icons/signout.webp'),
+                                     width: 40,
+                                   ),
+                                 ),
+                               ],
+                             ),
+                           ),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height-(94+138+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),

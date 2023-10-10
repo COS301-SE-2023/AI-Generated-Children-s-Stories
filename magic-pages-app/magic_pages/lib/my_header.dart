@@ -116,20 +116,6 @@ class _MyHeaderState extends State<MyHeader> {
                               ),
                             ),
                           ),
-                          // GestureDetector(
-                          //   onTap: () async {
-                          //     if (!await launchUrl(Uri.parse('https://fullstackfox.co.za'))) {
-                          //       throw Exception('Could not launch help page');
-                          //     }
-                          //   },
-                          //   child: const Padding(
-                          //     padding:  EdgeInsets.all(16.0),
-                          //     child:  Image(
-                          //       image: AssetImage('assets/images/nav-icons/help.webp'),
-                          //       width: 40,
-                          //     ),
-                          //   ),
-                          // ),
                         ),
                         Positioned(
                           right: 0,
