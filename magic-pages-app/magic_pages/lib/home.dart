@@ -106,7 +106,10 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      bottomNavigationBar: const NavbarWidget(active: 1),
+      bottomNavigationBar:
+          const NavbarWidget(active: 1)
+
+    ,
     );
   }
 
@@ -121,6 +124,7 @@ class _HomeState extends State<Home> {
       totalPages: story.totalPages,
       isLiked: story.isLiked,
       ifSnapScroll: true,
+      isLast: index == _currentlyReadingStory.length - 1,
     );
   }
 }
