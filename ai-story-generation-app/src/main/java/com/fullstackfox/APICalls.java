@@ -138,7 +138,7 @@ public class APICalls {
 
     public void sendJsonObject(JSONObject jsonObject) {
         try {
-            String url = "http://13.247.19.241:8080/story";
+            String url = "http://api.fullstackfox.co.za/story";
             OkHttpClient client = new OkHttpClient.Builder()
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS)
