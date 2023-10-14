@@ -8,10 +8,12 @@ import java.util.concurrent.TimeUnit;
 
 public class APICalls {
     ArrayList<String> configList;
+    JsonProcessor jsonProcessor;
 
     public APICalls() {
-        JsonProcessor jsonProcessor = new JsonProcessor();
+        jsonProcessor = new JsonProcessor();
         configList = jsonProcessor.readJson();
+        jsonProcessor.setApiKey(configList.get(7));
     }
 
     public String getMessage() {
@@ -136,7 +138,8 @@ public class APICalls {
         return null;
     }
 
-    public void sendJsonObject(JSONObject jsonObject) {
+    public void sendJsonObject() {
+        JSONObject jsonObject = jsonProcessor.writeStoryToJson();
         try {
             String url = "http://api.fullstackfox.co.za/story";
             OkHttpClient client = new OkHttpClient.Builder()

@@ -23,11 +23,6 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="19.0" prefHeight="47.0" prefWidth="1040.0" text="Settings" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
-               <font>
-                  <Font name="Arial Bold" size="40.0" />
-               </font>
-            </Label>
             <Button fx:id="updateButton1" alignment="CENTER" contentDisplay="CENTER" layoutX="896.0" layoutY="18.0" onAction="#close" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Exit" textAlignment="JUSTIFY" wrapText="true">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -36,6 +31,11 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" layoutY="19.0" prefHeight="47.0" prefWidth="746.0" text="Settings" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane maxWidth="1040.0" prefWidth="1040.0">
@@ -225,7 +225,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Label text="MidJourney Seed:" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                  <Label text="Api Key:" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="9">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 
 public class JsonProcessor {
+    private String apiKey;
 
     public JsonProcessor() {
     }
@@ -35,7 +36,7 @@ public class JsonProcessor {
                     configList.add(jsonObject.optString("botAuthorization"));
                     configList.add(jsonObject.optString("userAuthorization"));
                     configList.add(jsonObject.optString("chatGPTKey"));
-                    configList.add(jsonObject.optString("midjourneySeed"));
+                    configList.add(jsonObject.optString("apiKey"));
                     return configList;
                 }
             } else {
@@ -50,7 +51,6 @@ public class JsonProcessor {
     }
 
     public JSONObject writeStoryToJson() {
-        String apiKey = "f0181441-a6f4-4eea-ba72-fcb15a675e63";
         JSONObject jsonStory = new JSONObject();
         jsonStory.put("apiKey", apiKey);
 
@@ -76,6 +76,10 @@ public class JsonProcessor {
             e.printStackTrace();
         }
         return jsonStory;
+    }
+
+    public void setApiKey(String inApiKey) {
+        apiKey = inApiKey;
     }
 
 }

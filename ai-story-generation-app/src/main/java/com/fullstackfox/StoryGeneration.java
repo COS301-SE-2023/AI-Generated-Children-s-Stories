@@ -16,7 +16,6 @@ public class StoryGeneration {
     private static String characterImageUrl;
     private static ArrayList<String> paragraphs;
     private static ArrayList<String> imagePrompts;
-    private static JsonProcessor jsonProcessor;
 
     static int currentPage;
 
@@ -25,7 +24,6 @@ public class StoryGeneration {
         imageGenerator = new ImageGeneration(callApi);
         processPrompt = new PromptProcessor();
         currentPage = 0;
-        jsonProcessor = new JsonProcessor();
     }
 
     public static StoryGeneration getInstance() throws URISyntaxException {
@@ -105,8 +103,7 @@ public class StoryGeneration {
 //    }
 
     public static void sendStory(){
-        JSONObject story = jsonProcessor.writeStoryToJson();
-        callApi.sendJsonObject(story);
+        callApi.sendJsonObject();
     }
 
     public static String extractContent(String inResponseBody) {
