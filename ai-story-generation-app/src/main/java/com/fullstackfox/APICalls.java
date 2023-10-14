@@ -17,7 +17,9 @@ public class APICalls {
     }
 
     public String getMessage() {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         Request request = new Request.Builder()
                 .url("https://discord.com/api/channels/1109207920551416000/messages?limit=1")
@@ -38,7 +40,9 @@ public class APICalls {
     }
 
     public String postPrompt(String inPrompt) {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         String requestBodyStr = "{\r\n    \"type\": 2,\r\n    \"application_id\": \"" + configList.get(0)
@@ -72,7 +76,9 @@ public class APICalls {
     }
 
     public void postUpscale(String inImageURL, String inMessageID, String inUpscale) {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         int lastUnderscoreIndex = inImageURL.lastIndexOf("_");

@@ -1,7 +1,6 @@
 package com.fullstackfox;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
@@ -39,13 +38,8 @@ public class StoryPageController extends UiParent {
         Story.addPage(newPage);
         StoryGeneration.incCurrentPage();
         if (StoryGeneration.lastPageCheck()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Completed");
-            alert.setHeaderText(null);
-            alert.setContentText("Story sent to database");
-            alert.showAndWait();
-            Story.printStory();
             StoryGeneration.sendStory();
+            App.setRoot("sent-db");
         } else {
             title.setText("Page " + (StoryGeneration.getCurrentPage()+1));
             output_image.getChildren().clear();

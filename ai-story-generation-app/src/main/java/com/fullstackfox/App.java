@@ -14,10 +14,13 @@ import java.net.URISyntaxException;
  * JavaFX App
  */
 
+//To make jar
+//        1. mvn clean package -DskipTests
+//        2. cd target
+//        2. java -jar .\target\backend-1.0-SNAPSHOT.jar
+
 public class App extends Application {
-
     private static Scene scene;
-
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
         scene = new Scene(loadFXML("home"), 1040, 585);
