@@ -60,7 +60,7 @@
                   <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" ellipsisString="" prefHeight="46.0" prefWidth="973.0" text="                       2. This is the second prompt.&quot; " textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="generateButton" layoutX="436.0" layoutY="424.0" onAction="#getPrompts" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Prompts" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="button_generate" layoutX="436.0" layoutY="424.0" onMousePressed="#disableGeneration" onMouseReleased="#getPrompts" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-width: 2;" text="Generate Prompts" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="15.0" />
                </font></Button>
@@ -82,6 +82,6 @@
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </Pane>
-      <Pane fx:id="button_generate" layoutX="-100.0" maxHeight="40.0" prefHeight="80.0" prefWidth="1040.0" />
+      <Pane fx:id="pane" layoutX="-100.0" maxHeight="40.0" prefHeight="80.0" prefWidth="1040.0" />
     </children>
 </VBox>

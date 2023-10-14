@@ -25,7 +25,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="358.0" layoutY="17.0" text="Story Generation" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="17.0" prefHeight="47.0" prefWidth="1040.0" text="Story Generation" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
                <font>
                   <Font name="Arial Bold" size="40.0" />
                </font>

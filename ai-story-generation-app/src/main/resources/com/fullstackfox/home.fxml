@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="585.0" maxWidth="1040.0" minHeight="585.0" minWidth="1040.0" prefHeight="585.0" prefWidth="1040.0" spacing="25.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fullstackfox.HomeController">
    <children>
       <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="18.0" text="DVT - AI Story Generator" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="18.0" prefHeight="47.0" prefWidth="1040.0" text="DVT - AI Story Generator" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
                <font>
                   <Font name="Arial Bold" size="40.0" />
                </font>

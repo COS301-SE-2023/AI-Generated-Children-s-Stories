@@ -27,6 +27,8 @@ public class App extends Application {
         stage.getIcons().add(iconImage);
         stage.setScene(scene);
         stage.show();
+        Story.getInstance();
+        StoryGeneration.getInstance();
     }
 
     static void setRoot(String fxml) throws IOException {

@@ -5,20 +5,25 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class StoryGeneration {
     private static StoryGeneration instance;
-    private static APICalls  callApi;
+    private static APICalls callApi;
     private static PromptProcessor processPrompt;
     private static ImageGeneration imageGenerator;
     private static String story;
     private static String characterImageUrl;
+    private static ArrayList<String> paragraphs;
+    private static ArrayList<String> imagePrompts;
+
+    static int currentPage;
 
     private StoryGeneration() throws URISyntaxException {
         callApi = new APICalls();
         imageGenerator = new ImageGeneration(callApi);
         processPrompt = new PromptProcessor();
+        currentPage = 0;
     }
 
     public static StoryGeneration getInstance() throws URISyntaxException {
@@ -69,7 +74,7 @@ public class StoryGeneration {
     }
 
     // Index 0 = url | Index 1 = messageID (Only used for upscaling)
-    public ArrayList<String> pageImage(String inPrompt) throws URISyntaxException {
+    public static ArrayList<String> pageImage(String inPrompt) throws URISyntaxException {
         String pagePrompt = processPrompt.storyImagePrompt(characterImageUrl, inPrompt);
         return imageGenerator.generateImage(pagePrompt);
     }
@@ -80,18 +85,25 @@ public class StoryGeneration {
     }
 
     public static String storyImagePrompts(String inPrompt) {
-        String response = callApi.promptGPT(inPrompt);
+        String imagePromptsPrompt = processPrompt.genMidjourneyPromptsPrompt(inPrompt, paragraphs.size());
+        System.out.println("-------------------");
+        System.out.println(imagePromptsPrompt);
+        System.out.println("-------------------");
+        String response = callApi.promptGPT(imagePromptsPrompt);
         return extractContent(response);
     }
 
-    public static void compileStory(String inStoryTitle, String inStoryTrailer, String story, ArrayList<String> inStoryImages) {
-        ArrayList<String> inParagraphs = splitParagraphs(story);
-        Story.setTitle(inStoryTitle);
-        Story.setTrailer(inStoryTrailer);
-        for (int i = 0; i < inParagraphs.size(); i++) {
-            Page newPage = new Page(inParagraphs.get(i), inStoryImages.get(i));
-            Story.addPage(newPage);
-        }
+//    public static void compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inStoryImages) {
+//        Story.setTitle(inStoryTitle);
+//        Story.setTrailer(inStoryTrailer);
+//        for (int i = 0; i < paragraphs.size(); i++) {
+//            Page newPage = new Page(paragraphs.get(i), inStoryImages.get(i));
+//            Story.addPage(newPage);
+//        }
+//    }
+
+    public static void sendStory(){
+        callApi.sendJsonObject();
     }
 
     public static String extractContent(String inResponseBody) {
@@ -122,24 +134,17 @@ public class StoryGeneration {
         return "";
     }
 
-    /// Splits the story into paragraphs
-    /// @param inStory The story to split
-    /// @return An ArrayList of paragraphs
-    public static ArrayList<String> splitParagraphs(String inStory) {
-        String[] paragraphs = inStory.split("\n");
-        ArrayList<String> list = new ArrayList<>();
+    public static void setParagraphs() {
+        String[] splittingArray = story.split("\n\n");
+        paragraphs = new ArrayList<>(Arrays.asList(splittingArray));
         for (String paragraph : paragraphs) {
-            String trimmedParagraph = paragraph.trim();
-            if (!trimmedParagraph.isEmpty()) {
-                list.add(trimmedParagraph);
-            }
+            System.out.println(paragraph);
         }
-        return list;
     }
 
-    public static List<String> splitNumberedList(String inPromptList) {
+    public static ArrayList<String> splitNumberedList(String inPromptList) {
         inPromptList = trim(inPromptList);
-        List<String> resultList = new ArrayList<>();
+        ArrayList<String> resultList = new ArrayList<>();
         String[] lines = inPromptList.split("\n");
         for (String line : lines) {
             int dotIndex = line.indexOf(".");
@@ -171,11 +176,35 @@ public class StoryGeneration {
         story = inStory;
     }
 
-    public static String getCharacter() {
-        return characterImageUrl;
-    }
-
     public static void setCharacter(String character) {
         characterImageUrl = character;
+    }
+
+    public static void setImagePrompts(String inImagePrompts) {
+        imagePrompts = splitNumberedList(inImagePrompts);
+        System.out.println(imagePrompts);
+    }
+
+    public static void incCurrentPage() {
+        currentPage++;
+    }
+
+    public static String getCurrentParagraph(){
+        return paragraphs.get(currentPage);
+    }
+
+    public static String getCurrentImagePrompt(){
+        return imagePrompts.get(currentPage);
+    }
+
+    public static boolean lastPageCheck(){
+        if(currentPage == paragraphs.size()){
+            return true;
+        }
+        return false;
+    }
+
+    public static int getCurrentPage(){
+        return currentPage;
     }
 }

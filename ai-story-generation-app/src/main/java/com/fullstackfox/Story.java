@@ -11,6 +11,7 @@ public class Story {
     private static int numPages;
 
     public Story() {
+        pages = new ArrayList<>();
     }
 
     public static Story getInstance() {
@@ -51,8 +52,6 @@ public class Story {
     }
 
     public static void addPage(Page inPage) {
-        if (pages == null)
-            pages = new ArrayList<>();
         inPage.print();
         pages.add(inPage);
         numPages++;
@@ -60,5 +59,12 @@ public class Story {
 
     public static void output(String inString) {
         System.out.println("Received " + inString);
+    }
+
+    public static void printStory(){
+        for(Page page : pages){
+            page.print();
+            System.out.println("Next Page -----------------");
+        }
     }
 }
