@@ -14,6 +14,7 @@ class BookWithProgress extends StatefulWidget {
   final int totalPages;
   final bool isLiked;
   final bool ifSnapScroll;
+  final bool? isLast;
 
   // ignore: use_key_in_widget_constructors
   const BookWithProgress(
@@ -24,6 +25,7 @@ class BookWithProgress extends StatefulWidget {
         required this.totalPages,
         required this.isLiked,
         required this.ifSnapScroll,
+        this.isLast
       });
 
   @override
@@ -35,9 +37,8 @@ class _BookWithProgressState extends State<BookWithProgress> {
   @override
   Widget build(BuildContext context) {
     return widget.ifSnapScroll ?
-    Container(
-        margin: const EdgeInsets.only(bottom: 0),
-        height: MediaQuery.of(context).size.height-(94+138+35+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
+    SizedBox(
+        height: MediaQuery.of(context).size.height-(94+138+35-10+MediaQuery.of(context).padding.top+MediaQuery.of(context).padding.bottom),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,28 +80,31 @@ class _BookWithProgressState extends State<BookWithProgress> {
                     ));
                 },
                 child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  decoration: BoxDecoration(
-                      color: const Color(0xFFFE8D29),
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0xFF84370F),
-                          spreadRadius: 0,
-                          blurRadius: 0,
-                          offset: Offset(0, 6),
-                        )
-                      ]),
-                  child: const Center(
-                    child: Text(
-                      'VIEW',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFFDFDFD),
+                  margin: (widget.isLast != null && widget.isLast!) ? const EdgeInsets.only(bottom: 20) : const EdgeInsets.only(bottom: 10),
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFFE8D29),
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0xFF84370F),
+                            spreadRadius: 0,
+                            blurRadius: 0,
+                            offset: Offset(0, 6),
+                          )
+                        ]),
+                    child: const Center(
+                      child: Text(
+                        'VIEW',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFFFDFDFD),
+                        ),
                       ),
                     ),
                   ),
