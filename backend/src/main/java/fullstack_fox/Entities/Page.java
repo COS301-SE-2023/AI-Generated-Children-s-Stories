@@ -12,9 +12,9 @@ public class Page {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column()
+    @Column(length = 2048)
     private String image;
-    @Column(length = 1024)
+    @Column(length = 2048)
     private String text;
 
     @JsonBackReference("story-pages") //prevent infinite loop
