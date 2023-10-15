@@ -1,9 +1,9 @@
-name: Flutter Workflow
+name: Testing Workflow
 
 on: [push, workflow_dispatch]
 jobs:
   flutter_test:
-    name: Run flutter test and analyze
+    name: Run flutter and Java tests and analyze
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout code
