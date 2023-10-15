@@ -57,8 +57,6 @@ class _ProfileState extends State<Profile> {
 
         if (response.statusCode == 200) {
           if (context.mounted) {
-            Globals.showSnackbarMessage(
-                'Logged out', context);
 
             await storage.delete(key: 'id');
             await storage.delete(key: 'apiKey');

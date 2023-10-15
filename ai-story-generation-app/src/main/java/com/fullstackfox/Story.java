@@ -53,8 +53,13 @@ public class Story {
 
     public static void addPage(Page inPage) {
         inPage.print();
+        pages = new ArrayList<>();
         pages.add(inPage);
         numPages++;
+    }
+
+    public static void setNumPages(int pages) {
+        numPages = pages;
     }
 
     public static void output(String inString) {
