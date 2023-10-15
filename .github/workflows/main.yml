@@ -3,7 +3,7 @@ name: Testing Workflow
 on: [push, workflow_dispatch]
 jobs:
   flutter_test:
-    name: Run flutter and Java tests and analyze
+    name: Run flutter tests and analyze
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout code
