@@ -24,6 +24,9 @@ public class JsonProcessor {
                 // Read the resource using BufferedReader or any other appropriate method
                 try (BufferedReader reader = new BufferedReader(
                         new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+
+                    System.out.println(reader);
+
                     JSONTokener tokener = new JSONTokener(reader);
                     JSONObject jsonObject = new JSONObject(tokener);
                     ArrayList<String> configList = new ArrayList<>();
