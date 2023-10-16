@@ -26,6 +26,7 @@ public class StoryGeneration {
         currentPage = 0;
     }
 
+
     public static StoryGeneration getInstance() throws URISyntaxException {
         if (instance == null) {
             instance = new StoryGeneration();
@@ -86,21 +87,9 @@ public class StoryGeneration {
 
     public static String storyImagePrompts(String inPrompt) {
         String imagePromptsPrompt = processPrompt.genMidjourneyPromptsPrompt(inPrompt, paragraphs.size());
-        System.out.println("-------------------");
-        System.out.println(imagePromptsPrompt);
-        System.out.println("-------------------");
         String response = callApi.promptGPT(imagePromptsPrompt);
         return extractContent(response);
     }
-
-//    public static void compileStory(String inStoryTitle, String inStoryTrailer, ArrayList<String> inStoryImages) {
-//        Story.setTitle(inStoryTitle);
-//        Story.setTrailer(inStoryTrailer);
-//        for (int i = 0; i < paragraphs.size(); i++) {
-//            Page newPage = new Page(paragraphs.get(i), inStoryImages.get(i));
-//            Story.addPage(newPage);
-//        }
-//    }
 
     public static void sendStory(){
         callApi.sendJsonObject();
@@ -182,7 +171,6 @@ public class StoryGeneration {
 
     public static void setImagePrompts(String inImagePrompts) {
         imagePrompts = splitNumberedList(inImagePrompts);
-        System.out.println(imagePrompts);
     }
 
     public static void incCurrentPage() {
