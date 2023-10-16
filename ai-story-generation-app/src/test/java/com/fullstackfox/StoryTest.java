@@ -1,72 +1,51 @@
 package com.fullstackfox;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StoryTest {
 
-    @Test
-    void getInstance() {
-        Story instance1 = Story.getInstance();
-        Story instance2 = Story.getInstance();
+        private Story story;
 
-        assertSame(instance1, instance2);
-    }
+        @Before
+        public void setUp() {
+            // Initialize a new Story object before each test case
+            story = new Story();
+            // Reset static variables for each test
+            Story.setInstance(null);
+            Story.setTitle(null);
+            Story.setTrailer(null);
+            Story.getPages().clear();
+            Story.setNumPages(0);
+        }
 
-    @Test
-    void getTitle() {
-        Story.setTitle("Test Title");
-        assertEquals("Test Title", Story.getTitle());
-    }
+        @Test
+        public void testGetInstance() {
+            Story instance1 = Story.getInstance();
+            Story instance2 = Story.getInstance();
+            assertSame(instance1, instance2);
+        }
 
-    @Test
-    void setTitle() {
-        Story.setTitle("Test Title");
-        assertEquals("Test Title", Story.getTitle());
-    }
+        @Test
+        public void testSetTitle() {
+            Story.setTitle("Test Title");
+            assertEquals("Test Title", Story.getTitle());
+        }
 
-    @Test
-    void getTrailer() {
-        Story.setTrailer("Test Trailer");
-        assertEquals("Test Trailer", Story.getTrailer());
-    }
+        @Test
+        public void testSetTrailer() {
+            Story.setTrailer("Test Trailer");
+            assertEquals("Test Trailer", Story.getTrailer());
+        }
 
-    @Test
-    void setTrailer() {
-        Story.setTrailer("Test Trailer");
-        assertEquals("Test Trailer", Story.getTrailer());
-    }
+        @Test
+        public void testAddPage() {
+            Page page = new Page("Test Content", "img Url");
+            Story.addPage(page);
+            assertEquals(1, Story.getNumPages());
+            assertEquals(page, Story.getPages().get(0));
+        }
 
-    @Test
-    void getPages() {
-        Page page = new Page("content", "url");
-        Story.addPage(page);
-
-        ArrayList<Page> pages = Story.getPages();
-        assertEquals(1, Story.getNumPages());
-        assertEquals(page, pages.get(0));
-    }
-
-    @Test
-    void getNumPages() {
-        Page page = new Page("content", "url");
-        Story.addPage(page);
-
-        ArrayList<Page> pages = Story.getPages();
-        assertEquals(1, Story.getNumPages());
-        assertEquals(page, pages.get(0));
-    }
-
-    @Test
-    void addPage() {
-        Page page = new Page("content", "url");
-        Story.addPage(page);
-
-        ArrayList<Page> pages = Story.getPages();
-        assertEquals(1, Story.getNumPages());
-        assertEquals(page, pages.get(0));
-    }
 }

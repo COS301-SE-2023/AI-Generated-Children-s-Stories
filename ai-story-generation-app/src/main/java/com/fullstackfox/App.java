@@ -14,10 +14,13 @@ import java.net.URISyntaxException;
  * JavaFX App
  */
 
+//To make jar
+//        1. mvn clean package -DskipTests
+//        2. cd target
+//        2. java -jar .\target\backend-1.0-SNAPSHOT.jar
+
 public class App extends Application {
-
     private static Scene scene;
-
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
         scene = new Scene(loadFXML("home"), 1040, 585);
@@ -27,6 +30,8 @@ public class App extends Application {
         stage.getIcons().add(iconImage);
         stage.setScene(scene);
         stage.show();
+        Story.getInstance();
+        StoryGeneration.getInstance();
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -38,7 +43,7 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) throws URISyntaxException {
-        launch();
+    public static void main(String[] args) {
+        launch(args);
     }
 }

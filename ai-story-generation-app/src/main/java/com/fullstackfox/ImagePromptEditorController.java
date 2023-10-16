@@ -10,40 +10,53 @@ import java.io.IOException;
 public class ImagePromptEditorController {
     private String prompts;
     @FXML
-    private TextArea storyOut;
-
+    private TextArea output_prompts;
     @FXML
-    private Button acceptButton;
+    private Button button_accept;
     @FXML
-    private Button editButton;
-
-
+    private Button button_edit;
+    @FXML
+    private Button button_generate;
+    @FXML
+    private Button button_discard;
     @FXML
     private void switchToHome() throws IOException {
-
         App.setRoot("home");
-
     }
 
-//
-//    @FXML
-//    private void getPrompts() throws IOException {
-//        prompts = gen.storyImagePrompts(gen.getStory());
-//        storyOut.setText(prompts);
-//        acceptButton.setDisable(false);
-//        editButton.setDisable(false);
-//    }
-//
-//    @FXML
-//    private void switchToPage() throws IOException {
-//        gen.splitNumberedList(prompts);
-//        App.setRoot("story-page");
-//    }
-//
-//    @FXML
-//    private void editPrompts() throws IOException {
-//        storyOut.setEditable(true);
-//    }
 
+    @FXML
+    private void getPrompts() throws IOException {
+        prompts = StoryGeneration.storyImagePrompts(StoryGeneration.getStory());
+        output_prompts.setText(prompts);
+        enableGeneration();
+    }
+
+    @FXML
+    private void switchToPage() throws IOException {
+        StoryGeneration.setImagePrompts(output_prompts.getText());
+        App.setRoot("story-page");
+    }
+
+    @FXML
+    private void editPrompts() throws IOException {
+        output_prompts.setEditable(true);
+    }
+
+    @FXML
+    protected void disableGeneration() throws IOException {
+        button_accept.setDisable(true);
+        button_discard.setDisable(true);
+        button_generate.setDisable(true);
+        button_edit.setDisable(true);
+    }
+
+    @FXML
+    protected void enableGeneration() throws IOException {
+        button_accept.setDisable(false);
+        button_discard.setDisable(false);
+        button_generate.setDisable(false);
+        button_edit.setDisable(false);
+    }
 
 }

@@ -42,7 +42,8 @@ public class CreateAStoryController {
 
     @FXML
     private void switchToCharacter() throws IOException, URISyntaxException {
-        StoryGeneration.getInstance().setStory(output_story.getText());
+        StoryGeneration.setStory(output_story.getText());
+        StoryGeneration.setParagraphs();
         App.setRoot("character");
     }
 
@@ -69,11 +70,7 @@ public class CreateAStoryController {
 
     @FXML
     private void setStory(ArrayList<String> inPromptList) throws URISyntaxException {
-        String story = StoryGeneration.getInstance().storyText(inPromptList);
-        System.out.println(
-                "create a story controller: "
-        );
-        System.out.println(story);
+        String story = StoryGeneration.storyText(inPromptList);
         output_story.setText(story);
         enableGeneration();
     }

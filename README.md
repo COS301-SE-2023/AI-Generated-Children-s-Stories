@@ -5,8 +5,8 @@
 [![codecov](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories/branch/main/graph/badge.svg?token=7TANM1PRKY)](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories)
 [![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues?q=is%3Aissue+is%3Aclosed)
-[![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m795478297-5e8c748360970de87346e1ed)](https://stats.uptimerobot.com/jjVg0clGDD)
-[![Flutter_Tests](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml/badge.svg)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml)
+[![Uptime Robot status](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595?style=flat-square)](https://img.shields.io/uptimerobot/ratio/7/m794371847-738190ed660788defde4f595)
+[![Tests](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml/badge.svg)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml)
 
 
 # Table of Contents

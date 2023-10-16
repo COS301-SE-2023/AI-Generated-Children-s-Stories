@@ -17,6 +17,7 @@ target/
 *.iml
 *.ipr
 *.iws
+*.jar
 .idea/
 
 # The .vscode folder contains launch configuration and tasks you configure in

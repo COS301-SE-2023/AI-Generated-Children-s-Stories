@@ -1,0 +1,1 @@
+java --module-path /usr/share/openjfx/lib --add-modules javafx.controls,javafx.fxml -jar target/ai-ui-1.0-SNAPSHOT.jar

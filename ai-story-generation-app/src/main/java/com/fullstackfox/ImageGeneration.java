@@ -16,19 +16,15 @@ public class ImageGeneration {
     }
 
     public ArrayList<String> generateImage(String inPrompt) {
-        System.out.println("1");
         String lastMessageID = this.latestMessageID();
         callApi.postPrompt(inPrompt);
-        System.out.println("2");
         this.imageGenDelay(lastMessageID);
         String message = callApi.getMessage();
         String imageURL = this.extractImageUrl(message);
-        System.out.println("3");
         lastMessageID = this.latestMessageID();
         ArrayList<String> result = new ArrayList<>();
         result.add(imageURL);
         result.add(lastMessageID);
-        System.out.println("4");
         return result;
     }
 
@@ -46,6 +42,7 @@ public class ImageGeneration {
         String message;
         String id;
         String url;
+        int time = 15000;
         while (idCheck) {
             id = this.latestMessageID();
             if (id.compareTo(lastMessageID) != 0) {
@@ -61,7 +58,10 @@ public class ImageGeneration {
                     }
                     if (check) {
                         try {
-                            Thread.sleep(5000);
+                            Thread.sleep(time);
+                            if(time > 5000) {
+                                time -= 5000;
+                            }
                         } catch (InterruptedException e) {
 
                             e.printStackTrace();
@@ -81,14 +81,13 @@ public class ImageGeneration {
 
     // todo: test
     public String extractImageUrl(String inResponseBody) {
-
         JSONArray jsonArray = new JSONArray(inResponseBody);
         String content = "";
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject messageObject = jsonArray.getJSONObject(i);
             content = messageObject.getString("content");
         }
-        if (content.contains("(Waiting to start)")) {
+        if (content.contains("(Waiting to start)") || content.contains("(paused)")) {
             return null;
         }
         String url = "";
@@ -102,7 +101,6 @@ public class ImageGeneration {
     }
 
     private void urlUnitTest(String inUrl) {
-        System.out.println(inUrl);
         if (inUrl == "") {
             System.out.println("Message recived not an image");
         } else {

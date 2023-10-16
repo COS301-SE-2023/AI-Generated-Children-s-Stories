@@ -26,5 +26,4 @@ public class CharacterController extends UiParent {
     private void switchToTrailer() throws IOException {
         App.setRoot("trailer-image");
     }
-
 }

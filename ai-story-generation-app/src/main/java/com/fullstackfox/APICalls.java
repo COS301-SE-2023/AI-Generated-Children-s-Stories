@@ -1,20 +1,25 @@
 package com.fullstackfox;
 
 import okhttp3.*;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class APICalls {
     ArrayList<String> configList;
+    JsonProcessor jsonProcessor;
 
     public APICalls() {
-        JsonProcessor jsonProcessor = new JsonProcessor();
+        jsonProcessor = new JsonProcessor();
         configList = jsonProcessor.readJson();
+        jsonProcessor.setApiKey(configList.get(7));
     }
 
     public String getMessage() {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         Request request = new Request.Builder()
                 .url("https://discord.com/api/channels/1109207920551416000/messages?limit=1")
@@ -35,7 +40,9 @@ public class APICalls {
     }
 
     public String postPrompt(String inPrompt) {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         String requestBodyStr = "{\r\n    \"type\": 2,\r\n    \"application_id\": \"" + configList.get(0)
@@ -69,7 +76,9 @@ public class APICalls {
     }
 
     public void postUpscale(String inImageURL, String inMessageID, String inUpscale) {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         int lastUnderscoreIndex = inImageURL.lastIndexOf("_");
@@ -133,5 +142,38 @@ public class APICalls {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void sendJsonObject() {
+        JSONObject jsonObject = jsonProcessor.writeStoryToJson();
+        try {
+            String url = "http://api.fullstackfox.co.za/story";
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .build();
+            // Define the request body as JSON
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody requestBody = RequestBody.create(jsonObject.toString(), JSON);
+
+            // Create a POST request with the JSON data
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+
+            // Send the request and get the response
+            Response response = client.newCall(request).execute();
+
+            // Check if the response is successful
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                System.out.println("Response: " + responseBody);
+            } else {
+                System.out.println("Request failed: " + response.code() + " " + response.message());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
