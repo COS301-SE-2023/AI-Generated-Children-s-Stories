@@ -4,7 +4,7 @@
 [![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues?q=is%3Aissue+is%3Aclosed)
 [![Tests](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml/badge.svg)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml)
-# Full-Stack Fox - AI Generated Children's Stories - Project Description
+# Full-Stack Fox-AI Generated Children's Stories-Project Description
 AI Generated Children’s Stories is a mobile application that leverages cutting-edge AI technologies to create engaging stories for foundation phase learners in South Africa. The app will use AI language models and generative image models, to provide age-appropriate reading and visual material centred around stories that interest the student.
 ## Documentation
 - [System Requirements Specification](https://drive.google.com/file/d/1BcMoKytuD5j95lCxkVF_Z1PIgEmwF7Uz/view?usp=drive_link)
@@ -16,7 +16,7 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 ## [Project Board](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/projects?query=is%3Aopen)
 We made use of a code board and an admin board. The code board was used to manage sprints while the admin board was used to ensure all documentation was always done and up to date.
 ## [Team](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members) 
-**Oliver Welsh** ~ Project Manager and AI Services; **Latasha Friend** ~ Designer, Administrator and Business Analyst; **Ayaaz Street**~ User Interface Engineer and DevOps; **Mekhail Muller** ~ Databse Engineer and Services; **Thomas Isebeck** ~ Tester and Integration Engineer
+**Oliver Welsh** ~ Project Manager; **Latasha Friend** ~Business Analyst; **Ayaaz Street**~ User Interface Enginee; **Mekhail Muller** ~ Databse Engineer; **Thomas Isebeck** ~ Tester.
 ## [Final Demo](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
  The above link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
 ### [Advertisment](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo)
