@@ -12,7 +12,7 @@ AI Generated Children’s Stories is a mobile application that leverages emergin
 ## [Project Board](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/projects?query=is%3Aopen)
 We made use of a code board and an admin board. The code board was used to manage sprints.
 ## [Team](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members) 
-**Oliver Welsh** ~ Project Manager; **Latasha Friend** ~ Business Analyst; **Ayaaz Street** ~ User Interface Enginee; **Mekhail Muller** ~ Databse Engineer; **Thomas Isebeck** ~ Tester.
+**Oliver Welsh** ~ Project Manager; **Latasha Friend** ~ Business Analyst; **Ayaaz Street** ~ User Interface Engineer; **Mekhail Muller** ~ Databse Engineer; **Thomas Isebeck** ~ Tester.
 ## [Final Demo](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
  The above link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
 ### [Advertisment](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo)
