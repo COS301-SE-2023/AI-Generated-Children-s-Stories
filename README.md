@@ -39,7 +39,7 @@ We made use of a code board and an admin board. The code board was used to manag
 - **Ayaaz Street**~ User Interface Engineer and DevOps
 - **Mekhail Muller** ~ Databse Engineer and Services
 - **Thomas Isebeck** ~ Tester and Integration Engineer
-- Please see each memembers full profile [here](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members).
+- Please see each members full profile [here](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members).
 
 # Final Demo
 - The following link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
