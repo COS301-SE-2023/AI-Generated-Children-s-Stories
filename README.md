@@ -13,16 +13,12 @@ AI Generated Children’s Stories is a mobile application that leverages cutting
 - [User Manual](https://drive.google.com/file/d/1AvWpJBUiKM9IrK5EMko2A7Q6IKJb1orP/view?usp=drive_link) 
 - [Technical Installation Manual](https://drive.google.com/file/d/1Zx5pzX2fDGjAhmKxmkEyl8NHfwOFpM2K/view?usp=drive_link) 
 - For more documents, please look at our wiki (Linked at the bottom of this page).
-## Project Board
+## [Project Board](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/projects?query=is%3Aopen)
 We made use of a code board and an admin board. The code board was used to manage sprints while the admin board was used to ensure all documentation was always done and up to date.
-- [Boards](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/projects?query=is%3Aopen)
-## Team 
+## [Team](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members) 
 **Oliver Welsh** ~ Project Manager and AI Services; **Latasha Friend** ~ Designer, Administrator and Business Analyst; **Ayaaz Street**~ User Interface Engineer and DevOps; **Mekhail Muller** ~ Databse Engineer and Services; **Thomas Isebeck** ~ Tester and Integration Engineer
-- Please see each members full profile [here](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members).
-## Final Demo
-- The following link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
-- [Files](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
-## Advertisment
-- [Video](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
+## [Final Demo](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
+ The above link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
+### [Advertisment](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo)
 ## Full Read Me
   **Check out our [GitHub Wiki](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki) for more!**
