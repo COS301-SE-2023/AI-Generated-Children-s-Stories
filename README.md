@@ -10,9 +10,9 @@ AI Generated Children’s Stories is a mobile application that leverages emergin
 [System Requirements Specification](https://drive.google.com/file/d/1BcMoKytuD5j95lCxkVF_Z1PIgEmwF7Uz/view?usp=drive_link);  [Coding Standards](https://drive.google.com/file/d/1lxASkp7_slnptIFbi7Ir-C5KxIQUDD5D/view?usp=drive_link);  [Testing Policy](https://drive.google.com/file/d/1xdTqp5y72RnoLj6BA2-wCZpdR5c1_Ee7/view?usp=drive_link);  [User Manual](https://drive.google.com/file/d/1AvWpJBUiKM9IrK5EMko2A7Q6IKJb1orP/view?usp=drive_link);  [Technical Installation Manual](https://drive.google.com/file/d/1Zx5pzX2fDGjAhmKxmkEyl8NHfwOFpM2K/view?usp=drive_link) 
 - For more documents, please look at our wiki (Linked at the bottom of this page).
 ## [Project Board](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/projects?query=is%3Aopen)
-We made use of a code board and an admin board. The code board was used to manage sprints while the admin board was used to ensure all documentation was always done and up to date.
+We made use of a code board and an admin board. The code board was used to manage sprints.
 ## [Team](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members) 
-**Oliver Welsh** ~ Project Manager; **Latasha Friend** ~Business Analyst; **Ayaaz Street**~ User Interface Enginee; **Mekhail Muller** ~ Databse Engineer; **Thomas Isebeck** ~ Tester.
+**Oliver Welsh** ~ Project Manager; **Latasha Friend** ~ Business Analyst; **Ayaaz Street** ~ User Interface Enginee; **Mekhail Muller** ~ Databse Engineer; **Thomas Isebeck** ~ Tester.
 ## [Final Demo](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
  The above link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
 ### [Advertisment](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo)
