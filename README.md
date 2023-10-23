@@ -4,7 +4,7 @@
 [![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues?q=is%3Aissue+is%3Aclosed)
 [![Tests](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml/badge.svg)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml)
-# Full-Stack Fox-AI Generated Children's Stories-Project Description
+## Project Description
 AI Generated Children’s Stories is a mobile application that leverages cutting-edge AI technologies to create engaging stories for foundation phase learners in South Africa. The app will use AI language models and generative image models, to provide age-appropriate reading and visual material centred around stories that interest the student.
 ## Documentation
 - [System Requirements Specification](https://drive.google.com/file/d/1BcMoKytuD5j95lCxkVF_Z1PIgEmwF7Uz/view?usp=drive_link)
