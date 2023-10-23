@@ -2,7 +2,6 @@
 
 [![GitHub Repo Size in Bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2023/AI-Generated-Children-s-Stories)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
 [![GitHub Commit Activity](https://img.shields.io/github/commit-activity/w/COS301-SE-2023/AI-Generated-Children-s-Stories)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories)
-[![codecov](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories/branch/main/graph/badge.svg?token=7TANM1PRKY)](https://codecov.io/gh/COS301-SE-2023/AI-Generated-Children-s-Stories)
 [![Open Issues](https://img.shields.io/github/issues/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/COS301-SE-2023/AI-Generated-Children-s-Stories.svg?style=flat-square)](https://github.com/COS301-SE-2023//AI-Generated-Children-s-Stories/issues?q=is%3Aissue+is%3Aclosed)
 [![Tests](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml/badge.svg)](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/actions/workflows/main.yml)
@@ -24,11 +23,7 @@ We made use of a code board and an admin board. The code board was used to manag
 - [Boards](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/projects?query=is%3Aopen)
 
 # Team 
-- **Oliver Welsh** ~ Project Manager and AI Services
-- **Latasha Friend** ~ Designer, Administrator and Business Analyst
-- **Ayaaz Street**~ User Interface Engineer and DevOps
-- **Mekhail Muller** ~ Databse Engineer and Services
-- **Thomas Isebeck** ~ Tester and Integration Engineer
+**Oliver Welsh** ~ Project Manager and AI Services; **Latasha Friend** ~ Designer, Administrator and Business Analyst; **Ayaaz Street**~ User Interface Engineer and DevOps; **Mekhail Muller** ~ Databse Engineer and Services; **Thomas Isebeck** ~ Tester and Integration Engineer
 - Please see each members full profile [here](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members).
 
 # Final Demo
