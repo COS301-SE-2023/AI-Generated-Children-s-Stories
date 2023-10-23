@@ -15,6 +15,7 @@
 > -  [Project Board](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#project-board)
 > -  [Team](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#team)
 > -  [Final Demo](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#final-demo)
+> -  [Marketing Video](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories#advertisment)
 
 # Full-Stack Fox - AI Generated Children's Stories - Project Description
 
@@ -43,6 +44,9 @@ We made use of a code board and an admin board. The code board was used to manag
 # Final Demo
 - The following link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
 - [Files](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
+
+# Advertisment
+- [Video](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
 
 # Full Read Me
   **Check out our [GitHub Wiki](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki) for more!**
