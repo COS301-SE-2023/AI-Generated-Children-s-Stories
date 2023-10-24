@@ -15,6 +15,6 @@ We made use of a code board and an admin board. The code board was used to manag
 **Oliver Welsh** ~ Project Manager; **Latasha Friend** ~ Business Analyst; **Ayaaz Street** ~ User Interface Engineer; **Mekhail Muller** ~ Databse Engineer; **Thomas Isebeck** ~ Tester.
 ## [Final Demo](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo) 
  The above link will take you to a demo of our final project. You will also find a slide show summarizing the project and additional information about our research.
-### [Advertisment](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Final-Demo)
+### [Advertisment](INSERT_TRAILER_LINK_HERE)
 ## Full Read Me
   **Check out our [GitHub Wiki](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki) for more!**
