@@ -9,7 +9,6 @@ AI Generated Children’s Stories is a mobile application that, in combination w
 ## Documentation
 [System Requirements Specification](https://drive.google.com/file/d/1BcMoKytuD5j95lCxkVF_Z1PIgEmwF7Uz/view?usp=drive_link);  [Coding Standards](https://drive.google.com/file/d/1lxASkp7_slnptIFbi7Ir-C5KxIQUDD5D/view?usp=drive_link);  [Testing Policy](https://drive.google.com/file/d/1zHHwg4FeHpO4FP46XXSzxeOK_b0EQu9Q/view?usp=sharing);  [User Manual](https://drive.google.com/file/d/1dSMHtmRMmJmYnC7ZAgZvqRtoCoTzeXyo/view?usp=drive_link);  [Technical Installation Manual](https://drive.google.com/file/d/1Zx5pzX2fDGjAhmKxmkEyl8NHfwOFpM2K/view?usp=drive_link) 
 
-For more documents, please look at our wiki *(Linked at the bottom of this page)*.
 ## [Project Board](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/projects?query=is%3Aopen)
 We made use of a code board and an admin board. The code board was used to manage sprints.
 ## [Team](https://github.com/COS301-SE-2023/AI-Generated-Children-s-Stories/wiki/Team-~Full-Stack-Fox#members) 
