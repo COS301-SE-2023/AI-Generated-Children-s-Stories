@@ -17,6 +17,11 @@
     <children>
       <Pane prefHeight="85.0" prefWidth="1040.0" style="-fx-background-color: #e6e7e8;">
          <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="17.0" prefHeight="47.0" prefWidth="1040.0" text="Story Generation" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Label>
             <Button fx:id="button_home" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="16.0" onAction="#switchToHome" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Home" textAlignment="JUSTIFY" wrapText="true">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -25,11 +30,6 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="17.0" prefHeight="47.0" prefWidth="1040.0" text="Story Generation" textAlignment="JUSTIFY" textFill="#0f4876" wrapText="true">
-               <font>
-                  <Font name="Arial Bold" size="40.0" />
-               </font>
-            </Label>
             <Button fx:id="button_discard" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="896.0" layoutY="14.0" onAction="#clearStory" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #FFC72C; -fx-border-color: #0F4876; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Discard Story" textAlignment="JUSTIFY" wrapText="true">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
