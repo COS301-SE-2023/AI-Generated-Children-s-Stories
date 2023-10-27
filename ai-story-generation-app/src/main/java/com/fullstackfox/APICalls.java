@@ -50,10 +50,11 @@ public class APICalls {
                 + "\",\r\n    \"channel_id\": \""
                 + configList.get(1) + "\",\r\n    \"session_id\": \""
                 + configList.get(3)
-                + "\",\r\n    \"data\": {\r\n        \"id\": \"938956540159881230\",\r\n        \"version\": \"1118961510123847772\",\r\n        \"name\": \"imagine\",\r\n        \"type\": 1,\r\n        \"options\": [\r\n            {\r\n                \"type\": 3,\r\n                \"name\": \"prompt\",\r\n                \"value\": \""
+                + "\",\r\n    \"data\": {\r\n        \"id\": \"938956540159881230\",\r\n        \"version\": \"1166847114203123795\",\r\n        \"name\": \"imagine\",\r\n        \"type\": 1,\r\n        \"options\": [\r\n            {\r\n                \"type\": 3,\r\n                \"name\": \"prompt\",\r\n                \"value\": \""
                 + inPrompt + "\"\r\n            }\r\n        ]\r\n    }\r\n}";
 
         RequestBody body = RequestBody.create(requestBodyStr, mediaType);
+
         Request request = new Request.Builder()
                 .url("https://discord.com/api/v9/interactions")
                 .method("POST", body)
@@ -66,7 +67,16 @@ public class APICalls {
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new Exception("Unexpected response code: " + response);
+                int statusCode = response.code();
+
+                // Get the response body as a string (if applicable)
+                String responseBody = response.body().string();
+
+                // Get the response headers (if needed)
+                Headers headers = response.headers();
+
+                // You can now log or handle this additional information
+                throw new Exception("Unexpected response code: " + statusCode + "\nResponse Body: " + responseBody);
             }
         } catch (Exception e) {
 
