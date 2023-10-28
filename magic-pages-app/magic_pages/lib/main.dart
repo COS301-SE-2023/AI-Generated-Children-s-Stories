@@ -41,8 +41,16 @@ Future main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FlutterSecureStorage storage = FlutterSecureStorage();
-  String? id = await storage.read(key: 'id');
-  String? token = await storage.read(key: 'api_token');
+
+    String? id;
+    String? token;
+  try {
+    id = await storage.read(key: 'id');
+    token = await storage.read(key: 'api_token');
+  } catch (e) {
+    id = null;
+    token = null;
+  }
 
   bool loggedInPreviously = false;
 
